@@ -1,0 +1,70 @@
+def versionMajor = 0
+def versionMinor = 1
+def versionPatch = 2
+def versionBuild = 0
+
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion versions.compileSdk
+
+    defaultConfig {
+        applicationId "com.superbigbang.mushelp"
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+
+        versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation deps.support.appCompat
+    implementation deps.support.constraintLayout
+    implementation deps.support.design
+    implementation deps.support.cardview
+    implementation deps.support.recyclerView
+
+    implementation deps.timber
+    implementation deps.picasso
+    implementation deps.eventbus
+    implementation deps.baseRecyclerViewAdapterHelper
+    implementation deps.dialogplus
+
+    implementation deps.room.runtime
+    annotationProcessor deps.room.compiler
+
+    implementation deps.rx.core
+    implementation deps.rx.android
+
+    implementation deps.butterknife.core
+    annotationProcessor deps.butterknife.compiler
+
+    implementation deps.dagger2.core
+    annotationProcessor deps.dagger2.compiler
+
+    implementation deps.moxy.core
+    implementation deps.moxy.compat
+    annotationProcessor deps.moxy.compiler
+
+    testImplementation deps.junit
+    androidTestImplementation deps.testRunner
+    androidTestImplementation deps.testRules
+    androidTestImplementation(deps.espresso.core) {
+        exclude group: 'com.google.code.findbugs'
+    }
+}

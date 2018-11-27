@@ -7,5 +7,5 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 @StateStrategyType(OneExecutionStateStrategy.class)
 public interface SplashView extends MvpView {
 
-    void startTopActivity();
+    void setAuthorized(boolean isAuthorized);
 }

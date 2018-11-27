@@ -21,4 +21,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_black_bc" />
 
+    <ImageView
+        android:id="@+id/author_name_img"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/authorimg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/author" />
 </android.support.constraint.ConstraintLayout>

@@ -21,7 +21,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".screen.topLevelActivity.TopLevelViewActivity"/>
+        <activity
+            android:name=".screen.topLevelActivity.TopLevelViewActivity"
+            android:theme="@style/AppTheme" />
 
     </application>
 

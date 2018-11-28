@@ -67,4 +67,5 @@ dependencies {
     androidTestImplementation(deps.espresso.core) {
         exclude group: 'com.google.code.findbugs'
     }
+    implementation 'com.google.android.gms:play-services-ads:17.1.1'
 }

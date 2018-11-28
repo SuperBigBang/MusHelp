@@ -4,4 +4,7 @@
     <string name="authorimg">authorimg</string>
     <string name="editListPenButton">editListPenButton</string>
     <string name="selectListButtonText">...</string>
+    <string name="buybutton">buyButton</string>
+    <string name="newitemcirclebutton">newItemCircleButton</string>
+    <string name="volumex2button">volumeX2button</string>
 </resources>

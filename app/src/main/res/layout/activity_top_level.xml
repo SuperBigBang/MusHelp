@@ -36,6 +36,7 @@
         app:srcCompat="@drawable/baseline_create_white_48" />
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/RecyclerSetList"
         android:layout_width="0dp"
         android:layout_height="43dp"
         android:layout_marginEnd="8dp"
@@ -46,5 +47,74 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="368dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/newItemCircleButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selectListButton" />
+
+    <ImageButton
+        android:id="@+id/buyButton"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/colorPrimary"
+        android:contentDescription="@string/buybutton"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/adView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/baseline_shopping_cart_white_48" />
+
+    <ImageButton
+        android:id="@+id/newItemCircleButton"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@color/colorPrimary"
+        android:contentDescription="@string/newitemcirclebutton"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/adView"
+        app:layout_constraintEnd_toEndOf="@+id/buyButton"
+        app:layout_constraintStart_toStartOf="@+id/volumeX2button"
+        app:srcCompat="@drawable/baseline_add_circle_outline_white_48" />
+
+    <ImageButton
+        android:id="@+id/volumeX2button"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@color/colorPrimary"
+        android:contentDescription="@string/volumex2button"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/adView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/baseline_volume_up_white_18dp" />
+
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+        ads:layout_constraintBottom_toBottomOf="parent"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintStart_toStartOf="parent">
+
+    </com.google.android.gms.ads.AdView>
 
 </android.support.constraint.ConstraintLayout>

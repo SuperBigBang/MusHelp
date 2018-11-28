@@ -2,4 +2,6 @@
     <string name="app_name">MusHelp</string>
     <string name="logoimg">logoimg</string>
     <string name="authorimg">authorimg</string>
+    <string name="editListPenButton">editListPenButton</string>
+    <string name="selectListButtonText">...</string>
 </resources>

@@ -4,6 +4,7 @@ import android.app.Application;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 
+import com.google.android.gms.ads.MobileAds;
 import com.superbigbang.mushelp.di.BaseComponent;
 
 import timber.log.Timber;
@@ -34,5 +35,7 @@ public class ExtendApplication extends Application {
                 .starbuzzDatabaseHelperModule(new StarbuzzDatabaseHelperModule(this))
                 .build();
 */
+
+        MobileAds.initialize(this, "ca-app-pub-5364969751338385~1161013636");
     }
 }

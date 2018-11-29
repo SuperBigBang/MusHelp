@@ -100,7 +100,7 @@
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/baseline_volume_up_white_18dp" />
+        app:srcCompat="@drawable/baseline_volume_up_colored_48dp" />
 
     <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"

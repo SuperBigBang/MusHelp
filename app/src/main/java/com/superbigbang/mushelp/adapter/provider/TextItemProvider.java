@@ -17,17 +17,17 @@ public class TextItemProvider extends BaseItemProvider<NormalMultipleEntity, Bas
 
     @Override
     public int layout() {
-        return R.layout.item_text_view;
+        return R.layout.item_set_list;
     }
 
     @Override
     public void convert(BaseViewHolder helper, NormalMultipleEntity data, int position) {
-        helper.setText(R.id.tv, data.content);
+        helper.setText(R.id.setListName, data.content);
     }
 
     @Override
     public void onClick(BaseViewHolder helper, NormalMultipleEntity data, int position) {
-        Toast.makeText(mContext, "click", Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, "click on " + data.content, Toast.LENGTH_SHORT).show();
     }
 
     @Override

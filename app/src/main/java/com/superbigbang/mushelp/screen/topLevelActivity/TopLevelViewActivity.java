@@ -12,10 +12,6 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.superbigbang.mushelp.R;
 import com.superbigbang.mushelp.adapter.DemoMultipleItemRvAdapter;
-import com.superbigbang.mushelp.model.DataServer;
-import com.superbigbang.mushelp.model.NormalMultipleEntity;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,7 +40,6 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     @BindView(R.id.volumeX2button)
     ImageButton volumeX2button;
 
-    private List<NormalMultipleEntity> mData;
 
 
     @Override
@@ -52,13 +47,17 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_level);
         ButterKnife.bind(this);
+
         mTopLevelPresenter.showAdvertistments();
 
         LinearLayoutManager managerSetList = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mRecyclerSetList.setLayoutManager(managerSetList);
-        mData = DataServer.getNormalMultipleEntities();
-        DemoMultipleItemRvAdapter multipleItemAdapter = new DemoMultipleItemRvAdapter(mData);
+        mTopLevelPresenter.showSetLists();
 
+    }
+
+    @Override
+    public void showSetLists(DemoMultipleItemRvAdapter multipleItemAdapter) {
         mRecyclerSetList.setAdapter(multipleItemAdapter);
     }
 

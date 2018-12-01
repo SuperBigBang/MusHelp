@@ -4,5 +4,5 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#000000</color>
     <color name="textColorPrimary">#FFFFFFFF</color>
-    <color name="cornerColor">#66BFFF</color>
+    <color name="cornerColor">#66bfff</color>
 </resources>

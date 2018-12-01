@@ -19,15 +19,19 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
         super.onFirstViewAttach();
     }
 
-    public void showAdvertistments() {
+    void showAdvertistments() {
         getViewState().showAdvertistments(new AdRequest.Builder().build());
     }
 
-    public void showSetLists() {
+    void showSetLists() {
         mData = DataServer.getNormalMultipleEntities();
-        DemoMultipleItemRvAdapter multipleItemAdapter = new DemoMultipleItemRvAdapter(mData);
-        getViewState().showSetLists(multipleItemAdapter);
+        DemoMultipleItemRvAdapter multipleItemAdapterSet = new DemoMultipleItemRvAdapter(mData);
+        getViewState().showSetLists(multipleItemAdapterSet);
     }
 
-
+    void showSongsLists() {
+        mData = DataServer.getNormalMultipleEntities();
+        DemoMultipleItemRvAdapter multipleItemAdapterSongs = new DemoMultipleItemRvAdapter(mData);
+        getViewState().showSongsLists(multipleItemAdapterSongs);
+    }
 }

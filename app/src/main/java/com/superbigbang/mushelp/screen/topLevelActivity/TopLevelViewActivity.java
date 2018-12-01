@@ -32,7 +32,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     @BindView(R.id.RecyclerSetList)
     RecyclerView mRecyclerSetList;
     @BindView(R.id.RecyclerSongsList)
-    RecyclerView RecyclerSongsList;
+    RecyclerView mRecyclerSongsList;
     @BindView(R.id.buyButton)
     ImageButton buyButton;
     @BindView(R.id.newItemCircleButton)
@@ -54,6 +54,14 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         mRecyclerSetList.setLayoutManager(managerSetList);
         mTopLevelPresenter.showSetLists();
 
+        LinearLayoutManager managerSongsList = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        mRecyclerSongsList.setLayoutManager(managerSongsList);
+        mTopLevelPresenter.showSongsLists();
+    }
+
+    @Override
+    public void showSongsLists(DemoMultipleItemRvAdapter multipleItemAdapter) {
+        mRecyclerSongsList.setAdapter(multipleItemAdapter);
     }
 
     @Override

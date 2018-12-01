@@ -12,4 +12,6 @@ public interface TopLevelView extends MvpView {
  void showAdvertistments(AdRequest adRequest);
 
  void showSetLists(DemoMultipleItemRvAdapter multipleItemAdapter);
+
+    void showSongsLists(DemoMultipleItemRvAdapter multipleItemAdapter);
 }

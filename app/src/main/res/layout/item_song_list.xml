@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_set_list_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/divider1"
+        app:layout_constraintTop_toTopOf="@+id/divider1">
+
+        <TextView
+            android:id="@+id/songPosition"
+            android:layout_width="28sp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
+            android:maxLength="2"
+            android:maxLines="1"
+            android:paddingStart="@dimen/dp_4"
+            android:paddingEnd="@dimen/dp_4"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/divider1"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_margin="0dp"
+            android:contentDescription="@string/divider"
+            android:padding="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/songName"
+            app:layout_constraintStart_toEndOf="@+id/songPosition"
+            app:layout_constraintTop_toTopOf="@+id/songName"
+            app:srcCompat="@color/cornerColor" />
+
+        <TextView
+            android:id="@+id/songName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
+            android:paddingStart="@dimen/dp_4"
+            android:paddingEnd="@dimen/dp_4"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/divider2"
+            app:layout_constraintStart_toEndOf="@+id/divider1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/divider2"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_margin="0dp"
+            android:contentDescription="@string/divider"
+            android:padding="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/songName"
+            app:layout_constraintEnd_toStartOf="@+id/bpmEditMetro"
+            app:layout_constraintTop_toTopOf="@+id/songName"
+            app:srcCompat="@color/cornerColor" />
+
+        <TextView
+            android:id="@+id/bpmEditMetro"
+            android:layout_width="38sp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
+            android:maxLength="3"
+            android:maxLines="1"
+            android:paddingStart="@dimen/dp_4"
+            android:paddingEnd="@dimen/dp_4"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toTopOf="@+id/bpmText"
+            app:layout_constraintEnd_toStartOf="@+id/playPauseButton"
+            app:layout_constraintStart_toEndOf="@+id/songName"
+            app:layout_constraintTop_toTopOf="@+id/playPauseButton" />
+
+        <TextView
+            android:id="@+id/bpmText"
+            android:layout_width="36dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingStart="@dimen/dp_4"
+            android:paddingEnd="@dimen/dp_4"
+            android:text="@string/bpm"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="@+id/playPauseButton"
+            app:layout_constraintEnd_toStartOf="@+id/playPauseButton"
+            app:layout_constraintStart_toEndOf="@+id/songName"
+            app:layout_constraintTop_toTopOf="@+id/playPauseButton"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <ImageButton
+            android:id="@+id/playPauseButton"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="4dp"
+            android:background="@color/colorPrimary"
+            android:contentDescription="@string/playpausebutton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/divider3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_play_circle_outline_white_48" />
+
+        <ImageView
+            android:id="@+id/divider3"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_margin="0dp"
+            android:contentDescription="@string/divider"
+            android:padding="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/songName"
+            app:layout_constraintEnd_toStartOf="@+id/editSongButton"
+            app:layout_constraintTop_toTopOf="@+id/songName"
+            app:srcCompat="@color/cornerColor" />
+
+        <ImageButton
+            android:id="@+id/editSongButton"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="4dp"
+            android:background="@color/colorPrimary"
+            android:contentDescription="@string/editsongbutton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/divider4"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_create_white_48" />
+
+        <ImageView
+            android:id="@+id/divider4"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_margin="0dp"
+            android:contentDescription="@string/divider"
+            android:padding="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/songName"
+            app:layout_constraintEnd_toStartOf="@+id/deleteSongButton"
+            app:layout_constraintTop_toTopOf="@+id/songName"
+            app:srcCompat="@color/cornerColor" />
+
+        <ImageButton
+            android:id="@+id/deleteSongButton"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@color/colorPrimary"
+            android:contentDescription="@string/deletesongbutton"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_remove_white_36" />
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>

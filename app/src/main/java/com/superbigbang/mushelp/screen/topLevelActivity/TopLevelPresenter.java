@@ -24,13 +24,13 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
     }
 
     void showSetLists() {
-        mData = DataServer.getNormalMultipleEntities();
+        mData = DataServer.getSetListsMultipleEntities();
         DemoMultipleItemRvAdapter multipleItemAdapterSet = new DemoMultipleItemRvAdapter(mData);
         getViewState().showSetLists(multipleItemAdapterSet);
     }
 
     void showSongsLists() {
-        mData = DataServer.getNormalMultipleEntities();
+        mData = DataServer.getSongsMultipleEntities();
         DemoMultipleItemRvAdapter multipleItemAdapterSongs = new DemoMultipleItemRvAdapter(mData);
         getViewState().showSongsLists(multipleItemAdapterSongs);
     }

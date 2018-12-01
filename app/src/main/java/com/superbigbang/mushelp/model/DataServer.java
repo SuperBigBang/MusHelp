@@ -117,14 +117,21 @@ public class DataServer {
             return list;
         }
     */
-    public static List<NormalMultipleEntity> getNormalMultipleEntities() {
+    public static List<NormalMultipleEntity> getSetListsMultipleEntities() {
         List<NormalMultipleEntity> list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            list.add(new NormalMultipleEntity(NormalMultipleEntity.SINGLE_TEXT, SET_LIST_NAME + (i + 1)));
+            list.add(new NormalMultipleEntity(NormalMultipleEntity.SET_LISTS, SET_LIST_NAME + (i + 1)));
         }
         return list;
     }
 
+    public static List<NormalMultipleEntity> getSongsMultipleEntities() {
+        List<NormalMultipleEntity> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            list.add(new NormalMultipleEntity(NormalMultipleEntity.SONGS_LISTS));
+        }
+        return list;
+    }
 //    public static List<MultipleItem> getMultipleChildView() {
 //        List<MultipleItem> list = new ArrayList<>();
 //        for (int i = 0; i <= 4; i++) {

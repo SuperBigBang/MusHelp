@@ -2,7 +2,8 @@ package com.superbigbang.mushelp.model;
 
 public class NormalMultipleEntity {
 
-    public static final int SINGLE_TEXT = 1;
+    public static final int SET_LISTS = 1;
+    public static final int SONGS_LISTS = 4;
     public static final int SINGLE_IMG = 2;
     public static final int TEXT_IMG = 3;
 

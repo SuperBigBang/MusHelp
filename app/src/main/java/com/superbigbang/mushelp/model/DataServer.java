@@ -127,8 +127,8 @@ public class DataServer {
 
     public static List<NormalMultipleEntity> getSongsMultipleEntities() {
         List<NormalMultipleEntity> list = new ArrayList<>();
-        for (int i = 0; i < 9; i++) {
-            list.add(new NormalMultipleEntity(NormalMultipleEntity.SONGS_LISTS, "Song name", "Song lyrics"));
+        for (int i = 1; i <= 10; i++) {
+            list.add(new NormalMultipleEntity(NormalMultipleEntity.SONGS_LISTS, "Song name", "Song lyrics", i));
             if (i == 1) {
                 list.add(new NormalMultipleEntity(NormalMultipleEntity.SONGS_LISTS, "Three Days Grace - Over and Over", "I feel it everyday, it's all the same\n" +
                         "It brings me down, but I'm the one to blame\n" +
@@ -168,7 +168,7 @@ public class DataServer {
                         "Over and over, over and over\n" +
                         "You don't even try to\n" +
                         "Авторы: Gavin Brown / Neil Sanderson / Adam Gontier / Brad Walst / Barry Stock\n" +
-                        "Текст песни \"Over and Over\", © Sony/ATV Music Publishing LLC, Kobalt Music Publishing Ltd."));
+                        "Текст песни \"Over and Over\", © Sony/ATV Music Publishing LLC, Kobalt Music Publishing Ltd.", ++i));
             }
         }
         return list;

@@ -57,7 +57,6 @@
             android:minHeight="36dp"
             android:paddingEnd="@dimen/dp_4"
             android:paddingStart="@dimen/dp_4"
-            android:text=""
             android:textColor="@color/textColorPrimary"
             android:textSize="18sp"
             android:textStyle="normal"
@@ -166,9 +165,9 @@
             android:background="@color/colorPrimary"
             android:contentDescription="@string/deletesongbutton"
             android:scaleType="fitCenter"
-            app:layout_constraintBottom_toBottomOf="@+id/songName"
+            app:layout_constraintBottom_toBottomOf="@+id/playPauseButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/playPauseButton"
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/baseline_remove_white_36" />
 

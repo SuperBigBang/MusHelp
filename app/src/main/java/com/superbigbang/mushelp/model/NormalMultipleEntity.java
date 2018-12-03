@@ -9,6 +9,7 @@ public class NormalMultipleEntity {
 
     public int type;
     public String content;
+    public String lyrics;
 
     public NormalMultipleEntity(int type) {
         this.type = type;
@@ -17,5 +18,11 @@ public class NormalMultipleEntity {
     public NormalMultipleEntity(int type, String content) {
         this.type = type;
         this.content = content;
+    }
+
+    public NormalMultipleEntity(int type, String content, String lyrics) {
+        this.type = type;
+        this.content = content;
+        this.lyrics = lyrics;
     }
 }

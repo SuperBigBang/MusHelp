@@ -1,5 +1,6 @@
 package com.superbigbang.mushelp.adapter.provider;
 
+import android.view.View;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -22,12 +23,18 @@ public class SongsListItemProvider extends BaseItemProvider<NormalMultipleEntity
 
     @Override
     public void convert(BaseViewHolder helper, NormalMultipleEntity data, int position) {
-        // helper.setText(R.id.setListName, data.content);
+        helper.setText(R.id.songName, data.content);
+        helper.setText(R.id.songLyrics, data.lyrics);
     }
 
     @Override
     public void onClick(BaseViewHolder helper, NormalMultipleEntity data, int position) {
-        Toast.makeText(mContext, "click on ", Toast.LENGTH_SHORT).show();
+        if (helper.getView(R.id.songLyrics).getVisibility() == View.VISIBLE) {
+            helper.setGone(R.id.songLyrics, false);
+        } else {
+            helper.setVisible(R.id.songLyrics, true);
+        }
+
     }
 
     @Override

@@ -31,6 +31,7 @@
             android:textColor="@color/textColorPrimary"
             android:textSize="18sp"
             android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="@+id/songName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -100,6 +101,7 @@
             android:id="@+id/bpmEditMetro"
             android:layout_width="36sp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
             android:ellipsize="end"
             android:fontFamily="@font/roboto_medium"
             android:gravity="center"
@@ -140,33 +142,10 @@
             android:background="@color/colorPrimary"
             android:contentDescription="@string/playpausebutton"
             android:scaleType="fitCenter"
-            app:layout_constraintEnd_toStartOf="@+id/divider3"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/baseline_play_circle_outline_white_48" />
-
-        <ImageView
-            android:id="@+id/divider3"
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
-            android:contentDescription="@string/divider"
             app:layout_constraintBottom_toBottomOf="@+id/songName"
-            app:layout_constraintEnd_toStartOf="@+id/editSongButton"
-            app:layout_constraintTop_toTopOf="@+id/songName"
-            app:srcCompat="@color/cornerColor" />
-
-        <ImageButton
-            android:id="@+id/editSongButton"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_marginEnd="4dp"
-            android:background="@color/colorPrimary"
-            android:contentDescription="@string/editsongbutton"
-            android:scaleType="fitCenter"
             app:layout_constraintEnd_toStartOf="@+id/divider4"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/baseline_create_white_48" />
+            app:srcCompat="@drawable/baseline_play_circle_outline_white_48" />
 
         <ImageView
             android:id="@+id/divider4"
@@ -187,8 +166,10 @@
             android:background="@color/colorPrimary"
             android:contentDescription="@string/deletesongbutton"
             android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="@+id/songName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/baseline_remove_white_36" />
 
         <View

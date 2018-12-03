@@ -6,40 +6,15 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
 
-    <ImageButton
-        android:id="@+id/editListPenButton"
-        android:layout_width="66dp"
-        android:layout_height="43dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/round_shape_btn"
-        android:contentDescription="@string/editListPenButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/baseline_create_white_48" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/RecyclerSetList"
-        android:layout_width="0dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:scrollbars="none"
-        app:layout_constraintEnd_toStartOf="@+id/editListPenButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/RecyclerSongsList"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="4dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
         android:scrollbars="none"
-        app:layout_constraintBottom_toTopOf="@+id/newItemCircleButton"
+        app:layout_constraintBottom_toTopOf="@+id/seekBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -100,5 +75,29 @@
         ads:layout_constraintStart_toStartOf="parent">
 
     </com.google.android.gms.ads.AdView>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/RecyclerSetList"
+        android:layout_width="0dp"
+        android:layout_height="43dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/newItemCircleButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

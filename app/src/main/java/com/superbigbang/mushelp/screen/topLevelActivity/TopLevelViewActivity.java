@@ -27,8 +27,6 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
 
     @BindView(R.id.adView)
     AdView mAdView;
-    @BindView(R.id.editListPenButton)
-    ImageButton editListPenButton;
     @BindView(R.id.RecyclerSetList)
     RecyclerView mRecyclerSetList;
     @BindView(R.id.RecyclerSongsList)
@@ -85,11 +83,9 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         super.onRestart();
     }
 
-    @OnClick({R.id.editListPenButton, R.id.buyButton, R.id.newItemCircleButton, R.id.volumeX2button})
+    @OnClick({R.id.buyButton, R.id.newItemCircleButton, R.id.volumeX2button})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.editListPenButton:
-                break;
             case R.id.buyButton:
                 break;
             case R.id.newItemCircleButton:

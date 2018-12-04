@@ -26,6 +26,9 @@ public class SongsListItemProvider extends BaseItemProvider<NormalMultipleEntity
         helper.setText(R.id.songPosition, String.valueOf(data.id));
         helper.setText(R.id.songName, data.content);
         helper.setText(R.id.songLyrics, data.lyrics);
+        helper.setText(R.id.bpmEditMetro, String.valueOf(data.bitrate));
+        helper.addOnClickListener(R.id.playPauseButton).addOnClickListener(R.id.deleteSongButton)
+                .addOnLongClickListener(R.id.playPauseButton);
     }
 
     @Override
@@ -40,7 +43,7 @@ public class SongsListItemProvider extends BaseItemProvider<NormalMultipleEntity
 
     @Override
     public boolean onLongClick(BaseViewHolder helper, NormalMultipleEntity data, int position) {
-        Toast.makeText(mContext, "longClick", Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, "longClick Open song edit window", Toast.LENGTH_SHORT).show();
         return true;
     }
 }

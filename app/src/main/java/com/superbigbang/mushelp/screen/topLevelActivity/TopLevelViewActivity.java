@@ -3,8 +3,10 @@ package com.superbigbang.mushelp.screen.topLevelActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -38,7 +40,9 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     @BindView(R.id.volumeX2button)
     ImageButton volumeX2button;
 
-
+    private static String TAG = "ItemClickActivity";
+    private DemoMultipleItemRvAdapter setListAdapter;
+    private DemoMultipleItemRvAdapter songListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,13 +62,29 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     }
 
     @Override
-    public void showSongsLists(DemoMultipleItemRvAdapter multipleItemAdapter) {
-        mRecyclerSongsList.setAdapter(multipleItemAdapter);
+    public void showSongsLists(DemoMultipleItemRvAdapter songsItemAdapter) {
+        songListAdapter = songsItemAdapter;
+        mRecyclerSongsList.setAdapter(songsItemAdapter);
+
+        songsItemAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            Log.d(TAG, "onItemChildClick: ");
+            if (view.getId() == R.id.playPauseButton) {
+                Toast.makeText(TopLevelViewActivity.this, "onItemChildClick Play" + position, Toast.LENGTH_SHORT).show();
+            } else if (view.getId() == R.id.deleteSongButton) {
+                Toast.makeText(TopLevelViewActivity.this, "onItemChildClick Delete" + position, Toast.LENGTH_SHORT).show();
+            }
+
+        });
+        songsItemAdapter.setOnItemChildLongClickListener((adapter, view, position) -> {
+            Toast.makeText(TopLevelViewActivity.this, "onItemChildLongClick" + position, Toast.LENGTH_SHORT).show();
+            return true;
+        });
     }
 
     @Override
-    public void showSetLists(DemoMultipleItemRvAdapter multipleItemAdapter) {
-        mRecyclerSetList.setAdapter(multipleItemAdapter);
+    public void showSetLists(DemoMultipleItemRvAdapter setListItemAdapter) {
+        setListAdapter = setListItemAdapter;
+        mRecyclerSetList.setAdapter(setListItemAdapter);
     }
 
     @Override

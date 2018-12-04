@@ -41,8 +41,6 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     ImageButton volumeX2button;
 
     private static String TAG = "ItemClickActivity";
-    private DemoMultipleItemRvAdapter setListAdapter;
-    private DemoMultipleItemRvAdapter songListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +61,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
 
     @Override
     public void showSongsLists(DemoMultipleItemRvAdapter songsItemAdapter) {
-        songListAdapter = songsItemAdapter;
         mRecyclerSongsList.setAdapter(songsItemAdapter);
-
         songsItemAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             Log.d(TAG, "onItemChildClick: ");
             if (view.getId() == R.id.playPauseButton) {
@@ -83,7 +79,6 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
 
     @Override
     public void showSetLists(DemoMultipleItemRvAdapter setListItemAdapter) {
-        setListAdapter = setListItemAdapter;
         mRecyclerSetList.setAdapter(setListItemAdapter);
     }
 

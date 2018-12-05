@@ -3,7 +3,6 @@ package com.superbigbang.mushelp.screen.topLevelActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -14,6 +13,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.superbigbang.mushelp.R;
 import com.superbigbang.mushelp.adapter.DemoMultipleItemRvAdapter;
+import com.superbigbang.mushelp.popup.DeleteSongPopup;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,8 +40,6 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     @BindView(R.id.volumeX2button)
     ImageButton volumeX2button;
 
-    private static String TAG = "ItemClickActivity";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,24 +55,29 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         LinearLayoutManager managerSongsList = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerSongsList.setLayoutManager(managerSongsList);
         mTopLevelPresenter.showSongsLists();
+
+
     }
 
     @Override
     public void showSongsLists(DemoMultipleItemRvAdapter songsItemAdapter) {
         mRecyclerSongsList.setAdapter(songsItemAdapter);
         songsItemAdapter.setOnItemChildClickListener((adapter, view, position) -> {
-            Log.d(TAG, "onItemChildClick: ");
             if (view.getId() == R.id.playPauseButton) {
                 Toast.makeText(TopLevelViewActivity.this, "onItemChildClick Play" + position, Toast.LENGTH_SHORT).show();
             } else if (view.getId() == R.id.deleteSongButton) {
-                Toast.makeText(TopLevelViewActivity.this, "onItemChildClick Delete" + position, Toast.LENGTH_SHORT).show();
+                mTopLevelPresenter.showDeletePopup(position);
             }
-
         });
         songsItemAdapter.setOnItemChildLongClickListener((adapter, view, position) -> {
             Toast.makeText(TopLevelViewActivity.this, "onItemChildLongClick" + position, Toast.LENGTH_SHORT).show();
             return true;
         });
+    }
+
+    @Override
+    public void showDeletePopup(String songname) {
+        new DeleteSongPopup(this, songname, mTopLevelPresenter).showPopupWindow();
     }
 
     @Override
@@ -108,6 +111,10 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
             case R.id.volumeX2button:
                 break;
         }
+    }
+
+    @Override
+    public void clearStateStrategyPull() {
     }
 }
 

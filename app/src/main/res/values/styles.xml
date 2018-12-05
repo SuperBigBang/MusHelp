@@ -15,4 +15,12 @@
         <item name="android:windowBackground">@drawable/background_splash</item>
     </style>
 
+    <style name="line_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:layout_margin">2dp</item>
+    </style>
+
+    <style name="Theme">theme</style>
 </resources>

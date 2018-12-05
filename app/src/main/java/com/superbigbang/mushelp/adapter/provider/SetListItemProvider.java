@@ -22,12 +22,12 @@ public class SetListItemProvider extends BaseItemProvider<NormalMultipleEntity, 
 
     @Override
     public void convert(BaseViewHolder helper, NormalMultipleEntity data, int position) {
-        helper.setText(R.id.setListName, data.content);
+        helper.setText(R.id.setListName, data.songname);
     }
 
     @Override
     public void onClick(BaseViewHolder helper, NormalMultipleEntity data, int position) {
-        Toast.makeText(mContext, "click on " + data.content, Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, "click on " + data.songname, Toast.LENGTH_SHORT).show();
     }
 
     @Override

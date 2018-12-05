@@ -34,4 +34,12 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
         DemoMultipleItemRvAdapter multipleItemAdapterSongs = new DemoMultipleItemRvAdapter(mData);
         getViewState().showSongsLists(multipleItemAdapterSongs);
     }
+
+    void showDeletePopup(int position) {
+        getViewState().showDeletePopup(mData.get(position).songname);
+    }
+
+    public void clearStateStrategyPull() {
+        getViewState().clearStateStrategyPull();
+    }
 }

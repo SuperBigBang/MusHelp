@@ -26,7 +26,7 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto_medium"
             android:gravity="center"
-            android:text="Вы действительно хотите удалить этот трэк?"
+            android:text="@string/popDel_text1"
             android:textAllCaps="false"
             android:textColor="@color/cornerColor"
             android:textSize="16sp" />
@@ -38,7 +38,7 @@
             android:layout_marginBottom="2dp"
             android:fontFamily="@font/roboto_medium"
             android:gravity="center"
-            android:text="название трэка"
+            android:text=""
             android:textColor="@color/textColorPrimary"
             android:textSize="16sp" />
 
@@ -58,7 +58,7 @@
                 android:layout_marginRight="25dp"
                 android:layout_weight="0.75"
                 android:background="@drawable/round_shape_btn_set_lists"
-                android:text="Отмена"
+                android:text="@string/button_Cancel"
                 android:textColor="@color/cornerColor" />
 
             <Button
@@ -68,7 +68,7 @@
                 android:layout_marginLeft="25dp"
                 android:layout_weight="0.75"
                 android:background="@drawable/round_shape_btn_set_lists"
-                android:text="Удалить"
+                android:text="@string/button_Delete"
                 android:textColor="@color/cornerColor" />
         </LinearLayout>
 

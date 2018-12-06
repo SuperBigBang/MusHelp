@@ -5,14 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/linearLayout3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginStart="25dp"
         android:background="@drawable/round_shape_btn_set_lists"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,57 +17,106 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto_medium"
-            android:gravity="center"
-            android:text="Вы действительно хотите удалить этот трэк?"
-            android:textAllCaps="false"
+            android:text="@string/popupWEdit_set_text1"
             android:textColor="@color/cornerColor"
-            android:textSize="16sp" />
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/popupDelWindSongName"
-            android:layout_width="match_parent"
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/roboto_medium"
-            android:gravity="center"
-            android:text="название трэка"
+            android:text="@string/popupWEdit_text2"
+            android:textColor="@color/cornerColor"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <EditText
+            android:id="@+id/editSetListPosition"
+            android:layout_width="40dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:ems="10"
+            android:hint="@string/popupWEditSetListHintText1"
+            android:fontFamily="@font/roboto_medium"
+            android:inputType="number"
+            android:maxLength="2"
+            android:maxLines="1"
             android:textColor="@color/textColorPrimary"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toTopOf="@+id/textView" />
+
+        <EditText
+            android:id="@+id/editSetListName"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
+            android:ellipsize="end"
+            android:ems="10"
+            android:fontFamily="@font/roboto_medium"
+            android:hint="@string/popupWEditSetList_HintText2"
+            android:inputType="textPersonName"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintTop_toTopOf="@+id/textView2" />
 
         <LinearLayout
+            android:id="@+id/linearLayout4"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginBottom="4dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="40dp"
             android:gravity="center"
             android:orientation="horizontal"
-            android:weightSum="2">
+            android:weightSum="2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView2">
 
             <Button
-                android:id="@+id/btn_cancel"
+                android:id="@+id/btn_e_cancel"
+                style="buttonBar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="0dp"
-                android:layout_marginRight="25dp"
+                android:layout_marginEnd="25dp"
                 android:layout_weight="0.75"
                 android:background="@drawable/round_shape_btn_set_lists"
-                android:text="Отмена"
+                android:text="@string/button_Cancel"
                 android:textColor="@color/cornerColor" />
 
             <Button
-                android:id="@+id/btn_Compelete"
+                android:id="@+id/btn_e_Save"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
+                android:layout_marginStart="25dp"
                 android:layout_weight="0.75"
                 android:background="@drawable/round_shape_btn_set_lists"
-                android:text="Удалить"
+                android:text="@string/button_Save"
                 android:textColor="@color/cornerColor" />
         </LinearLayout>
-
-    </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

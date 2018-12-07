@@ -7,13 +7,14 @@ public class NormalMultipleEntity {
 
     public int type;
     public int id;
+    public String setlistname;
     public String songname;
     public String lyrics;
     public int bitrate;
 
-    NormalMultipleEntity(int type, String songname) {
+    NormalMultipleEntity(int type, String setlistname) {
         this.type = type;
-        this.songname = songname;
+        this.setlistname = setlistname;
     }
 
     NormalMultipleEntity(int type, String songname, String lyrics, int id, int bitrate) {

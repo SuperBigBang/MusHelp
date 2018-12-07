@@ -22,4 +22,9 @@ public interface TopLevelView extends MvpView {
 
     @StateStrategyType(ClearStateStrategy.class)
     void clearStateStrategyPull();
+
+    void changeSetList(String setlistname);
+
+    @StateStrategyType(SingleStateStrategy.class)
+    void showSetListEditPopup(String setListName, int position);
 }

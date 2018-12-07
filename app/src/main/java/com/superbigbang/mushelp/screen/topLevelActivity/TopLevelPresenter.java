@@ -12,7 +12,9 @@ import java.util.List;
 
 @InjectViewState
 public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
-    private List<NormalMultipleEntity> mData;
+    private List<NormalMultipleEntity> mDataSetLists;
+    private List<NormalMultipleEntity> mDataSongList;
+    private int currentsetlist;
 
     @Override
     protected void onFirstViewAttach() {
@@ -24,22 +26,30 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
     }
 
     void showSetLists() {
-        mData = DataServer.getSetListsMultipleEntities();
-        DemoMultipleItemRvAdapter multipleItemAdapterSet = new DemoMultipleItemRvAdapter(mData);
+        mDataSetLists = DataServer.getSetListsMultipleEntities();
+        DemoMultipleItemRvAdapter multipleItemAdapterSet = new DemoMultipleItemRvAdapter(mDataSetLists);
         getViewState().showSetLists(multipleItemAdapterSet);
     }
 
     void showSongsLists() {
-        mData = DataServer.getSongsMultipleEntities();
-        DemoMultipleItemRvAdapter multipleItemAdapterSongs = new DemoMultipleItemRvAdapter(mData);
+        mDataSongList = DataServer.getSongsMultipleEntities();
+        DemoMultipleItemRvAdapter multipleItemAdapterSongs = new DemoMultipleItemRvAdapter(mDataSongList);
         getViewState().showSongsLists(multipleItemAdapterSongs);
     }
 
     void showDeletePopup(int position) {
-        getViewState().showDeletePopup(mData.get(position).songname);
+        getViewState().showDeletePopup(mDataSongList.get(position).songname);
     }
 
     public void clearStateStrategyPull() {
         getViewState().clearStateStrategyPull();
+    }
+
+    void changeSetList(int position) {
+        getViewState().changeSetList(mDataSetLists.get(position).setlistname);
+    }
+
+    void showSetListEditPopup(int position) {
+        getViewState().showSetListEditPopup(mDataSetLists.get(position).setlistname, position + 1);
     }
 }

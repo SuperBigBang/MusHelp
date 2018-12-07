@@ -14,6 +14,7 @@ import com.google.android.gms.ads.AdView;
 import com.superbigbang.mushelp.R;
 import com.superbigbang.mushelp.adapter.DemoMultipleItemRvAdapter;
 import com.superbigbang.mushelp.popup.DeleteSongPopup;
+import com.superbigbang.mushelp.popup.EditSetListPopup;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -83,6 +84,18 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     @Override
     public void showSetLists(DemoMultipleItemRvAdapter setListItemAdapter) {
         mRecyclerSetList.setAdapter(setListItemAdapter);
+        setListItemAdapter.setOnItemClickListener((adapter, view, position) -> {
+            mTopLevelPresenter.changeSetList(position);
+        });
+        setListItemAdapter.setOnItemLongClickListener((adapter, view, position) -> {
+            mTopLevelPresenter.showSetListEditPopup(position);
+            return true;
+        });
+    }
+
+    @Override
+    public void showSetListEditPopup(String setListName, int position) {
+        new EditSetListPopup(this, setListName, position, mTopLevelPresenter).showPopupWindow();
     }
 
     @Override
@@ -116,5 +129,11 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     @Override
     public void clearStateStrategyPull() {
     }
-}
 
+    @Override
+    public void changeSetList(String setlistname) {
+        Toast.makeText(TopLevelViewActivity.this, "Выбран сет лист " + setlistname, Toast.LENGTH_SHORT).show();
+    }
+
+
+}

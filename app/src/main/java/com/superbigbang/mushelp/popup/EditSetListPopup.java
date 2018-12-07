@@ -7,6 +7,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.superbigbang.mushelp.R;
@@ -17,13 +18,19 @@ import razerdp.basepopup.BasePopupWindow;
 public class EditSetListPopup extends BasePopupWindow implements View.OnClickListener {
     private Button mCancelButton;
     private Button mSaveButton;
+    private EditText mEditTextPosition;
+    private EditText mEditTextSetListName;
+
     private TopLevelPresenter mTopLevelPresenter;
 
-    public EditSetListPopup(Context context, String SongName, TopLevelPresenter mTopLevelPresenter) {
+    public EditSetListPopup(Context context, String SongName, int position, TopLevelPresenter mTopLevelPresenter) {
         super(context);
         mCancelButton = findViewById(R.id.btn_e_cancel);
         mSaveButton = findViewById(R.id.btn_e_Save);
-
+        mEditTextPosition = findViewById(R.id.editSetListPosition);
+        mEditTextSetListName = findViewById(R.id.editSetListName);
+        mEditTextPosition.setHint(String.valueOf(position));
+        mEditTextSetListName.setHint(SongName);
 
         this.mTopLevelPresenter = mTopLevelPresenter;
         setBlurBackgroundEnable(true);
@@ -56,7 +63,7 @@ public class EditSetListPopup extends BasePopupWindow implements View.OnClickLis
 
     @Override
     public View onCreateContentView() {
-        return createPopupById(R.layout.popup_delete);
+        return createPopupById(R.layout.popup_edit_set_list);
     }
 
     @Override
@@ -86,7 +93,7 @@ public class EditSetListPopup extends BasePopupWindow implements View.OnClickLis
                 dismiss();
                 break;
             case R.id.btn_e_Save:
-                Toast.makeText(getContext(), "Трэк удалён", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Сет-лист отредактирован", Toast.LENGTH_LONG).show();
                 dismiss();
                 break;
             default:

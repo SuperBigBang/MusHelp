@@ -59,9 +59,14 @@ public class DataServer {
 
     public static List<NormalMultipleEntity> getSongsMultipleEntities() {
         List<NormalMultipleEntity> list = new ArrayList<>();
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 1; i <= 9; i++) {
             list.add(new NormalMultipleEntity(NormalMultipleEntity.SONGS_LISTS,
                     "Song name", "Song lyrics", i, 170));
+            if (i == 9) {
+                list.add(new NormalMultipleEntity(NormalMultipleEntity.SONGS_LISTS,
+                        "Долгое нажатие позволяет отредактировать элемент",
+                        "Song lyrics", ++i, 140));
+            }
             if (i == 1) {
                 list.add(new NormalMultipleEntity(NormalMultipleEntity.SONGS_LISTS,
                         "Three Days Grace - Over and Over",

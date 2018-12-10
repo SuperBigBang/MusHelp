@@ -52,4 +52,10 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
     void showSetListEditPopup(int position) {
         getViewState().showSetListEditPopup(mDataSetLists.get(position).setlistname, position + 1);
     }
+
+    void showSongEditPopup(int position) {
+        getViewState().showSongEditPopup(mDataSongList.get(position).songname,
+                position + 1, mDataSongList.get(position).bitrate, false, "noFile",
+                mDataSongList.get(position).lyrics);
+    }
 }

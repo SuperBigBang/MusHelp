@@ -10,10 +10,10 @@
         android:id="@+id/linearLayout3"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/round_shape_btn_set_lists"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,16 +24,16 @@
         app:layout_constraintVertical_bias="0.0">
 
         <ImageButton
-            android:id="@+id/newItemCircleButton2"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:layout_marginEnd="16dp"
+            android:id="@+id/btn_e_loadAudioFromFile"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="8dp"
             android:background="@color/colorPrimary"
             android:contentDescription="@string/newitemcirclebutton"
             android:scaleType="fitCenter"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/edit_audioOrMetronom_switch"
             app:layout_constraintTop_toBottomOf="@+id/editMetronomBPM"
-            app:srcCompat="@drawable/baseline_add_circle_outline_white_48" />
+            app:srcCompat="@drawable/baseline_save_alt_white_48" />
 
         <TextView
             android:id="@+id/textView"
@@ -41,7 +41,7 @@
             android:layout_height="0dp"
             android:layout_marginStart="40dp"
             android:fontFamily="@font/roboto_medium"
-            android:text="Позиция трэка:"
+            android:text="@string/enter_track_position"
             android:textColor="@color/cornerColor"
             android:textSize="16sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/editSongPosition"
@@ -60,14 +60,14 @@
 
         <EditText
             android:id="@+id/editSongPosition"
-            android:layout_width="144dp"
+            android:layout_width="40dp"
             android:layout_height="0dp"
-            android:layout_marginEnd="32dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
             android:ems="10"
             android:fontFamily="@font/roboto_medium"
-            android:gravity="start"
+            android:gravity="center"
             android:hint="@string/popupWEditSetListHintText1"
             android:inputType="number"
             android:maxLength="2"
@@ -83,17 +83,18 @@
 
         <EditText
             android:id="@+id/editSongName"
-            android:layout_width="208dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
             android:ellipsize="end"
             android:ems="10"
             android:fontFamily="@font/roboto_medium"
-            android:hint="Введите название трэка"
+            android:hint="@string/edit_enter_track_name"
             android:inputType="textPersonName"
-            android:maxLength="20"
+            android:maxLength="100"
             android:maxLines="1"
+            android:scrollHorizontally="true"
             android:textColor="@color/textColorPrimary"
             android:textColorHint="@color/textColorPrimary"
             android:textSize="16sp"
@@ -108,7 +109,7 @@
             android:layout_width="wrap_content"
             android:layout_height="21dp"
             android:fontFamily="@font/roboto_medium"
-            android:text="Метроном:"
+            android:text="@string/text_metronom"
             android:textColor="@color/cornerColor"
             android:textSize="16sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/editMetronomBPM"
@@ -121,9 +122,10 @@
             android:ellipsize="end"
             android:ems="10"
             android:fontFamily="@font/roboto_medium"
-            android:hint="@string/popupWEditSetListHintText1"
+            android:gravity="center"
+            android:hint="@string/_100"
             android:inputType="textPersonName"
-            android:maxLength="20"
+            android:maxLength="3"
             android:maxLines="1"
             android:textColor="@color/textColorPrimary"
             android:textColorHint="@color/textColorPrimary"
@@ -137,20 +139,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_medium"
-            android:text="Аудио вместо метронома:"
+            android:text="@string/text_audio_or_metronom"
             android:textColor="@color/cornerColor"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/newItemCircleButton2"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_e_loadAudioFromFile"
             app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintTop_toTopOf="@+id/newItemCircleButton2" />
+            app:layout_constraintTop_toTopOf="@+id/btn_e_loadAudioFromFile" />
 
         <LinearLayout
             android:id="@+id/linearLayout4"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
             android:gravity="center"
             android:orientation="horizontal"
             android:weightSum="2"
@@ -160,19 +162,19 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <Button
-                android:id="@+id/btn_e_cancel"
+                android:id="@+id/btn_e_cancel2"
                 style="buttonBar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="0dp"
                 android:layout_marginEnd="25dp"
+                android:layout_marginBottom="0dp"
                 android:layout_weight="0.75"
                 android:background="@drawable/round_shape_btn_set_lists"
                 android:text="@string/button_Cancel"
                 android:textColor="@color/cornerColor" />
 
             <Button
-                android:id="@+id/btn_e_Save"
+                android:id="@+id/btn_e_Save2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
@@ -184,7 +186,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/bpm"
@@ -194,20 +196,67 @@
             app:layout_constraintBaseline_toBaselineOf="@+id/editMetronomBPM"
             app:layout_constraintStart_toEndOf="@+id/editMetronomBPM" />
 
-        <CheckBox
-            android:id="@+id/alternateSoundcheckBox"
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/edit_audioOrMetronom_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:buttonTint=""
-            app:layout_constraintBottom_toBottomOf="@+id/newItemCircleButton2"
-            app:layout_constraintEnd_toStartOf="@+id/newItemCircleButton2"
-            app:layout_constraintHorizontal_bias="0.8"
+            android:layout_marginBottom="8dp"
+            android:checked="false"
+            android:theme="@style/MySwitch"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_e_loadAudioFromFile"
             app:layout_constraintStart_toEndOf="@+id/textView4"
-            app:layout_constraintTop_toTopOf="@+id/newItemCircleButton2" />
+            app:layout_constraintTop_toTopOf="@+id/btn_e_loadAudioFromFile" />
+
+        <ImageView
+            android:id="@+id/divider10"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
+            android:contentDescription="@string/divider"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@color/cornerColor" />
+
+        <EditText
+            android:id="@+id/editSongLyrics"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="9dp"
+            android:layout_marginBottom="1dp"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center_horizontal"
+            android:hint="@string/edit_hint_Enter_song_lyics"
+            android:inputType="textMultiLine"
+            android:scrollHorizontally="false"
+            android:textColor="@color/textColorPrimary"
+            android:textColorHint="@color/textColorPrimary"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/divider10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider11"
+            tools:ignore="Autofill" />
+
+        <ImageView
+            android:id="@+id/divider11"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/divider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_e_loadAudioFromFile"
+            app:srcCompat="@color/cornerColor" />
 
     </android.support.constraint.ConstraintLayout>
 

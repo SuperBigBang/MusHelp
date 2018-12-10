@@ -20,4 +20,10 @@
     <string name="popupWEdit_text2">Название:</string>
     <string name="popupWEditSetListHintText1"><u>10</u></string>
     <string name="popupWEditSetList_HintText2"><u>Введите название сет-листа</u></string>
+    <string name="enter_track_position">Позиция трэка:</string>
+    <string name="edit_enter_track_name">Введите название трэка</string>
+    <string name="text_metronom">Метроном:</string>
+    <string name="text_audio_or_metronom">Аудио вместо метронома:</string>
+    <string name="edit_hint_Enter_song_lyics">Разместите тут текст песни</string>
+    <string name="_100">100</string>
 </resources>

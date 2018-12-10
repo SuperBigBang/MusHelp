@@ -22,9 +22,12 @@
         <item name="android:layout_margin">2dp</item>
     </style>
 
-    <style name="checkBoxStyle" parent="Base.Theme.AppCompat">
-        <item name="colorAccent">@color/cornerColor</item>
-        <item name="android:textColorSecondary">@color</item>
+    <style name="MySwitch" parent="Theme.AppCompat.Light">
+        <item name="trackTint">@color/cardview_light_background</item>
+        <!-- Неактивное состояние -->
+        <item name="colorSwitchThumbNormal">@color/uncheckColor</item>
+        <!-- Активное состояние -->
+        <item name="colorControlActivated">@color/cornerColor</item>
     </style>
 
     <style name="Theme">theme</style>

@@ -15,6 +15,7 @@ import com.superbigbang.mushelp.R;
 import com.superbigbang.mushelp.adapter.DemoMultipleItemRvAdapter;
 import com.superbigbang.mushelp.popup.DeleteSongPopup;
 import com.superbigbang.mushelp.popup.EditSetListPopup;
+import com.superbigbang.mushelp.popup.EditSongPopup;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -65,15 +66,24 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         mRecyclerSongsList.setAdapter(songsItemAdapter);
         songsItemAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             if (view.getId() == R.id.playPauseButton) {
-                Toast.makeText(TopLevelViewActivity.this, "onItemChildClick Play" + position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(TopLevelViewActivity.this, "onItemChildClick Play/Pause" + position, Toast.LENGTH_SHORT).show();
             } else if (view.getId() == R.id.deleteSongButton) {
                 mTopLevelPresenter.showDeletePopup(position);
             }
         });
         songsItemAdapter.setOnItemChildLongClickListener((adapter, view, position) -> {
-            Toast.makeText(TopLevelViewActivity.this, "onItemChildLongClick" + position, Toast.LENGTH_SHORT).show();
+            Toast.makeText(TopLevelViewActivity.this, "onItemChildLongClick Stop" + position, Toast.LENGTH_SHORT).show();
             return true;
         });
+        songsItemAdapter.setOnItemLongClickListener((adapter, view, position) -> {
+            mTopLevelPresenter.showSongEditPopup(position);
+            return true;
+        });
+    }
+
+    @Override
+    public void showSongEditPopup(String SongName, int position, int tempBpm, boolean audioIsOn, String audioFile, String lyrics) {
+        new EditSongPopup(this, SongName, position, tempBpm, audioIsOn, audioFile, lyrics, mTopLevelPresenter).showPopupWindow();
     }
 
     @Override

@@ -18,6 +18,6 @@
     <string name="button_Save">Сохранить</string>
     <string name="popupWEdit_set_text1">Позиция сет-листа:</string>
     <string name="popupWEdit_text2">Название:</string>
-    <string name="popupWEditSetListHintText1">10</string>
-    <string name="popupWEditSetList_HintText2">Введите название сет-листа</string>
+    <string name="popupWEditSetListHintText1"><u>10</u></string>
+    <string name="popupWEditSetList_HintText2"><u>Введите название сет-листа</u></string>
 </resources>

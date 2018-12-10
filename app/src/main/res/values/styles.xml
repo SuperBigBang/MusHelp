@@ -22,5 +22,10 @@
         <item name="android:layout_margin">2dp</item>
     </style>
 
+    <style name="checkBoxStyle" parent="Base.Theme.AppCompat">
+        <item name="colorAccent">@color/cornerColor</item>
+        <item name="android:textColorSecondary">@color</item>
+    </style>
+
     <style name="Theme">theme</style>
 </resources>

@@ -5,4 +5,5 @@
     <color name="colorAccent">#000000</color>
     <color name="textColorPrimary">#FFFFFFFF</color>
     <color name="cornerColor">#66bfff</color>
+    <color name="uncheckColor">#FFC9C9C9</color
 </resources>

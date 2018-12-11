@@ -56,6 +56,7 @@
         android:layout_marginStart="8dp"
         android:background="@color/colorPrimary"
         android:contentDescription="@string/volumex2button"
+
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintStart_toStartOf="parent"

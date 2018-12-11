@@ -15,6 +15,7 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
     private List<NormalMultipleEntity> mDataSetLists;
     private List<NormalMultipleEntity> mDataSongList;
     private int currentsetlist;
+    private boolean mVolumeUpIsOn_RED = false;
 
     @Override
     protected void onFirstViewAttach() {
@@ -58,4 +59,25 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
                 position + 1, mDataSongList.get(position).bitrate, false, "noFile",
                 mDataSongList.get(position).lyrics);
     }
+
+    public void showVolumeUpPopup() {
+        if (!mVolumeUpIsOn_RED) getViewState().showVolumeUpPopup();
+        else changeVolumeUpButtonState();
+    }
+
+    public void changeVolumeUpButtonState() {
+        //On is Blue (false), Off is Red (true)
+        if (!mVolumeUpIsOn_RED) {
+            mVolumeUpIsOn_RED = true;
+            getViewState().setVolumeUpButtonState(mVolumeUpIsOn_RED);
+        } else {
+            mVolumeUpIsOn_RED = false;
+            getViewState().setVolumeUpButtonState(mVolumeUpIsOn_RED);
+        }
+    }
+
+    void setVolumeUpButtonState() {
+        getViewState().setVolumeUpButtonState(mVolumeUpIsOn_RED);
+    }
 }
+

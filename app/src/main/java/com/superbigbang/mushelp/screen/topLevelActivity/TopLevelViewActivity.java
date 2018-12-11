@@ -1,5 +1,6 @@
 package com.superbigbang.mushelp.screen.topLevelActivity;
 
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,7 @@ import com.superbigbang.mushelp.adapter.DemoMultipleItemRvAdapter;
 import com.superbigbang.mushelp.popup.DeleteSongPopup;
 import com.superbigbang.mushelp.popup.EditSetListPopup;
 import com.superbigbang.mushelp.popup.EditSongPopup;
+import com.superbigbang.mushelp.popup.VolumeUpPopup;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -58,7 +60,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         mRecyclerSongsList.setLayoutManager(managerSongsList);
         mTopLevelPresenter.showSongsLists();
 
-
+        mTopLevelPresenter.setVolumeUpButtonState();
     }
 
     @Override
@@ -132,6 +134,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
             case R.id.newItemCircleButton:
                 break;
             case R.id.volumeX2button:
+                mTopLevelPresenter.showVolumeUpPopup();
                 break;
         }
     }
@@ -145,5 +148,19 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         Toast.makeText(TopLevelViewActivity.this, "Выбран сет лист " + setlistname, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void showVolumeUpPopup() {
+        new VolumeUpPopup(this, mTopLevelPresenter).showPopupWindow();
+    }
 
+    @Override
+    public void setVolumeUpButtonState(boolean VolumeUpChangeToOFF) {
+        if (VolumeUpChangeToOFF) {
+            volumeX2button.getDrawable().setColorFilter(
+                    getResources().getColor(R.color.VolumeButtonIsOn),
+                    PorterDuff.Mode.SRC_ATOP);
+        } else {
+            volumeX2button.getDrawable().clearColorFilter();
+        }
+    }
 }

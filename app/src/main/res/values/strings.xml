@@ -1,16 +1,13 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">MusHelp</string>
     <string name="logoimg">logoimg</string>
     <string name="authorimg">authorimg</string>
-    <string name="editListPenButton">editListPenButton</string>
-    <string name="selectListButtonText" tools:ignore="TypographyEllipsis">...</string>
     <string name="buybutton">buyButton</string>
     <string name="newitemcirclebutton">newItemCircleButton</string>
     <string name="volumex2button">volumeX2button</string>
     <string name="divider">divider</string>
     <string name="bpm">bpm</string>
     <string name="playpausebutton">playPauseButton</string>
-    <string name="editsongbutton">editSongButton</string>
     <string name="deletesongbutton">deleteSongButton</string>
     <string name="popDel_text1">Вы действительно хотите удалить этот трэк?</string>
     <string name="button_Cancel">Отмена</string>
@@ -21,9 +18,11 @@
     <string name="popupWEditSetListHintText1"><u>10</u></string>
     <string name="popupWEditSetList_HintText2"><u>Введите название сет-листа</u></string>
     <string name="enter_track_position">Позиция трэка:</string>
-    <string name="edit_enter_track_name">Введите название трэка</string>
+    <string name="edit_enter_track_name"><u>Введите название трэка</u></string>
     <string name="text_metronom">Метроном:</string>
     <string name="text_audio_or_metronom">Аудио вместо метронома:</string>
-    <string name="edit_hint_Enter_song_lyics">Разместите тут текст песни</string>
-    <string name="_100">100</string>
+    <string name="edit_hint_Enter_song_lyics"><u>Разместите тут текст песни</u></string>
+    <string name="_100"><u>100</u></string>
+    <string name="volume_up_text">Вы готовы к усилению уровня громкости? (может привести к непредвиденным последствиям)</string>
+    <string name="Yes">Да</string>
 </resources>

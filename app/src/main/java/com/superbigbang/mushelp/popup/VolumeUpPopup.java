@@ -4,12 +4,9 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
-import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.superbigbang.mushelp.R;
@@ -17,38 +14,15 @@ import com.superbigbang.mushelp.screen.topLevelActivity.TopLevelPresenter;
 
 import razerdp.basepopup.BasePopupWindow;
 
-public class EditSongPopup extends BasePopupWindow implements View.OnClickListener {
+public class VolumeUpPopup extends BasePopupWindow implements View.OnClickListener {
     private Button mCancelButton;
-    private Button mSaveButton;
-    private ImageButton mClearFileAndLyricsButton;
-    private EditText mEditTextPosition;
-    private EditText mEditTextSongName;
-    private EditText mEditTextTempMetronom;
-    private EditText mEditTextLyrics;
-    private SwitchCompat mAudioOrMetronomSwitch;
-
-
+    private Button mAcceptButton;
     private TopLevelPresenter mTopLevelPresenter;
 
-    public EditSongPopup(Context context, String SongName, int position, int tempBpm,
-                         boolean audioIsOn, String audioFile, String lyrics,
-                         TopLevelPresenter mTopLevelPresenter) {
+    public VolumeUpPopup(Context context, TopLevelPresenter mTopLevelPresenter) {
         super(context);
-        mCancelButton = findViewById(R.id.btn_e_cancel2);
-        mSaveButton = findViewById(R.id.btn_e_Save2);
-        mClearFileAndLyricsButton = findViewById(R.id.btn_e_loadAudioFromFile);
-        mEditTextPosition = findViewById(R.id.editSongPosition);
-        mEditTextSongName = findViewById(R.id.editSongName);
-        mEditTextTempMetronom = findViewById(R.id.editMetronomBPM);
-        mEditTextLyrics = findViewById(R.id.editSongLyrics);
-        mAudioOrMetronomSwitch = findViewById(R.id.edit_audioOrMetronom_switch);
-        mEditTextPosition.setText(String.valueOf(position));
-        mEditTextSongName.setText(SongName);
-        mEditTextTempMetronom.setText(String.valueOf(tempBpm));
-        mEditTextLyrics.setText(lyrics);
-        mAudioOrMetronomSwitch.setChecked(audioIsOn);
-        mClearFileAndLyricsButton.setImageResource(R.drawable.baseline_delete_sweep_white_48);
-
+        mCancelButton = findViewById(R.id.btn_PVUP_cancel);
+        mAcceptButton = findViewById(R.id.btn_PVUP_Accept);
 
         this.mTopLevelPresenter = mTopLevelPresenter;
         setBlurBackgroundEnable(true);
@@ -67,8 +41,7 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
 
     private void bindEvent() {
         mCancelButton.setOnClickListener(this);
-        mSaveButton.setOnClickListener(this);
-        mClearFileAndLyricsButton.setOnClickListener(this);
+        mAcceptButton.setOnClickListener(this);
     }
 
     //=============================================================super methods
@@ -81,7 +54,7 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
 
     @Override
     public View onCreateContentView() {
-        return createPopupById(R.layout.popup_edit_song);
+        return createPopupById(R.layout.popup_volume_up);
     }
 
     @Override
@@ -107,22 +80,13 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_e_cancel2:
+            case R.id.btn_PVUP_cancel:
                 dismiss();
                 break;
-            case R.id.btn_e_Save2:
-                Toast.makeText(getContext(), "Трэк отредактирован", Toast.LENGTH_LONG).show();
+            case R.id.btn_PVUP_Accept:
+                mTopLevelPresenter.changeVolumeUpButtonState();
+                Toast.makeText(getContext(), "Громкость повышена", Toast.LENGTH_LONG).show();
                 dismiss();
-                break;
-            case R.id.btn_e_loadAudioFromFile:
-
-                break;
-            case R.id.edit_audioOrMetronom_switch:
-                if (mAudioOrMetronomSwitch.isChecked()) {
-                    mAudioOrMetronomSwitch.setChecked(false);
-                } else {
-                    mAudioOrMetronomSwitch.setChecked(true);
-                }
                 break;
             default:
                 break;

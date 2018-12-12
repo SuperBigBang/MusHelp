@@ -55,9 +55,11 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
     }
 
     void showSongEditPopup(int position) {
-        getViewState().showSongEditPopup(mDataSongList.get(position).songname,
-                position + 1, mDataSongList.get(position).bitrate, false, "noFile",
-                mDataSongList.get(position).lyrics);
+        if (position != 999) {
+            getViewState().showSongEditPopup(mDataSongList.get(position).songname,
+                    position, mDataSongList.get(position).bitrate, false, "noFile",
+                    mDataSongList.get(position).lyrics);
+        } else getViewState().showSongEditPopup("", 0, 0, false, "", "");
     }
 
     public void showVolumeUpPopup() {

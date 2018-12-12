@@ -111,7 +111,7 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
                 dismiss();
                 break;
             case R.id.btn_e_Save2:
-                Toast.makeText(getContext(), "Трэк отредактирован", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Трэк сохранён", Toast.LENGTH_LONG).show();
                 dismiss();
                 break;
             case R.id.btn_e_loadAudioFromFile:

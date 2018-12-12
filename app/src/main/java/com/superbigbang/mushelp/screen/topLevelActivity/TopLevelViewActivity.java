@@ -96,9 +96,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     @Override
     public void showSetLists(DemoMultipleItemRvAdapter setListItemAdapter) {
         mRecyclerSetList.setAdapter(setListItemAdapter);
-        setListItemAdapter.setOnItemClickListener((adapter, view, position) -> {
-            mTopLevelPresenter.changeSetList(position);
-        });
+        setListItemAdapter.setOnItemClickListener((adapter, view, position) -> mTopLevelPresenter.changeSetList(position));
         setListItemAdapter.setOnItemLongClickListener((adapter, view, position) -> {
             mTopLevelPresenter.showSetListEditPopup(position);
             return true;
@@ -132,6 +130,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
             case R.id.buyButton:
                 break;
             case R.id.newItemCircleButton:
+                mTopLevelPresenter.showSongEditPopup(999);
                 break;
             case R.id.volumeX2button:
                 mTopLevelPresenter.showVolumeUpPopup();

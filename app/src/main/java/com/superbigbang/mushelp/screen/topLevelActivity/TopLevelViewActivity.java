@@ -14,6 +14,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.superbigbang.mushelp.R;
 import com.superbigbang.mushelp.adapter.DemoMultipleItemRvAdapter;
+import com.superbigbang.mushelp.popup.BuyPopup;
 import com.superbigbang.mushelp.popup.DeleteSongPopup;
 import com.superbigbang.mushelp.popup.EditSetListPopup;
 import com.superbigbang.mushelp.popup.EditSongPopup;
@@ -84,8 +85,8 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     }
 
     @Override
-    public void showSongEditPopup(String SongName, int position, int tempBpm, boolean audioIsOn, String audioFile, String lyrics) {
-        new EditSongPopup(this, SongName, position, tempBpm, audioIsOn, audioFile, lyrics, mTopLevelPresenter).showPopupWindow();
+    public void showSongEditPopup(String SongName, int position, int tempBpm, boolean audioIsOn, boolean countdownIsOn, String audioFile, String lyrics) {
+        new EditSongPopup(this, SongName, position, tempBpm, audioIsOn, countdownIsOn, audioFile, lyrics, mTopLevelPresenter).showPopupWindow();
     }
 
     @Override
@@ -128,6 +129,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.buyButton:
+                mTopLevelPresenter.showBuyPopup();
                 break;
             case R.id.newItemCircleButton:
                 mTopLevelPresenter.showSongEditPopup(999);
@@ -150,6 +152,11 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     @Override
     public void showVolumeUpPopup() {
         new VolumeUpPopup(this, mTopLevelPresenter).showPopupWindow();
+    }
+
+    @Override
+    public void showBuyPopup() {
+        new BuyPopup(this, mTopLevelPresenter).showPopupWindow();
     }
 
     @Override

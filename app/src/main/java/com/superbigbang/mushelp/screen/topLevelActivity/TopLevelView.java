@@ -29,10 +29,13 @@ public interface TopLevelView extends MvpView {
     void showSetListEditPopup(String setListName, int position);
 
    @StateStrategyType(SingleStateStrategy.class)
-   void showSongEditPopup(String SongName, int position, int tempBpm, boolean audioIsOn, String audioFile, String lyrics);
+   void showSongEditPopup(String SongName, int position, int tempBpm, boolean audioIsOn, boolean countdownIsOn, String audioFile, String lyrics);
 
     @StateStrategyType(SingleStateStrategy.class)
     void showVolumeUpPopup();
 
     void setVolumeUpButtonState(boolean VolumeUpIsOn_RED);
+
+    @StateStrategyType(SingleStateStrategy.class)
+    void showBuyPopup();
 }

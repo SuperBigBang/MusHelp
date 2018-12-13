@@ -61,16 +61,16 @@ public class DataServer {
         List<NormalMultipleEntity> list = new ArrayList<>();
         for (int i = 1; i <= 9; i++) {
             list.add(new NormalMultipleEntity(NormalMultipleEntity.SONGS_LISTS,
-                    "Song name", "Song lyrics", i, 170));
+                    "Song name", "Song lyrics", "", i * 100, i, 170, false, false));
             if (i == 9) {
                 list.add(new NormalMultipleEntity(NormalMultipleEntity.SONGS_LISTS,
                         "Долгое нажатие позволяет отредактировать элемент",
-                        "Song lyrics", ++i, 140));
+                        "Song lyrics", "", (++i) * 100, i, 140, false, false));
             }
             if (i == 1) {
                 list.add(new NormalMultipleEntity(NormalMultipleEntity.SONGS_LISTS,
                         "Three Days Grace - Over and Over",
-                        tdgOverAndOverLyrics, ++i, 125));
+                        tdgOverAndOverLyrics, "", (++i) * 100, i, 125, false, false));
             }
         }
         return list;

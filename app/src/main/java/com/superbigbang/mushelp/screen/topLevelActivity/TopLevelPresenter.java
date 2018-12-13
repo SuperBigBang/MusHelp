@@ -42,6 +42,10 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
         getViewState().showDeletePopup(mDataSongList.get(position).songname);
     }
 
+    void showBuyPopup() {
+        getViewState().showBuyPopup();
+    }
+
     public void clearStateStrategyPull() {
         getViewState().clearStateStrategyPull();
     }
@@ -57,9 +61,12 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
     void showSongEditPopup(int position) {
         if (position != 999) {
             getViewState().showSongEditPopup(mDataSongList.get(position).songname,
-                    position, mDataSongList.get(position).bitrate, false, "noFile",
+                    mDataSongList.get(position).position, mDataSongList.get(position).bitrate,
+                    mDataSongList.get(position).audioIsOn,
+                    mDataSongList.get(position).countdownIsOn,
+                    mDataSongList.get(position).audioFile,
                     mDataSongList.get(position).lyrics);
-        } else getViewState().showSongEditPopup("", 0, 0, false, "", "");
+        } else getViewState().showSongEditPopup("", 0, 0, false, false, "", "");
     }
 
     public void showVolumeUpPopup() {

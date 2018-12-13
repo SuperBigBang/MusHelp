@@ -21,8 +21,12 @@
     <string name="edit_enter_track_name"><u>Введите название трэка</u></string>
     <string name="text_metronom">Метроном:</string>
     <string name="text_audio_or_metronom">Аудио вместо метронома:</string>
-    <string name="edit_hint_Enter_song_lyics"><u>Разместите тут текст песни</u></string>
+    <string name="edit_hint_Enter_song_lyics"><u>Разместите тут текст песни</u>\nРазовое нажатие на корзину удалит текст песни, а долгое удерживание на ней, удалит привязанную ссылку на аудио файл</string>
     <string name="_100"><u>100</u></string>
     <string name="volume_up_text">Вы готовы к усилению уровня громкости? (может привести к непредвиденным последствиям)</string>
     <string name="Yes">Да</string>
+    <string name="Countdown">Отсчёт:</string>
+    <string name="buy_popup_text">Желаете приобрести полную версию приложения?\nВам будет доступно:\n- Больше сет-листов и до 50 трэков в каждом\n- Никакой рекламы</string>
+    <string name="Buy">Купить</string>
+    <string name="author_superbigbang">Author: SuperBigBang</string>
 </resources>

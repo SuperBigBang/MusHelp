@@ -14,15 +14,15 @@ import com.superbigbang.mushelp.screen.topLevelActivity.TopLevelPresenter;
 
 import razerdp.basepopup.BasePopupWindow;
 
-public class VolumeUpPopup extends BasePopupWindow implements View.OnClickListener {
+public class BuyPopup extends BasePopupWindow implements View.OnClickListener {
     private Button mCancelButton;
-    private Button mAcceptButton;
+    private Button mBuyButton;
     private TopLevelPresenter mTopLevelPresenter;
 
-    public VolumeUpPopup(Context context, TopLevelPresenter mTopLevelPresenter) {
+    public BuyPopup(Context context, TopLevelPresenter mTopLevelPresenter) {
         super(context);
-        mCancelButton = findViewById(R.id.btn_PVUP_cancel);
-        mAcceptButton = findViewById(R.id.btn_PVUP_Accept);
+        mCancelButton = findViewById(R.id.btn_PBUY_cancel);
+        mBuyButton = findViewById(R.id.btn_PBUY_Accept);
 
         this.mTopLevelPresenter = mTopLevelPresenter;
         setBlurBackgroundEnable(true);
@@ -41,7 +41,7 @@ public class VolumeUpPopup extends BasePopupWindow implements View.OnClickListen
 
     private void bindEvent() {
         mCancelButton.setOnClickListener(this);
-        mAcceptButton.setOnClickListener(this);
+        mBuyButton.setOnClickListener(this);
     }
 
     //=============================================================super methods
@@ -54,7 +54,7 @@ public class VolumeUpPopup extends BasePopupWindow implements View.OnClickListen
 
     @Override
     public View onCreateContentView() {
-        return createPopupById(R.layout.popup_volume_up);
+        return createPopupById(R.layout.popup_buy);
     }
 
     @Override
@@ -80,12 +80,11 @@ public class VolumeUpPopup extends BasePopupWindow implements View.OnClickListen
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_PVUP_cancel:
+            case R.id.btn_PBUY_cancel:
                 dismiss();
                 break;
-            case R.id.btn_PVUP_Accept:
-                mTopLevelPresenter.changeVolumeUpButtonState();
-                Toast.makeText(getContext(), "Громкость повышена", Toast.LENGTH_LONG).show();
+            case R.id.btn_PBUY_Accept:
+                Toast.makeText(getContext(), "Переход на Google Play для покупки", Toast.LENGTH_LONG).show();
                 dismiss();
                 break;
             default:

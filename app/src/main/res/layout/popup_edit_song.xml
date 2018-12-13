@@ -196,6 +196,18 @@
             app:layout_constraintBaseline_toBaselineOf="@+id/editMetronomBPM"
             app:layout_constraintStart_toEndOf="@+id/editMetronomBPM" />
 
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/Countdown"
+            android:textAlignment="viewStart"
+            android:textColor="@color/cornerColor"
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView5"
+            app:layout_constraintEnd_toStartOf="@+id/edit_beforeAudioCountdown_switch2" />
+
         <android.support.v7.widget.SwitchCompat
             android:id="@+id/edit_audioOrMetronom_switch"
             android:layout_width="wrap_content"
@@ -208,6 +220,17 @@
             app:layout_constraintBottom_toBottomOf="@+id/btn_e_loadAudioFromFile"
             app:layout_constraintStart_toEndOf="@+id/textView4"
             app:layout_constraintTop_toTopOf="@+id/btn_e_loadAudioFromFile" />
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/edit_beforeAudioCountdown_switch2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:checked="false"
+            android:theme="@style/MySwitch"
+            app:layout_constraintBottom_toBottomOf="@+id/textView6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView6" />
 
         <ImageView
             android:id="@+id/divider10"

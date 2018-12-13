@@ -65,7 +65,7 @@ public class InputPopup extends BasePopupWindow implements View.OnClickListener 
             if (mDisplayAnimateView != null) {
                 set.playTogether(
                         ObjectAnimator.ofFloat(mDisplayAnimateView, "translationY", 0, 250).setDuration(400),
-                        ObjectAnimator.ofFloat(mDisplayAnimateView, "alpha", 1, 0.4f).setDuration(250 * 3 / 2));
+                        ObjectAnimator.ofFloat(mDisplayAnimateView, "alpha", 1, 0.4f).setDuration(375));
             }
         }
         return set;

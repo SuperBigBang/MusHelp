@@ -23,7 +23,7 @@ public class SongsListItemProvider extends BaseItemProvider<NormalMultipleEntity
 
     @Override
     public void convert(BaseViewHolder helper, NormalMultipleEntity data, int position) {
-        helper.setText(R.id.songPosition, String.valueOf(data.id));
+        helper.setText(R.id.songPosition, String.valueOf(data.position));
         helper.setText(R.id.songName, data.songname);
         helper.setText(R.id.songLyrics, data.lyrics);
         helper.setText(R.id.bpmEditMetro, String.valueOf(data.bitrate));

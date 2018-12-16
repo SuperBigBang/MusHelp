@@ -4,9 +4,9 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.provider.BaseItemProvider;
 import com.superbigbang.mushelp.R;
 import com.superbigbang.mushelp.adapter.DemoMultipleItemRvAdapter;
-import com.superbigbang.mushelp.model.NormalMultipleEntity;
+import com.superbigbang.mushelp.model.SetList;
 
-public class SetListItemProvider extends BaseItemProvider<NormalMultipleEntity, BaseViewHolder> {
+public class SetListItemProvider extends BaseItemProvider<SetList, BaseViewHolder> {
 
     @Override
     public int viewType() {
@@ -19,7 +19,7 @@ public class SetListItemProvider extends BaseItemProvider<NormalMultipleEntity, 
     }
 
     @Override
-    public void convert(BaseViewHolder helper, NormalMultipleEntity data, int position) {
-        helper.setText(R.id.setListName, data.setlistname);
+    public void convert(BaseViewHolder helper, SetList data, int position) {
+        helper.setText(R.id.setListName, data.getName());
     }
 }

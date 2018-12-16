@@ -6,14 +6,17 @@ import java.util.List;
 public class DataServer {
 
     private static final String SET_LIST_NAME = "Сет лист ";
+    private static final int SET_LISTS = 1;
+    private static final int SONGS_LISTS = 4;
 
     private DataServer() {
     }
-    public static List<NormalMultipleEntity> getSetListsMultipleEntities() {
-        List<NormalMultipleEntity> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            list.add(new NormalMultipleEntity(NormalMultipleEntity.SET_LISTS, SET_LIST_NAME + (i + 1)));
-        }
+
+    public static List<SetList> getSetListsMultipleEntities() {
+        List<SetList> list = new ArrayList<>();
+
+
+        /* for (int i = 0; i < 10; i++) {list.add(new SetList(SET_LISTS, SET_LIST_NAME + (i + 1)));}*/
         return list;
     }
 

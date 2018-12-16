@@ -14,6 +14,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.superbigbang.mushelp.R;
 import com.superbigbang.mushelp.adapter.DemoMultipleItemRvAdapter;
+import com.superbigbang.mushelp.adapter.SetListItemRvAdapter;
 import com.superbigbang.mushelp.popup.BuyPopup;
 import com.superbigbang.mushelp.popup.DeleteSongPopup;
 import com.superbigbang.mushelp.popup.EditSetListPopup;
@@ -53,6 +54,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
 
         mTopLevelPresenter.showAdvertistments();
 
+        mTopLevelPresenter.realmsInit();
         LinearLayoutManager managerSetList = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mRecyclerSetList.setLayoutManager(managerSetList);
         mTopLevelPresenter.showSetLists();
@@ -95,7 +97,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     }
 
     @Override
-    public void showSetLists(DemoMultipleItemRvAdapter setListItemAdapter) {
+    public void showSetLists(SetListItemRvAdapter setListItemAdapter) {
         mRecyclerSetList.setAdapter(setListItemAdapter);
         setListItemAdapter.setOnItemClickListener((adapter, view, position) -> mTopLevelPresenter.changeSetList(position));
         setListItemAdapter.setOnItemLongClickListener((adapter, view, position) -> {

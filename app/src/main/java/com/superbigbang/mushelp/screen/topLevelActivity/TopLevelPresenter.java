@@ -72,7 +72,7 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
     }
 
     void changeSetList(int position) {
-        getViewState().changeSetList(mDataSetLists.get(position).getName());
+        getViewState().changeSetList(mSetlistsrealm.where(SetList.class).equalTo("position", position).findFirst().getName());
     }
 
     void showSetListEditPopup(int position) {

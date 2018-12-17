@@ -14,8 +14,7 @@ public class SetListItemRvAdapter extends MultipleItemRvAdapter<SetList, BaseVie
     private final RealmResults<SetList> mSetLists;
 
     public SetListItemRvAdapter(RealmResults<SetList> mSetLists) {
-        super(mSetLists);
-        mSetLists.sort("position");
+        super(mSetLists.sort("position"));
         this.mSetLists = mSetLists;
         this.mSetLists.addChangeListener(this);
         finishInitialize();

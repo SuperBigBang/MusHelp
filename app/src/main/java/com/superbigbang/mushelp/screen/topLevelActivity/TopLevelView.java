@@ -12,7 +12,7 @@ import com.superbigbang.mushelp.customMoxyStrategies.ClearStateStrategy;
 @StateStrategyType(OneExecutionStateStrategy.class)
 public interface TopLevelView extends MvpView {
 
- void showAdvertistments(AdRequest adRequest);
+    void showAdvertistments(AdRequest adRequest);
 
     void showSetLists(SetListItemRvAdapter multipleItemAdapter);
 
@@ -29,8 +29,8 @@ public interface TopLevelView extends MvpView {
     @StateStrategyType(SingleStateStrategy.class)
     void showSetListEditPopup(String setListName, int position);
 
-   @StateStrategyType(SingleStateStrategy.class)
-   void showSongEditPopup(String SongName, int position, int tempBpm, boolean audioIsOn, boolean countdownIsOn, String audioFile, String lyrics);
+    @StateStrategyType(SingleStateStrategy.class)
+    void showSongEditPopup(String SongName, int position, int tempBpm, boolean audioIsOn, boolean countdownIsOn, String audioFile, String lyrics);
 
     @StateStrategyType(SingleStateStrategy.class)
     void showVolumeUpPopup();

@@ -21,6 +21,7 @@ public class SongsListItemProvider extends BaseItemProvider<NormalMultipleEntity
         return R.layout.item_song_list;
     }
 
+    //====================== START начать редактировать отсюда, сделать Songs модель
     @Override
     public void convert(BaseViewHolder helper, NormalMultipleEntity data, int position) {
         helper.setText(R.id.songPosition, String.valueOf(data.position));

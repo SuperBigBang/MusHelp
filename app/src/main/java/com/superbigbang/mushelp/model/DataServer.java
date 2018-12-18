@@ -8,18 +8,6 @@ public class DataServer {
     private static final String SET_LIST_NAME = "Сет лист ";
     private static final int SET_LISTS = 1;
     private static final int SONGS_LISTS = 4;
-
-    private DataServer() {
-    }
-
-    public static List<SetList> getSetListsMultipleEntities() {
-        List<SetList> list = new ArrayList<>();
-
-
-        /* for (int i = 0; i < 10; i++) {list.add(new SetList(SET_LISTS, SET_LIST_NAME + (i + 1)));}*/
-        return list;
-    }
-
     private static final String tdgOverAndOverLyrics = "I feel it everyday, it's all the same\n" +
             "It brings me down, but I'm the one to blame\n" +
             "I've tried everything to get away\n" +
@@ -60,15 +48,26 @@ public class DataServer {
             "Авторы: Gavin Brown / Neil Sanderson / Adam Gontier / Brad Walst / Barry Stock\n" +
             "Текст песни \"Over and Over\", © Sony/ATV Music Publishing LLC, Kobalt Music Publishing Ltd.";
 
+    private DataServer() {
+    }
+
+    public static List<SetList> getSetListsMultipleEntities() {
+        List<SetList> list = new ArrayList<>();
+
+
+        /* for (int i = 0; i < 10; i++) {list.add(new SetList(SET_LISTS, SET_LIST_NAME + (i + 1)));}*/
+        return list;
+    }
+
     public static List<NormalMultipleEntity> getSongsMultipleEntities() {
         List<NormalMultipleEntity> list = new ArrayList<>();
         for (int i = 1; i <= 9; i++) {
             list.add(new NormalMultipleEntity(NormalMultipleEntity.SONGS_LISTS,
-                    "Song name", "Song lyrics", "", i * 100, i, 170, false, false));
+                    "Songs name", "Songs lyrics", "", i * 100, i, 170, false, false));
             if (i == 9) {
                 list.add(new NormalMultipleEntity(NormalMultipleEntity.SONGS_LISTS,
                         "Долгое нажатие позволяет отредактировать элемент",
-                        "Song lyrics", "", (++i) * 100, i, 140, false, false));
+                        "Songs lyrics", "", (++i) * 100, i, 140, false, false));
             }
             if (i == 1) {
                 list.add(new NormalMultipleEntity(NormalMultipleEntity.SONGS_LISTS,

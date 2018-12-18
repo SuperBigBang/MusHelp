@@ -29,4 +29,9 @@
     <string name="buy_popup_text">Желаете приобрести полную версию приложения?\nВам будет доступно:\n- Больше сет-листов и до 50 трэков в каждом\n- Никакой рекламы</string>
     <string name="Buy">Купить</string>
     <string name="author_superbigbang">Author: SuperBigBang</string>
+    <string name="SetListNameDefault">Сет лист\u0020</string>
+    <string name="SetListHasEdit">Сет-лист отредактирован</string>
+    <string name="SetListNoPositionError">Введите номер позиции, чтобы продолжить</string>
+    <string name="SetListNoNameError">Введите название сет-листа, чтобы продолжить</string>
+    <string name="SetListPosNumError">Введите позицию от 1 до 10</string>
 </resources>

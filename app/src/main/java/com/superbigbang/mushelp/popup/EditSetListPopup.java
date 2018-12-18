@@ -11,8 +11,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.superbigbang.mushelp.R;
+import com.superbigbang.mushelp.model.SetList;
 import com.superbigbang.mushelp.screen.topLevelActivity.TopLevelPresenter;
 
+import io.realm.RealmResults;
 import razerdp.basepopup.BasePopupWindow;
 
 public class EditSetListPopup extends BasePopupWindow implements View.OnClickListener {
@@ -20,6 +22,7 @@ public class EditSetListPopup extends BasePopupWindow implements View.OnClickLis
     private Button mSaveButton;
     private EditText mEditTextPosition;
     private EditText mEditTextSetListName;
+    private int currentPosition;
 
     private TopLevelPresenter mTopLevelPresenter;
 
@@ -29,9 +32,10 @@ public class EditSetListPopup extends BasePopupWindow implements View.OnClickLis
         mSaveButton = findViewById(R.id.btn_e_Save);
         mEditTextPosition = findViewById(R.id.editSetListPosition);
         mEditTextSetListName = findViewById(R.id.editSetListName);
-        mEditTextPosition.setHint(String.valueOf(position));
-        mEditTextSetListName.setHint(SongName);
+        mEditTextPosition.setText(String.valueOf(position + 1));
+        mEditTextSetListName.setText(SongName);
 
+        currentPosition = position;
         this.mTopLevelPresenter = mTopLevelPresenter;
         setBlurBackgroundEnable(true);
         bindEvent();
@@ -93,8 +97,73 @@ public class EditSetListPopup extends BasePopupWindow implements View.OnClickLis
                 dismiss();
                 break;
             case R.id.btn_e_Save:
-                Toast.makeText(getContext(), "Сет-лист отредактирован", Toast.LENGTH_LONG).show();
-                dismiss();
+                String resultPositionEditText = mEditTextPosition.getText().toString();
+                String resultNameEditText = mEditTextSetListName.getText().toString();
+                int valueOfResultPositionEditText;
+                if (resultPositionEditText.isEmpty()) {
+                    Toast.makeText(getContext(), R.string.SetListNoPositionError, Toast.LENGTH_LONG).show();
+                } else if (resultNameEditText.isEmpty()) {
+                    Toast.makeText(getContext(), R.string.SetListNoNameError, Toast.LENGTH_LONG).show();
+                } else {
+                    valueOfResultPositionEditText = Integer.valueOf(resultPositionEditText) - 1;
+                    if (valueOfResultPositionEditText < 0 || valueOfResultPositionEditText >= 10) {
+                        Toast.makeText(getContext(), R.string.SetListPosNumError, Toast.LENGTH_LONG).show();
+                    } else {
+                        if (currentPosition > valueOfResultPositionEditText) {
+//=============================================================to Bottom
+                            final RealmResults<SetList> setlistsforedit = mTopLevelPresenter.mSetlistsrealm
+                                    .where(SetList.class)
+                                    .between("position", valueOfResultPositionEditText, currentPosition)
+                                    .findAll();
+                            mTopLevelPresenter.mSetlistsrealm.beginTransaction();
+                            String buffer1 = "";
+                            String buffer2 = "";
+                            for (int i = 0; i <= currentPosition - valueOfResultPositionEditText; i++) {
+                                if (i == 0) {
+                                    buffer1 = setlistsforedit.get(i).getName();
+                                    setlistsforedit.get(i).setName(resultNameEditText);
+                                } else {
+                                    buffer2 = setlistsforedit.get(i).getName();
+                                    setlistsforedit.get(i).setName(buffer1);
+                                    buffer1 = buffer2;
+                                }
+                            }
+                            mTopLevelPresenter.mSetlistsrealm.commitTransaction();
+                        } else if (currentPosition < valueOfResultPositionEditText) {
+//=============================================================to Top
+                            final RealmResults<SetList> setlistsforedit = mTopLevelPresenter.mSetlistsrealm
+                                    .where(SetList.class)
+                                    .between("position", currentPosition, valueOfResultPositionEditText)
+                                    .findAll();
+                            mTopLevelPresenter.mSetlistsrealm.beginTransaction();
+                            String buffer1 = "";
+                            String buffer2 = "";
+                            for (int i = 0; i <= valueOfResultPositionEditText - currentPosition; i++) {
+                                int currentEditSetList = (valueOfResultPositionEditText - currentPosition) - i;
+                                if (i == 0) {
+                                    buffer1 = setlistsforedit.get(currentEditSetList).getName();
+                                    setlistsforedit.get(currentEditSetList).setName(resultNameEditText);
+                                } else {
+                                    buffer2 = setlistsforedit.get(currentEditSetList).getName();
+                                    setlistsforedit.get(currentEditSetList).setName(buffer1);
+                                    buffer1 = buffer2;
+                                }
+                            }
+                            mTopLevelPresenter.mSetlistsrealm.commitTransaction();
+                        } else if (currentPosition == valueOfResultPositionEditText) {
+                            //=============================================================no change position, edit only Name
+                            mTopLevelPresenter.mSetlistsrealm.beginTransaction();
+                            SetList setList = mTopLevelPresenter.mSetlistsrealm
+                                    .where(SetList.class)
+                                    .equalTo("position", currentPosition)
+                                    .findFirst();
+                            setList.setName(resultNameEditText);
+                            mTopLevelPresenter.mSetlistsrealm.commitTransaction();
+                        }
+                        Toast.makeText(getContext(), R.string.SetListHasEdit, Toast.LENGTH_LONG).show();
+                        dismiss();
+                    }
+                }
                 break;
             default:
                 break;

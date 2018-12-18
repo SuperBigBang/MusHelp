@@ -18,11 +18,12 @@ import io.realm.RealmConfiguration;
 @InjectViewState
 public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
 
-    Realm mSetlistsrealm;
+    public Realm mSetlistsrealm;
+    public Realm mSongsrealm;
     private List<NormalMultipleEntity> mDataSongList;
     private int currentsetlist;
     private boolean mVolumeUpIsOn_RED = false;
-    Realm mSongsrealm;
+
     private List<SetList> mDataSetLists;
 
     @Override
@@ -76,7 +77,7 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
     }
 
     void showSetListEditPopup(int position) {
-        getViewState().showSetListEditPopup(mDataSetLists.get(position).getName(), position + 1);
+        getViewState().showSetListEditPopup(mSetlistsrealm.where(SetList.class).equalTo("position", position).findFirst().getName(), position);
     }
 
     void showSongEditPopup(int position) {

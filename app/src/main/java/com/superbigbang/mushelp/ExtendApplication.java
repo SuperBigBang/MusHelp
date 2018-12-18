@@ -81,8 +81,13 @@ public class ExtendApplication extends Application {
         setList2.setId(1);
         setList2.setName("Amon Amarth");
         setList2.setPosition(1);
+        for (int i = 2; i < 10; i++) {
+            SetList setList = setlistsrealm.createObject(SetList.class);
+            setList.setId(i);
+            setList.setName(getResources().getString(R.string.SetListNameDefault) + (i + 1));
+            setList.setPosition(i);
+        }
         setlistsrealm.commitTransaction();
-
         setlistsrealm.close();
     }
 }

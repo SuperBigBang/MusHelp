@@ -76,6 +76,7 @@ public class ExtendApplication extends Application {
         setList1.setId(0);
         setList1.setName("Hell Rain");
         setList1.setPosition(0);
+        setList1.setOpen(true);
         SetList setList2 = setlistsrealm.createObject(SetList.class);
         setList2.setId(1);
         setList2.setName("Amon Amarth");

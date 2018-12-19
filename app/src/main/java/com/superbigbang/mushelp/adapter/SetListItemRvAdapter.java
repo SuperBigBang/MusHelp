@@ -11,7 +11,7 @@ import io.realm.RealmResults;
 public class SetListItemRvAdapter extends MultipleItemRvAdapter<SetList, BaseViewHolder> implements RealmChangeListener {
 
     public static final int TYPE_SET_LISTS = 100;
-    private final RealmResults<SetList> mSetLists;
+    private RealmResults<SetList> mSetLists;
 
     public SetListItemRvAdapter(RealmResults<SetList> mSetLists) {
         super(mSetLists.sort("position"));

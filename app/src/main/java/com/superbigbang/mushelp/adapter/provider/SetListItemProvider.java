@@ -1,5 +1,7 @@
 package com.superbigbang.mushelp.adapter.provider;
 
+import android.graphics.Color;
+
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.provider.BaseItemProvider;
 import com.superbigbang.mushelp.R;
@@ -21,5 +23,10 @@ public class SetListItemProvider extends BaseItemProvider<SetList, BaseViewHolde
     @Override
     public void convert(BaseViewHolder helper, SetList data, int position) {
         helper.setText(R.id.setListName, data.getName());
+        if (data.isOpen()) {
+            helper.setTextColor(R.id.setListName, Color.parseColor("#FFFFFFFF"));
+        } else {
+            helper.setTextColor(R.id.setListName, Color.parseColor("#66bfff"));
+        }
     }
 }

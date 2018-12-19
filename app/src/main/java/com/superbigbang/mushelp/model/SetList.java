@@ -10,6 +10,7 @@ public class SetList extends RealmObject {
 
     private int id;
     private int position;
+    private boolean isOpen;
 
     public int getId() {
         return id;
@@ -33,5 +34,20 @@ public class SetList extends RealmObject {
 
     public void setPosition(int position) {
         this.position = position;
+    }
+
+    public boolean isOpen() {
+        return isOpen;
+    }
+
+    public void setOpen(boolean open) {
+        isOpen = open;
+    }
+
+    public void setAllSettings(SetList setListLoad) {
+        setId(setListLoad.getId());
+        setName(setListLoad.getName());
+        setPosition(setListLoad.getPosition());
+        setOpen(setListLoad.isOpen());
     }
 }

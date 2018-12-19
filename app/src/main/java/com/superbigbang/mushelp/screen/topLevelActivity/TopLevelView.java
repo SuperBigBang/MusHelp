@@ -1,7 +1,5 @@
 package com.superbigbang.mushelp.screen.topLevelActivity;
 
-import android.view.View;
-
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy;
 import com.arellomobile.mvp.viewstate.strategy.SingleStateStrategy;
@@ -16,7 +14,7 @@ public interface TopLevelView extends MvpView {
 
     void showAdvertistments(AdRequest adRequest);
 
-    void showSetLists(SetListItemRvAdapter multipleItemAdapter, int lastOpenPosition, int lastOpenSetListId);
+    void showSetLists(SetListItemRvAdapter multipleItemAdapter);
 
     void showSongsLists(DemoMultipleItemRvAdapter multipleItemAdapter);
 
@@ -26,7 +24,7 @@ public interface TopLevelView extends MvpView {
     @StateStrategyType(ClearStateStrategy.class)
     void clearStateStrategyPull();
 
-    void changeSetList(View openedPosition, View lastPosition);
+    void changeSetList(String currentSetListName);
 
     @StateStrategyType(SingleStateStrategy.class)
     void showSetListEditPopup(String setListName, int position);

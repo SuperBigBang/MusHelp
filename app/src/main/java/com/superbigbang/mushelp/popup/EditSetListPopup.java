@@ -16,6 +16,7 @@ import com.superbigbang.mushelp.screen.topLevelActivity.TopLevelPresenter;
 
 import io.realm.RealmResults;
 import razerdp.basepopup.BasePopupWindow;
+import timber.log.Timber;
 
 public class EditSetListPopup extends BasePopupWindow implements View.OnClickListener {
     private Button mCancelButton;
@@ -105,33 +106,52 @@ public class EditSetListPopup extends BasePopupWindow implements View.OnClickLis
                 } else if (resultNameEditText.isEmpty()) {
                     Toast.makeText(getContext(), R.string.SetListNoNameError, Toast.LENGTH_LONG).show();
                 } else {
-                    valueOfResultPositionEditText = Integer.valueOf(resultPositionEditText) - 1;
+                    valueOfResultPositionEditText = (Integer.valueOf(resultPositionEditText)) - 1;
                     if (valueOfResultPositionEditText < 0 || valueOfResultPositionEditText >= 10) {
                         Toast.makeText(getContext(), R.string.SetListPosNumError, Toast.LENGTH_LONG).show();
                     } else {
                         if (currentPosition > valueOfResultPositionEditText) {
 //=============================================================to Bottom
-                            final RealmResults<SetList> setlistsforedit = mTopLevelPresenter.mSetlistsrealm
+                            RealmResults<SetList> setlistNoAutoSorting = mTopLevelPresenter.mSetlistsrealm
                                     .where(SetList.class)
                                     .between("position", valueOfResultPositionEditText, currentPosition)
                                     .findAll();
                             mTopLevelPresenter.mSetlistsrealm.beginTransaction();
-                            String buffer1 = "";
-                            String buffer2 = "";
+                            int countposition1 = 0;
+                            int countposition2 = 0;
+                            SetList firstSetList = null;
+                            SetList lastbeforeSetList = null;
                             for (int i = 0; i <= currentPosition - valueOfResultPositionEditText; i++) {
                                 if (i == 0) {
-                                    buffer1 = setlistsforedit.get(i).getName();
-                                    setlistsforedit.get(i).setName(resultNameEditText);
+                                    SetList editedSetList = setlistNoAutoSorting.where().equalTo("position", currentPosition).findFirst();
+                                    editedSetList.setName(resultNameEditText);
+                                    //    lastbeforeSetList = setlistNoAutoSorting.where().equalTo("position",currentPosition-1).findFirst();
+                                    firstSetList = setlistNoAutoSorting.where().equalTo("position", valueOfResultPositionEditText).findFirst();
+                                    countposition1 = firstSetList.getPosition();
+                                    editedSetList.setPosition(countposition1);
                                 } else {
-                                    buffer2 = setlistsforedit.get(i).getName();
-                                    setlistsforedit.get(i).setName(buffer1);
-                                    buffer1 = buffer2;
+                                    SetList secondSetList = setlistNoAutoSorting.where().equalTo("position", countposition1 + 1).findFirst();
+                                    countposition2 = countposition1 + 1;
+                                    if (firstSetList != null) {
+                                        firstSetList.setPosition(countposition2);
+                                    } else {
+                                        Timber.e("ONENULL1!!!");
+                                    }
+                                    countposition1++;
+                                    firstSetList = setlistNoAutoSorting.where().equalTo("position", countposition2 + 1).findFirst();
+                                    countposition2++;
+                                    if (secondSetList != null) {
+                                        secondSetList.setPosition(countposition2);
+                                    } else {
+                                        Timber.e("ONENULL2!!!");
+                                    }
+                                    countposition1++;
                                 }
                             }
                             mTopLevelPresenter.mSetlistsrealm.commitTransaction();
                         } else if (currentPosition < valueOfResultPositionEditText) {
 //=============================================================to Top
-                            final RealmResults<SetList> setlistsforedit = mTopLevelPresenter.mSetlistsrealm
+                            RealmResults<SetList> setlistsforedit = mTopLevelPresenter.mSetlistsrealm
                                     .where(SetList.class)
                                     .between("position", currentPosition, valueOfResultPositionEditText)
                                     .findAll();

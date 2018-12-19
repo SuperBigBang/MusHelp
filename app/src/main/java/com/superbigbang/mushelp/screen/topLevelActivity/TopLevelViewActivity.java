@@ -1,7 +1,10 @@
 package com.superbigbang.mushelp.screen.topLevelActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -46,15 +49,23 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     @BindView(R.id.volumeX2button)
     ImageButton volumeX2button;
 
+    public static final String APP_PREFERENCES = "mysettings";
+    SharedPreferences mSettings;
+    SharedPreferences.Editor mSettingsEditor;
+    int lastOpenSetListPosition;
+    int lastOpenSetListId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_level);
         ButterKnife.bind(this);
+        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 
         mTopLevelPresenter.showAdvertistments();
 
-        mTopLevelPresenter.realmsInit();
+        mTopLevelPresenter.realmsInit(mSettings);
+        mSettingsEditor = mSettings.edit();
         LinearLayoutManager managerSetList = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mRecyclerSetList.setLayoutManager(managerSetList);
         mTopLevelPresenter.showSetLists();
@@ -97,9 +108,17 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     }
 
     @Override
-    public void showSetLists(SetListItemRvAdapter setListItemAdapter) {
+    public void showSetLists(SetListItemRvAdapter setListItemAdapter, int lastOpenPosition, int lastOpenSListId) {
+        lastOpenSetListPosition = lastOpenPosition;
+        lastOpenSetListId = lastOpenSListId;
+        //  mRecyclerSetList.setAdapter(setListItemAdapter);
         mRecyclerSetList.setAdapter(setListItemAdapter);
-        setListItemAdapter.setOnItemClickListener((adapter, view, position) -> mTopLevelPresenter.changeSetList(position));
+        setListItemAdapter.bindToRecyclerView(mRecyclerSetList);
+        setListItemAdapter.setOnItemClickListener((adapter, view, position) -> {
+            if (position != lastOpenSetListPosition) {
+                mTopLevelPresenter.changeSetList(adapter, view, position, lastOpenSetListId, mSettingsEditor);
+            }
+        });
         setListItemAdapter.setOnItemLongClickListener((adapter, view, position) -> {
             mTopLevelPresenter.showSetListEditPopup(position);
             return true;
@@ -147,8 +166,12 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     }
 
     @Override
-    public void changeSetList(String setlistname) {
-        Toast.makeText(TopLevelViewActivity.this, "Выбран сет лист " + setlistname, Toast.LENGTH_SHORT).show();
+    public void changeSetList(View openedPosition, View lastPosition) {
+        AppCompatTextView text = openedPosition.findViewById(R.id.setListName);
+        text.setTextColor(getResources().getColor(R.color.textColorPrimary));
+        AppCompatTextView textOfLastPosition = lastPosition.findViewById(R.id.setListName);
+        textOfLastPosition.setTextColor(getResources().getColor(R.color.cornerColor));
+        Toast.makeText(TopLevelViewActivity.this, "Выбран сет лист " + text.getText(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

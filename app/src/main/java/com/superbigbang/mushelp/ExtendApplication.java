@@ -56,8 +56,7 @@ public class ExtendApplication extends Application {
         MobileAds.initialize(this, "ca-app-pub-5364969751338385~1161013636");
 
         SharedPreferences.Editor editor = mSettings.edit();
-        editor.putBoolean(APP_PREFERENCES_FIRST_INSTALL_FLAG, false);
-        editor.apply();
+        editor.putBoolean(APP_PREFERENCES_FIRST_INSTALL_FLAG, false).apply();
     }
 
     void MyInitialDataRealmTransaction() {

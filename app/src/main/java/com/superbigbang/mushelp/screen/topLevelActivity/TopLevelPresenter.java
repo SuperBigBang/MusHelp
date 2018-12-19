@@ -1,8 +1,13 @@
 package com.superbigbang.mushelp.screen.topLevelActivity;
 
+import android.content.SharedPreferences;
+import android.view.View;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.android.gms.ads.AdRequest;
+import com.superbigbang.mushelp.R;
 import com.superbigbang.mushelp.adapter.DemoMultipleItemRvAdapter;
 import com.superbigbang.mushelp.adapter.SetListItemRvAdapter;
 import com.superbigbang.mushelp.model.DataServer;
@@ -21,18 +26,16 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
     public Realm mSetlistsrealm;
     public Realm mSongsrealm;
     private List<NormalMultipleEntity> mDataSongList;
-    private int currentsetlist;
+    public static final String APP_PREFERENCES_LAST_SET_LIST_ID = "LAST_SET_LIST_ID";
     private boolean mVolumeUpIsOn_RED = false;
-
-    private List<SetList> mDataSetLists;
+    private int idcurrentsetlist;
 
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
     }
 
-
-    public void realmsInit() {
+    public void realmsInit(SharedPreferences mSettings) {
         RealmConfiguration setListsRealmConfig = new RealmConfiguration.Builder()
                 .name("setlistsrealm.realm")
                 .build();
@@ -41,7 +44,11 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
                 .name("songsrealm.realm")
                 .build();
         mSetlistsrealm = Realm.getInstance(setListsRealmConfig);
-        mSongsrealm = Realm.getInstance(songsRealmConfig);
+        if (!mSettings.contains(APP_PREFERENCES_LAST_SET_LIST_ID)) {
+            idcurrentsetlist = 0;
+        } else {
+            idcurrentsetlist = mSettings.getInt(APP_PREFERENCES_LAST_SET_LIST_ID, 0);
+        }
     }
 
     void showAdvertistments() {
@@ -49,9 +56,11 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
     }
 
     void showSetLists() {
-        //  mDataSetLists = DataServer.getSetListsMultipleEntities();
         SetListItemRvAdapter setListItemRvAdapter = new SetListItemRvAdapter(mSetlistsrealm.where(SetList.class).findAll());
-        getViewState().showSetLists(setListItemRvAdapter);
+        SetList currentSetList = mSetlistsrealm.where(SetList.class).equalTo("id", idcurrentsetlist).findFirst();
+        int currentOpenedSetPosition = currentSetList.getPosition();
+        int currentOpenedSetId = currentSetList.getId();
+        getViewState().showSetLists(setListItemRvAdapter, currentOpenedSetPosition, currentOpenedSetId);
     }
 
     void showSongsLists() {
@@ -72,8 +81,12 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
         getViewState().clearStateStrategyPull();
     }
 
-    void changeSetList(int position) {
-        getViewState().changeSetList(mSetlistsrealm.where(SetList.class).equalTo("position", position).findFirst().getName());
+    void changeSetList(BaseQuickAdapter adapter, View view, int position, int lastOpenSetListId, SharedPreferences.Editor editor) {
+        SetList opened = mSetlistsrealm.where(SetList.class).equalTo("position", position).findFirst();
+        idcurrentsetlist = opened.getId();
+        editor.putInt(APP_PREFERENCES_LAST_SET_LIST_ID, idcurrentsetlist).apply();
+        SetList lastOpened = mSetlistsrealm.where(SetList.class).equalTo("id", lastOpenSetListId).findFirst();
+        getViewState().changeSetList(view, adapter.getViewByPosition(lastOpened.getPosition(), R.id.setListName));
     }
 
     void showSetListEditPopup(int position) {

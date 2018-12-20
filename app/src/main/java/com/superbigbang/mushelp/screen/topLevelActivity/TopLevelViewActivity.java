@@ -15,8 +15,8 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.superbigbang.mushelp.R;
-import com.superbigbang.mushelp.adapter.DemoMultipleItemRvAdapter;
 import com.superbigbang.mushelp.adapter.SetListItemRvAdapter;
+import com.superbigbang.mushelp.adapter.SongsItemRvAdapter;
 import com.superbigbang.mushelp.popup.BuyPopup;
 import com.superbigbang.mushelp.popup.DeleteSongPopup;
 import com.superbigbang.mushelp.popup.EditSetListPopup;
@@ -77,20 +77,20 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     }
 
     @Override
-    public void showSongsLists(DemoMultipleItemRvAdapter songsItemAdapter) {
-        mRecyclerSongsList.setAdapter(songsItemAdapter);
-        songsItemAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+    public void showSongsLists(SongsItemRvAdapter songsItemRvAdapter) {
+        mRecyclerSongsList.setAdapter(songsItemRvAdapter);
+        songsItemRvAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             if (view.getId() == R.id.playPauseButton) {
                 Toast.makeText(TopLevelViewActivity.this, "onItemChildClick Play/Pause" + position, Toast.LENGTH_SHORT).show();
             } else if (view.getId() == R.id.deleteSongButton) {
                 mTopLevelPresenter.showDeletePopup(position);
             }
         });
-        songsItemAdapter.setOnItemChildLongClickListener((adapter, view, position) -> {
+        songsItemRvAdapter.setOnItemChildLongClickListener((adapter, view, position) -> {
             Toast.makeText(TopLevelViewActivity.this, "onItemChildLongClick Stop" + position, Toast.LENGTH_SHORT).show();
             return true;
         });
-        songsItemAdapter.setOnItemLongClickListener((adapter, view, position) -> {
+        songsItemRvAdapter.setOnItemLongClickListener((adapter, view, position) -> {
             mTopLevelPresenter.showSongEditPopup(position);
             return true;
         });
@@ -111,7 +111,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         mRecyclerSetList.setAdapter(setListItemAdapter);
 
         setListItemAdapter.setOnItemClickListener((adapter, view, position) -> {
-            mTopLevelPresenter.changeSetList(adapter, view, position);
+            mTopLevelPresenter.changeSetList(position);
         });
         setListItemAdapter.setOnItemLongClickListener((adapter, view, position) -> {
             mTopLevelPresenter.showSetListEditPopup(position);
@@ -161,6 +161,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
 
     @Override
     public void changeSetList(String currentSetListName) {
+        mTopLevelPresenter.showSongsLists();
         Toast.makeText(TopLevelViewActivity.this, "Выбран сет лист " + currentSetListName, Toast.LENGTH_SHORT).show();
     }
 

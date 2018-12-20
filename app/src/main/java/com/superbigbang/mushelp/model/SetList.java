@@ -43,11 +43,4 @@ public class SetList extends RealmObject {
     public void setOpen(boolean open) {
         isOpen = open;
     }
-
-    public void setAllSettings(SetList setListLoad) {
-        setId(setListLoad.getId());
-        setName(setListLoad.getName());
-        setPosition(setListLoad.getPosition());
-        setOpen(setListLoad.isOpen());
-    }
 }

@@ -1,23 +1,18 @@
 package com.superbigbang.mushelp.screen.topLevelActivity;
 
-import android.view.View;
-
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.android.gms.ads.AdRequest;
-import com.superbigbang.mushelp.adapter.DemoMultipleItemRvAdapter;
 import com.superbigbang.mushelp.adapter.SetListItemRvAdapter;
-import com.superbigbang.mushelp.model.DataServer;
+import com.superbigbang.mushelp.adapter.SongsItemRvAdapter;
 import com.superbigbang.mushelp.model.NormalMultipleEntity;
 import com.superbigbang.mushelp.model.SetList;
+import com.superbigbang.mushelp.model.Songs;
 
 import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
-import io.realm.RealmResults;
-import timber.log.Timber;
 
 
 @InjectViewState
@@ -44,6 +39,7 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
                 .name("songsrealm.realm")
                 .build();
         mSetlistsrealm = Realm.getInstance(setListsRealmConfig);
+        mSongsrealm = Realm.getInstance(songsRealmConfig);
     }
 
     void showAdvertistments() {
@@ -56,9 +52,10 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
     }
 
     void showSongsLists() {
-        mDataSongList = DataServer.getSongsMultipleEntities();
-        DemoMultipleItemRvAdapter multipleItemAdapterSongs = new DemoMultipleItemRvAdapter(mDataSongList);
-        getViewState().showSongsLists(multipleItemAdapterSongs);
+        SongsItemRvAdapter songsItemRvAdapter = new SongsItemRvAdapter(mSongsrealm.where(Songs.class)
+                .equalTo("setlistid", mSetlistsrealm.where(SetList.class).equalTo("isOpen", true)
+                        .findFirst().getId()).findAll());
+        getViewState().showSongsLists(songsItemRvAdapter);
     }
 
     void showDeletePopup(int position) {
@@ -73,14 +70,9 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
         getViewState().clearStateStrategyPull();
     }
 
-    void changeSetList(BaseQuickAdapter adapter, View view, int position) {
-        Timber.e("POSITION CLICK " + position);
+    void changeSetList(int position) {
         SetList lastOpened = mSetlistsrealm.where(SetList.class).equalTo("isOpen", true).findFirst();
         SetList openlist = mSetlistsrealm.where(SetList.class).equalTo("position", position).findFirst();
-        RealmResults<SetList> all = mSetlistsrealm.where(SetList.class).findAll();
-        for (int i = 0; i < all.size(); i++) {
-            Timber.e("NAME: " + all.get(i).getName() + " POSITION " + all.get(i).getPosition());
-        }
         if (lastOpened.getId() != openlist.getId()) {
             mSetlistsrealm.beginTransaction();
             lastOpened.setOpen(false);

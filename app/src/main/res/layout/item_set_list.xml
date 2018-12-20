@@ -8,7 +8,7 @@
     android:layout_marginStart="3dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:background="@color/colorPrimary"
         android:gravity="center"
@@ -16,7 +16,7 @@
 
         <TextView
             android:id="@+id/setListName"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@drawable/round_shape_btn_set_lists"
             android:ellipsize="end"

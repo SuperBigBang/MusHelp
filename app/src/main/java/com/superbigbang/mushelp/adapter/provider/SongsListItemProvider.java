@@ -1,5 +1,6 @@
 package com.superbigbang.mushelp.adapter.provider;
 
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.Toast;
 
@@ -7,9 +8,9 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.provider.BaseItemProvider;
 import com.superbigbang.mushelp.R;
 import com.superbigbang.mushelp.adapter.DemoMultipleItemRvAdapter;
-import com.superbigbang.mushelp.model.NormalMultipleEntity;
+import com.superbigbang.mushelp.model.Songs;
 
-public class SongsListItemProvider extends BaseItemProvider<NormalMultipleEntity, BaseViewHolder> {
+public class SongsListItemProvider extends BaseItemProvider<Songs, BaseViewHolder> {
 
     @Override
     public int viewType() {
@@ -23,17 +24,22 @@ public class SongsListItemProvider extends BaseItemProvider<NormalMultipleEntity
 
     //====================== START начать редактировать отсюда, сделать Songs модель
     @Override
-    public void convert(BaseViewHolder helper, NormalMultipleEntity data, int position) {
-        helper.setText(R.id.songPosition, String.valueOf(data.position));
-        helper.setText(R.id.songName, data.songname);
-        helper.setText(R.id.songLyrics, data.lyrics);
-        helper.setText(R.id.bpmEditMetro, String.valueOf(data.bitrate));
+    public void convert(BaseViewHolder helper, Songs data, int position) {
+        helper.setText(R.id.songPosition, String.valueOf(data.getPosition() + 1));
+        helper.setText(R.id.songName, data.getTitle());
+        helper.setText(R.id.songLyrics, data.getLyrics());
+        helper.setText(R.id.bpmEditMetro, String.valueOf(data.getMetronombpm()));
+        if (!data.isPlaystarted()) {
+            helper.setImageDrawable(R.id.playPauseButton, Drawable.createFromPath("drawable-nodpi/baseline_play_circle_outline_white_48.png"));
+        } else {
+            helper.setImageDrawable(R.id.playPauseButton, Drawable.createFromPath("drawable-nodpi/baseline_pause_circle_outline_white_48.png"));
+        }
         helper.addOnClickListener(R.id.playPauseButton).addOnClickListener(R.id.deleteSongButton)
                 .addOnLongClickListener(R.id.playPauseButton);
     }
 
     @Override
-    public void onClick(BaseViewHolder helper, NormalMultipleEntity data, int position) {
+    public void onClick(BaseViewHolder helper, Songs data, int position) {
         if (helper.getView(R.id.songLyrics).getVisibility() == View.VISIBLE) {
             helper.setGone(R.id.songLyrics, false);
         } else {
@@ -43,7 +49,7 @@ public class SongsListItemProvider extends BaseItemProvider<NormalMultipleEntity
     }
 
     @Override
-    public boolean onLongClick(BaseViewHolder helper, NormalMultipleEntity data, int position) {
+    public boolean onLongClick(BaseViewHolder helper, Songs data, int position) {
         Toast.makeText(mContext, "longClick Open song edit window", Toast.LENGTH_SHORT).show();
         return true;
     }

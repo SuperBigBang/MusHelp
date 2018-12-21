@@ -34,7 +34,7 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
     }
 
     public void realmsInit() {
-        if (mSetlistsrealm == null) {
+        if (mSetlistsrealm == null || mSetlistsrealm.isClosed()) {
             RealmConfiguration setListsRealmConfig = new RealmConfiguration.Builder()
                     .name("setlistsrealm.realm")
                     .build();
@@ -108,12 +108,15 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
 
     void showSongEditPopup(int position) {
         if (position != 999) {
-            getViewState().showSongEditPopup(mDataSongList.get(position).songname,
-                    mDataSongList.get(position).position, mDataSongList.get(position).bitrate,
-                    mDataSongList.get(position).audioIsOn,
-                    mDataSongList.get(position).countdownIsOn,
-                    mDataSongList.get(position).audioFile,
-                    mDataSongList.get(position).lyrics);
+            Songs editsong = mSongsrealm.where(Songs.class).equalTo("setlistid", mSetlistsrealm.where(SetList.class).equalTo("isOpen", true).findFirst().getId())
+                    .findAll()
+                    .where().equalTo("position", position).findFirst();
+            getViewState().showSongEditPopup(editsong.getTitle(),
+                    editsong.getPosition(), editsong.getMetronombpm(),
+                    editsong.isAudioOn(),
+                    editsong.isCountdownOn(),
+                    editsong.getAudiofile(),
+                    editsong.getLyrics());
         } else getViewState().showSongEditPopup("", 0, 0, false, false, "", "");
     }
 

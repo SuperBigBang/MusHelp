@@ -108,6 +108,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     @Override
     public void showSongEditPopup(String SongName, int position, int tempBpm, boolean audioIsOn, boolean countdownIsOn, String audioFile, String lyrics) {
         new EditSongPopup(this, SongName, position, tempBpm, audioIsOn, countdownIsOn, audioFile, lyrics, mTopLevelPresenter).showPopupWindow();
+        Toast.makeText(this, "Действия в этом окне на данный момент в разработке", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -171,7 +172,6 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     @Override
     public void changeSetList(String currentSetListName) {
         mTopLevelPresenter.showSongsLists();
-        Toast.makeText(TopLevelViewActivity.this, "Выбран сет лист " + currentSetListName, Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -44,7 +44,7 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
         mEditTextLyrics = findViewById(R.id.editSongLyrics);
         mAudioOrMetronomSwitch = findViewById(R.id.edit_audioOrMetronom_switch);
         mBeforeAudioCountdownSwitch = findViewById(R.id.edit_beforeAudioCountdown_switch2);
-        mEditTextPosition.setText(String.valueOf(position));
+        mEditTextPosition.setText(String.valueOf(position + 1));
         mEditTextSongName.setText(SongName);
         mEditTextTempMetronom.setText(String.valueOf(tempBpm));
         mEditTextLyrics.setText(lyrics);

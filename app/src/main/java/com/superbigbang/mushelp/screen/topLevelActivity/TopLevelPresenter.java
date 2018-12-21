@@ -1,5 +1,7 @@
 package com.superbigbang.mushelp.screen.topLevelActivity;
 
+import android.view.View;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.google.android.gms.ads.AdRequest;
@@ -115,6 +117,19 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
 
     void setVolumeUpButtonState() {
         getViewState().setVolumeUpButtonState(mVolumeUpIsOn_RED);
+    }
+
+    void playButtonIsClicked(View view, int position) {
+        mSongsrealm.beginTransaction();
+        Songs editsong = mSongsrealm.where(Songs.class).equalTo("setlistid", mSetlistsrealm.where(SetList.class).equalTo("isOpen", true).findFirst().getId())
+                .findAll()
+                .where().equalTo("position", position).findFirst();
+        if (editsong.isPlaystarted()) {
+            editsong.setPlaystarted(false);
+        } else {
+            editsong.setPlaystarted(true);
+        }
+        mSongsrealm.commitTransaction();
     }
 
     @Override

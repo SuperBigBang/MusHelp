@@ -1,11 +1,12 @@
 package com.superbigbang.mushelp.adapter.provider;
 
-import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.provider.BaseItemProvider;
+import com.superbigbang.mushelp.ExtendApplication;
 import com.superbigbang.mushelp.R;
 import com.superbigbang.mushelp.adapter.DemoMultipleItemRvAdapter;
 import com.superbigbang.mushelp.model.Songs;
@@ -30,9 +31,9 @@ public class SongsListItemProvider extends BaseItemProvider<Songs, BaseViewHolde
         helper.setText(R.id.songLyrics, data.getLyrics());
         helper.setText(R.id.bpmEditMetro, String.valueOf(data.getMetronombpm()));
         if (!data.isPlaystarted()) {
-            helper.setImageDrawable(R.id.playPauseButton, Drawable.createFromPath("drawable-nodpi/baseline_play_circle_outline_white_48.png"));
+            helper.setImageDrawable(R.id.playPauseButton, ContextCompat.getDrawable(ExtendApplication.getBaseComponent().getContext(), R.drawable.baseline_play_circle_outline_white_48));
         } else {
-            helper.setImageDrawable(R.id.playPauseButton, Drawable.createFromPath("drawable-nodpi/baseline_pause_circle_outline_white_48.png"));
+            helper.setImageDrawable(R.id.playPauseButton, ContextCompat.getDrawable(ExtendApplication.getBaseComponent().getContext(), R.drawable.baseline_pause_circle_outline_white_48));
         }
         helper.addOnClickListener(R.id.playPauseButton).addOnClickListener(R.id.deleteSongButton)
                 .addOnLongClickListener(R.id.playPauseButton);

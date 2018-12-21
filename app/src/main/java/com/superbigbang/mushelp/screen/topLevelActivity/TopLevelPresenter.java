@@ -1,10 +1,11 @@
 package com.superbigbang.mushelp.screen.topLevelActivity;
 
-import android.view.View;
+import android.widget.Toast;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.google.android.gms.ads.AdRequest;
+import com.superbigbang.mushelp.ExtendApplication;
 import com.superbigbang.mushelp.adapter.SetListItemRvAdapter;
 import com.superbigbang.mushelp.adapter.SongsItemRvAdapter;
 import com.superbigbang.mushelp.model.NormalMultipleEntity;
@@ -33,15 +34,23 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
     }
 
     public void realmsInit() {
-        RealmConfiguration setListsRealmConfig = new RealmConfiguration.Builder()
-                .name("setlistsrealm.realm")
-                .build();
+        if (mSetlistsrealm == null) {
+            RealmConfiguration setListsRealmConfig = new RealmConfiguration.Builder()
+                    .name("setlistsrealm.realm")
+                    .build();
 
-        RealmConfiguration songsRealmConfig = new RealmConfiguration.Builder()
-                .name("songsrealm.realm")
-                .build();
-        mSetlistsrealm = Realm.getInstance(setListsRealmConfig);
-        mSongsrealm = Realm.getInstance(songsRealmConfig);
+            RealmConfiguration songsRealmConfig = new RealmConfiguration.Builder()
+                    .name("songsrealm.realm")
+                    .build();
+            mSetlistsrealm = Realm.getInstance(setListsRealmConfig);
+            mSongsrealm = Realm.getInstance(songsRealmConfig);
+            Songs editsong = mSongsrealm.where(Songs.class).equalTo("playstarted", true).findFirst();
+            if (editsong != null) {
+                mSongsrealm.beginTransaction();
+                editsong.setPlaystarted(false);
+                mSongsrealm.commitTransaction();
+            }
+        }
     }
 
     void showAdvertistments() {
@@ -61,7 +70,10 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
     }
 
     void showDeletePopup(int position) {
-        getViewState().showDeletePopup(mDataSongList.get(position).songname);
+        getViewState().showDeletePopup(mSongsrealm.where(Songs.class).equalTo("setlistid", mSetlistsrealm.where(SetList.class).equalTo("isOpen", true).findFirst().getId())
+                .findAll()
+                .where().equalTo("position", position)
+                .findFirst().getTitle());
     }
 
     void showBuyPopup() {
@@ -76,6 +88,12 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
         SetList lastOpened = mSetlistsrealm.where(SetList.class).equalTo("isOpen", true).findFirst();
         SetList openlist = mSetlistsrealm.where(SetList.class).equalTo("position", position).findFirst();
         if (lastOpened.getId() != openlist.getId()) {
+            Songs editsong = mSongsrealm.where(Songs.class).equalTo("playstarted", true).findFirst();
+            if (editsong != null) {
+                mSongsrealm.beginTransaction();
+                editsong.setPlaystarted(false);
+                mSongsrealm.commitTransaction();
+            }
             mSetlistsrealm.beginTransaction();
             lastOpened.setOpen(false);
             openlist.setOpen(true);
@@ -119,15 +137,28 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
         getViewState().setVolumeUpButtonState(mVolumeUpIsOn_RED);
     }
 
-    void playButtonIsClicked(View view, int position) {
+    void playButtonIsClicked(int position, boolean functionIsStop) {
         mSongsrealm.beginTransaction();
         Songs editsong = mSongsrealm.where(Songs.class).equalTo("setlistid", mSetlistsrealm.where(SetList.class).equalTo("isOpen", true).findFirst().getId())
                 .findAll()
                 .where().equalTo("position", position).findFirst();
         if (editsong.isPlaystarted()) {
+            if (functionIsStop) {
+                Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Stop playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Pause playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
+            }
             editsong.setPlaystarted(false);
         } else {
-            editsong.setPlaystarted(true);
+            Songs firststoppedsong = mSongsrealm.where(Songs.class).equalTo("playstarted", true).findFirst();
+            if (firststoppedsong != null) {
+                firststoppedsong.setPlaystarted(false);
+                Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Stop playing " + firststoppedsong.getTitle() + " Start playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
+                editsong.setPlaystarted(true);
+            } else {
+                Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Start playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
+                editsong.setPlaystarted(true);
+            }
         }
         mSongsrealm.commitTransaction();
     }

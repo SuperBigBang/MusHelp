@@ -81,14 +81,13 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         mRecyclerSongsList.setAdapter(songsItemRvAdapter);
         songsItemRvAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             if (view.getId() == R.id.playPauseButton) {
-                mTopLevelPresenter.playButtonIsClicked(view, position);
-                Toast.makeText(TopLevelViewActivity.this, "onItemChildClick Play/Pause" + position, Toast.LENGTH_SHORT).show();
+                mTopLevelPresenter.playButtonIsClicked(position, false);
             } else if (view.getId() == R.id.deleteSongButton) {
                 mTopLevelPresenter.showDeletePopup(position);
             }
         });
         songsItemRvAdapter.setOnItemChildLongClickListener((adapter, view, position) -> {
-            Toast.makeText(TopLevelViewActivity.this, "onItemChildLongClick Stop" + position, Toast.LENGTH_SHORT).show();
+            mTopLevelPresenter.playButtonIsClicked(position, true);
             return true;
         });
         songsItemRvAdapter.setOnItemLongClickListener((adapter, view, position) -> {

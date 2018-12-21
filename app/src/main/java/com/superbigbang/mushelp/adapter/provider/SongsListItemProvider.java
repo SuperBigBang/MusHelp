@@ -1,8 +1,6 @@
 package com.superbigbang.mushelp.adapter.provider;
 
 import android.support.v4.content.ContextCompat;
-import android.view.View;
-import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.provider.BaseItemProvider;
@@ -35,10 +33,13 @@ public class SongsListItemProvider extends BaseItemProvider<Songs, BaseViewHolde
         } else {
             helper.setImageDrawable(R.id.playPauseButton, ContextCompat.getDrawable(ExtendApplication.getBaseComponent().getContext(), R.drawable.baseline_pause_circle_outline_white_48));
         }
-        helper.addOnClickListener(R.id.playPauseButton).addOnClickListener(R.id.deleteSongButton)
-                .addOnLongClickListener(R.id.playPauseButton);
+        helper.addOnClickListener(R.id.playPauseButton)
+                .addOnClickListener(R.id.deleteSongButton)
+                .addOnLongClickListener(R.id.playPauseButton)
+                .addOnClickListener(R.id.songName)
+                .addOnLongClickListener(R.id.songName);
     }
-
+/*
     @Override
     public void onClick(BaseViewHolder helper, Songs data, int position) {
         if (helper.getView(R.id.songLyrics).getVisibility() == View.VISIBLE) {
@@ -53,5 +54,5 @@ public class SongsListItemProvider extends BaseItemProvider<Songs, BaseViewHolde
     public boolean onLongClick(BaseViewHolder helper, Songs data, int position) {
         Toast.makeText(mContext, "longClick Open song edit window", Toast.LENGTH_SHORT).show();
         return true;
-    }
+    }*/
 }

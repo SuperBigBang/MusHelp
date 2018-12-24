@@ -112,8 +112,8 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     }
 
     @Override
-    public void showDeletePopup(String songname) {
-        new DeleteSongPopup(this, songname, mTopLevelPresenter).showPopupWindow();
+    public void showDeletePopup(String songname, int currentposition, int currentSetList) {
+        new DeleteSongPopup(this, songname, currentposition, currentSetList, mTopLevelPresenter).showPopupWindow();
     }
 
     @Override

@@ -19,7 +19,7 @@ public interface TopLevelView extends MvpView {
     void showSongsLists(SongsItemRvAdapter songsItemRvAdapter);
 
     @StateStrategyType(SingleStateStrategy.class)
-    void showDeletePopup(String songname);
+    void showDeletePopup(String songname, int currentposition, int currentSetList);
 
     @StateStrategyType(ClearStateStrategy.class)
     void clearStateStrategyPull();

@@ -20,7 +20,9 @@ import io.realm.RealmConfiguration;
 
 @InjectViewState
 public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
-
+    /**
+     * Заметки: Важно! Обработать java.lang.OutOfMemoryError в будущем!
+     */
     public Realm mSetlistsrealm;
     public Realm mSongsrealm;
     private List<NormalMultipleEntity> mDataSongList;
@@ -70,10 +72,11 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
     }
 
     void showDeletePopup(int position) {
-        getViewState().showDeletePopup(mSongsrealm.where(Songs.class).equalTo("setlistid", mSetlistsrealm.where(SetList.class).equalTo("isOpen", true).findFirst().getId())
+        Songs edit = mSongsrealm.where(Songs.class).equalTo("setlistid", mSetlistsrealm.where(SetList.class).equalTo("isOpen", true).findFirst().getId())
                 .findAll()
                 .where().equalTo("position", position)
-                .findFirst().getTitle());
+                .findFirst();
+        getViewState().showDeletePopup(edit.getTitle(), position, edit.getSetlistid());
     }
 
     void showBuyPopup() {
@@ -168,9 +171,9 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
         mSetlistsrealm.close();
         mSongsrealm.close();
-        super.onDestroy();
     }
 }
 

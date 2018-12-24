@@ -11,22 +11,28 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.superbigbang.mushelp.R;
+import com.superbigbang.mushelp.model.Songs;
 import com.superbigbang.mushelp.screen.topLevelActivity.TopLevelPresenter;
 
+import io.realm.RealmResults;
 import razerdp.basepopup.BasePopupWindow;
 
 public class DeleteSongPopup extends BasePopupWindow implements View.OnClickListener {
     private Button mCancelButton;
     private Button mCompeleteButton;
     private TopLevelPresenter mTopLevelPresenter;
+    private int currentPosition;
+    private int currentSetList;
 
-    public DeleteSongPopup(Context context, String SongName, TopLevelPresenter mTopLevelPresenter) {
+    public DeleteSongPopup(Context context, String SongName, int currentPosition, int currentSetList, TopLevelPresenter mTopLevelPresenter) {
         super(context);
         mCancelButton = findViewById(R.id.btn_cancel);
         mCompeleteButton = findViewById(R.id.btn_Compelete);
         TextView mSongName = findViewById(R.id.popupDelWindSongName);
         mSongName.setText(SongName);
         this.mTopLevelPresenter = mTopLevelPresenter;
+        this.currentPosition = currentPosition;
+        this.currentSetList = currentSetList;
         setBlurBackgroundEnable(true);
         bindEvent();
     }
@@ -87,6 +93,25 @@ public class DeleteSongPopup extends BasePopupWindow implements View.OnClickList
                 dismiss();
                 break;
             case R.id.btn_Compelete:
+                //================================================================Delete processing:
+                RealmResults<Songs> songsNoAutoSorting2 = mTopLevelPresenter.mSongsrealm
+                        .where(Songs.class)
+                        .equalTo("setlistid", currentSetList)
+                        .findAll().where()
+                        .greaterThanOrEqualTo("position", currentPosition)
+                        .findAll();
+                mTopLevelPresenter.mSongsrealm.beginTransaction();
+                for (int i = 0; i <= songsNoAutoSorting2.size(); i++) {
+                    if (i == 0) {
+                        Songs deletedSong = songsNoAutoSorting2.where().equalTo("position", currentPosition).findFirst();
+                        deletedSong.deleteFromRealm();
+                    }
+                    Songs nextSong = songsNoAutoSorting2.where().equalTo("position", currentPosition + 1 + i).findFirst();
+                    if (nextSong != null) {
+                        nextSong.setPosition(currentPosition + i);
+                    }
+                }
+                mTopLevelPresenter.mSongsrealm.commitTransaction();
                 Toast.makeText(getContext(), "Трэк удалён", Toast.LENGTH_LONG).show();
                 dismiss();
                 break;

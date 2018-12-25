@@ -115,12 +115,20 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
                     .findAll()
                     .where().equalTo("position", position).findFirst();
             getViewState().showSongEditPopup(editsong.getTitle(),
-                    editsong.getPosition(), editsong.getMetronombpm(),
+                    editsong.getPosition(),
+                    editsong.getSetlistid(),
                     editsong.isAudioOn(),
                     editsong.isCountdownOn(),
                     editsong.getAudiofile(),
-                    editsong.getLyrics());
-        } else getViewState().showSongEditPopup("", 0, 0, false, false, "", "");
+                    editsong.getLyrics(), editsong.getMetronombpm());
+        } else getViewState().showSongEditPopup("",
+                0,
+                mSetlistsrealm.where(SetList.class).equalTo("isOpen", true).findFirst().getId(),
+                false,
+                false,
+                "",
+                "",
+                0);
     }
 
     public void showVolumeUpPopup() {

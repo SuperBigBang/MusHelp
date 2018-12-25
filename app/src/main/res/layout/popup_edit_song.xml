@@ -24,7 +24,7 @@
         app:layout_constraintVertical_bias="0.0">
 
         <ImageButton
-            android:id="@+id/btn_e_loadAudioFromFile"
+            android:id="@+id/btn_e_clearLyricsOrClearPathToAudioFile"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_marginEnd="16dp"
@@ -142,9 +142,9 @@
             android:text="@string/text_audio_or_metronom"
             android:textColor="@color/cornerColor"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_e_loadAudioFromFile"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_e_clearLyricsOrClearPathToAudioFile"
             app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintTop_toTopOf="@+id/btn_e_loadAudioFromFile" />
+            app:layout_constraintTop_toTopOf="@+id/btn_e_clearLyricsOrClearPathToAudioFile" />
 
         <LinearLayout
             android:id="@+id/linearLayout4"
@@ -217,9 +217,9 @@
             android:layout_marginBottom="8dp"
             android:checked="false"
             android:theme="@style/MySwitch"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_e_loadAudioFromFile"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_e_clearLyricsOrClearPathToAudioFile"
             app:layout_constraintStart_toEndOf="@+id/textView4"
-            app:layout_constraintTop_toTopOf="@+id/btn_e_loadAudioFromFile" />
+            app:layout_constraintTop_toTopOf="@+id/btn_e_clearLyricsOrClearPathToAudioFile" />
 
         <android.support.v7.widget.SwitchCompat
             android:id="@+id/edit_beforeAudioCountdown_switch2"
@@ -276,7 +276,7 @@
             android:contentDescription="@string/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_e_loadAudioFromFile"
+            app:layout_constraintTop_toBottomOf="@+id/btn_e_clearLyricsOrClearPathToAudioFile"
             app:srcCompat="@color/cornerColor" />
 
     </android.support.constraint.ConstraintLayout>

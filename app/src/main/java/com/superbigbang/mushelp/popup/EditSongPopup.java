@@ -8,16 +8,20 @@ import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.superbigbang.mushelp.ExtendApplication;
 import com.superbigbang.mushelp.R;
+import com.superbigbang.mushelp.model.Songs;
 import com.superbigbang.mushelp.screen.topLevelActivity.TopLevelPresenter;
 
+import io.realm.RealmResults;
 import razerdp.basepopup.BasePopupWindow;
 
-public class EditSongPopup extends BasePopupWindow implements View.OnClickListener {
+public class EditSongPopup extends BasePopupWindow implements View.OnClickListener, View.OnLongClickListener, CompoundButton.OnCheckedChangeListener {
     private Button mCancelButton;
     private Button mSaveButton;
     private ImageButton mClearFileAndLyricsButton;
@@ -27,17 +31,18 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
     private EditText mEditTextLyrics;
     private SwitchCompat mAudioOrMetronomSwitch;
     private SwitchCompat mBeforeAudioCountdownSwitch;
+    private int currentSetListID;
+    private int currentPosition;
+    private String currentAudioFile;
 
 
     private TopLevelPresenter mTopLevelPresenter;
 
-    public EditSongPopup(Context context, String SongName, int position, int tempBpm,
-                         boolean audioIsOn, boolean countDownIsOn, String audioFile, String lyrics,
-                         TopLevelPresenter mTopLevelPresenter) {
+    public EditSongPopup(Context context, String SongName, int position, int currentSetList, boolean audioIsOn, boolean countDownIsOn, String audioFile, String lyrics, TopLevelPresenter mTopLevelPresenter, int tempBpm) {
         super(context);
         mCancelButton = findViewById(R.id.btn_e_cancel2);
         mSaveButton = findViewById(R.id.btn_e_Save2);
-        mClearFileAndLyricsButton = findViewById(R.id.btn_e_loadAudioFromFile);
+        mClearFileAndLyricsButton = findViewById(R.id.btn_e_clearLyricsOrClearPathToAudioFile);
         mEditTextPosition = findViewById(R.id.editSongPosition);
         mEditTextSongName = findViewById(R.id.editSongName);
         mEditTextTempMetronom = findViewById(R.id.editMetronomBPM);
@@ -51,6 +56,9 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
         mAudioOrMetronomSwitch.setChecked(audioIsOn);
         mBeforeAudioCountdownSwitch.setChecked(countDownIsOn);
         mClearFileAndLyricsButton.setImageResource(R.drawable.baseline_delete_sweep_white_48);
+        currentSetListID = currentSetList;
+        currentPosition = position;
+        currentAudioFile = audioFile;
 
 
         this.mTopLevelPresenter = mTopLevelPresenter;
@@ -72,6 +80,9 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
         mCancelButton.setOnClickListener(this);
         mSaveButton.setOnClickListener(this);
         mClearFileAndLyricsButton.setOnClickListener(this);
+        mClearFileAndLyricsButton.setOnLongClickListener(this);
+        mAudioOrMetronomSwitch.setOnCheckedChangeListener(this);
+        mBeforeAudioCountdownSwitch.setOnCheckedChangeListener(this);
     }
 
     //=============================================================super methods
@@ -114,21 +125,182 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
                 dismiss();
                 break;
             case R.id.btn_e_Save2:
-                Toast.makeText(getContext(), "Трэк сохранён", Toast.LENGTH_LONG).show();
-                dismiss();
-                break;
-            case R.id.btn_e_loadAudioFromFile:
 
-                break;
-            case R.id.edit_audioOrMetronom_switch:
-                if (mAudioOrMetronomSwitch.isChecked()) {
-                    mAudioOrMetronomSwitch.setChecked(false);
+                String resultPositionEditText = mEditTextPosition.getText().toString();
+                String resultNameEditText = mEditTextSongName.getText().toString();
+                String resultMetronomBpm = mEditTextTempMetronom.getText().toString();
+                String resultLyrics = mEditTextLyrics.getText().toString(); //Можно оставить пустым
+                /** Заметки: необходимо добавить реализацию сохранения свитчей audioOn и countdownOn
+                 * Сделать реализацию кнопки корзины*/
+
+                int valueOfResultPositionEditText;
+                int valueOfResultMetronomEditText;
+                int sizeOfcurrentSetlist = mTopLevelPresenter.mSongsrealm
+                        .where(Songs.class)
+                        .equalTo("setlistid", currentSetListID)
+                        .findAll().size();
+                if (resultPositionEditText.isEmpty()) {
+                    Toast.makeText(getContext(), R.string.SetListAndSongNoPositionError, Toast.LENGTH_LONG).show();
+                } else if (resultNameEditText.isEmpty()) {
+                    Toast.makeText(getContext(), R.string.SongNoNameError, Toast.LENGTH_LONG).show();
+                } else if (resultMetronomBpm.isEmpty()) {
+                    Toast.makeText(getContext(), R.string.SongNoMetronomError, Toast.LENGTH_LONG).show();
+                } else if (resultLyrics.isEmpty()) {
+                    resultLyrics = "";
+                }
+            {
+                valueOfResultPositionEditText = (Integer.valueOf(resultPositionEditText)) - 1;
+                valueOfResultMetronomEditText = (Integer.valueOf(resultMetronomBpm));
+                if (valueOfResultPositionEditText < 0 || valueOfResultPositionEditText >= sizeOfcurrentSetlist) {
+                    Toast.makeText(getContext(), ExtendApplication.getBaseComponent().getContext().getResources().getString(R.string.SongPosNumError) + (sizeOfcurrentSetlist), Toast.LENGTH_LONG).show();
+                } else if (valueOfResultMetronomEditText <= 0 || valueOfResultMetronomEditText > 999) {
+                    Toast.makeText(getContext(), R.string.SongMetronomNumError, Toast.LENGTH_LONG).show();
                 } else {
+                    if (currentPosition > valueOfResultPositionEditText) {
+//=============================================================to Bottom
+                        RealmResults<Songs> songsNoAutoSorting = mTopLevelPresenter.mSongsrealm
+                                .where(Songs.class)
+                                .equalTo("setlistid", currentSetListID)
+                                .findAll()
+                                .where()
+                                .between("position", valueOfResultPositionEditText, currentPosition)
+                                .findAll();
+                        mTopLevelPresenter.mSongsrealm.beginTransaction();
+                        int countposition1 = 0;
+                        int countposition2 = 0;
+                        Songs firstSong = null;
+                        for (int i = 0; i <= songsNoAutoSorting.size(); i++) {
+                            if (i == 0) {
+                                Songs editedSong = songsNoAutoSorting.where().equalTo("position", currentPosition).findFirst();
+                                editedSong.setTitle(resultNameEditText); //применение изменений
+                                editedSong.setMetronombpm(valueOfResultMetronomEditText);
+                                editedSong.setAudioOn(mAudioOrMetronomSwitch.isChecked());
+                                editedSong.setAudiofile(currentAudioFile);
+                                editedSong.setCountdownOn(mBeforeAudioCountdownSwitch.isChecked());
+                                editedSong.setLyrics(resultLyrics);
+                                firstSong = songsNoAutoSorting.where().equalTo("position", valueOfResultPositionEditText).findFirst();
+                                countposition1 = firstSong.getPosition();
+                                editedSong.setPosition(countposition1);
+                            } else {
+                                Songs secondSong = songsNoAutoSorting.where().equalTo("position", countposition1 + 1).findFirst();
+                                countposition2 = countposition1 + 1;
+                                if (firstSong != null) {
+                                    firstSong.setPosition(countposition2);
+                                }
+                                countposition1++;
+                                firstSong = songsNoAutoSorting.where().equalTo("position", countposition2 + 1).findFirst();
+                                countposition2++;
+                                if (secondSong != null) {
+                                    secondSong.setPosition(countposition2);
+                                }
+                                countposition1++;
+                            }
+                        }
+                        mTopLevelPresenter.mSongsrealm.commitTransaction();
+                    } else if (currentPosition < valueOfResultPositionEditText) {
+//=============================================================to Top
+                        RealmResults<Songs> songsNoAutoSorting2 = mTopLevelPresenter.mSongsrealm
+                                .where(Songs.class)
+                                .equalTo("setlistid", currentSetListID)
+                                .findAll()
+                                .where()
+                                .between("position", currentPosition, valueOfResultPositionEditText)
+                                .findAll();
+                        mTopLevelPresenter.mSongsrealm.beginTransaction();
+                        int countposition1 = 0;
+                        int countposition2 = 0;
+                        Songs firstSong = null;
+                        for (int i = 0; i <= songsNoAutoSorting2.size(); i++) {
+                            if (i == 0) {
+                                Songs editedSong = songsNoAutoSorting2.where().equalTo("position", currentPosition).findFirst();
+                                editedSong.setTitle(resultNameEditText);
+                                editedSong.setMetronombpm(valueOfResultMetronomEditText);
+                                editedSong.setAudioOn(mAudioOrMetronomSwitch.isChecked());
+                                editedSong.setAudiofile(currentAudioFile);
+                                editedSong.setCountdownOn(mBeforeAudioCountdownSwitch.isChecked());
+                                editedSong.setLyrics(resultLyrics);
+                                firstSong = songsNoAutoSorting2.where().equalTo("position", valueOfResultPositionEditText).findFirst();
+                                countposition1 = firstSong.getPosition();
+                                editedSong.setPosition(countposition1);
+                            } else {
+                                Songs secondSong = songsNoAutoSorting2.where().equalTo("position", countposition1 - 1).findFirst();
+                                countposition2 = countposition1 - 1;
+                                if (firstSong != null) {
+                                    firstSong.setPosition(countposition2);
+                                }
+                                countposition1--;
+                                firstSong = songsNoAutoSorting2.where().equalTo("position", countposition2 - 1).findFirst();
+                                countposition2--;
+                                if (secondSong != null) {
+                                    secondSong.setPosition(countposition2);
+                                }
+                                countposition1--;
+                            }
+                        }
+                        mTopLevelPresenter.mSongsrealm.commitTransaction();
+                    } else if (currentPosition == valueOfResultPositionEditText) {
+                        //=============================================================no change position, edit only Name
+                        mTopLevelPresenter.mSongsrealm.beginTransaction();
+                        Songs song = mTopLevelPresenter.mSongsrealm
+                                .where(Songs.class)
+                                .equalTo("setlistid", currentSetListID)
+                                .findAll()
+                                .where()
+                                .equalTo("position", currentPosition)
+                                .findFirst();
+                        song.setTitle(resultNameEditText);
+                        song.setMetronombpm(valueOfResultMetronomEditText);
+                        song.setAudioOn(mAudioOrMetronomSwitch.isChecked());
+                        song.setAudiofile(currentAudioFile);
+                        song.setCountdownOn(mBeforeAudioCountdownSwitch.isChecked());
+                        song.setLyrics(resultLyrics);
+                        mTopLevelPresenter.mSongsrealm.commitTransaction();
+                    }
+                    Toast.makeText(getContext(), R.string.SongHasEdit, Toast.LENGTH_LONG).show();
+                    dismiss();
+                }
+            }
+                break;
+            case R.id.btn_e_clearLyricsOrClearPathToAudioFile:
+                mEditTextLyrics.setText("");
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        if (v.getId() == R.id.btn_e_clearLyricsOrClearPathToAudioFile) {
+            currentAudioFile = "";
+            Toast.makeText(getContext(), "Путь к аудиофайлу удалён", Toast.LENGTH_LONG).show();
+        }
+        return false;
+    }
+
+    @Override
+    public void dismiss() {
+        mTopLevelPresenter.clearStateStrategyPull();
+        mTopLevelPresenter = null;
+        super.dismiss();
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        switch (buttonView.getId()) {
+            case R.id.edit_audioOrMetronom_switch:
+                if (isChecked) {
+                    mAudioOrMetronomSwitch.setChecked(false);
+                } else if (!currentAudioFile.equals("")) {
+                    mAudioOrMetronomSwitch.setChecked(true);
+                } else {
+                    Toast.makeText(getContext(), "В разработке: установка пути к аудиофайлу", Toast.LENGTH_LONG).show();
+                    currentAudioFile = "R://some audio path for TESTING";  //изменить в последующих этапах разработки
                     mAudioOrMetronomSwitch.setChecked(true);
                 }
                 break;
             case R.id.edit_beforeAudioCountdown_switch2:
-                if (mBeforeAudioCountdownSwitch.isChecked()) {
+                if (isChecked) {
                     mBeforeAudioCountdownSwitch.setChecked(false);
                 } else {
                     mBeforeAudioCountdownSwitch.setChecked(true);
@@ -137,13 +309,5 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
             default:
                 break;
         }
-
-    }
-
-    @Override
-    public void dismiss() {
-        mTopLevelPresenter.clearStateStrategyPull();
-        mTopLevelPresenter = null;
-        super.dismiss();
     }
 }

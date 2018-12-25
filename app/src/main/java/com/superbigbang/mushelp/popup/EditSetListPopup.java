@@ -101,7 +101,7 @@ public class EditSetListPopup extends BasePopupWindow implements View.OnClickLis
                 String resultNameEditText = mEditTextSetListName.getText().toString();
                 int valueOfResultPositionEditText;
                 if (resultPositionEditText.isEmpty()) {
-                    Toast.makeText(getContext(), R.string.SetListNoPositionError, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), R.string.SetListAndSongNoPositionError, Toast.LENGTH_LONG).show();
                 } else if (resultNameEditText.isEmpty()) {
                     Toast.makeText(getContext(), R.string.SetListNoNameError, Toast.LENGTH_LONG).show();
                 } else {
@@ -119,7 +119,7 @@ public class EditSetListPopup extends BasePopupWindow implements View.OnClickLis
                             int countposition1 = 0;
                             int countposition2 = 0;
                             SetList firstSetList = null;
-                            for (int i = 0; i <= currentPosition - valueOfResultPositionEditText; i++) {
+                            for (int i = 0; i <= setlistNoAutoSorting.size(); i++) {
                                 if (i == 0) {
                                     SetList editedSetList = setlistNoAutoSorting.where().equalTo("position", currentPosition).findFirst();
                                     editedSetList.setName(resultNameEditText);
@@ -152,7 +152,7 @@ public class EditSetListPopup extends BasePopupWindow implements View.OnClickLis
                             int countposition1 = 0;
                             int countposition2 = 0;
                             SetList firstSetList = null;
-                            for (int i = 0; i <= valueOfResultPositionEditText - currentPosition; i++) {
+                            for (int i = 0; i <= setlistNoAutoSorting2.size(); i++) {
                                 if (i == 0) {
                                     SetList editedSetList = setlistNoAutoSorting2.where().equalTo("position", currentPosition).findFirst();
                                     editedSetList.setName(resultNameEditText);

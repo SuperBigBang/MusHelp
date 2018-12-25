@@ -31,9 +31,14 @@
     <string name="author_superbigbang">Author: SuperBigBang</string>
     <string name="SetListNameDefault">Сет лист\u0020</string>
     <string name="SetListHasEdit">Сет-лист отредактирован</string>
-    <string name="SetListNoPositionError">Введите номер позиции, чтобы продолжить</string>
+    <string name="SongHasEdit">Трэк отредактирован</string>
+    <string name="SetListAndSongNoPositionError">Введите номер позиции, чтобы продолжить</string>
     <string name="SetListNoNameError">Введите название сет-листа, чтобы продолжить</string>
+    <string name="SongNoNameError">Введите название трэка, чтобы продолжить</string>
+    <string name="SongNoMetronomError">Введите значение для метронома, чтобы продолжить</string>
     <string name="SetListPosNumError">Введите позицию от 1 до 20</string>
+    <string name="SongPosNumError">Введите позицию от 1 до\u0020</string>
+    <string name="SongMetronomNumError">Введите позицию от 1 до 999</string>
     <string name="EmptyLyrics">Текст песни можно вставить в редакторе</string>
     <string name="EmptySongName">Название песни</string>
     <string name="Hint10">Долгое нажатие позволяет отредактировать элемент</string>

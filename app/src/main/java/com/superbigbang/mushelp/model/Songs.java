@@ -12,7 +12,7 @@ public class Songs extends RealmObject {
     private int position;
     private int metronombpm;
     private boolean audioOn;
-    private String audiofile;
+    private String audiofile = "";
     private boolean countdownOn;
     private String lyrics;
     private boolean lyricshasopen = false;

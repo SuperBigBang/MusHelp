@@ -42,17 +42,10 @@ public class SongsListItemProvider extends BaseItemProvider<Songs, BaseViewHolde
 /*
     @Override
     public void onClick(BaseViewHolder helper, Songs data, int position) {
-        if (helper.getView(R.id.songLyrics).getVisibility() == View.VISIBLE) {
-            helper.setGone(R.id.songLyrics, false);
-        } else {
-            helper.setVisible(R.id.songLyrics, true);
-        }
-
     }
 
     @Override
     public boolean onLongClick(BaseViewHolder helper, Songs data, int position) {
-        Toast.makeText(mContext, "longClick Open song edit window", Toast.LENGTH_SHORT).show();
-        return true;
+        return rue;
     }*/
 }

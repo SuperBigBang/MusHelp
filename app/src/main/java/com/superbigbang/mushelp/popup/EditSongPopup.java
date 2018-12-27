@@ -5,6 +5,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.support.v7.widget.SwitchCompat;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.Button;
@@ -20,6 +21,7 @@ import com.superbigbang.mushelp.screen.topLevelActivity.TopLevelPresenter;
 
 import io.realm.RealmResults;
 import razerdp.basepopup.BasePopupWindow;
+import timber.log.Timber;
 
 public class EditSongPopup extends BasePopupWindow implements View.OnClickListener, View.OnLongClickListener, CompoundButton.OnCheckedChangeListener {
     private Button mCancelButton;
@@ -49,6 +51,8 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
         mEditTextLyrics = findViewById(R.id.editSongLyrics);
         mAudioOrMetronomSwitch = findViewById(R.id.edit_audioOrMetronom_switch);
         mBeforeAudioCountdownSwitch = findViewById(R.id.edit_beforeAudioCountdown_switch2);
+        mAudioOrMetronomSwitch.setSwitchPadding(40);
+        mBeforeAudioCountdownSwitch.setSwitchPadding(40);
         mEditTextPosition.setText(String.valueOf(position + 1));
         mEditTextSongName.setText(SongName);
         mEditTextTempMetronom.setText(String.valueOf(tempBpm));
@@ -59,6 +63,7 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
         currentSetListID = currentSetList;
         currentPosition = position;
         currentAudioFile = audioFile;
+        Timber.e("on launch popupw currentaudiofile: " + currentAudioFile);
 
 
         this.mTopLevelPresenter = mTopLevelPresenter;
@@ -81,8 +86,8 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
         mSaveButton.setOnClickListener(this);
         mClearFileAndLyricsButton.setOnClickListener(this);
         mClearFileAndLyricsButton.setOnLongClickListener(this);
-        mAudioOrMetronomSwitch.setOnCheckedChangeListener(this);
         mBeforeAudioCountdownSwitch.setOnCheckedChangeListener(this);
+        mAudioOrMetronomSwitch.setOnCheckedChangeListener(this);
     }
 
     //=============================================================super methods
@@ -272,7 +277,7 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
     @Override
     public boolean onLongClick(View v) {
         if (v.getId() == R.id.btn_e_clearLyricsOrClearPathToAudioFile) {
-            currentAudioFile = "";
+            currentAudioFile = null;
             Toast.makeText(getContext(), "Путь к аудиофайлу удалён", Toast.LENGTH_LONG).show();
         }
         return false;
@@ -289,25 +294,23 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         switch (buttonView.getId()) {
             case R.id.edit_audioOrMetronom_switch:
-                if (isChecked) {
-                    mAudioOrMetronomSwitch.setChecked(false);
-                } else if (!currentAudioFile.equals("")) {
-                    mAudioOrMetronomSwitch.setChecked(true);
-                } else {
-                    Toast.makeText(getContext(), "В разработке: установка пути к аудиофайлу", Toast.LENGTH_LONG).show();
-                    currentAudioFile = "R://some audio path for TESTING";  //изменить в последующих этапах разработки
-                    mAudioOrMetronomSwitch.setChecked(true);
+                if (isChecked && currentAudioFile != null) {
+                    Timber.e("Audio is ON, audiofile not null");
+                } else if (isChecked) {
+                    if (insertingPathForAudioFile()) {
+                        Timber.e("Audio is ON, audiofile included");
+                    } else mAudioOrMetronomSwitch.setChecked(false);
                 }
                 break;
             case R.id.edit_beforeAudioCountdown_switch2:
-                if (isChecked) {
-                    mBeforeAudioCountdownSwitch.setChecked(false);
-                } else {
-                    mBeforeAudioCountdownSwitch.setChecked(true);
-                }
-                break;
-            default:
+                Log.i("switch_compat2", isChecked + "");
                 break;
         }
+    }
+
+    private boolean insertingPathForAudioFile() {
+        Toast.makeText(getContext(), "В разработке: установка пути к аудиофайлу", Toast.LENGTH_LONG).show();
+        currentAudioFile = "R://some audio path for TESTING";  //изменить в последующих этапах разработки
+        return true; //for initial testing, every try is successfully;
     }
 }

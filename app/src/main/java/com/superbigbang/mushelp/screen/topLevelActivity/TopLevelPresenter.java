@@ -126,7 +126,7 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
                 mSetlistsrealm.where(SetList.class).equalTo("isOpen", true).findFirst().getId(),
                 false,
                 false,
-                "",
+                null,
                 "",
                 0);
     }

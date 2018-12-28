@@ -16,6 +16,7 @@ import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
 
 
 @InjectViewState
@@ -52,7 +53,31 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
                 editsong.setPlaystarted(false);
                 mSongsrealm.commitTransaction();
             }
+            RealmResults<Songs> forcloselyricslist = mSongsrealm.where(Songs.class).equalTo("lyricshasopen", true).findAll();
+            mSongsrealm.beginTransaction();
+            for (int i = 0; i < forcloselyricslist.size(); i++) {
+                if (forcloselyricslist.get(i) != null) {
+                    forcloselyricslist.get(i).setLyricshasopen(false);
+                }
+            }
+            mSongsrealm.commitTransaction();
         }
+    }
+
+    void changeLyricsOpenOrCloseCondition(int position) {
+        Songs editSong = mSongsrealm.where(Songs.class).equalTo("setlistid", mSetlistsrealm.where(SetList.class).equalTo("isOpen", true).findFirst().getId())
+                .findAll()
+                .where().equalTo("position", position)
+                .findFirst();
+        mSongsrealm.beginTransaction();
+        if (editSong != null) {
+            if (editSong.isLyricshasopen()) {
+                editSong.setLyricshasopen(false);
+            } else {
+                editSong.setLyricshasopen(true);
+            }
+        }
+        mSongsrealm.commitTransaction();
     }
 
     void showAdvertistments() {

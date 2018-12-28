@@ -33,10 +33,16 @@ public class SongsListItemProvider extends BaseItemProvider<Songs, BaseViewHolde
         } else {
             helper.setImageDrawable(R.id.playPauseButton, ContextCompat.getDrawable(ExtendApplication.getBaseComponent().getContext(), R.drawable.baseline_pause_circle_outline_white_48));
         }
+        if (data.isLyricshasopen()) {
+            helper.setGone(R.id.songLyrics, true);
+        } else {
+            helper.setGone(R.id.songLyrics, false);
+        }
         helper.addOnClickListener(R.id.playPauseButton)
                 .addOnClickListener(R.id.deleteSongButton)
                 .addOnLongClickListener(R.id.playPauseButton)
                 .addOnClickListener(R.id.songName)
+                .addOnClickListener(R.id.songLyrics)
                 .addOnLongClickListener(R.id.songName);
     }
 /*

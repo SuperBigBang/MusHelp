@@ -15,8 +15,8 @@ public class Songs extends RealmObject {
     private String audiofile;
     private boolean countdownOn;
     private String lyrics;
-    private boolean lyricshasopen = false;
-    private boolean playstarted = false;
+    private boolean lyricshasopen;
+    private boolean playstarted;
 
     public String getTitle() {
         return title;

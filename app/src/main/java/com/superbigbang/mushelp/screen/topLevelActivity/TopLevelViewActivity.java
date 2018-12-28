@@ -85,14 +85,8 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
             } else if (view.getId() == R.id.deleteSongButton) {
                 mTopLevelPresenter.showDeletePopup(position);
             }
-            if (view.getId() == R.id.songName) {
-                /**Переделать в базу*/
-                if (adapter.getViewByPosition(mRecyclerSongsList, position, R.id.songLyrics).getVisibility() == View.VISIBLE) {
-                    adapter.getViewByPosition(mRecyclerSongsList, position, R.id.songLyrics).setVisibility(View.INVISIBLE);
-                    adapter.getViewByPosition(mRecyclerSongsList, position, R.id.songLyrics).setVisibility(View.GONE);
-                } else {
-                    adapter.getViewByPosition(mRecyclerSongsList, position, R.id.songLyrics).setVisibility(View.VISIBLE);
-                }
+            if (view.getId() == R.id.songName || view.getId() == R.id.songLyrics) {
+                mTopLevelPresenter.changeLyricsOpenOrCloseCondition(position);
             }
 
         });

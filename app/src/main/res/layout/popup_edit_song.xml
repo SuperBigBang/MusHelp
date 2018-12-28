@@ -124,7 +124,7 @@
             android:fontFamily="@font/roboto_medium"
             android:gravity="center"
             android:hint="@string/_100"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:maxLength="3"
             android:maxLines="1"
             android:textColor="@color/textColorPrimary"

@@ -131,8 +131,8 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
         getViewState().showSetListEditPopup(mSetlistsrealm.where(SetList.class).equalTo("position", position).findFirst().getName(), position);
     }
 
-    void showSongEditPopup(int position) {
-        if (position != 999) {
+    void showSongEditPopup(int position, boolean actionIsAddNewSong) {
+        if (!actionIsAddNewSong) {
             Songs editsong = mSongsrealm.where(Songs.class).equalTo("setlistid", mSetlistsrealm.where(SetList.class).equalTo("isOpen", true).findFirst().getId())
                     .findAll()
                     .where().equalTo("position", position).findFirst();
@@ -142,7 +142,9 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
                     editsong.isAudioOn(),
                     editsong.isCountdownOn(),
                     editsong.getAudiofile(),
-                    editsong.getLyrics(), editsong.getMetronombpm());
+                    editsong.getLyrics(),
+                    editsong.getMetronombpm(),
+                    false);
         } else getViewState().showSongEditPopup("",
                 0,
                 mSetlistsrealm.where(SetList.class).equalTo("isOpen", true).findFirst().getId(),
@@ -150,7 +152,8 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
                 false,
                 null,
                 "",
-                0);
+                0,
+                true);
     }
 
     public void showVolumeUpPopup() {

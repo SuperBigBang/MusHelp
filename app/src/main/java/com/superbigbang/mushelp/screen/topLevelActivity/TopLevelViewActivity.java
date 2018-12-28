@@ -95,15 +95,15 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
                 mTopLevelPresenter.playButtonIsClicked(position, true);
             }
             if (view.getId() == R.id.songName) {
-                mTopLevelPresenter.showSongEditPopup(position);
+                mTopLevelPresenter.showSongEditPopup(position, false);
             }
             return true;
         });
     }
 
     @Override
-    public void showSongEditPopup(String SongName, int position, int currentSetList, boolean audioIsOn, boolean countdownIsOn, String audioFile, String lyrics, int tempBpm) {
-        new EditSongPopup(this, SongName, position, currentSetList, audioIsOn, countdownIsOn, audioFile, lyrics, mTopLevelPresenter, tempBpm).showPopupWindow();
+    public void showSongEditPopup(String SongName, int position, int currentSetList, boolean audioIsOn, boolean countdownIsOn, String audioFile, String lyrics, int tempBpm, boolean actionIsAddNewSong) {
+        new EditSongPopup(this, SongName, position, currentSetList, audioIsOn, countdownIsOn, audioFile, lyrics, mTopLevelPresenter, tempBpm, actionIsAddNewSong).showPopupWindow();
         Toast.makeText(this, "Действия в этом окне на данный момент в разработке", Toast.LENGTH_LONG).show();
     }
 
@@ -153,7 +153,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
                 mTopLevelPresenter.showBuyPopup();
                 break;
             case R.id.newItemCircleButton:
-                mTopLevelPresenter.showSongEditPopup(999);
+                mTopLevelPresenter.showSongEditPopup(0, true);
                 break;
             case R.id.volumeX2button:
                 mTopLevelPresenter.showVolumeUpPopup();

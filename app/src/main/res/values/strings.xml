@@ -32,6 +32,7 @@
     <string name="SetListNameDefault">Сет лист\u0020</string>
     <string name="SetListHasEdit">Сет-лист отредактирован</string>
     <string name="SongHasEdit">Трэк отредактирован</string>
+    <string name="SongHasAdded">Трэк добавлен</string>
     <string name="SetListAndSongNoPositionError">Введите номер позиции, чтобы продолжить</string>
     <string name="SetListNoNameError">Введите название сет-листа, чтобы продолжить</string>
     <string name="SongNoNameError">Введите название трэка, чтобы продолжить</string>

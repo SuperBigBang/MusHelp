@@ -132,13 +132,12 @@ public class EditSetListPopup extends BasePopupWindow implements View.OnClickLis
                                     if (firstSetList != null) {
                                         firstSetList.setPosition(countposition2);
                                     }
-                                    countposition1++;
+                                    countposition1 = countposition1 + 2;
                                     firstSetList = setlistNoAutoSorting.where().equalTo("position", countposition2 + 1).findFirst();
                                     countposition2++;
                                     if (secondSetList != null) {
                                         secondSetList.setPosition(countposition2);
                                     }
-                                    countposition1++;
                                 }
                             }
                             mTopLevelPresenter.mSetlistsrealm.commitTransaction();
@@ -165,13 +164,12 @@ public class EditSetListPopup extends BasePopupWindow implements View.OnClickLis
                                     if (firstSetList != null) {
                                         firstSetList.setPosition(countposition2);
                                     }
-                                    countposition1--;
+                                    countposition1 = countposition1 - 2;
                                     firstSetList = setlistNoAutoSorting2.where().equalTo("position", countposition2 - 1).findFirst();
                                     countposition2--;
                                     if (secondSetList != null) {
                                         secondSetList.setPosition(countposition2);
                                     }
-                                    countposition1--;
                                 }
                             }
                             mTopLevelPresenter.mSetlistsrealm.commitTransaction();

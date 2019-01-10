@@ -41,7 +41,7 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
 
     private TopLevelPresenter mTopLevelPresenter;
 
-    public EditSongPopup(Context context, String SongName, int position, int currentSetList, boolean audioIsOn, boolean countDownIsOn, String audioFile, String lyrics, TopLevelPresenter mTopLevelPresenter, int tempBpm, boolean actionIsAddNewSong) {
+    public EditSongPopup(Context context, String SongName, int position, int currentSetList, boolean audioIsOn, boolean countDownIsOn, String audioFile, String lyrics, TopLevelPresenter mTopLevelPresenter, int tempBpm, boolean actionIsAddNewSongg) {
         super(context);
         mCancelButton = findViewById(R.id.btn_e_cancel2);
         mSaveButton = findViewById(R.id.btn_e_Save2);
@@ -64,7 +64,7 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
         currentSetListID = currentSetList;
         currentPosition = position;
         currentAudioFile = audioFile;
-        actionIsAddNewSong = actionIsAddNewSong;
+        actionIsAddNewSong = actionIsAddNewSongg;
         Timber.e("on launch popupw currentaudiofile: " + currentAudioFile);
 
 
@@ -155,8 +155,84 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
                     valueOfResultPositionEditText = (Integer.valueOf(resultPositionEditText)) - 1;
                     valueOfResultMetronomEditText = (Integer.valueOf(resultMetronomBpm));
                     if (actionIsAddNewSong) {
-                        /** Заметки: необходимо сделать реализацию добавления нового трэка*/
-                    } else {
+                        //=============================================================Add new song
+                        if (valueOfResultPositionEditText < 0 || valueOfResultPositionEditText > sizeOfcurrentSetlist) {
+                            Toast.makeText(getContext(), ExtendApplication.getBaseComponent().getContext().getResources().getString(R.string.SongPosNumError) + (sizeOfcurrentSetlist + 1), Toast.LENGTH_LONG).show();
+                        } else if (valueOfResultMetronomEditText <= 0 || valueOfResultMetronomEditText > 999) {
+                            Toast.makeText(getContext(), R.string.SongMetronomNumError, Toast.LENGTH_LONG).show();
+                        } else {
+                            int newIdForSong = mTopLevelPresenter.mSongsrealm
+                                    .where(Songs.class)
+                                    .max("songid")
+                                    .intValue()
+                                    + 1;
+                            if (valueOfResultPositionEditText + 1 > sizeOfcurrentSetlist) {
+                                //=============================================================Adding new song to the end of current Song List
+                                mTopLevelPresenter.mSongsrealm.beginTransaction();
+                                Songs newSong = mTopLevelPresenter.mSongsrealm.createObject(Songs.class);
+                                newSong.setTitle(resultNameEditText);
+                                newSong.setSetlistid(currentSetListID);
+                                newSong.setSongid(newIdForSong);
+                                newSong.setPosition(valueOfResultPositionEditText);
+                                newSong.setMetronombpm(valueOfResultMetronomEditText);
+                                newSong.setAudioOn(mAudioOrMetronomSwitch.isChecked());
+                                newSong.setCountdownOn(mBeforeAudioCountdownSwitch.isChecked());
+                                newSong.setLyrics(resultLyrics);
+                                newSong.setLyricshasopen(false);
+                                newSong.setPlaystarted(false);
+                                newSong.setAudiofile(currentAudioFile);
+                                mTopLevelPresenter.mSongsrealm.commitTransaction();
+                            } else {
+//=============================================================Inserting new song in current Song List
+                                RealmResults<Songs> songsNoAutoSorting = mTopLevelPresenter.mSongsrealm
+                                        .where(Songs.class)
+                                        .equalTo("setlistid", currentSetListID)
+                                        .findAll()
+                                        .where()
+                                        .between("position", valueOfResultPositionEditText, sizeOfcurrentSetlist)
+                                        .findAll();
+                                mTopLevelPresenter.mSongsrealm.beginTransaction();
+                                int countposition1 = 0;
+                                int countposition2 = 0;
+                                Songs firstSong = null;
+                                for (int i = 0; i <= songsNoAutoSorting.size(); i++) {
+                                    if (i == 0) {
+                                        firstSong = songsNoAutoSorting.where().equalTo("position", valueOfResultPositionEditText).findFirst();
+                                        countposition1 = firstSong.getPosition();
+                                    } else {
+                                        Songs secondSong = songsNoAutoSorting.where().equalTo("position", countposition1 + 1).findFirst();
+                                        countposition2 = countposition1 + 1;
+                                        if (firstSong != null) {
+                                            firstSong.setPosition(countposition2);
+                                        }
+                                        countposition1 = countposition1 + 2;
+                                        firstSong = songsNoAutoSorting.where().equalTo("position", countposition2 + 1).findFirst();
+                                        countposition2++;
+                                        if (secondSong != null) {
+                                            secondSong.setPosition(countposition2);
+                                        }
+                                    }
+                                }
+                                Songs newSong = mTopLevelPresenter.mSongsrealm.createObject(Songs.class);
+                                newSong.setTitle(resultNameEditText);
+                                newSong.setSetlistid(currentSetListID);
+                                newSong.setSongid(newIdForSong);
+                                newSong.setPosition(valueOfResultPositionEditText);
+                                newSong.setMetronombpm(valueOfResultMetronomEditText);
+                                newSong.setAudioOn(mAudioOrMetronomSwitch.isChecked());
+                                newSong.setCountdownOn(mBeforeAudioCountdownSwitch.isChecked());
+                                newSong.setLyrics(resultLyrics);
+                                newSong.setLyricshasopen(false);
+                                newSong.setPlaystarted(false);
+                                newSong.setAudiofile(currentAudioFile);
+                                mTopLevelPresenter.mSongsrealm.commitTransaction();
+                            }
+                            Toast.makeText(getContext(), R.string.SongHasAdded, Toast.LENGTH_LONG).show();
+                            dismiss();
+                        }
+                    }
+                    //=============================================================Edit existing song
+                    else {
                         if (valueOfResultPositionEditText < 0 || valueOfResultPositionEditText >= sizeOfcurrentSetlist) {
                             Toast.makeText(getContext(), ExtendApplication.getBaseComponent().getContext().getResources().getString(R.string.SongPosNumError) + (sizeOfcurrentSetlist), Toast.LENGTH_LONG).show();
                         } else if (valueOfResultMetronomEditText <= 0 || valueOfResultMetronomEditText > 999) {
@@ -193,13 +269,12 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
                                         if (firstSong != null) {
                                             firstSong.setPosition(countposition2);
                                         }
-                                        countposition1++;
+                                        countposition1 = countposition1 + 2;
                                         firstSong = songsNoAutoSorting.where().equalTo("position", countposition2 + 1).findFirst();
                                         countposition2++;
                                         if (secondSong != null) {
                                             secondSong.setPosition(countposition2);
                                         }
-                                        countposition1++;
                                     }
                                 }
                                 mTopLevelPresenter.mSongsrealm.commitTransaction();
@@ -234,13 +309,12 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
                                         if (firstSong != null) {
                                             firstSong.setPosition(countposition2);
                                         }
-                                        countposition1--;
+                                        countposition1 = countposition1 - 2;
                                         firstSong = songsNoAutoSorting2.where().equalTo("position", countposition2 - 1).findFirst();
                                         countposition2--;
                                         if (secondSong != null) {
                                             secondSong.setPosition(countposition2);
                                         }
-                                        countposition1--;
                                     }
                                 }
                                 mTopLevelPresenter.mSongsrealm.commitTransaction();

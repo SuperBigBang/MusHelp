@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.superbigbang.mushelp">
 
+    <uses-permission android:name="android.permission.VIBRATE" />
     <application
         android:name=".ExtendApplication"
         android:allowBackup="true"
@@ -27,6 +28,8 @@
             android:name=".screen.topLevelActivity.TopLevelViewActivity"
             android:theme="@style/AppTheme" />
 
+        <service android:name=".services.MetronomeService" />
     </application>
+
 
 </manifest>

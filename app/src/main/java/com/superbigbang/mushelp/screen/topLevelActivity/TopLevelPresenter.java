@@ -200,6 +200,11 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
             }
         }
         mSongsrealm.commitTransaction();
+        if (ExtendApplication.isBound()) {
+            if (ExtendApplication.getMetroComponent().getMetronomeService().isPlaying())
+                ExtendApplication.getMetroComponent().getMetronomeService().pause();
+            else ExtendApplication.getMetroComponent().getMetronomeService().play();
+        }
     }
 
     @Override

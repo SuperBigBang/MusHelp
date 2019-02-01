@@ -7,6 +7,11 @@
     <string name="volumex2button">volumeX2button</string>
     <string name="divider">divider</string>
     <string name="bpm">bpm</string>
+    <string name="title_beep">Beep</string>
+    <string name="title_wood">Click</string>
+    <string name="title_vibrate">Vibrate</string>
+    <string name="notification_title">MusHelp работает…</string>
+    <string name="notification_desc">Нажмите для остановки.</string>
     <string name="playpausebutton">playPauseButton</string>
     <string name="deletesongbutton">deleteSongButton</string>
     <string name="popDel_text1">Вы действительно хотите удалить этот трэк?</string>

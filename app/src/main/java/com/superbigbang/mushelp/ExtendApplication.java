@@ -1,32 +1,47 @@
 package com.superbigbang.mushelp;
 
 import android.app.Application;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 
 import com.google.android.gms.ads.MobileAds;
 import com.superbigbang.mushelp.di.BaseComponent;
 import com.superbigbang.mushelp.di.DaggerBaseComponent;
+import com.superbigbang.mushelp.di.DaggerMetroComponent;
+import com.superbigbang.mushelp.di.MetroComponent;
 import com.superbigbang.mushelp.di.modules.ContextModule;
+import com.superbigbang.mushelp.di.modules.MetronomeServiceModule;
 import com.superbigbang.mushelp.model.SetList;
 import com.superbigbang.mushelp.model.Songs;
+import com.superbigbang.mushelp.services.MetronomeService;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import timber.log.Timber;
 
 
-public class ExtendApplication extends Application {
+public class ExtendApplication extends Application implements ServiceConnection {
 
     public static final String APP_PREFERENCES = "mysettings";
     public static final String APP_PREFERENCES_FIRST_INSTALL_FLAG = "FIRST_INSTALL_FLAG";
 
     private static BaseComponent sBaseComponent;
+    public static boolean isBound;
+    private static MetroComponent sMetroComponent;
+    public MetronomeService service;
 
     public static BaseComponent getBaseComponent() {
         return sBaseComponent;
+    }
+
+    public static MetroComponent getMetroComponent() {
+        return sMetroComponent;
     }
 
     @VisibleForTesting
@@ -34,15 +49,27 @@ public class ExtendApplication extends Application {
         sBaseComponent = baseComponent;
     }
 
+    @VisibleForTesting
+    public static void setMetroComponent(@NonNull MetroComponent metroComponent) {
+        sMetroComponent = metroComponent;
+    }
+
+    public static boolean isBound() {
+        return isBound;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
         SharedPreferences mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 
-
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
         }
+
+        Intent intent = new Intent(this, MetronomeService.class);
+        startService(intent);
+        bindService(intent, this, Context.BIND_AUTO_CREATE);
 
         sBaseComponent = DaggerBaseComponent.builder()
                 .contextModule(new ContextModule(this))
@@ -58,6 +85,33 @@ public class ExtendApplication extends Application {
 
         SharedPreferences.Editor editor = mSettings.edit();
         editor.putBoolean(APP_PREFERENCES_FIRST_INSTALL_FLAG, false).apply();
+    }
+
+    @Override
+    public void onTerminate() {
+        if (isBound) {
+            unbindService(this);
+            isBound = false;
+        }
+        super.onTerminate();
+    }
+
+    @Override
+    public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+        MetronomeService.LocalBinder binder = (MetronomeService.LocalBinder) iBinder;
+        service = binder.getService();
+        isBound = true;
+        Timber.e("service is bound: %s", isBound());
+        sMetroComponent = DaggerMetroComponent.builder()
+                .metronomeServiceModule(new MetronomeServiceModule(service))
+                .build();
+        Timber.e("BaseCompMetroService is not null, and named: %s", ExtendApplication.getMetroComponent().getMetronomeService());
+    }
+
+
+    @Override
+    public void onServiceDisconnected(ComponentName componentName) {
+        isBound = false;
     }
 
     //==================Lyrics added for Test:

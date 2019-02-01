@@ -45,6 +45,7 @@ public class MetronomeService extends Service implements Runnable {
     private int soundId = -1;
     private boolean isPlaying;
     private Vibrator vibrator;
+    private int tick;
 
     private static int toBpm(long interval) {
         return (int) (60000 / interval);
@@ -70,9 +71,10 @@ public class MetronomeService extends Service implements Runnable {
                     .build();
         } else soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
 
-        int tick = prefs.getInt(PREF_TICK, 0);
-        if (!ticks[tick].isVibration())
+        tick = prefs.getInt(PREF_TICK, 2);
+        if (!ticks[tick].isVibration()) {
             soundId = ticks[tick].getSoundId(this, soundPool);
+        }
 
         interval = prefs.getLong(PREF_INTERVAL, 500);
         bpm = toBpm(interval);
@@ -108,11 +110,12 @@ public class MetronomeService extends Service implements Runnable {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE))
-                    .createNotificationChannel(new NotificationChannel("mushelp", getString(R.string.app_name), NotificationManager.IMPORTANCE_DEFAULT));
+                    .createNotificationChannel(new NotificationChannel("mushelp", getString(R.string.app_name), NotificationManager.IMPORTANCE_LOW));
 
             builder = new NotificationCompat.Builder(this, "mushelp");
         } else
             builder = new NotificationCompat.Builder(this);
+
 
         startForeground(530,
                 builder.setContentTitle(getString(R.string.notification_title))
@@ -150,6 +153,17 @@ public class MetronomeService extends Service implements Runnable {
 
     public int getTick() {
         return prefs.getInt(PREF_TICK, 0);
+    }
+
+    public void changeTickSound() {
+        if (tick + 1 == ticks.length) {
+            tick = 0;
+            setTick(tick);
+        } else {
+            tick++;
+            setTick(tick);
+        }
+
     }
 
     public void setTick(int tick) {

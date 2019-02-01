@@ -34,6 +34,21 @@
         app:srcCompat="@drawable/baseline_shopping_cart_white_48" />
 
     <ImageButton
+        android:id="@+id/metroSoundChangeButton"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorPrimary"
+        android:contentDescription="@string/metroSoundChangeButton"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/adView"
+        app:layout_constraintEnd_toStartOf="@+id/buyButton"
+        app:layout_constraintStart_toEndOf="@+id/newItemCircleButton"
+        app:srcCompat="@drawable/baseline_music_note_white1_48" />
+
+    <ImageButton
         android:id="@+id/newItemCircleButton"
         android:layout_width="42dp"
         android:layout_height="42dp"

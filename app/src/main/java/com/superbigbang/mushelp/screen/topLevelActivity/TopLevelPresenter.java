@@ -184,8 +184,18 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
         if (editsong.isPlaystarted()) {
             if (functionIsStop) {
                 Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Stop playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
+                if (ExtendApplication.isBound()) {
+                    if (ExtendApplication.getMetroComponent().getMetronomeService().isPlaying()) {
+                        ExtendApplication.getMetroComponent().getMetronomeService().pause();
+                    }
+                } //изменить в будущем на stop
             } else {
                 Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Pause playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
+                if (ExtendApplication.isBound()) {
+                    if (ExtendApplication.getMetroComponent().getMetronomeService().isPlaying()) {
+                        ExtendApplication.getMetroComponent().getMetronomeService().pause();
+                    }
+                }
             }
             editsong.setPlaystarted(false);
         } else {
@@ -194,24 +204,41 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
                 firststoppedsong.setPlaystarted(false);
                 Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Stop playing " + firststoppedsong.getTitle() + " Start playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
                 editsong.setPlaystarted(true);
+                if (ExtendApplication.isBound()) {
+                    if (ExtendApplication.getMetroComponent().getMetronomeService().isPlaying()) {
+                        ExtendApplication.getMetroComponent().getMetronomeService().pause();
+                    }
+                    ExtendApplication.getMetroComponent().getMetronomeService().setBpm(editsong.getMetronombpm());
+                    ExtendApplication.getMetroComponent().getMetronomeService().play();
+                }
             } else {
                 Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Start playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
                 editsong.setPlaystarted(true);
+                if (ExtendApplication.isBound()) {
+                    if (!ExtendApplication.getMetroComponent().getMetronomeService().isPlaying()) {
+                        ExtendApplication.getMetroComponent().getMetronomeService().setBpm(editsong.getMetronombpm());
+                        ExtendApplication.getMetroComponent().getMetronomeService().play();
+                    }
+                }
             }
         }
         mSongsrealm.commitTransaction();
-        if (ExtendApplication.isBound()) {
-            if (ExtendApplication.getMetroComponent().getMetronomeService().isPlaying())
-                ExtendApplication.getMetroComponent().getMetronomeService().pause();
-            else ExtendApplication.getMetroComponent().getMetronomeService().play();
-        }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if (ExtendApplication.isBound()) {
+            if (ExtendApplication.getMetroComponent().getMetronomeService().isPlaying()) {
+                ExtendApplication.getMetroComponent().getMetronomeService().pause();
+            }
+        }
         mSetlistsrealm.close();
         mSongsrealm.close();
+    }
+
+    void metroSoundChangeButton() {
+        ExtendApplication.getMetroComponent().getMetronomeService().changeTickSound();
     }
 }
 

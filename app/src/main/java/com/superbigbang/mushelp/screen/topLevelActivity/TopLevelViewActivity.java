@@ -47,6 +47,8 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     ImageButton newItemCircleButton;
     @BindView(R.id.volumeX2button)
     ImageButton volumeX2button;
+    @BindView(R.id.metroSoundChangeButton)
+    ImageButton metroSoundChangeButton;
 
     public static final String APP_PREFERENCES = "mysettings";
     SharedPreferences mSettings;
@@ -146,7 +148,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         super.onRestart();
     }
 
-    @OnClick({R.id.buyButton, R.id.newItemCircleButton, R.id.volumeX2button})
+    @OnClick({R.id.buyButton, R.id.newItemCircleButton, R.id.volumeX2button, R.id.metroSoundChangeButton})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.buyButton:
@@ -157,6 +159,9 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
                 break;
             case R.id.volumeX2button:
                 mTopLevelPresenter.showVolumeUpPopup();
+                break;
+            case R.id.metroSoundChangeButton:
+                mTopLevelPresenter.metroSoundChangeButton();
                 break;
         }
     }

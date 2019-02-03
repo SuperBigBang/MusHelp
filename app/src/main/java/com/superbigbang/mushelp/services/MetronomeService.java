@@ -1,5 +1,6 @@
 package com.superbigbang.mushelp.services;
 
+import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -12,7 +13,6 @@ import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Binder;
 import android.os.Build;
-import android.os.Handler;
 import android.os.IBinder;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
@@ -22,6 +22,14 @@ import android.support.v4.app.NotificationCompat;
 
 import com.superbigbang.mushelp.R;
 import com.superbigbang.mushelp.model.TickData;
+
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
+import io.reactivex.Scheduler;
+import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subjects.PublishSubject;
+
 
 public class MetronomeService extends Service {
 
@@ -33,19 +41,26 @@ public class MetronomeService extends Service {
     public static final String PREF_INTERVAL = "interval";
     public static final TickData[] ticks = new TickData[]{
             new TickData(R.string.title_beep, R.raw.beep),
-            new TickData(R.string.title_wood, R.raw.wood),
-            new TickData(R.string.title_vibrate)
+            new TickData(R.string.title_wood, R.raw.tick1),
+            new TickData(R.string.title_vibrate),
     };
     private final IBinder binder = new LocalBinder();
     private SharedPreferences prefs;
     private int bpm;
     private long interval;
     private SoundPool soundPool;
-    private Handler handler;
     private int soundId = -1;
     private boolean isPlaying;
     private Vibrator vibrator;
     private int tick;
+
+   /* private boolean start;
+    private long startTime1;
+    private long endTime2;*/
+
+    private PublishSubject<Object> stopTrigger = PublishSubject.create();
+
+    private Scheduler scheduler;
 
     private static int toBpm(long interval) {
         return (int) (60000 / interval);
@@ -61,25 +76,11 @@ public class MetronomeService extends Service {
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            soundPool = new SoundPool.Builder()
-                    .setMaxStreams(1)
-                    .setAudioAttributes(new AudioAttributes.Builder()
-                            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                            .build())
-                    .build();
-        } else soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
-
-        tick = prefs.getInt(PREF_TICK, 2);
-        if (!ticks[tick].isVibration()) {
-            soundId = ticks[tick].getSoundId(this, soundPool);
-        }
+        scheduler = Schedulers.newThread();
+        loadSoundPoolOnNewThreadRX();
 
         interval = prefs.getLong(PREF_INTERVAL, 500);
         bpm = toBpm(interval);
-
-        handler = new Handler();
     }
 
     @Override
@@ -99,24 +100,72 @@ public class MetronomeService extends Service {
         return START_STICKY;
     }
 
-    Runnable playMetro = new Runnable() {
-        @Override
-        public void run() {
-            if (isPlaying) {
-                if (soundId != -1) {
-                    soundPool.play(soundId, 1, 1, 1, 0, 1);
-                } else if (Build.VERSION.SDK_INT >= 26) {
-                    vibrator.vibrate(VibrationEffect.createOneShot(20, VibrationEffect.DEFAULT_AMPLITUDE));
-                } else {
-                    vibrator.vibrate(20);
-                }
-                handler.postDelayed(playMetro, interval);
-            }
-        }
-    };
+    @SuppressLint("CheckResult")
+    public void playWithRX() {
+        Observable.interval(interval, TimeUnit.MILLISECONDS, scheduler)
+                .takeUntil(stopTrigger)
+                .subscribe((Long value) -> {
+                    if (isPlaying) {
+                        if (soundId != -1) {
+
+                            soundPool.play(soundId, 1, 1, 1, 0, 1);
+                            //      soundPool.play(soundId, 0, 0, 0, -1, 1);
+                            //Timber.e("Setted interval: %s", String.valueOf(interval));
+                            //  checkIntervals();
+                        } else if (Build.VERSION.SDK_INT >= 26) {
+                            vibrator.vibrate(VibrationEffect.createOneShot(20, VibrationEffect.DEFAULT_AMPLITUDE));
+                        } else {
+                            vibrator.vibrate(20);
+                        }
+                    }
+                });
+    }
+
+    @SuppressLint("CheckResult")
+    void loadSoundPoolOnNewThreadRX() {
+        Observable.just(0)
+                .observeOn(scheduler)
+                .subscribe((Integer value) -> {
+                    SoundPool soundPool0;
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        soundPool0 = new SoundPool.Builder()
+                                .setMaxStreams(4)
+                                .setAudioAttributes(new AudioAttributes.Builder()
+                                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                                        .build())
+                                .build();
+                    } else soundPool0 = new SoundPool(4, AudioManager.STREAM_MUSIC, 0);
+                    tick = prefs.getInt(PREF_TICK, 0);
+                    if (!ticks[tick].isVibration()) {
+                        soundId = ticks[tick].getSoundId(this, soundPool0);
+                    }
+                    soundPool = soundPool0;
+                });
+    }
+
+  /*  @SuppressLint("CheckResult")
+    void checkIntervals() {
+        Observable.just(0)
+                .observeOn(scheduler)
+                .subscribe((Integer value) -> {
+                    if (!start) {
+                        startTime1 = System.currentTimeMillis();
+                        start = true;
+                    } else {
+                        endTime2 = System.currentTimeMillis();
+                        long elapsedTime = endTime2 - startTime1;
+                        Timber.e("Result interval: %s", String.valueOf(elapsedTime));
+                        start = false;
+                    }
+                });
+    }*/
+
+    private void stopWithRX() {
+        stopTrigger.onNext(false);
+    }
 
     public void play() {
-        handler.post(playMetro);
+        playWithRX();
         isPlaying = true;
 
         Intent intent = new Intent(this, MetronomeService.class);
@@ -147,22 +196,10 @@ public class MetronomeService extends Service {
         return isPlaying;
     }
 
-    public long getInterval() {
-        return interval;
-    }
-
-    public int getBpm() {
-        return bpm;
-    }
-
     public void setBpm(int bpm) {
         this.bpm = bpm;
         interval = toInterval(bpm);
         prefs.edit().putLong(PREF_INTERVAL, interval).apply();
-    }
-
-    public int getTick() {
-        return prefs.getInt(PREF_TICK, 0);
     }
 
     public void changeTickSound() {
@@ -173,11 +210,10 @@ public class MetronomeService extends Service {
             tick++;
             setTick(tick);
         }
-
     }
 
     public void pause() {
-        handler.removeCallbacks(playMetro);
+        stopWithRX();
         stopForeground(true);
         isPlaying = false;
     }
@@ -199,13 +235,11 @@ public class MetronomeService extends Service {
             if (!isPlaying)
                 soundPool.play(soundId, 1.0f, 1.0f, 1, 0, 1.0f);
         } else soundId = -1;
-
         prefs.edit().putInt(PREF_TICK, tick).apply();
     }
 
     @Override
     public void onDestroy() {
-        handler.removeCallbacks(playMetro);
         super.onDestroy();
     }
 

@@ -39,7 +39,7 @@ public class MetronomeService extends Service {
 
     public static final String PREF_TICK = "tick";
     public static final String PREF_INTERVAL = "interval";
-    public static final TickData[] ticks = new TickData[]{
+    public static TickData[] ticks = new TickData[]{
             new TickData(R.string.title_beep, R.raw.beep),
             new TickData(R.string.title_wood, R.raw.tick1),
             new TickData(R.string.title_ding, R.raw.ding),
@@ -106,9 +106,7 @@ public class MetronomeService extends Service {
         Observable.interval(interval, TimeUnit.MILLISECONDS, scheduler)
                 .takeUntil(stopTrigger)
                 .subscribe((Long value) -> {
-                    if (isPlaying) {
                         if (soundId != -1) {
-
                             soundPool.play(soundId, 1, 1, 1, 0, 1);
                             //      soundPool.play(soundId, 0, 0, 0, -1, 1);
                             //Timber.e("Setted interval: %s", String.valueOf(interval));
@@ -118,7 +116,6 @@ public class MetronomeService extends Service {
                         } else {
                             vibrator.vibrate(20);
                         }
-                    }
                 });
     }
 
@@ -167,8 +164,8 @@ public class MetronomeService extends Service {
 
     public void play() {
         playWithRX();
-        isPlaying = true;
 
+        isPlaying = true;
         Intent intent = new Intent(this, MetronomeService.class);
         intent.setAction(ACTION_PAUSE);
 
@@ -233,8 +230,8 @@ public class MetronomeService extends Service {
     public void setTick(int tick) {
         if (!ticks[tick].isVibration()) {
             soundId = ticks[tick].getSoundId(this, soundPool);
-            if (!isPlaying)
-                soundPool.play(soundId, 1.0f, 1.0f, 1, 0, 1.0f);
+         /*   if (!isPlaying){
+                soundPool.play(soundId, 1.0f, 1.0f, 1, 0, 1.0f);}*/
         } else soundId = -1;
         prefs.edit().putInt(PREF_TICK, tick).apply();
     }
@@ -242,6 +239,11 @@ public class MetronomeService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    public void onTaskRemoved(Intent rootIntent) {
+        super.onTaskRemoved(rootIntent);
     }
 
     public class LocalBinder extends Binder {

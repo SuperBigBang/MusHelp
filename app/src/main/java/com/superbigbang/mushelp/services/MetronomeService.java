@@ -47,7 +47,7 @@ public class MetronomeService extends Service {
     };
     private final IBinder binder = new LocalBinder();
     private SharedPreferences prefs;
-    private int bpm;
+    //  private int bpm;
     private long interval;
     private SoundPool soundPool;
     private int soundId = -1;
@@ -81,7 +81,7 @@ public class MetronomeService extends Service {
         loadSoundPoolOnNewThreadRX();
 
         interval = prefs.getLong(PREF_INTERVAL, 500);
-        bpm = toBpm(interval);
+        //   bpm = toBpm(interval);
     }
 
     @Override
@@ -89,7 +89,7 @@ public class MetronomeService extends Service {
         if (intent != null && intent.getAction() != null) {
             switch (intent.getAction()) {
                 case ACTION_START:
-                    setBpm(intent.getIntExtra(EXTRA_BPM, bpm));
+                    //          setBpm(intent.getIntExtra(EXTRA_BPM, bpm));
                     pause();
                     play();
                     break;
@@ -195,7 +195,7 @@ public class MetronomeService extends Service {
     }
 
     public void setBpm(int bpm) {
-        this.bpm = bpm;
+        //    this.bpm = bpm;
         interval = toInterval(bpm);
         prefs.edit().putLong(PREF_INTERVAL, interval).apply();
     }

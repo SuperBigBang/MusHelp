@@ -34,7 +34,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
     private static BaseComponent sBaseComponent;
     public static boolean isBound;
     private static MetroComponent sMetroComponent;
-    public MetronomeService service;
 
     public static BaseComponent getBaseComponent() {
         return sBaseComponent;
@@ -99,7 +98,7 @@ public class ExtendApplication extends Application implements ServiceConnection 
     @Override
     public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
         MetronomeService.LocalBinder binder = (MetronomeService.LocalBinder) iBinder;
-        service = binder.getService();
+        MetronomeService service = binder.getService();
         isBound = true;
         Timber.e("service is bound: %s", isBound());
         sMetroComponent = DaggerMetroComponent.builder()

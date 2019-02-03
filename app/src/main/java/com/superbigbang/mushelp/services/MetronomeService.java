@@ -42,6 +42,7 @@ public class MetronomeService extends Service {
     public static final TickData[] ticks = new TickData[]{
             new TickData(R.string.title_beep, R.raw.beep),
             new TickData(R.string.title_wood, R.raw.tick1),
+            new TickData(R.string.title_ding, R.raw.ding),
             new TickData(R.string.title_vibrate),
     };
     private final IBinder binder = new LocalBinder();

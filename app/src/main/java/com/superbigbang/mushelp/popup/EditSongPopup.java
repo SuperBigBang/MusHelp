@@ -235,7 +235,7 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
                     else {
                         if (valueOfResultPositionEditText < 0 || valueOfResultPositionEditText >= sizeOfcurrentSetlist) {
                             Toast.makeText(getContext(), ExtendApplication.getBaseComponent().getContext().getResources().getString(R.string.SongPosNumError) + (sizeOfcurrentSetlist), Toast.LENGTH_LONG).show();
-                        } else if (valueOfResultMetronomEditText <= 0 || valueOfResultMetronomEditText > 999) {
+                        } else if (valueOfResultMetronomEditText <= 0 || valueOfResultMetronomEditText > 300) {
                             Toast.makeText(getContext(), R.string.SongMetronomNumError, Toast.LENGTH_LONG).show();
                         } else {
                             if (currentPosition > valueOfResultPositionEditText) {

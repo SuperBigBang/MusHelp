@@ -23,7 +23,7 @@ import android.support.v4.app.NotificationCompat;
 import com.superbigbang.mushelp.R;
 import com.superbigbang.mushelp.model.TickData;
 
-public class MetronomeService extends Service implements Runnable {
+public class MetronomeService extends Service {
 
     public static final String ACTION_START = "ACTION_START";
     public static final String ACTION_PAUSE = "ACTION_PAUSE";
@@ -99,8 +99,24 @@ public class MetronomeService extends Service implements Runnable {
         return START_STICKY;
     }
 
+    Runnable playMetro = new Runnable() {
+        @Override
+        public void run() {
+            if (isPlaying) {
+                if (soundId != -1) {
+                    soundPool.play(soundId, 1, 1, 1, 0, 1);
+                } else if (Build.VERSION.SDK_INT >= 26) {
+                    vibrator.vibrate(VibrationEffect.createOneShot(20, VibrationEffect.DEFAULT_AMPLITUDE));
+                } else {
+                    vibrator.vibrate(20);
+                }
+                handler.postDelayed(playMetro, interval);
+            }
+        }
+    };
+
     public void play() {
-        handler.post(this);
+        handler.post(playMetro);
         isPlaying = true;
 
         Intent intent = new Intent(this, MetronomeService.class);
@@ -125,12 +141,6 @@ public class MetronomeService extends Service implements Runnable {
                         .setPriority(NotificationCompat.PRIORITY_LOW)
                         .build()
         );
-    }
-
-    public void pause() {
-        handler.removeCallbacks(this);
-        stopForeground(true);
-        isPlaying = false;
     }
 
     public boolean isPlaying() {
@@ -166,14 +176,10 @@ public class MetronomeService extends Service implements Runnable {
 
     }
 
-    public void setTick(int tick) {
-        if (!ticks[tick].isVibration()) {
-            soundId = ticks[tick].getSoundId(this, soundPool);
-            if (!isPlaying)
-                soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f);
-        } else soundId = -1;
-
-        prefs.edit().putInt(PREF_TICK, tick).apply();
+    public void pause() {
+        handler.removeCallbacks(playMetro);
+        stopForeground(true);
+        isPlaying = false;
     }
 
     @Nullable
@@ -187,25 +193,20 @@ public class MetronomeService extends Service implements Runnable {
         return super.onUnbind(intent);
     }
 
-    @Override
-    public void onDestroy() {
-        handler.removeCallbacks(this);
-        super.onDestroy();
+    public void setTick(int tick) {
+        if (!ticks[tick].isVibration()) {
+            soundId = ticks[tick].getSoundId(this, soundPool);
+            if (!isPlaying)
+                soundPool.play(soundId, 1.0f, 1.0f, 1, 0, 1.0f);
+        } else soundId = -1;
+
+        prefs.edit().putInt(PREF_TICK, tick).apply();
     }
 
     @Override
-    public void run() {
-        if (isPlaying) {
-            handler.postDelayed(this, interval);
-
-            if (soundId != -1) {
-                soundPool.play(soundId, 1, 1, 0, 0, 1);
-            } else if (Build.VERSION.SDK_INT >= 26) {
-                vibrator.vibrate(VibrationEffect.createOneShot(20, VibrationEffect.DEFAULT_AMPLITUDE));
-            } else {
-                vibrator.vibrate(20);
-            }
-        }
+    public void onDestroy() {
+        handler.removeCallbacks(playMetro);
+        super.onDestroy();
     }
 
     public class LocalBinder extends Binder {

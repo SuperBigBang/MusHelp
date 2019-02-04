@@ -781,6 +781,9 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song1_1.setPosition(0);
         song1_1.setMetronombpm(145);
         song1_1.setAudioOn(false);
+        song1_1.setAudiofile(Environment
+                .getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC)
+                + "/Amon Amarth/Amon Amarth - One Against All [Deathcoreanstvo] (1).mp3");
         song1_1.setCountdownOn(false);
         song1_1.setLyrics(Amon_Amarth_One_Against_All_lyrics);
         song1_1.setLyricshasopen(false);
@@ -795,7 +798,7 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song1_2.setAudioOn(false);
         song1_2.setAudiofile(Environment
                 .getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC)
-                + "/Amon Amarth - We Shall Destroy (1).mp3");
+                + "/Amon Amarth/Amon Amarth - We Shall Destroy (1).mp3");
         song1_2.setCountdownOn(false);
         song1_2.setLyrics(Amon_Amarth_We_Shall_Destroy_lyrics);
         song1_2.setLyricshasopen(false);
@@ -808,6 +811,9 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song1_3.setPosition(2);
         song1_3.setMetronombpm(173);
         song1_3.setAudioOn(false);
+        song1_3.setAudiofile(Environment
+                .getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC)
+                + "/Amon Amarth/Amon Amarth-Cry Of The Black Birds Vid.mp3");
         song1_3.setCountdownOn(false);
         song1_3.setLyrics(Amon_Amarth_Cry_of_blackbirds_lyrics);
         song1_3.setLyricshasopen(false);

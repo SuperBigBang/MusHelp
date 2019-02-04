@@ -101,11 +101,9 @@ public class ExtendApplication extends Application implements ServiceConnection 
         MetronomeService.LocalBinder binder = (MetronomeService.LocalBinder) iBinder;
         MetronomeService service = binder.getService();
         isBound = true;
-        Timber.e("service is bound: %s", isBound());
         sMetroComponent = DaggerMetroComponent.builder()
                 .metronomeServiceModule(new MetronomeServiceModule(service))
                 .build();
-        Timber.e("BaseCompMetroService is not null, and named: %s", ExtendApplication.getMetroComponent().getMetronomeService());
     }
 
 

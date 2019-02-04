@@ -144,7 +144,6 @@ public class MetronomeService extends Service {
                         Timber.e("ERROR: %s", extra);
                         return false;
                     });
-                    Timber.e("Datasource: %s", audioFilePath);
                     mediaPlayer.reset();
                     mediaPlayer.setDataSource(audioFilePath);
                 } catch (IOException e) {
@@ -225,23 +224,6 @@ public class MetronomeService extends Service {
                     soundPool = soundPool0;
                 });
     }
-
-  /*  @SuppressLint("CheckResult")
-    void checkIntervals() {
-        Observable.just(0)
-                .observeOn(scheduler)
-                .subscribe((Integer value) -> {
-                    if (!start) {
-                        startTime1 = System.currentTimeMillis();
-                        start = true;
-                    } else {
-                        endTime2 = System.currentTimeMillis();
-                        long elapsedTime = endTime2 - startTime1;
-                        Timber.e("Result interval: %s", String.valueOf(elapsedTime));
-                        start = false;
-                    }
-                });
-    }*/
 
     private void releaseMP() {
         if (mediaPlayer != null) {

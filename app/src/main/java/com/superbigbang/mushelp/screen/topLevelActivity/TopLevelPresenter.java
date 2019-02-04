@@ -228,6 +228,7 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
         stopTrueOrPauseFalsePlaying(true);
         mSetlistsrealm.close();
         mSongsrealm.close();
+        ExtendApplication.getMetroComponent().getMetronomeService().stopSelf();
     }
 
     void metroSoundChangeButton() {

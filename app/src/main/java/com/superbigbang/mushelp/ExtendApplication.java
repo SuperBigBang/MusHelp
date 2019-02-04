@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.os.Environment;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
@@ -792,6 +793,9 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song1_2.setPosition(1);
         song1_2.setMetronombpm(122);
         song1_2.setAudioOn(false);
+        song1_2.setAudiofile(Environment
+                .getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC)
+                + "/Amon Amarth - We Shall Destroy (1).mp3");
         song1_2.setCountdownOn(false);
         song1_2.setLyrics(Amon_Amarth_We_Shall_Destroy_lyrics);
         song1_2.setLyricshasopen(false);

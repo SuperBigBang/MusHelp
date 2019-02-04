@@ -26,6 +26,8 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
     public static final String APP_PREFERENCES_LAST_SET_LIST_ID = "LAST_SET_LIST_ID";
     private boolean mVolumeUpIsOn_RED = false;
     private int idcurrentsetlist;
+    private boolean permissionsToFileStorageIsGranted;
+    private boolean isPaused;
 
     @Override
     protected void onFirstViewAttach() {
@@ -56,6 +58,10 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
                 mSongsrealm.commitTransaction();
             }
         }
+    }
+
+    public void setPermissionsToFileStorageIsGranted(boolean permissionsToFileStorageIsGranted) {
+        this.permissionsToFileStorageIsGranted = permissionsToFileStorageIsGranted;
     }
 
     void changeLyricsOpenOrCloseCondition(int position) {
@@ -183,23 +189,35 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
             if (functionIsStop) {
                 Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Stop playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
                 stopTrueOrPauseFalsePlaying(true);
+                editsong.setPlaystarted(false);
+                isPaused = false;
             } else {
-                Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Pause playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
-                stopTrueOrPauseFalsePlaying(false);
+                if (!isPaused) {
+                    Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Pause playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
+                    stopTrueOrPauseFalsePlaying(false);
+                    isPaused = true;
+                    editsong.setPlaystarted(false);
+                } else {
+                    Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Start playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
+                    editsong.setPlaystarted(true);
+                    startPlaying(editsong.getMetronombpm(), false, editsong.isAudioOn() ? editsong.getAudiofile() : null);
+                }
+
             }
-            editsong.setPlaystarted(false);
+
         } else {
             Songs firststoppedsong = mSongsrealm.where(Songs.class).equalTo("playstarted", true).findFirst();
             if (firststoppedsong != null) {
                 firststoppedsong.setPlaystarted(false);
                 Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Stop playing " + firststoppedsong.getTitle() + " Start playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
                 editsong.setPlaystarted(true);
-                startPlaying(editsong.getMetronombpm(), true);
+                startPlaying(editsong.getMetronombpm(), true, editsong.isAudioOn() ? editsong.getAudiofile() : null);
             } else {
                 Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Start playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
                 editsong.setPlaystarted(true);
-                startPlaying(editsong.getMetronombpm(), false);
+                startPlaying(editsong.getMetronombpm(), false, editsong.isAudioOn() ? editsong.getAudiofile() : null);
             }
+            isPaused = false;
         }
         mSongsrealm.commitTransaction();
     }
@@ -216,11 +234,20 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
         ExtendApplication.getMetroComponent().getMetronomeService().changeTickSound();
     }
 
-    private void startPlaying(int bpm, boolean stopOneStartTwo) {
+    private void startPlaying(int bpm, boolean stopOneStartTwo, String filepath) {
         if (!stopOneStartTwo) {
             if (ExtendApplication.isBound()) {
                 if (!ExtendApplication.getMetroComponent().getMetronomeService().isPlaying()) {
                     ExtendApplication.getMetroComponent().getMetronomeService().setBpm(bpm);
+                    if (filepath == null) {
+                        ExtendApplication.getMetroComponent().getMetronomeService().setFilePathOfCurrentAudio(filepath);
+                    } else if (permissionsToFileStorageIsGranted) {
+                        ExtendApplication.getMetroComponent().getMetronomeService().setFilePathOfCurrentAudio(filepath);
+                    } else {
+                        getViewState().showErrorMessages(100);
+                    }
+                    ExtendApplication.getMetroComponent().getMetronomeService().play();
+                } else {
                     ExtendApplication.getMetroComponent().getMetronomeService().play();
                 }
             }
@@ -230,6 +257,7 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
                     stopTrueOrPauseFalsePlaying(true);
                 }
                 ExtendApplication.getMetroComponent().getMetronomeService().setBpm(bpm);
+                ExtendApplication.getMetroComponent().getMetronomeService().setFilePathOfCurrentAudio(filepath);
                 ExtendApplication.getMetroComponent().getMetronomeService().play();
             }
         }
@@ -238,9 +266,7 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
     private void stopTrueOrPauseFalsePlaying(boolean stop) {
         if (stop) {
             if (ExtendApplication.isBound()) {
-                if (ExtendApplication.getMetroComponent().getMetronomeService().isPlaying()) {
-                    ExtendApplication.getMetroComponent().getMetronomeService().pause(); //Заменить на стоп в будущем!
-                }
+                ExtendApplication.getMetroComponent().getMetronomeService().stop();
             }
         } else {
             if (ExtendApplication.isBound()) {
@@ -250,5 +276,7 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
             }
         }
     }
+
+
 }
 

@@ -2,6 +2,11 @@
     package="com.superbigbang.mushelp">
 
     <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!--danger permissions-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:name=".ExtendApplication"
         android:allowBackup="true"

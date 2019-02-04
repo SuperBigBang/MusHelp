@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Binder;
 import android.os.Build;
@@ -23,12 +24,14 @@ import android.support.v4.app.NotificationCompat;
 import com.superbigbang.mushelp.R;
 import com.superbigbang.mushelp.model.TickData;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
+import timber.log.Timber;
 
 
 public class MetronomeService extends Service {
@@ -59,6 +62,14 @@ public class MetronomeService extends Service {
     private long startTime1;
     private long endTime2;*/
 
+    private AudioManager am;
+    private MediaPlayer mediaPlayer;
+    private int resumePosition;
+    private String audioFilePath;
+    private String backupAudioFilePath;
+    private boolean countdownIsOn;
+    private boolean pause;
+
     private PublishSubject<Object> stopTrigger = PublishSubject.create();
 
     private Scheduler scheduler;
@@ -81,6 +92,9 @@ public class MetronomeService extends Service {
         loadSoundPoolOnNewThreadRX();
 
         interval = prefs.getLong(PREF_INTERVAL, 500);
+
+        am = (AudioManager) getSystemService(AUDIO_SERVICE);
+        mediaPlayer = new MediaPlayer();
         //   bpm = toBpm(interval);
     }
 
@@ -90,11 +104,11 @@ public class MetronomeService extends Service {
             switch (intent.getAction()) {
                 case ACTION_START:
                     //          setBpm(intent.getIntExtra(EXTRA_BPM, bpm));
-                    pause();
+                    stop();
                     play();
                     break;
                 case ACTION_PAUSE:
-                    pause();
+                    stop();
                     break;
             }
         }
@@ -103,9 +117,14 @@ public class MetronomeService extends Service {
 
     @SuppressLint("CheckResult")
     public void playWithRX() {
-        Observable.interval(interval, TimeUnit.MILLISECONDS, scheduler)
-                .takeUntil(stopTrigger)
-                .subscribe((Long value) -> {
+        if (audioFilePath == null && backupAudioFilePath != null) {
+            audioFilePath = backupAudioFilePath;
+            backupAudioFilePath = null;
+        }
+        if (audioFilePath == null) {
+            Observable.interval(interval, TimeUnit.MILLISECONDS, scheduler)
+                    .takeUntil(stopTrigger)
+                    .subscribe((Long value) -> {
                         if (soundId != -1) {
                             soundPool.play(soundId, 1, 1, 1, 0, 1);
                             //      soundPool.play(soundId, 0, 0, 0, -1, 1);
@@ -116,7 +135,73 @@ public class MetronomeService extends Service {
                         } else {
                             vibrator.vibrate(20);
                         }
-                });
+                    });
+        } else if (!countdownIsOn) {
+            if (!isPlaying() && !audioFilePath.equals(backupAudioFilePath)) {
+                try {
+                    // Set the data source to the mediaFile location
+                    mediaPlayer.setOnErrorListener((MediaPlayer mp, int what, int extra) -> {
+                        Timber.e("ERROR: %s", extra);
+                        return false;
+                    });
+                    Timber.e("Datasource: %s", audioFilePath);
+                    mediaPlayer.reset();
+                    mediaPlayer.setDataSource(audioFilePath);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    stopSelf();
+                }
+                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                // mediaPlayer.setOnPreparedListener(mp -> playMedia());
+                try {
+                    mediaPlayer.prepare();
+                    playMedia();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            /*   catch (IllegalStateException s){
+                   s.printStackTrace();
+               }*/
+            } else {
+                resumeMedia();
+            }
+            /*   catch (IllegalStateException s){
+                   s.printStackTrace();
+               }*/
+
+        }
+    }
+
+    private void playMedia() {
+        if (!mediaPlayer.isPlaying()) {
+            mediaPlayer.start();
+
+        }
+    }
+
+    private void stopMedia() {
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mediaPlayer.stop();
+            mediaPlayer.reset();
+            backupAudioFilePath = null;
+            audioFilePath = null;
+        }
+    }
+
+    private void pauseMedia() {
+        if (mediaPlayer.isPlaying()) {
+            mediaPlayer.pause();
+            resumePosition = mediaPlayer.getCurrentPosition();
+            isPlaying = false;
+        }
+    }
+
+    private void resumeMedia() {
+        if (!mediaPlayer.isPlaying()) {
+            mediaPlayer.seekTo(resumePosition);
+            mediaPlayer.start();
+
+        }
     }
 
     @SuppressLint("CheckResult")
@@ -158,8 +243,27 @@ public class MetronomeService extends Service {
                 });
     }*/
 
+    private void releaseMP() {
+        if (mediaPlayer != null) {
+            try {
+                mediaPlayer.release();
+                mediaPlayer = null;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     private void stopWithRX() {
+        stopMedia();
         stopTrigger.onNext(false);
+    }
+
+    private void pauseWithRX() {
+        pauseMedia();
+        backupAudioFilePath = audioFilePath;
+        audioFilePath = null;
+        //stopTrigger.onNext(false);
     }
 
     public void play() {
@@ -200,6 +304,15 @@ public class MetronomeService extends Service {
         prefs.edit().putLong(PREF_INTERVAL, interval).apply();
     }
 
+    public void setFilePathOfCurrentAudio(String filePath) {
+        if (filePath != null && filePath.equals(backupAudioFilePath)) {
+            audioFilePath = filePath;
+        } else {
+            audioFilePath = filePath;
+            backupAudioFilePath = null;
+        }
+    }
+
     public void changeTickSound() {
         if (tick + 1 == ticks.length) {
             tick = 0;
@@ -211,9 +324,22 @@ public class MetronomeService extends Service {
     }
 
     public void pause() {
+        if (audioFilePath != null) {
+            pauseWithRX();
+            stopForeground(true);
+
+            //    isPlaying=false;
+        } else {
+            stop();
+        }
+    }
+
+    public void stop() {
         stopWithRX();
         stopForeground(true);
         isPlaying = false;
+        audioFilePath = null;
+        backupAudioFilePath = null;
     }
 
     @Nullable
@@ -239,6 +365,8 @@ public class MetronomeService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        soundPool.release();
+        releaseMP();
     }
 
     @Override

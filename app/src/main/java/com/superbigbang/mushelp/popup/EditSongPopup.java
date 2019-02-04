@@ -386,7 +386,7 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
 
     private boolean insertingPathForAudioFile() {
         Toast.makeText(getContext(), "В разработке: установка пути к аудиофайлу", Toast.LENGTH_LONG).show();
-        currentAudioFile = "R://some audio path for TESTING";  //изменить в последующих этапах разработки
-        return true; //for initial testing, every try is successfully;
+        // currentAudioFile = "R://some audio path for TESTING";  //изменить в последующих этапах разработки
+        return currentAudioFile != null; //for initial testing
     }
 }

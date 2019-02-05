@@ -1,6 +1,6 @@
 package com.superbigbang.mushelp.screen.topLevelActivity;
 
-import android.widget.Toast;
+import android.os.Build;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -28,6 +28,10 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
     private int idcurrentsetlist;
     private boolean permissionsToFileStorageIsGranted;
     private boolean isPaused;
+    public static float[] speedRates = new float[]{
+            1f, 0.95f, 0.90f, 0.85f, 0.80f, 0.75f, 1.05f
+    };
+    private int currentSpeed = 0;
 
     @Override
     protected void onFirstViewAttach() {
@@ -187,18 +191,19 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
                 .where().equalTo("position", position).findFirst();
         if (editsong.isPlaystarted()) {
             if (functionIsStop) {
-                Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Stop playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
+                //     Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Stop playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
+                currentSpeed = 0;
                 stopTrueOrPauseFalsePlaying(true);
                 editsong.setPlaystarted(false);
                 isPaused = false;
             } else {
                 if (!isPaused) {
-                    Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Pause playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
+                    //        Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Pause playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
                     stopTrueOrPauseFalsePlaying(false);
                     isPaused = true;
                     editsong.setPlaystarted(false);
                 } else {
-                    Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Start playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
+                    //       Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Start playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
                     editsong.setPlaystarted(true);
                     startPlaying(editsong.getMetronombpm(), false, editsong.isAudioOn() ? editsong.getAudiofile() : null);
                 }
@@ -209,11 +214,12 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
             Songs firststoppedsong = mSongsrealm.where(Songs.class).equalTo("playstarted", true).findFirst();
             if (firststoppedsong != null) {
                 firststoppedsong.setPlaystarted(false);
-                Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Stop playing " + firststoppedsong.getTitle() + " Start playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
+                //     Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Stop playing " + firststoppedsong.getTitle() + " Start playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
+                currentSpeed = 0;
                 editsong.setPlaystarted(true);
                 startPlaying(editsong.getMetronombpm(), true, editsong.isAudioOn() ? editsong.getAudiofile() : null);
             } else {
-                Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Start playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
+                //    Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Start playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
                 editsong.setPlaystarted(true);
                 startPlaying(editsong.getMetronombpm(), false, editsong.isAudioOn() ? editsong.getAudiofile() : null);
             }
@@ -278,6 +284,31 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
         }
     }
 
+    public void changeRate(boolean toDefault) {
+        if (ExtendApplication.getMetroComponent().getMetronomeService().mediaPlayerIsPlay()) {
+            if (toDefault) {
+                sendChangeRateToService(speedRates[0]);
+            } else {
+                if (currentSpeed + 1 == speedRates.length) {
+                    currentSpeed = 0;
+                    sendChangeRateToService(speedRates[currentSpeed]);
+                } else {
+                    currentSpeed++;
+                    sendChangeRateToService(speedRates[currentSpeed]);
+                }
+            }
+        } else {
+            getViewState().showErrorMessages(102);
+        }
+    }
 
+    private void sendChangeRateToService(float speed) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            ExtendApplication.getMetroComponent().getMetronomeService().changeRate(speed);
+            getViewState().showMessage(200, String.valueOf(speed));
+        } else {
+            getViewState().showErrorMessages(101);
+        }
+    }
 }
 

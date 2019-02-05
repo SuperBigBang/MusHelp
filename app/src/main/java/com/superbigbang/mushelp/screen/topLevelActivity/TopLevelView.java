@@ -20,6 +20,8 @@ public interface TopLevelView extends MvpView {
 
     void showErrorMessages(int errorID);
 
+    void showMessage(int messageId, String additionalText);
+
     @StateStrategyType(SingleStateStrategy.class)
     void showDeletePopup(String songname, int currentposition, int currentSetList);
 

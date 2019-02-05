@@ -19,6 +19,7 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 
 import com.superbigbang.mushelp.R;
@@ -58,6 +59,7 @@ public class MetronomeService extends Service {
     private Vibrator vibrator;
     private int tick;
 
+
    /* private boolean start;
     private long startTime1;
     private long endTime2;*/
@@ -69,6 +71,7 @@ public class MetronomeService extends Service {
     private String backupAudioFilePath;
     private boolean countdownIsOn;
     private boolean pause;
+    private float currentRate = 1f;
 
     private PublishSubject<Object> stopTrigger = PublishSubject.create();
 
@@ -171,10 +174,20 @@ public class MetronomeService extends Service {
         }
     }
 
+    public boolean mediaPlayerIsPlay() {
+        return mediaPlayer.isPlaying();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void changeRate(float speedRate) {
+        if (mediaPlayer.isPlaying()) {
+            mediaPlayer.setPlaybackParams(mediaPlayer.getPlaybackParams().setSpeed(speedRate));
+        }
+    }
+
     private void playMedia() {
         if (!mediaPlayer.isPlaying()) {
             mediaPlayer.start();
-
         }
     }
 

@@ -72,6 +72,7 @@ public class MetronomeService extends Service {
     private boolean countdownIsOn;
     private boolean pause;
     private float currentRate = 1f;
+    private int countdownNum = 8;
 
     private PublishSubject<Object> stopTrigger = PublishSubject.create();
 
@@ -140,38 +141,60 @@ public class MetronomeService extends Service {
                         }
                     });
         } else if (!countdownIsOn) {
-            if (!isPlaying() && !audioFilePath.equals(backupAudioFilePath)) {
-                try {
-                    // Set the data source to the mediaFile location
-                    mediaPlayer.setOnErrorListener((MediaPlayer mp, int what, int extra) -> {
-                        Timber.e("ERROR: %s", extra);
-                        return false;
+            prepareAndStartOrResumePlayback();
+        } else {
+            Observable.interval(interval, TimeUnit.MILLISECONDS, scheduler)
+                    .takeUntil(stopTrigger)
+                    .subscribe((Long value) -> {
+                        if (countdownNum != 0) {
+                            if (soundId != -1) {
+                                soundPool.play(soundId, 1, 1, 1, 0, 1);
+                                //      soundPool.play(soundId, 0, 0, 0, -1, 1);
+                                //Timber.e("Setted interval: %s", String.valueOf(interval));
+                                //  checkIntervals();
+                            } else if (Build.VERSION.SDK_INT >= 26) {
+                                vibrator.vibrate(VibrationEffect.createOneShot(20, VibrationEffect.DEFAULT_AMPLITUDE));
+                            } else {
+                                vibrator.vibrate(20);
+                            }
+                            countdownNum--;
+                        } else {
+                            countdownNum = 8;
+                            stopTrigger.onNext(false);
+                            isPlaying = false;
+                            prepareAndStartOrResumePlayback();
+                        }
                     });
-                    mediaPlayer.reset();
-                    mediaPlayer.setDataSource(audioFilePath);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    stopSelf();
-                }
-                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                // mediaPlayer.setOnPreparedListener(mp -> playMedia());
-                try {
-                    mediaPlayer.prepare();
-                    playMedia();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            /*   catch (IllegalStateException s){
-                   s.printStackTrace();
-               }*/
-            } else {
-                resumeMedia();
-            }
-            /*   catch (IllegalStateException s){
-                   s.printStackTrace();
-               }*/
-
         }
+    }
+
+    private void prepareAndStartOrResumePlayback() {
+        if (!isPlaying() && !audioFilePath.equals(backupAudioFilePath)) {
+            try {
+                // Set the data source to the mediaFile location
+                mediaPlayer.setOnErrorListener((MediaPlayer mp, int what, int extra) -> {
+                    Timber.e("ERROR: %s", extra);
+                    return false;
+                });
+                mediaPlayer.reset();
+                mediaPlayer.setDataSource(audioFilePath);
+            } catch (IOException e) {
+                e.printStackTrace();
+                stopSelf();
+            }
+            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            try {
+                mediaPlayer.prepare();
+                playMedia();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            isPlaying = true;
+        } else {
+            resumeMedia();
+            isPlaying = true;
+        }
+
     }
 
     public boolean mediaPlayerIsPlay() {
@@ -252,13 +275,15 @@ public class MetronomeService extends Service {
     private void stopWithRX() {
         stopMedia();
         stopTrigger.onNext(false);
+        countdownNum = 8;
     }
 
     private void pauseWithRX() {
         pauseMedia();
         backupAudioFilePath = audioFilePath;
         audioFilePath = null;
-        //stopTrigger.onNext(false);
+        stopTrigger.onNext(false);
+        countdownNum = 8;
     }
 
     public void play() {
@@ -335,6 +360,10 @@ public class MetronomeService extends Service {
         isPlaying = false;
         audioFilePath = null;
         backupAudioFilePath = null;
+    }
+
+    public void setCountdownIsOn(boolean countdownIsOn) {
+        this.countdownIsOn = countdownIsOn;
     }
 
     @Nullable

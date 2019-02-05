@@ -236,13 +236,13 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
 
     private boolean checkAndRequestPermissions() {
         if (SDK_INT >= Build.VERSION_CODES.M) {
-            int permissionReadPhoneState = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
+            //   int permissionReadPhoneState = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
             int permissionStorage = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
             List<String> listPermissionsNeeded = new ArrayList<>();
 
-            if (permissionReadPhoneState != PackageManager.PERMISSION_GRANTED) {
+        /*    if (permissionReadPhoneState != PackageManager.PERMISSION_GRANTED) {
                 listPermissionsNeeded.add(Manifest.permission.READ_PHONE_STATE);
-            }
+            }*/
 
             if (permissionStorage != PackageManager.PERMISSION_GRANTED) {
                 listPermissionsNeeded.add(Manifest.permission.READ_EXTERNAL_STORAGE);
@@ -268,7 +268,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
 
                 Map<String, Integer> perms = new HashMap<>();
                 // Initialize the map with both permissions
-                perms.put(Manifest.permission.READ_PHONE_STATE, PackageManager.PERMISSION_GRANTED);
+                /*    perms.put(Manifest.permission.READ_PHONE_STATE, PackageManager.PERMISSION_GRANTED);*/
                 perms.put(Manifest.permission.READ_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
                 // Fill with actual results from user
                 if (grantResults.length > 0) {
@@ -276,10 +276,12 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
                         perms.put(permissions[i], grantResults[i]);
                     // Check for both permissions
 
-                    if (perms.get(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED
+                  /*  if (perms.get(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED
                             && perms.get(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
-                    ) {
-                        Timber.d("Phone state and storage permissions granted");
+                    )*/
+                    if (perms.get(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                        /*     Timber.d("Phone state and storage permissions granted");*/
+                        Timber.d("Storage permissions granted");
                         // process the normal flow
                         //else any one or both the permissions are not granted
                         mTopLevelPresenter.setPermissionsToFileStorageIsGranted(true);
@@ -288,8 +290,10 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
                         //permission is denied (this is the first time, when "never ask again" is not checked) so ask again explaining the usage of permission
 //                      //shouldShowRequestPermissionRationale will return true
                         //show the dialog or snackbar saying its necessary and try again otherwise proceed with setup.
-                        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE) ||
-                                ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_PHONE_STATE)) {
+                     /*   if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE) ||
+                                ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_PHONE_STATE))
+                        */
+                        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
                             showDialogOK(
                                     (dialog, which) -> {
                                         switch (which) {

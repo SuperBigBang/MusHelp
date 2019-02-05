@@ -33,41 +33,35 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation deps.support.appCompat
     implementation deps.support.constraintLayout
     implementation deps.support.design
     implementation deps.support.cardview
     implementation deps.support.recyclerView
-
     implementation deps.timber
     implementation deps.picasso
     implementation deps.eventbus
     implementation deps.baseRecyclerViewAdapterHelper
     implementation deps.dialogplus
-
     implementation deps.room.runtime
     annotationProcessor deps.room.compiler
-
     implementation deps.rx.core
     implementation deps.rx.android
-
     implementation deps.butterknife.core
     annotationProcessor deps.butterknife.compiler
-
     implementation deps.dagger2.core
     annotationProcessor deps.dagger2.compiler
-
     implementation deps.moxy.core
     implementation deps.moxy.compat
     annotationProcessor deps.moxy.compiler
-
     testImplementation deps.junit
     androidTestImplementation deps.testRunner
     androidTestImplementation deps.testRules
     androidTestImplementation(deps.espresso.core) {
         exclude group: 'com.google.code.findbugs'
     }
-    implementation 'com.google.android.gms:play-services-ads:17.1.2'
+    implementation 'com.google.android.gms:play-services-ads:17.1.3'
     implementation 'com.github.razerdp:BasePopup:2.0.9'
+    implementation 'com.obsez.android.lib.filechooser:filechooser:1.1.14'
 }

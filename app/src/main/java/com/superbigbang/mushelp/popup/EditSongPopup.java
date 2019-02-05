@@ -4,8 +4,8 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.os.Environment;
 import android.support.v7.widget.SwitchCompat;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.Button;
@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.obsez.android.lib.filechooser.ChooserDialog;
 import com.superbigbang.mushelp.ExtendApplication;
 import com.superbigbang.mushelp.R;
 import com.superbigbang.mushelp.model.Songs;
@@ -21,7 +22,6 @@ import com.superbigbang.mushelp.screen.topLevelActivity.TopLevelPresenter;
 
 import io.realm.RealmResults;
 import razerdp.basepopup.BasePopupWindow;
-import timber.log.Timber;
 
 public class EditSongPopup extends BasePopupWindow implements View.OnClickListener, View.OnLongClickListener, CompoundButton.OnCheckedChangeListener {
     private Button mCancelButton;
@@ -65,8 +65,7 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
         currentPosition = position;
         currentAudioFile = audioFile;
         actionIsAddNewSong = actionIsAddNewSongg;
-        Timber.e("on launch popupw currentaudiofile: " + currentAudioFile);
-
+        //Timber.e("on launch popupw currentaudiofile: " + currentAudioFile);
 
         this.mTopLevelPresenter = mTopLevelPresenter;
         setBlurBackgroundEnable(true);
@@ -354,7 +353,7 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
     public boolean onLongClick(View v) {
         if (v.getId() == R.id.btn_e_clearLyricsOrClearPathToAudioFile) {
             currentAudioFile = null;
-            Toast.makeText(getContext(), "Путь к аудиофайлу удалён", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), getContext().getText(R.string.delete_audio_file_path), Toast.LENGTH_LONG).show();
         }
         return false;
     }
@@ -371,22 +370,31 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
         switch (buttonView.getId()) {
             case R.id.edit_audioOrMetronom_switch:
                 if (isChecked && currentAudioFile != null) {
-                    Timber.e("Audio is ON, audiofile not null");
+                    //             Timber.e("Audio is ON, audiofile not null");
                 } else if (isChecked) {
                     if (insertingPathForAudioFile()) {
-                        Timber.e("Audio is ON, audiofile included");
+                        //                Timber.e("Audio is ON, audiofile included");
                     } else mAudioOrMetronomSwitch.setChecked(false);
                 }
                 break;
             case R.id.edit_beforeAudioCountdown_switch2:
-                Log.i("switch_compat2", isChecked + "");
+                //         Timber.i("%s", isChecked);
                 break;
         }
     }
 
     private boolean insertingPathForAudioFile() {
-        Toast.makeText(getContext(), "В разработке: установка пути к аудиофайлу", Toast.LENGTH_LONG).show();
-        // currentAudioFile = "R://some audio path for TESTING";  //изменить в последующих этапах разработки
-        return currentAudioFile != null; //for initial testing
+        Toast.makeText(getContext(), getContext().getText(R.string.add_audio_file), Toast.LENGTH_SHORT).show();
+        new ChooserDialog().with(EditSongPopup.this.getContext())
+                .withStartFile(Environment
+                        .getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).getPath())
+                .withRowLayoutView(R.layout.li_row_textview)
+                .withChosenListener((path, pathFile) -> {
+                    currentAudioFile = path;
+                    Toast.makeText(ExtendApplication.getBaseComponent().getContext(), getContext().getText(R.string.add_audio_file_ok) + pathFile.getName(), Toast.LENGTH_SHORT).show();
+                })
+                .build()
+                .show();
+        return currentAudioFile != null;
     }
 }

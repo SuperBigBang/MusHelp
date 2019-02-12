@@ -337,9 +337,6 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
             case 101:
                 Toast.makeText(this, getText(R.string.rate_change_feature_error), Toast.LENGTH_LONG).show();
                 break;
-            case 102:
-                Toast.makeText(this, getText(R.string.rate_change_feature_error_off), Toast.LENGTH_LONG).show();
-                break;
         }
     }
 

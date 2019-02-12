@@ -205,12 +205,17 @@ public class MetronomeService extends Service {
     public void changeRate(float speedRate) {
         if (mediaPlayer.isPlaying()) {
             mediaPlayer.setPlaybackParams(mediaPlayer.getPlaybackParams().setSpeed(speedRate));
+            currentRate = speedRate;
+        } else {
+            currentRate = speedRate;
         }
     }
 
     private void playMedia() {
         if (!mediaPlayer.isPlaying()) {
-            mediaPlayer.start();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                mediaPlayer.setPlaybackParams(mediaPlayer.getPlaybackParams().setSpeed(currentRate));
+            } else mediaPlayer.start();
         }
     }
 
@@ -234,8 +239,9 @@ public class MetronomeService extends Service {
     private void resumeMedia() {
         if (!mediaPlayer.isPlaying()) {
             mediaPlayer.seekTo(resumePosition);
-            mediaPlayer.start();
-
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                mediaPlayer.setPlaybackParams(mediaPlayer.getPlaybackParams().setSpeed(currentRate));
+            } else mediaPlayer.start();
         }
     }
 

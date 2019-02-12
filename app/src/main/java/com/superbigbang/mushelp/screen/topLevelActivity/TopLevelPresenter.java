@@ -288,7 +288,6 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
     }
 
     public void changeRate(boolean toDefault) {
-        if (ExtendApplication.getMetroComponent().getMetronomeService().mediaPlayerIsPlay()) {
             if (toDefault) {
                 sendChangeRateToService(speedRates[0]);
             } else {
@@ -300,9 +299,6 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
                     sendChangeRateToService(speedRates[currentSpeed]);
                 }
             }
-        } else {
-            getViewState().showErrorMessages(102);
-        }
     }
 
     private void sendChangeRateToService(float speed) {

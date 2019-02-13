@@ -5,14 +5,13 @@ import android.graphics.Color;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.provider.BaseItemProvider;
 import com.superbigbang.mushelp.R;
-import com.superbigbang.mushelp.adapter.DemoMultipleItemRvAdapter;
 import com.superbigbang.mushelp.model.SetList;
 
 public class SetListItemProvider extends BaseItemProvider<SetList, BaseViewHolder> {
 
     @Override
     public int viewType() {
-        return DemoMultipleItemRvAdapter.TYPE_SET_LISTS;
+        return 100;
     }
 
     @Override

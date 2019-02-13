@@ -32,7 +32,6 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
     private EditText mEditTextTempMetronom;
     private EditText mEditTextLyrics;
     private SwitchCompat mAudioOrMetronomSwitch;
-    private SwitchCompat mBeforeAudioCountdownSwitch;
     private int currentSetListID;
     private int currentPosition;
     private String currentAudioFile;
@@ -41,7 +40,7 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
 
     private TopLevelPresenter mTopLevelPresenter;
 
-    public EditSongPopup(Context context, String SongName, int position, int currentSetList, boolean audioIsOn, boolean countDownIsOn, String audioFile, String lyrics, TopLevelPresenter mTopLevelPresenter, int tempBpm, boolean actionIsAddNewSongg) {
+    public EditSongPopup(Context context, String SongName, int position, int currentSetList, boolean audioIsOn, String audioFile, String lyrics, TopLevelPresenter mTopLevelPresenter, int tempBpm, boolean actionIsAddNewSongg) {
         super(context);
         mCancelButton = findViewById(R.id.btn_e_cancel2);
         mSaveButton = findViewById(R.id.btn_e_Save2);
@@ -51,15 +50,12 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
         mEditTextTempMetronom = findViewById(R.id.editMetronomBPM);
         mEditTextLyrics = findViewById(R.id.editSongLyrics);
         mAudioOrMetronomSwitch = findViewById(R.id.edit_audioOrMetronom_switch);
-        mBeforeAudioCountdownSwitch = findViewById(R.id.edit_beforeAudioCountdown_switch2);
         mAudioOrMetronomSwitch.setSwitchPadding(40);
-        mBeforeAudioCountdownSwitch.setSwitchPadding(40);
         mEditTextPosition.setText(String.valueOf(position + 1));
         mEditTextSongName.setText(SongName);
         mEditTextTempMetronom.setText(String.valueOf(tempBpm));
         mEditTextLyrics.setText(lyrics);
         mAudioOrMetronomSwitch.setChecked(audioIsOn);
-        mBeforeAudioCountdownSwitch.setChecked(countDownIsOn);
         mClearFileAndLyricsButton.setImageResource(R.drawable.baseline_delete_sweep_white_48);
         currentSetListID = currentSetList;
         currentPosition = position;
@@ -87,7 +83,6 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
         mSaveButton.setOnClickListener(this);
         mClearFileAndLyricsButton.setOnClickListener(this);
         mClearFileAndLyricsButton.setOnLongClickListener(this);
-        mBeforeAudioCountdownSwitch.setOnCheckedChangeListener(this);
         mAudioOrMetronomSwitch.setOnCheckedChangeListener(this);
     }
 
@@ -175,7 +170,6 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
                                 newSong.setPosition(valueOfResultPositionEditText);
                                 newSong.setMetronombpm(valueOfResultMetronomEditText);
                                 newSong.setAudioOn(mAudioOrMetronomSwitch.isChecked());
-                                newSong.setCountdownOn(mBeforeAudioCountdownSwitch.isChecked());
                                 newSong.setLyrics(resultLyrics);
                                 newSong.setLyricshasopen(false);
                                 newSong.setPlaystarted(false);
@@ -219,7 +213,6 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
                                 newSong.setPosition(valueOfResultPositionEditText);
                                 newSong.setMetronombpm(valueOfResultMetronomEditText);
                                 newSong.setAudioOn(mAudioOrMetronomSwitch.isChecked());
-                                newSong.setCountdownOn(mBeforeAudioCountdownSwitch.isChecked());
                                 newSong.setLyrics(resultLyrics);
                                 newSong.setLyricshasopen(false);
                                 newSong.setPlaystarted(false);
@@ -257,7 +250,6 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
                                         editedSong.setMetronombpm(valueOfResultMetronomEditText);
                                         editedSong.setAudioOn(mAudioOrMetronomSwitch.isChecked());
                                         editedSong.setAudiofile(currentAudioFile);
-                                        editedSong.setCountdownOn(mBeforeAudioCountdownSwitch.isChecked());
                                         editedSong.setLyrics(resultLyrics);
                                         firstSong = songsNoAutoSorting.where().equalTo("position", valueOfResultPositionEditText).findFirst();
                                         countposition1 = firstSong.getPosition();
@@ -297,7 +289,6 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
                                         editedSong.setMetronombpm(valueOfResultMetronomEditText);
                                         editedSong.setAudioOn(mAudioOrMetronomSwitch.isChecked());
                                         editedSong.setAudiofile(currentAudioFile);
-                                        editedSong.setCountdownOn(mBeforeAudioCountdownSwitch.isChecked());
                                         editedSong.setLyrics(resultLyrics);
                                         firstSong = songsNoAutoSorting2.where().equalTo("position", valueOfResultPositionEditText).findFirst();
                                         countposition1 = firstSong.getPosition();
@@ -331,7 +322,6 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
                                 song.setMetronombpm(valueOfResultMetronomEditText);
                                 song.setAudioOn(mAudioOrMetronomSwitch.isChecked());
                                 song.setAudiofile(currentAudioFile);
-                                song.setCountdownOn(mBeforeAudioCountdownSwitch.isChecked());
                                 song.setLyrics(resultLyrics);
                                 mTopLevelPresenter.mSongsrealm.commitTransaction();
                             }
@@ -376,9 +366,6 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
                         //                Timber.e("Audio is ON, audiofile included");
                     } else mAudioOrMetronomSwitch.setChecked(false);
                 }
-                break;
-            case R.id.edit_beforeAudioCountdown_switch2:
-                //         Timber.i("%s", isChecked);
                 break;
         }
     }

@@ -6,14 +6,13 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.provider.BaseItemProvider;
 import com.superbigbang.mushelp.ExtendApplication;
 import com.superbigbang.mushelp.R;
-import com.superbigbang.mushelp.adapter.DemoMultipleItemRvAdapter;
 import com.superbigbang.mushelp.model.Songs;
 
 public class SongsListItemProvider extends BaseItemProvider<Songs, BaseViewHolder> {
 
     @Override
     public int viewType() {
-        return DemoMultipleItemRvAdapter.TYPE_SONGS_LIST;
+        return 400;
     }
 
     @Override

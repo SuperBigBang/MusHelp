@@ -9,11 +9,8 @@ import com.google.android.gms.ads.AdRequest;
 import com.superbigbang.mushelp.ExtendApplication;
 import com.superbigbang.mushelp.adapter.SetListItemRvAdapter;
 import com.superbigbang.mushelp.adapter.SongsItemRvAdapter;
-import com.superbigbang.mushelp.model.NormalMultipleEntity;
 import com.superbigbang.mushelp.model.SetList;
 import com.superbigbang.mushelp.model.Songs;
-
-import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -23,10 +20,6 @@ import io.realm.RealmConfiguration;
 public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
     public Realm mSetlistsrealm;
     public Realm mSongsrealm;
-    private List<NormalMultipleEntity> mDataSongList;
-    public static final String APP_PREFERENCES_LAST_SET_LIST_ID = "LAST_SET_LIST_ID";
-    private boolean mVolumeUpIsOn_RED = false;
-    private int idcurrentsetlist;
     private boolean permissionsToFileStorageIsGranted;
     private boolean isPaused;
     public static float[] speedRates = new float[]{
@@ -159,7 +152,6 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
                     editsong.getPosition(),
                     editsong.getSetlistid(),
                     editsong.isAudioOn(),
-                    editsong.isCountdownOn(),
                     editsong.getAudiofile(),
                     editsong.getLyrics(),
                     editsong.getMetronombpm(),
@@ -168,31 +160,10 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
                 0,
                 mSetlistsrealm.where(SetList.class).equalTo("isOpen", true).findFirst().getId(),
                 false,
-                false,
                 null,
                 "",
                 0,
                 true);
-    }
-
-    public void showVolumeUpPopup() {
-        if (!mVolumeUpIsOn_RED) getViewState().showVolumeUpPopup();
-        else changeVolumeUpButtonState();
-    }
-
-    public void changeVolumeUpButtonState() {
-        //On is Blue (false), Off is Red (true)
-        if (!mVolumeUpIsOn_RED) {
-            mVolumeUpIsOn_RED = true;
-            getViewState().setVolumeUpButtonState(mVolumeUpIsOn_RED);
-        } else {
-            mVolumeUpIsOn_RED = false;
-            getViewState().setVolumeUpButtonState(mVolumeUpIsOn_RED);
-        }
-    }
-
-    void setVolumeUpButtonState() {
-        getViewState().setVolumeUpButtonState(mVolumeUpIsOn_RED);
     }
 
     void playButtonIsClicked(int position, boolean functionIsStop) {
@@ -200,41 +171,41 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
         Songs editsong = mSongsrealm.where(Songs.class).equalTo("setlistid", mSetlistsrealm.where(SetList.class).equalTo("isOpen", true).findFirst().getId())
                 .findAll()
                 .where().equalTo("position", position).findFirst();
-        if (editsong.isPlaystarted()) {
-            if (functionIsStop) {
-                //     Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Stop playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
-                currentSpeed = 0;
-                stopTrueOrPauseFalsePlaying(true);
-                editsong.setPlaystarted(false);
-                isPaused = false;
-            } else {
-                if (!isPaused) {
-                    //        Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Pause playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
-                    stopTrueOrPauseFalsePlaying(false);
-                    isPaused = true;
+        if (editsong != null) {
+            if (editsong.isPlaystarted()) {
+                if (functionIsStop) {
+                    //     Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Stop playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
+                    currentSpeed = 0;
+                    stopTrueOrPauseFalsePlaying(true);
                     editsong.setPlaystarted(false);
+                    isPaused = false;
                 } else {
-                    //       Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Start playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
+                    if (!isPaused) {
+                        //        Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Pause playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
+                        stopTrueOrPauseFalsePlaying(false);
+                        isPaused = true;
+                        editsong.setPlaystarted(false);
+                    } else {
+                        //       Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Start playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
+                        editsong.setPlaystarted(true);
+                        startPlaying(editsong.getMetronombpm(), false, editsong.isAudioOn() ? editsong.getAudiofile() : null, countDownIsOn);
+                    }
+                }
+            } else {
+                Songs firststoppedsong = mSongsrealm.where(Songs.class).equalTo("playstarted", true).findFirst();
+                if (firststoppedsong != null) {
+                    firststoppedsong.setPlaystarted(false);
+                    //     Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Stop playing " + firststoppedsong.getTitle() + " Start playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
+                    currentSpeed = 0;
+                    editsong.setPlaystarted(true);
+                    startPlaying(editsong.getMetronombpm(), true, editsong.isAudioOn() ? editsong.getAudiofile() : null, countDownIsOn);
+                } else {
+                    //    Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Start playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
                     editsong.setPlaystarted(true);
                     startPlaying(editsong.getMetronombpm(), false, editsong.isAudioOn() ? editsong.getAudiofile() : null, countDownIsOn);
                 }
-
+                isPaused = false;
             }
-
-        } else {
-            Songs firststoppedsong = mSongsrealm.where(Songs.class).equalTo("playstarted", true).findFirst();
-            if (firststoppedsong != null) {
-                firststoppedsong.setPlaystarted(false);
-                //     Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Stop playing " + firststoppedsong.getTitle() + " Start playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
-                currentSpeed = 0;
-                editsong.setPlaystarted(true);
-                startPlaying(editsong.getMetronombpm(), true, editsong.isAudioOn() ? editsong.getAudiofile() : null, countDownIsOn);
-            } else {
-                //    Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Start playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
-                editsong.setPlaystarted(true);
-                startPlaying(editsong.getMetronombpm(), false, editsong.isAudioOn() ? editsong.getAudiofile() : null, countDownIsOn);
-            }
-            isPaused = false;
         }
         mSongsrealm.commitTransaction();
     }
@@ -331,7 +302,5 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
     void sendSeekBarOperationsToService(SeekBar seekBar) {
         ExtendApplication.getMetroComponent().getMetronomeService().setmSeekBar(seekBar);
     }
-
-
 }
 

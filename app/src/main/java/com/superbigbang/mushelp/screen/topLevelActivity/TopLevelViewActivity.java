@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -29,7 +28,6 @@ import com.superbigbang.mushelp.popup.BuyPopup;
 import com.superbigbang.mushelp.popup.DeleteSongPopup;
 import com.superbigbang.mushelp.popup.EditSetListPopup;
 import com.superbigbang.mushelp.popup.EditSongPopup;
-import com.superbigbang.mushelp.popup.VolumeUpPopup;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -98,7 +96,6 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         mRecyclerSongsList.setLayoutManager(managerSongsList);
         mTopLevelPresenter.showSongsLists();
 
-        mTopLevelPresenter.setVolumeUpButtonState();
         mTopLevelPresenter.changeRateChangeButtonState();
         mTopLevelPresenter.setCountDownButtonState();
 
@@ -135,8 +132,8 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     }
 
     @Override
-    public void showSongEditPopup(String SongName, int position, int currentSetList, boolean audioIsOn, boolean countdownIsOn, String audioFile, String lyrics, int tempBpm, boolean actionIsAddNewSong) {
-        new EditSongPopup(this, SongName, position, currentSetList, audioIsOn, countdownIsOn, audioFile, lyrics, mTopLevelPresenter, tempBpm, actionIsAddNewSong).showPopupWindow();
+    public void showSongEditPopup(String SongName, int position, int currentSetList, boolean audioIsOn, String audioFile, String lyrics, int tempBpm, boolean actionIsAddNewSong) {
+        new EditSongPopup(this, SongName, position, currentSetList, audioIsOn, audioFile, lyrics, mTopLevelPresenter, tempBpm, actionIsAddNewSong).showPopupWindow();
     }
 
     @Override
@@ -248,24 +245,8 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     }
 
     @Override
-    public void showVolumeUpPopup() {
-        new VolumeUpPopup(this, mTopLevelPresenter).showPopupWindow();
-    }
-
-    @Override
     public void showBuyPopup() {
         new BuyPopup(this, mTopLevelPresenter).showPopupWindow();
-    }
-
-    @Override
-    public void setVolumeUpButtonState(boolean VolumeUpChangeToOFF) {
-        if (VolumeUpChangeToOFF) {
-            countdownChangeButton.getDrawable().setColorFilter(
-                    getResources().getColor(R.color.VolumeButtonIsOn),
-                    PorterDuff.Mode.SRC_ATOP);
-        } else {
-            countdownChangeButton.getDrawable().clearColorFilter();
-        }
     }
 
     private boolean checkAndRequestPermissions() {
@@ -351,14 +332,13 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
                 }
             }
         }
-
     }
 
     private void showDialogOK(DialogInterface.OnClickListener okListener) {
         new AlertDialog.Builder(this)
-                .setMessage("Phone state and storage permissions required for this app")
-                .setPositiveButton("OK", okListener)
-                .setNegativeButton("Cancel", okListener)
+                .setMessage(getString(R.string.alert_window_message))
+                .setPositiveButton(getString(R.string.alert_window_positive_button), okListener)
+                .setNegativeButton(getString(R.string.alert_window_negative_button), okListener)
                 .create()
                 .show();
     }

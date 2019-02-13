@@ -318,11 +318,9 @@ public class MetronomeService extends Service {
                 mediaPlayer.setPlaybackParams(mediaPlayer.getPlaybackParams().setSpeed(currentRate));
             } else mediaPlayer.start();
             initializeSeekBar();
-            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mp) {
-                    stop();
-                }
+            mediaPlayer.setOnCompletionListener(mp -> {
+                stop();
+                mSeekBar.setVisibility(View.GONE);
             });
         }
     }

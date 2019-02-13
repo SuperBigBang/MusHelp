@@ -20,6 +20,9 @@
     <string name="title_vibrate">Vibrate</string>
     <string name="add_audio_file_ok">Добавление аудио:\u0020</string>
     <string name="add_audio_file">Выберите аудиофайл</string>
+    <string name="alert_window_positive_button">Принять</string>
+    <string name="alert_window_negative_button">Отмена</string>
+    <string name="alert_window_message">Для этого приложения необходимо разрешение на доступ к хранилищу(аудиофайлов)</string>
     <string name="delete_audio_file_path">Путь к аудиофайлу удалён</string>
     <string name="notification_title">MusHelp работает…</string>
     <string name="notification_desc">Нажмите для экстренной остановки.</string>

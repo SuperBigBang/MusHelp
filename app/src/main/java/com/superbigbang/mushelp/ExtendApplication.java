@@ -608,7 +608,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song1.setPosition(0);
         song1.setMetronombpm(145);
         song1.setAudioOn(false);
-        song1.setCountdownOn(false);
         song1.setLyrics("Текст песни Предатель");
         song1.setLyricshasopen(false);
         song1.setPlaystarted(false);
@@ -620,7 +619,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song2.setPosition(1);
         song2.setMetronombpm(115);
         song2.setAudioOn(false);
-        song2.setCountdownOn(false);
         song2.setLyrics("Текст песни Проклятая жизнь");
         song2.setLyricshasopen(false);
         song2.setPlaystarted(false);
@@ -632,7 +630,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song3.setPosition(2);
         song3.setMetronombpm(130);
         song3.setAudioOn(false);
-        song3.setCountdownOn(false);
         song3.setLyrics("Текст песни Война");
         song3.setLyricshasopen(false);
         song3.setPlaystarted(false);
@@ -644,7 +641,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song4.setPosition(3);
         song4.setMetronombpm(170);
         song4.setAudioOn(false);
-        song4.setCountdownOn(false);
         song4.setLyrics("Текст песни Мёртвый город");
         song4.setLyricshasopen(false);
         song4.setPlaystarted(false);
@@ -656,7 +652,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song5.setPosition(4);
         song5.setMetronombpm(130);
         song5.setAudioOn(false);
-        song5.setCountdownOn(false);
         song5.setLyrics("Текст песни Сон");
         song5.setLyricshasopen(false);
         song5.setPlaystarted(false);
@@ -668,7 +663,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song6.setPosition(5);
         song6.setMetronombpm(150);
         song6.setAudioOn(false);
-        song6.setCountdownOn(false);
         song6.setLyrics("Текст песни Клетка");
         song6.setLyricshasopen(false);
         song6.setPlaystarted(false);
@@ -680,7 +674,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song7.setPosition(6);
         song7.setMetronombpm(165);
         song7.setAudioOn(false);
-        song7.setCountdownOn(false);
         song7.setLyrics("Текст песни Молчание вечного крика");
         song7.setLyricshasopen(false);
         song7.setPlaystarted(false);
@@ -692,7 +685,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song8.setPosition(7);
         song8.setMetronombpm(80);
         song8.setAudioOn(false);
-        song8.setCountdownOn(false);
         song8.setLyrics(getResources().getString(R.string.EmptyLyrics));
         song8.setLyricshasopen(false);
         song8.setPlaystarted(false);
@@ -704,7 +696,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song9.setPosition(8);
         song9.setMetronombpm(120);
         song9.setAudioOn(false);
-        song9.setCountdownOn(false);
         song9.setLyrics("Текст песни Воздаяние");
         song9.setLyricshasopen(false);
         song9.setPlaystarted(false);
@@ -716,7 +707,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song10.setPosition(9);
         song10.setMetronombpm(140);
         song10.setAudioOn(false);
-        song10.setCountdownOn(false);
         song10.setLyrics("Текст песни Судный день");
         song10.setLyricshasopen(false);
         song10.setPlaystarted(false);
@@ -728,7 +718,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song11.setPosition(10);
         song11.setMetronombpm(140);
         song11.setAudioOn(false);
-        song11.setCountdownOn(false);
         song11.setLyrics("Текст песни Заготовка 6");
         song11.setLyricshasopen(false);
         song11.setPlaystarted(false);
@@ -740,7 +729,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song12.setPosition(11);
         song12.setMetronombpm(135);
         song12.setAudioOn(false);
-        song12.setCountdownOn(false);
         song12.setLyrics("Текст песни Заготовка 7");
         song12.setLyricshasopen(false);
         song12.setPlaystarted(false);
@@ -752,7 +740,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song13.setPosition(12);
         song13.setMetronombpm(150);
         song13.setAudioOn(false);
-        song13.setCountdownOn(false);
         song13.setLyrics("Текст песни Заготовка 8");
         song13.setLyricshasopen(false);
         song13.setPlaystarted(false);
@@ -766,7 +753,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
             songNew.setPosition(startFrom + i);
             songNew.setMetronombpm(80);
             songNew.setAudioOn(false);
-            songNew.setCountdownOn(false);
             songNew.setLyrics(getResources().getString(R.string.EmptyLyrics));
             songNew.setLyricshasopen(false);
             songNew.setPlaystarted(false);
@@ -782,7 +768,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song1_1.setAudiofile(Environment
                 .getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC)
                 + "/Amon Amarth/Amon Amarth - One Against All [Deathcoreanstvo] (1).mp3");
-        song1_1.setCountdownOn(false);
         song1_1.setLyrics(Amon_Amarth_One_Against_All_lyrics);
         song1_1.setLyricshasopen(false);
         song1_1.setPlaystarted(false);
@@ -797,7 +782,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song1_2.setAudiofile(Environment
                 .getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC)
                 + "/Amon Amarth/Amon Amarth - We Shall Destroy (1).mp3");
-        song1_2.setCountdownOn(false);
         song1_2.setLyrics(Amon_Amarth_We_Shall_Destroy_lyrics);
         song1_2.setLyricshasopen(false);
         song1_2.setPlaystarted(false);
@@ -812,7 +796,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song1_3.setAudiofile(Environment
                 .getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC)
                 + "/Amon Amarth/Amon Amarth-Cry Of The Black Birds Vid.mp3");
-        song1_3.setCountdownOn(false);
         song1_3.setLyrics(Amon_Amarth_Cry_of_blackbirds_lyrics);
         song1_3.setLyricshasopen(false);
         song1_3.setPlaystarted(false);
@@ -824,7 +807,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song1_4.setPosition(3);
         song1_4.setMetronombpm(160);
         song1_4.setAudioOn(false);
-        song1_4.setCountdownOn(false);
         song1_4.setLyrics(Amon_Amarth_At_downs_First_light_lyrics);
         song1_4.setLyricshasopen(false);
         song1_4.setPlaystarted(false);
@@ -836,7 +818,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song1_5.setPosition(4);
         song1_5.setMetronombpm(100);
         song1_5.setAudioOn(false);
-        song1_5.setCountdownOn(false);
         song1_5.setLyrics(Amon_Amarth_First_Kill_lyrics);
         song1_5.setLyricshasopen(false);
         song1_5.setPlaystarted(false);
@@ -849,7 +830,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song2_1.setPosition(0);
         song2_1.setMetronombpm(126);
         song2_1.setAudioOn(false);
-        song2_1.setCountdownOn(false);
         song2_1.setLyrics(Arch_Enemy_Eagles_Flys_alone);
         song2_1.setLyricshasopen(false);
         song2_1.setPlaystarted(false);
@@ -861,7 +841,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song2_2.setPosition(1);
         song2_2.setMetronombpm(192);
         song2_2.setAudioOn(false);
-        song2_2.setCountdownOn(false);
         song2_2.setLyrics(Arch_Enemy_Avalanche);
         song2_2.setLyricshasopen(false);
         song2_2.setPlaystarted(false);
@@ -873,7 +852,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song2_3.setPosition(2);
         song2_3.setMetronombpm(175);
         song2_3.setAudioOn(false);
-        song2_3.setCountdownOn(false);
         song2_3.setLyrics(Arch_Enemy_Ravenous);
         song2_3.setLyricshasopen(false);
         song2_3.setPlaystarted(false);
@@ -885,7 +863,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song2_4.setPosition(3);
         song2_4.setMetronombpm(180);
         song2_4.setAudioOn(false);
-        song2_4.setCountdownOn(false);
         song2_4.setLyrics(Arch_Enemy_The_world_is_Yours);
         song2_4.setLyricshasopen(false);
         song2_4.setPlaystarted(false);
@@ -897,7 +874,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song2_5.setPosition(4);
         song2_5.setMetronombpm(140);
         song2_5.setAudioOn(false);
-        song2_5.setCountdownOn(false);
         song2_5.setLyrics(Arch_Enemy_Taking_back_my_soul);
         song2_5.setLyricshasopen(false);
         song2_5.setPlaystarted(false);
@@ -909,7 +885,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song2_6.setPosition(5);
         song2_6.setMetronombpm(210);
         song2_6.setAudioOn(false);
-        song2_6.setCountdownOn(false);
         song2_6.setLyrics(Arch_Enemy_As_the_pages_burn);
         song2_6.setLyricshasopen(false);
         song2_6.setPlaystarted(false);

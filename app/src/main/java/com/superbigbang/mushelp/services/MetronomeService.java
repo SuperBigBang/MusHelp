@@ -8,6 +8,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.PorterDuff;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -21,6 +22,8 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
+import android.view.View;
+import android.widget.SeekBar;
 
 import com.superbigbang.mushelp.R;
 import com.superbigbang.mushelp.model.TickData;
@@ -73,8 +76,12 @@ public class MetronomeService extends Service {
     private boolean pause;
     private float currentRate = 1f;
     private int countdownNum = 8;
+    SeekBar mSeekBar;
+
+    // private SeekBar mSeekBar;
 
     private PublishSubject<Object> stopTrigger = PublishSubject.create();
+    private PublishSubject<Object> stopSeekBarTrigger = PublishSubject.create();
 
     private Scheduler scheduler;
 
@@ -119,6 +126,96 @@ public class MetronomeService extends Service {
         return START_STICKY;
     }
 
+    //SeekBar operations:
+    public SeekBar getmSeekBar() {
+        return mSeekBar;
+    }
+
+    public void setmSeekBar(SeekBar mSeekBar) {
+        this.mSeekBar = mSeekBar;
+        mSeekBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.cornerColor), PorterDuff.Mode.MULTIPLY);
+        mSeekBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.colorCursor), PorterDuff.Mode.SRC_ATOP);
+        stopSeekBarTrigger.onNext(false);
+        initializeSeekBar();
+        // Set a change listener for seek bar
+        mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            /*
+                void onProgressChanged (SeekBar seekBar, int progress, boolean fromUser)
+                    Notification that the progress level has changed. Clients can use the fromUser
+                    parameter to distinguish user-initiated changes from those that occurred programmatically.
+
+                Parameters
+                    seekBar SeekBar : The SeekBar whose progress has changed
+                    progress int : The current progress level. This will be in the range min..max
+                                   where min and max were set by setMin(int) and setMax(int),
+                                   respectively. (The default values for min is 0 and max is 100.)
+                    fromUser boolean : True if the progress change was initiated by the user.
+            */
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                if (mediaPlayer != null && b) {
+                        /*
+                            void seekTo (int msec)
+                                Seeks to specified time position. Same as seekTo(long, int)
+                                with mode = SEEK_PREVIOUS_SYNC.
+
+                            Parameters
+                                msec int: the offset in milliseconds from the start to seek to
+
+                            Throws
+                                IllegalStateException : if the internal player engine has not been initialized
+                        */
+                    mediaPlayer.seekTo(i * 1000);
+                    resumePosition = i * 1000;
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+    }
+
+    @SuppressLint("CheckResult")
+    protected void initializeSeekBar() {
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mSeekBar.setMax(mediaPlayer.getDuration() / 1000);
+
+            try {/** ИСПРАВИТЬ ОШИБКУ!*/
+                if (mSeekBar.getVisibility() == View.GONE) {
+                    mSeekBar.setVisibility(View.VISIBLE);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            Observable.interval(1000, TimeUnit.MILLISECONDS, scheduler)
+                    .takeUntil(stopSeekBarTrigger)
+                    .subscribe((Long value) -> {
+                        int mCurrentPosition = mediaPlayer.getCurrentPosition() / 1000; // In milliseconds
+                        mSeekBar.setProgress(mCurrentPosition);
+                    });
+        }
+    }
+
+   /* protected void getAudioStats(){
+        int duration  = mPlayer.getDuration()/1000; // In milliseconds
+        int due = (mPlayer.getDuration() - mPlayer.getCurrentPosition())/1000;
+        int pass = duration - due;
+
+        mPass.setText("" + pass + " seconds");
+        mDuration.setText("" + duration + " seconds");
+        mDue.setText("" + due + " seconds");
+    }*/
+    //End SeekBar operations;
+
     @SuppressLint("CheckResult")
     public void playWithRX() {
         if (audioFilePath == null && backupAudioFilePath != null) {
@@ -161,6 +258,7 @@ public class MetronomeService extends Service {
                         } else {
                             countdownNum = 8;
                             stopTrigger.onNext(false);
+                            stopSeekBarTrigger.onNext(false);
                             isPlaying = false;
                             prepareAndStartOrResumePlayback();
                         }
@@ -216,11 +314,19 @@ public class MetronomeService extends Service {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 mediaPlayer.setPlaybackParams(mediaPlayer.getPlaybackParams().setSpeed(currentRate));
             } else mediaPlayer.start();
+            initializeSeekBar();
+            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    stop();
+                }
+            });
         }
     }
 
     private void stopMedia() {
         if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mSeekBar.setVisibility(View.GONE);
             mediaPlayer.stop();
             mediaPlayer.reset();
             backupAudioFilePath = null;
@@ -242,6 +348,7 @@ public class MetronomeService extends Service {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 mediaPlayer.setPlaybackParams(mediaPlayer.getPlaybackParams().setSpeed(currentRate));
             } else mediaPlayer.start();
+            initializeSeekBar();
         }
     }
 
@@ -281,6 +388,7 @@ public class MetronomeService extends Service {
     private void stopWithRX() {
         stopMedia();
         stopTrigger.onNext(false);
+        stopSeekBarTrigger.onNext(false);
         countdownNum = 8;
     }
 
@@ -289,6 +397,7 @@ public class MetronomeService extends Service {
         backupAudioFilePath = audioFilePath;
         audioFilePath = null;
         stopTrigger.onNext(false);
+        stopSeekBarTrigger.onNext(false);
         countdownNum = 8;
     }
 

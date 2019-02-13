@@ -32,4 +32,8 @@
     </style>
 
     <style name="Theme">theme</style>
+
+    <style name="SeekBarColor" parent="Widget.AppCompat.SeekBar">
+        <item name="colorAccent">@color/cornerColor</item>
+    </style>
 </resources>

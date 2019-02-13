@@ -15,6 +15,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
@@ -67,6 +68,8 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     ImageButton metroSoundChangeButton;
     @BindView(R.id.rateChangeButton)
     ImageButton rateChangeButton;
+    @BindView(R.id.seekBar)
+    SeekBar mSeekBar;
 
     public static final String APP_PREFERENCES = "mysettings";
     SharedPreferences mSettings;
@@ -102,6 +105,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
             mTopLevelPresenter.setPermissionsToFileStorageIsGranted(true);
         }
 
+        mTopLevelPresenter.sendSeekBarOperationsToService(mSeekBar);
     }
 
     @Override

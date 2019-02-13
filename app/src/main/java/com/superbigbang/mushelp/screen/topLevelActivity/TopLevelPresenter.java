@@ -1,6 +1,7 @@
 package com.superbigbang.mushelp.screen.topLevelActivity;
 
 import android.os.Build;
+import android.widget.SeekBar;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -287,7 +288,7 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
         }
     }
 
-    public void changeRate(boolean toDefault) {
+    void changeRate(boolean toDefault) {
             if (toDefault) {
                 currentSpeed = 0;
                 sendChangeRateToService(speedRates[currentSpeed]);
@@ -300,10 +301,9 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
                     sendChangeRateToService(speedRates[currentSpeed]);
                 }
             }
-        changeRateChangeButtonState();
     }
 
-    public void changeRateChangeButtonState() {
+    void changeRateChangeButtonState() {
         getViewState().changeRateChangeButtonState(currentSpeed);
     }
 
@@ -311,9 +311,16 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             ExtendApplication.getMetroComponent().getMetronomeService().changeRate(speed);
             getViewState().showMessage(200, String.valueOf(speed));
+            changeRateChangeButtonState();
         } else {
             getViewState().showErrorMessages(101);
         }
     }
+
+    void sendSeekBarOperationsToService(SeekBar seekBar) {
+        ExtendApplication.getMetroComponent().getMetronomeService().setmSeekBar(seekBar);
+    }
+
+
 }
 

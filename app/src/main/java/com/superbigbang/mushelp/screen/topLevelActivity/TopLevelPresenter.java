@@ -33,6 +33,7 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
             1f, 0.95f, 0.90f, 0.85f, 0.80f, 0.75f, 1.05f
     };
     private int currentSpeed = 0;
+    private boolean countDownIsOn;
 
     @Override
     protected void onFirstViewAttach() {
@@ -63,6 +64,15 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
                 mSongsrealm.commitTransaction();
             }
         }
+    }
+
+    void setCountDownButtonState() {
+        getViewState().setCountDownButtonState(countDownIsOn);
+    }
+
+    void changeCountDownStateAndButton() {
+        countDownIsOn = !countDownIsOn;
+        setCountDownButtonState();
     }
 
     public void setPermissionsToFileStorageIsGranted(boolean permissionsToFileStorageIsGranted) {
@@ -206,7 +216,7 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
                 } else {
                     //       Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Start playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
                     editsong.setPlaystarted(true);
-                    startPlaying(editsong.getMetronombpm(), false, editsong.isAudioOn() ? editsong.getAudiofile() : null, editsong.isCountdownOn());
+                    startPlaying(editsong.getMetronombpm(), false, editsong.isAudioOn() ? editsong.getAudiofile() : null, countDownIsOn);
                 }
 
             }
@@ -218,11 +228,11 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
                 //     Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Stop playing " + firststoppedsong.getTitle() + " Start playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
                 currentSpeed = 0;
                 editsong.setPlaystarted(true);
-                startPlaying(editsong.getMetronombpm(), true, editsong.isAudioOn() ? editsong.getAudiofile() : null, editsong.isCountdownOn());
+                startPlaying(editsong.getMetronombpm(), true, editsong.isAudioOn() ? editsong.getAudiofile() : null, countDownIsOn);
             } else {
                 //    Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Start playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
                 editsong.setPlaystarted(true);
-                startPlaying(editsong.getMetronombpm(), false, editsong.isAudioOn() ? editsong.getAudiofile() : null, editsong.isCountdownOn());
+                startPlaying(editsong.getMetronombpm(), false, editsong.isAudioOn() ? editsong.getAudiofile() : null, countDownIsOn);
             }
             isPaused = false;
         }
@@ -258,6 +268,7 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
                     }
                     ExtendApplication.getMetroComponent().getMetronomeService().play();
                 } else {
+                    ExtendApplication.getMetroComponent().getMetronomeService().setCountdownIsOn(filepath != null && countdownIsOn);
                     ExtendApplication.getMetroComponent().getMetronomeService().play();
                 }
             }

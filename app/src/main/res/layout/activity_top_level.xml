@@ -38,14 +38,12 @@
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@color/colorPrimary"
         android:contentDescription="@string/metroSoundChangeButton"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/adView"
-        app:layout_constraintEnd_toStartOf="@+id/buyButton"
-        app:layout_constraintStart_toEndOf="@+id/newItemCircleButton"
+        app:layout_constraintStart_toEndOf="@+id/countdownChangeButton"
         app:srcCompat="@drawable/baseline_music_note_white1_48" />
 
     <ImageButton
@@ -60,20 +58,22 @@
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintEnd_toStartOf="@+id/newItemCircleButton"
-        app:layout_constraintStart_toEndOf="@+id/themeChangeButton"
+        app:layout_constraintStart_toEndOf="@+id/metroSoundChangeButton"
         app:srcCompat="@drawable/baseline_change_rate_button_48_0" />
 
     <ImageButton
         android:id="@+id/themeChangeButton"
         android:layout_width="42dp"
         android:layout_height="42dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@color/colorPrimary"
         android:contentDescription="@string/theme_change_button"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/adView"
-        app:layout_constraintStart_toEndOf="@+id/volumeX2button"
+        app:layout_constraintEnd_toStartOf="@+id/buyButton"
+        app:layout_constraintStart_toEndOf="@+id/newItemCircleButton"
         app:srcCompat="@drawable/baseline_change_theme_48" />
 
     <ImageButton
@@ -88,22 +88,22 @@
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintEnd_toEndOf="@+id/buyButton"
-        app:layout_constraintStart_toStartOf="@+id/volumeX2button"
+        app:layout_constraintStart_toStartOf="@+id/countdownChangeButton"
         app:srcCompat="@drawable/baseline_add_circle_outline_white_48" />
 
     <ImageButton
-        android:id="@+id/volumeX2button"
+        android:id="@+id/countdownChangeButton"
         android:layout_width="42dp"
         android:layout_height="42dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@color/colorPrimary"
         android:contentDescription="@string/volumex2button"
 
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/baseline_volume_up_colored_48dp" />
+        app:srcCompat="@drawable/baseline_timer_white_48_off" />
 
     <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"

@@ -22,6 +22,8 @@ public interface TopLevelView extends MvpView {
 
     void changeRateChangeButtonState(int state);
 
+    void setCountDownButtonState(boolean state);
+
     void showMessage(int messageId, String additionalText);
 
     @StateStrategyType(SingleStateStrategy.class)

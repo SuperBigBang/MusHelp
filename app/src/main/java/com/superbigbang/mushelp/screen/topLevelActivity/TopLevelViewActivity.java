@@ -62,8 +62,8 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     ImageButton buyButton;
     @BindView(R.id.newItemCircleButton)
     ImageButton newItemCircleButton;
-    @BindView(R.id.volumeX2button)
-    ImageButton volumeX2button;
+    @BindView(R.id.countdownChangeButton)
+    ImageButton countdownChangeButton;
     @BindView(R.id.metroSoundChangeButton)
     ImageButton metroSoundChangeButton;
     @BindView(R.id.rateChangeButton)
@@ -100,6 +100,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
 
         mTopLevelPresenter.setVolumeUpButtonState();
         mTopLevelPresenter.changeRateChangeButtonState();
+        mTopLevelPresenter.setCountDownButtonState();
 
         if (checkAndRequestPermissions()) {
             mTopLevelPresenter.setPermissionsToFileStorageIsGranted(true);
@@ -177,7 +178,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         super.onRestart();
     }
 
-    @OnClick({R.id.buyButton, R.id.newItemCircleButton, R.id.volumeX2button, R.id.metroSoundChangeButton, R.id.rateChangeButton})
+    @OnClick({R.id.buyButton, R.id.newItemCircleButton, R.id.countdownChangeButton, R.id.metroSoundChangeButton, R.id.rateChangeButton})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.buyButton:
@@ -186,8 +187,8 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
             case R.id.newItemCircleButton:
                 mTopLevelPresenter.showSongEditPopup(0, true);
                 break;
-            case R.id.volumeX2button:
-                mTopLevelPresenter.showVolumeUpPopup();
+            case R.id.countdownChangeButton:
+                mTopLevelPresenter.changeCountDownStateAndButton();
                 break;
             case R.id.metroSoundChangeButton:
                 mTopLevelPresenter.metroSoundChangeButton();
@@ -233,6 +234,10 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         }
     }
 
+    public void setCountDownButtonState(boolean state) {
+        countdownChangeButton.setImageResource(state ? R.drawable.baseline_timer_white_48_on : R.drawable.baseline_timer_white_48_off);
+    }
+
     @Override
     public void clearStateStrategyPull() {
     }
@@ -255,11 +260,11 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     @Override
     public void setVolumeUpButtonState(boolean VolumeUpChangeToOFF) {
         if (VolumeUpChangeToOFF) {
-            volumeX2button.getDrawable().setColorFilter(
+            countdownChangeButton.getDrawable().setColorFilter(
                     getResources().getColor(R.color.VolumeButtonIsOn),
                     PorterDuff.Mode.SRC_ATOP);
         } else {
-            volumeX2button.getDrawable().clearColorFilter();
+            countdownChangeButton.getDrawable().clearColorFilter();
         }
     }
 

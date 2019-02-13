@@ -33,6 +33,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
 import timber.log.Timber;
@@ -188,7 +189,7 @@ public class MetronomeService extends Service {
         if (mediaPlayer != null && mediaPlayer.isPlaying()) {
             mSeekBar.setMax(mediaPlayer.getDuration() / 1000);
 
-            try {/** ИСПРАВИТЬ ОШИБКУ!*/
+            try {
                 if (mSeekBar.getVisibility() == View.GONE) {
                     mSeekBar.setVisibility(View.VISIBLE);
                 }
@@ -260,7 +261,9 @@ public class MetronomeService extends Service {
                             stopTrigger.onNext(false);
                             stopSeekBarTrigger.onNext(false);
                             isPlaying = false;
-                            prepareAndStartOrResumePlayback();
+                            Observable.just(1)
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe((Integer values) -> prepareAndStartOrResumePlayback());
                         }
                     });
         }

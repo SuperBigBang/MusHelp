@@ -54,6 +54,7 @@ public class MetronomeService extends Service {
             new TickData(R.string.title_vibrate),
     };
     private final IBinder binder = new LocalBinder();
+    SeekBar mSeekBar;
     private SharedPreferences prefs;
     //  private int bpm;
     private long interval;
@@ -61,13 +62,12 @@ public class MetronomeService extends Service {
     private int soundId = -1;
     private boolean isPlaying;
     private Vibrator vibrator;
+
+
+    /* private boolean start;
+     private long startTime1;
+     private long endTime2;*/
     private int tick;
-
-
-   /* private boolean start;
-    private long startTime1;
-    private long endTime2;*/
-
     private AudioManager am;
     private MediaPlayer mediaPlayer;
     private int resumePosition;
@@ -77,10 +77,8 @@ public class MetronomeService extends Service {
     private boolean pause;
     private float currentRate = 1f;
     private int countdownNum = 8;
-    SeekBar mSeekBar;
 
     // private SeekBar mSeekBar;
-
     private PublishSubject<Object> stopTrigger = PublishSubject.create();
     private PublishSubject<Object> stopSeekBarTrigger = PublishSubject.create();
 

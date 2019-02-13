@@ -18,13 +18,13 @@ import io.realm.RealmConfiguration;
 
 @InjectViewState
 public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
+    public static float[] speedRates = new float[]{
+            1f, 0.95f, 0.90f, 0.85f, 0.80f, 0.75f, 1.05f
+    };
     public Realm mSetlistsrealm;
     public Realm mSongsrealm;
     private boolean permissionsToFileStorageIsGranted;
     private boolean isPaused;
-    public static float[] speedRates = new float[]{
-            1f, 0.95f, 0.90f, 0.85f, 0.80f, 0.75f, 1.05f
-    };
     private int currentSpeed = 0;
     private boolean countDownIsOn;
 
@@ -271,18 +271,18 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
     }
 
     void changeRate(boolean toDefault) {
-            if (toDefault) {
+        if (toDefault) {
+            currentSpeed = 0;
+            sendChangeRateToService(speedRates[currentSpeed]);
+        } else {
+            if (currentSpeed + 1 == speedRates.length) {
                 currentSpeed = 0;
                 sendChangeRateToService(speedRates[currentSpeed]);
             } else {
-                if (currentSpeed + 1 == speedRates.length) {
-                    currentSpeed = 0;
-                    sendChangeRateToService(speedRates[currentSpeed]);
-                } else {
-                    currentSpeed++;
-                    sendChangeRateToService(speedRates[currentSpeed]);
-                }
+                currentSpeed++;
+                sendChangeRateToService(speedRates[currentSpeed]);
             }
+        }
     }
 
     void changeRateChangeButtonState() {

@@ -47,9 +47,10 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
 //ca-app-pub-5364969751338385/9526465105  -  ads:adUnitId="" -LIVE (DON'T USE FOR TEST'S)
 // ca-app-pub-3940256099942544/6300978111 - ads:adUnitId="" ONLY FOR TEST/
 
+    public static final String APP_PREFERENCES = "mysettings";
+    public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
     @InjectPresenter
     TopLevelPresenter mTopLevelPresenter;
-
     @BindView(R.id.adView)
     AdView mAdView;
     @BindView(R.id.RecyclerSetList)
@@ -68,11 +69,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     ImageButton rateChangeButton;
     @BindView(R.id.seekBar)
     SeekBar mSeekBar;
-
-    public static final String APP_PREFERENCES = "mysettings";
     SharedPreferences mSettings;
-
-    public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
 //    SharedPreferences.Editor mSettingsEditor;
     //   int lastOpenSetListPosition;
     //   int lastOpenSetListId;

@@ -11,5 +11,5 @@ import dagger.Component;
 @Singleton
 @Component(modules = {ContextModule.class})
 public interface BaseComponent {
-        Context getContext();
+    Context getContext();
 }

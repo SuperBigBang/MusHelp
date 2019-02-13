@@ -31,87 +31,9 @@ public class ExtendApplication extends Application implements ServiceConnection 
 
     public static final String APP_PREFERENCES = "mysettings";
     public static final String APP_PREFERENCES_FIRST_INSTALL_FLAG = "FIRST_INSTALL_FLAG";
-
-    private static BaseComponent sBaseComponent;
     public static boolean isBound;
+    private static BaseComponent sBaseComponent;
     private static MetroComponent sMetroComponent;
-
-    public static BaseComponent getBaseComponent() {
-        return sBaseComponent;
-    }
-
-    public static MetroComponent getMetroComponent() {
-        return sMetroComponent;
-    }
-
-    @VisibleForTesting
-    public static void setBaseComponent(@NonNull BaseComponent baseComponent) {
-        sBaseComponent = baseComponent;
-    }
-
-    @VisibleForTesting
-    public static void setMetroComponent(@NonNull MetroComponent metroComponent) {
-        sMetroComponent = metroComponent;
-    }
-
-    public static boolean isBound() {
-        return isBound;
-    }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        SharedPreferences mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-
-        if (BuildConfig.DEBUG) {
-            Timber.plant(new Timber.DebugTree());
-        }
-
-        Intent intent = new Intent(this, MetronomeService.class);
-        startService(intent);
-        bindService(intent, this, Context.BIND_AUTO_CREATE);
-
-        sBaseComponent = DaggerBaseComponent.builder()
-                .contextModule(new ContextModule(this))
-                .build();
-
-        Realm.init(sBaseComponent.getContext());
-
-        if (!mSettings.contains(APP_PREFERENCES_FIRST_INSTALL_FLAG)) {
-            MyInitialDataRealmTransaction();
-        }
-
-        MobileAds.initialize(this, "ca-app-pub-5364969751338385~1161013636");
-
-        SharedPreferences.Editor editor = mSettings.edit();
-        editor.putBoolean(APP_PREFERENCES_FIRST_INSTALL_FLAG, false).apply();
-    }
-
-    @Override
-    public void onTerminate() {
-        if (isBound) {
-            unbindService(this);
-            isBound = false;
-        }
-        super.onTerminate();
-    }
-
-    @Override
-    public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-        MetronomeService.LocalBinder binder = (MetronomeService.LocalBinder) iBinder;
-        MetronomeService service = binder.getService();
-        isBound = true;
-        sMetroComponent = DaggerMetroComponent.builder()
-                .metronomeServiceModule(new MetronomeServiceModule(service))
-                .build();
-    }
-
-
-    @Override
-    public void onServiceDisconnected(ComponentName componentName) {
-        isBound = false;
-    }
-
     //==================Lyrics added for Test:
     private String Amon_Amarth_One_Against_All_lyrics = "Winter's lost its grip\n" +
             "The ocean is set free\n" +
@@ -564,6 +486,81 @@ public class ExtendApplication extends Application implements ServiceConnection 
             "As the pages burn!\n" +
             "Авторы: Alissa White-Gluz / Michael Amott\n" +
             "Текст песни \"As the Pages Burn\", © Kobalt Music Publishing Ltd.";
+
+    public static BaseComponent getBaseComponent() {
+        return sBaseComponent;
+    }
+
+    @VisibleForTesting
+    public static void setBaseComponent(@NonNull BaseComponent baseComponent) {
+        sBaseComponent = baseComponent;
+    }
+
+    public static MetroComponent getMetroComponent() {
+        return sMetroComponent;
+    }
+
+    @VisibleForTesting
+    public static void setMetroComponent(@NonNull MetroComponent metroComponent) {
+        sMetroComponent = metroComponent;
+    }
+
+    public static boolean isBound() {
+        return isBound;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        SharedPreferences mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+        }
+
+        Intent intent = new Intent(this, MetronomeService.class);
+        startService(intent);
+        bindService(intent, this, Context.BIND_AUTO_CREATE);
+
+        sBaseComponent = DaggerBaseComponent.builder()
+                .contextModule(new ContextModule(this))
+                .build();
+
+        Realm.init(sBaseComponent.getContext());
+
+        if (!mSettings.contains(APP_PREFERENCES_FIRST_INSTALL_FLAG)) {
+            MyInitialDataRealmTransaction();
+        }
+
+        MobileAds.initialize(this, "ca-app-pub-5364969751338385~1161013636");
+
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putBoolean(APP_PREFERENCES_FIRST_INSTALL_FLAG, false).apply();
+    }
+
+    @Override
+    public void onTerminate() {
+        if (isBound) {
+            unbindService(this);
+            isBound = false;
+        }
+        super.onTerminate();
+    }
+
+    @Override
+    public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+        MetronomeService.LocalBinder binder = (MetronomeService.LocalBinder) iBinder;
+        MetronomeService service = binder.getService();
+        isBound = true;
+        sMetroComponent = DaggerMetroComponent.builder()
+                .metronomeServiceModule(new MetronomeServiceModule(service))
+                .build();
+    }
+
+    @Override
+    public void onServiceDisconnected(ComponentName componentName) {
+        isBound = false;
+    }
 
     void MyInitialDataRealmTransaction() {
         RealmConfiguration setListsRealmConfig = new RealmConfiguration.Builder()

@@ -289,7 +289,8 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
 
     public void changeRate(boolean toDefault) {
             if (toDefault) {
-                sendChangeRateToService(speedRates[0]);
+                currentSpeed = 0;
+                sendChangeRateToService(speedRates[currentSpeed]);
             } else {
                 if (currentSpeed + 1 == speedRates.length) {
                     currentSpeed = 0;
@@ -299,6 +300,11 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
                     sendChangeRateToService(speedRates[currentSpeed]);
                 }
             }
+        changeRateChangeButtonState();
+    }
+
+    public void changeRateChangeButtonState() {
+        getViewState().changeRateChangeButtonState(currentSpeed);
     }
 
     private void sendChangeRateToService(float speed) {

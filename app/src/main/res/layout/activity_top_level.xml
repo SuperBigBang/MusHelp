@@ -61,7 +61,7 @@
         app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintEnd_toStartOf="@+id/newItemCircleButton"
         app:layout_constraintStart_toEndOf="@+id/themeChangeButton"
-        app:srcCompat="@drawable/baseline_change_rate_button_48" />
+        app:srcCompat="@drawable/baseline_change_rate_button_48_0" />
 
     <ImageButton
         android:id="@+id/themeChangeButton"

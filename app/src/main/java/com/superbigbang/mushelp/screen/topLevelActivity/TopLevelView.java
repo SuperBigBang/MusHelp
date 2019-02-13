@@ -20,6 +20,8 @@ public interface TopLevelView extends MvpView {
 
     void showErrorMessages(int errorID);
 
+    void changeRateChangeButtonState(int state);
+
     void showMessage(int messageId, String additionalText);
 
     @StateStrategyType(SingleStateStrategy.class)

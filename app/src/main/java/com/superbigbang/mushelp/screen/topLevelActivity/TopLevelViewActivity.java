@@ -96,6 +96,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         mTopLevelPresenter.showSongsLists();
 
         mTopLevelPresenter.setVolumeUpButtonState();
+        mTopLevelPresenter.changeRateChangeButtonState();
 
         if (checkAndRequestPermissions()) {
             mTopLevelPresenter.setPermissionsToFileStorageIsGranted(true);
@@ -202,7 +203,31 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         return true;
     }
 
-
+    public void changeRateChangeButtonState(int state) {
+        switch (state) {
+            case 0:
+                rateChangeButton.setImageResource(R.drawable.baseline_change_rate_button_48_0);
+                break;
+            case 1:
+                rateChangeButton.setImageResource(R.drawable.baseline_change_rate_button_48_1);
+                break;
+            case 2:
+                rateChangeButton.setImageResource(R.drawable.baseline_change_rate_button_48_2);
+                break;
+            case 3:
+                rateChangeButton.setImageResource(R.drawable.baseline_change_rate_button_48_3);
+                break;
+            case 4:
+                rateChangeButton.setImageResource(R.drawable.baseline_change_rate_button_48_4);
+                break;
+            case 5:
+                rateChangeButton.setImageResource(R.drawable.baseline_change_rate_button_48_5);
+                break;
+            case 6:
+                rateChangeButton.setImageResource(R.drawable.baseline_change_rate_button_48_6);
+                break;
+        }
+    }
 
     @Override
     public void clearStateStrategyPull() {

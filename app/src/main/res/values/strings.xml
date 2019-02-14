@@ -62,4 +62,6 @@
     <string name="EmptyLyrics">Текст песни можно вставить в редакторе</string>
     <string name="EmptySongName">Название песни</string>
     <string name="Hint10">Долгое нажатие позволяет отредактировать элемент</string>
+    <string name="_170">170</string>
+    <string name="_12">12</string>
 </resources>

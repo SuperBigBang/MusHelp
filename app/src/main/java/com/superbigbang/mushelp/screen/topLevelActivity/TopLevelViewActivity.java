@@ -7,11 +7,13 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
@@ -21,6 +23,7 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.superbigbang.mushelp.ExtendApplication;
 import com.superbigbang.mushelp.R;
 import com.superbigbang.mushelp.adapter.SetListItemRvAdapter;
 import com.superbigbang.mushelp.adapter.SongsItemRvAdapter;
@@ -69,17 +72,41 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     ImageButton rateChangeButton;
     @BindView(R.id.seekBar)
     SeekBar mSeekBar;
+    @BindView(R.id.themeChangeButton)
+    ImageButton themeChangeButton;
+
     SharedPreferences mSettings;
-//    SharedPreferences.Editor mSettingsEditor;
-    //   int lastOpenSetListPosition;
-    //   int lastOpenSetListId;
+
+    private int themeValue;
+    private SharedPreferences.OnSharedPreferenceChangeListener callback = (sharedPreferences, key) -> {
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        //Get the theme save on sharedpreference
+        themeValue = mSettings.getInt("theme", 1);
+        //Theme settings
+        switch (themeValue) {
+            case 1:
+                setTheme(R.style.Theme_1);
+               /* toolbarMain.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+                fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorAccent)));*/
+                break;
+            case 2:
+                setTheme(R.style.Theme_2);
+                break;
+        }
+        TypedValue typedValue = new TypedValue();
+        this.getTheme().resolveAttribute(R.attr.selectedTextColor, typedValue, true);
+        @ColorInt int color = typedValue.data;
+        ExtendApplication.currentThemeColorsTextSelected = color;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_level);
         ButterKnife.bind(this);
-        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+
 
         mTopLevelPresenter.showAdvertistments();
 
@@ -101,6 +128,18 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         }
 
         mTopLevelPresenter.sendSeekBarOperationsToService(mSeekBar);
+
+
+        mSettings.registerOnSharedPreferenceChangeListener(callback);
+
+        //Clicks
+        themeChangeButton.setOnClickListener(v -> {
+            themeValue++;
+            if (themeValue == 3) {
+                themeValue = 1;
+            }
+            recreate();
+        });
     }
 
     @Override
@@ -161,10 +200,31 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         mAdView.loadAd(adRequest);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //Save on sharedpreference when app stop
+        mSettings = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putInt("theme", themeValue);
+        editor.apply();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mSettings = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
+        mSettings.unregisterOnSharedPreferenceChangeListener(callback);
     }
 
     @Override

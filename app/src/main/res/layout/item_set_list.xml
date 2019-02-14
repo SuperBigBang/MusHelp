@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
+        android:background="?backGroundColor"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -23,8 +23,8 @@
             android:fontFamily="@font/roboto_medium"
             android:gravity="center"
             android:maxLines="1"
-            android:paddingEnd="@dimen/dp_4"
             android:paddingStart="@dimen/dp_4"
+            android:paddingEnd="@dimen/dp_4"
             android:text=""
             android:textColor="@color/cornerColor"
             android:textSize="18sp"

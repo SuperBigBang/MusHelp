@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Environment;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
@@ -34,6 +35,8 @@ public class ExtendApplication extends Application implements ServiceConnection 
     public static boolean isBound;
     private static BaseComponent sBaseComponent;
     private static MetroComponent sMetroComponent;
+    public static int currentThemeColorsTextSelected = Color.parseColor("#FFFFFFFF");
+
     //==================Lyrics added for Test:
     private String Amon_Amarth_One_Against_All_lyrics = "Winter's lost its grip\n" +
             "The ocean is set free\n" +

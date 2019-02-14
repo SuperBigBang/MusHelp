@@ -4,15 +4,16 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:background="?backGroundColor">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/RecyclerSongsList"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="4dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+
         android:scrollbars="none"
         app:layout_constraintBottom_toTopOf="@+id/seekBar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,7 +27,7 @@
         android:layout_height="42dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:background="@color/colorPrimary"
+        android:background="?backGroundColor"
         android:contentDescription="@string/buybutton"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/adView"
@@ -39,7 +40,7 @@
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@color/colorPrimary"
+        android:background="?backGroundColor"
         android:contentDescription="@string/metroSoundChangeButton"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/adView"
@@ -53,7 +54,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@color/colorPrimary"
+        android:background="?backGroundColor"
         android:contentDescription="@string/rate_change_button"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/adView"
@@ -68,7 +69,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@color/colorPrimary"
+        android:background="?backGroundColor"
         android:contentDescription="@string/theme_change_button"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/adView"
@@ -83,7 +84,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:background="@color/colorPrimary"
+        android:background="?backGroundColor"
         android:contentDescription="@string/newitemcirclebutton"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/adView"
@@ -97,7 +98,7 @@
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@color/colorPrimary"
+        android:background="?backGroundColor"
         android:contentDescription="@string/volumex2button"
 
         android:scaleType="fitCenter"
@@ -115,6 +116,7 @@
         ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
         ads:layout_constraintBottom_toBottomOf="parent"
         ads:layout_constraintEnd_toEndOf="parent"
+        android:background="?backGroundColor"
         ads:layout_constraintStart_toStartOf="parent">
 
     </com.google.android.gms.ads.AdView>
@@ -136,8 +138,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:visibility="gone"
         android:theme="@style/SeekBarColor"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/newItemCircleButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

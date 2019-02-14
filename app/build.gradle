@@ -40,7 +40,6 @@ dependencies {
     implementation deps.support.cardview
     implementation deps.support.recyclerView
     implementation deps.timber
-    implementation deps.picasso
     implementation deps.eventbus
     implementation deps.baseRecyclerViewAdapterHelper
     implementation deps.dialogplus

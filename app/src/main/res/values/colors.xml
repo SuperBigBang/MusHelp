@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryWhite">#FFFFFFFF</color>
     <color name="colorPrimaryDark">#000000</color>
+    <color name="colorPrimaryBlue">#66bfff</color>
+    <color name="colorSelectedTextColor">?selectedTextColor</color>
     <color name="colorAccent">#000000</color>
     <color name="colorCursor">#FFFFFFFF</color>
     <color name="textColorPrimary">#FFFFFFFF</color>

@@ -7,20 +7,45 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorCursor</item>
         <item name="android:alertDialogTheme">@style/Theme.AppCompat.NoActionBar</item>
+
+        <item name="backGroundColor">@color/colorPrimary</item>
+        <item name="selectedTextColor">@color/colorPrimaryWhite</item>
+        <item name="UNselectedTextColor">@color/colorPrimaryWhite</item>
+        <item name="OtherTextColor">@color/colorPrimaryWhite</item>
     </style>
+
+
+    <style name="Theme_1" parent="@style/AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorCursor</item>
+        <item name="android:alertDialogTheme">@style/Theme.AppCompat.NoActionBar</item>
+
+        <item name="backGroundColor">@color/colorPrimaryDark</item>
+        <item name="selectedTextColor">@color/colorPrimaryWhite</item>
+        <item name="UNselectedTextColor">@color/colorPrimaryWhite</item>
+        <item name="OtherTextColor">@color/colorPrimaryWhite</item>
+    </style>
+
+
+    <style name="Theme_2" parent="@style/AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorCursor</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:alertDialogTheme">@style/Theme.AppCompat.NoActionBar</item>
+
+        <item name="backGroundColor">@color/colorPrimaryWhite</item>
+        <item name="selectedTextColor">@color/colorPrimaryBlue</item>
+        <item name="UNselectedTextColor">@color/colorPrimaryWhite</item>
+        <item name="OtherTextColor">@color/colorPrimary</item>
+    </style>
+
 
     <style name="SplashTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@drawable/background_splash</item>
-    </style>
-
-    <style name="line_style">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">0.5dp</item>
-        <item name="android:background">@color/colorPrimary</item>
-        <item name="android:layout_margin">2dp</item>
     </style>
 
     <style name="MySwitch" parent="Theme.AppCompat.Light">
@@ -31,9 +56,12 @@
         <item name="colorControlActivated">@color/cornerColor</item>
     </style>
 
-    <style name="Theme">theme</style>
-
     <style name="SeekBarColor" parent="Widget.AppCompat.SeekBar">
         <item name="colorAccent">@color/cornerColor</item>
     </style>
+
+    <attr name="backGroundColor" format="reference|color" />
+    <attr name="selectedTextColor" format="reference|color" />
+    <attr name="UNselectedTextColor" format="reference|color" />
+    <attr name="OtherTextColor" format="reference|color" />
 </resources>

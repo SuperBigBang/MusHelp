@@ -12,6 +12,11 @@
         <item name="selectedTextColor">@color/colorPrimaryWhite</item>
         <item name="UNselectedTextColor">@color/colorPrimaryWhite</item>
         <item name="OtherTextColor">@color/colorPrimaryWhite</item>
+        <item name="seekBarDotColor">@color/colorPrimaryBlue</item>
+        <item name="seekBarProgressColor">@color/colorPrimaryBlue</item>
+        <item name="seekBarBackgroundProgressColor">@color/colorPrimaryWhite</item>
+        <item name="lines_color">@color/cornerColor</item>
+        <item name="BuyOkButton">@color/BuyOkButtonDark</item>
     </style>
 
 
@@ -19,25 +24,37 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorCursor</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:alertDialogTheme">@style/Theme.AppCompat.NoActionBar</item>
 
         <item name="backGroundColor">@color/colorPrimaryDark</item>
         <item name="selectedTextColor">@color/colorPrimaryWhite</item>
         <item name="UNselectedTextColor">@color/colorPrimaryWhite</item>
         <item name="OtherTextColor">@color/colorPrimaryWhite</item>
+        <item name="seekBarDotColor">@color/colorPrimaryBlue</item>
+        <item name="seekBarProgressColor">@color/colorPrimaryBlue</item>
+        <item name="seekBarBackgroundProgressColor">@color/colorPrimaryWhite</item>
+        <item name="lines_color">@color/cornerColor</item>
+        <item name="BuyOkButton">@color/BuyOkButtonDark</item>
     </style>
 
 
     <style name="Theme_2" parent="@style/AppTheme">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorCursor</item>
+        <item name="colorPrimary">@color/colorPrimaryWhite</item>
         <item name="colorAccent">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_state_white_blue</item>
         <item name="android:alertDialogTheme">@style/Theme.AppCompat.NoActionBar</item>
 
-        <item name="backGroundColor">@color/colorPrimaryWhite</item>
-        <item name="selectedTextColor">@color/colorPrimaryBlue</item>
-        <item name="UNselectedTextColor">@color/colorPrimaryWhite</item>
+        <item name="backGroundColor">@color/colorPrimaryWhiteBackground</item>
+        <item name="selectedTextColor">@color/colorPrimary</item>
+        <item name="UNselectedTextColor">@color/colorPrimaryDark_state_white_blue</item>
         <item name="OtherTextColor">@color/colorPrimary</item>
+        <item name="seekBarDotColor">@color/colorPrimaryDark_state_white_blue</item>
+        <item name="seekBarProgressColor">@color/colorPrimaryDark_state_white_blue</item>
+        <item name="seekBarBackgroundProgressColor">@color/md_grey_500</item>
+        <item name="lines_color">@color/colorPrimaryDark_state_white_blue</item>
+        <item name="BuyOkButton">@color/md_green_400</item>
     </style>
 
 
@@ -53,15 +70,20 @@
         <!-- Неактивное состояние -->
         <item name="colorSwitchThumbNormal">@color/uncheckColor</item>
         <!-- Активное состояние -->
-        <item name="colorControlActivated">@color/cornerColor</item>
+        <item name="colorControlActivated">?lines_color</item>
     </style>
 
     <style name="SeekBarColor" parent="Widget.AppCompat.SeekBar">
-        <item name="colorAccent">@color/cornerColor</item>
+        <item name="colorAccent">?seekBarProgressColor</item>
     </style>
 
     <attr name="backGroundColor" format="reference|color" />
     <attr name="selectedTextColor" format="reference|color" />
     <attr name="UNselectedTextColor" format="reference|color" />
     <attr name="OtherTextColor" format="reference|color" />
+    <attr name="seekBarDotColor" format="reference|color" />
+    <attr name="seekBarProgressColor" format="reference|color" />
+    <attr name="seekBarBackgroundProgressColor" format="reference|color" />
+    <attr name="lines_color" format="reference|color" />
+    <attr name="BuyOkButton" format="reference|color" />
 </resources>

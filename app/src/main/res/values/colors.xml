@@ -2,7 +2,9 @@
 <resources>
     <color name="colorPrimary">#000000</color>
     <color name="colorPrimaryWhite">#FFFFFFFF</color>
+    <color name="colorPrimaryWhiteBackground">#e5eaf0</color>
     <color name="colorPrimaryDark">#000000</color>
+    <color name="colorPrimaryDark_state_white_blue">#1976d3</color>
     <color name="colorPrimaryBlue">#66bfff</color>
     <color name="colorSelectedTextColor">?selectedTextColor</color>
     <color name="colorAccent">#000000</color>
@@ -11,6 +13,7 @@
     <color name="cornerColor">#66bfff</color>
     <color name="uncheckColor">#FFC9C9C9</color>
     <color name="VolumeButtonIsOn">#ff0000</color>
-    <color name="BuyOkButton">#00FF7F</color>
+    <color name="BuyOkButtonDark">#00FF7F</color>
+    <color name="BuyOkButtonLight">#00FF7F</color>
     <color name="backgroundWindowColor">#808080</color>
 </resources>

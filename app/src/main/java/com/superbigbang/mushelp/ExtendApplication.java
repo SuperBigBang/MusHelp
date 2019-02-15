@@ -36,6 +36,7 @@ public class ExtendApplication extends Application implements ServiceConnection 
     private static BaseComponent sBaseComponent;
     private static MetroComponent sMetroComponent;
     public static int currentThemeColorsTextSelected = Color.parseColor("#FFFFFFFF");
+    public static int currentThemeColorsTextUNSelected = Color.parseColor("#66bfff");
 
     //==================Lyrics added for Test:
     private String Amon_Amarth_One_Against_All_lyrics = "Winter's lost its grip\n" +

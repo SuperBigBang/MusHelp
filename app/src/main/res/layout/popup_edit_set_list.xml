@@ -27,7 +27,7 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto_medium"
             android:text="@string/popupWEdit_set_text1"
-            android:textColor="@color/cornerColor"
+            android:textColor="?lines_color"
             android:textSize="16sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/editSetListPosition"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +39,7 @@
             android:layout_height="21dp"
             android:fontFamily="@font/roboto_medium"
             android:text="@string/popupWEdit_text2"
-            android:textColor="@color/cornerColor"
+            android:textColor="?lines_color"
             android:textSize="16sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/editSetListName"
             app:layout_constraintStart_toStartOf="@+id/textView" />
@@ -117,7 +117,7 @@
                 android:layout_weight="0.75"
                 android:background="@drawable/round_shape_btn_set_lists"
                 android:text="@string/button_Cancel"
-                android:textColor="@color/cornerColor" />
+                android:textColor="?lines_color" />
 
             <Button
                 android:id="@+id/btn_e_Save"
@@ -127,7 +127,7 @@
                 android:layout_weight="0.75"
                 android:background="@drawable/round_shape_btn_set_lists"
                 android:text="@string/button_Save"
-                android:textColor="@color/cornerColor"
+                android:textColor="?lines_color"
                 tools:ignore="ButtonStyle" />
         </LinearLayout>
     </android.support.constraint.ConstraintLayout>

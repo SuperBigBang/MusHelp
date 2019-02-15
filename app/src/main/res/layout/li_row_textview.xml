@@ -8,7 +8,7 @@
     android:background="?android:attr/selectableItemBackground"
     android:descendantFocusability="beforeDescendants"
     android:padding="10dp">
-    <!-- android:background="#fbfbfb" -->
+    <!-- android:seekbar_background="#fbfbfb" -->
 
     <TextView
         android:id="@+id/text"

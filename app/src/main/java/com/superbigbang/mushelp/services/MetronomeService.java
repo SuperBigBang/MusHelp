@@ -8,7 +8,6 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.PorterDuff;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -132,8 +131,8 @@ public class MetronomeService extends Service {
 
     public void setmSeekBar(SeekBar mSeekBar) {
         this.mSeekBar = mSeekBar;
-        mSeekBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.cornerColor), PorterDuff.Mode.MULTIPLY);
-        mSeekBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.colorCursor), PorterDuff.Mode.SRC_ATOP);
+        // mSeekBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.cornerColor), PorterDuff.Mode.MULTIPLY);
+        // mSeekBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.colorCursor), PorterDuff.Mode.SRC_ATOP);
         stopSeekBarTrigger.onNext(false);
         initializeSeekBar();
         // Set a change listener for seek bar

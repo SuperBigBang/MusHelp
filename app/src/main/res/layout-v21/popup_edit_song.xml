@@ -31,9 +31,10 @@
             android:background="?backGroundColor"
             android:contentDescription="@string/newitemcirclebutton"
             android:scaleType="fitCenter"
+            android:tint="?lines_color"
+            android:tintMode="multiply"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editMetronomBPM"
-            android:tint="?lines_color"
             app:srcCompat="@drawable/baseline_delete_sweep_white_48" />
 
         <TextView
@@ -227,8 +228,9 @@
             android:id="@+id/editSongLyrics"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginEnd="9dp"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="9dp"
+            android:background="@android:color/transparent"
             android:fontFamily="@font/roboto_medium"
             android:gravity="center_horizontal"
             android:hint="@string/edit_hint_Enter_song_lyics"
@@ -237,7 +239,6 @@
             android:textColor="?OtherTextColor"
             android:textColorHint="?OtherTextColor"
             android:textSize="16sp"
-            android:background="@android:color/transparent"
             app:layout_constraintBottom_toTopOf="@+id/divider10"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

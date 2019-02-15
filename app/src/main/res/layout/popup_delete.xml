@@ -29,7 +29,7 @@
             android:gravity="center"
             android:text="@string/popDel_text1"
             android:textAllCaps="false"
-            android:textColor="@color/cornerColor"
+            android:textColor="?lines_color"
             android:textSize="16sp" />
 
         <TextView
@@ -60,7 +60,7 @@
                 android:layout_weight="0.75"
                 android:background="@drawable/round_shape_btn_set_lists"
                 android:text="@string/button_Cancel"
-                android:textColor="@color/cornerColor"
+                android:textColor="?lines_color"
                 tools:ignore="ButtonStyle" />
 
             <Button
@@ -71,7 +71,7 @@
                 android:layout_weight="0.75"
                 android:background="@drawable/round_shape_btn_set_lists"
                 android:text="@string/button_Delete"
-                android:textColor="@color/cornerColor"
+                android:textColor="?lines_color"
                 tools:ignore="ButtonStyle" />
         </LinearLayout>
 

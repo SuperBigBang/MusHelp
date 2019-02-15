@@ -1,7 +1,6 @@
 package com.superbigbang.mushelp.adapter.provider;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
 
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.provider.BaseItemProvider;
@@ -28,7 +27,7 @@ public class SetListItemProvider extends BaseItemProvider<SetList, BaseViewHolde
         if (data.isOpen()) {
             helper.setTextColor(R.id.setListName, ExtendApplication.currentThemeColorsTextSelected);
         } else {
-            helper.setTextColor(R.id.setListName, Color.parseColor("#66bfff"));
+            helper.setTextColor(R.id.setListName, ExtendApplication.currentThemeColorsTextUNSelected);
         }
     }
 }

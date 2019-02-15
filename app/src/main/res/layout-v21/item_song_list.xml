@@ -25,8 +25,8 @@
             android:gravity="center"
             android:maxLength="2"
             android:maxLines="1"
-            android:paddingEnd="@dimen/dp_4"
             android:paddingStart="@dimen/dp_4"
+            android:paddingEnd="@dimen/dp_4"
             android:text="@string/_12"
             android:textColor="?OtherTextColor"
             android:textSize="18sp"
@@ -39,8 +39,8 @@
             android:id="@+id/divider1"
             android:layout_width="1dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="4dp"
             android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
             android:contentDescription="@string/divider"
             app:layout_constraintBottom_toBottomOf="@+id/songName"
             app:layout_constraintStart_toEndOf="@+id/songPosition"
@@ -55,8 +55,8 @@
             android:fontFamily="@font/roboto_medium"
             android:gravity="center"
             android:minHeight="36dp"
-            android:paddingEnd="@dimen/dp_4"
             android:paddingStart="@dimen/dp_4"
+            android:paddingEnd="@dimen/dp_4"
             android:textColor="?OtherTextColor"
             android:textSize="18sp"
             android:textStyle="normal"
@@ -141,10 +141,11 @@
             android:background="?backGroundColor"
             android:contentDescription="@string/playpausebutton"
             android:scaleType="fitCenter"
+            android:tint="?lines_color"
+            android:tintMode="multiply"
             app:layout_constraintBottom_toBottomOf="@+id/songName"
             app:layout_constraintEnd_toStartOf="@+id/divider4"
             app:layout_constraintTop_toTopOf="parent"
-            android:tint="?lines_color"
             app:srcCompat="@drawable/baseline_play_circle_outline_white_48" />
 
         <ImageView
@@ -166,11 +167,12 @@
             android:background="?backGroundColor"
             android:contentDescription="@string/deletesongbutton"
             android:scaleType="fitCenter"
+            android:tint="?lines_color"
+            android:tintMode="multiply"
             app:layout_constraintBottom_toBottomOf="@+id/playPauseButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/playPauseButton"
             app:layout_constraintVertical_bias="0.0"
-            android:tint="?lines_color"
             app:srcCompat="@drawable/baseline_remove_white_36" />
 
         <View

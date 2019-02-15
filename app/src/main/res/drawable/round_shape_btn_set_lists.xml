@@ -8,5 +8,5 @@
         android:height="43dp" />
     <stroke
         android:width="2dp"
-        android:color="@color/cornerColor" />
+        android:color="?lines_color" />
 </shape>

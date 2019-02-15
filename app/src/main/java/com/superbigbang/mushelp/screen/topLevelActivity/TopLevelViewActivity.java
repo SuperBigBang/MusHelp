@@ -102,6 +102,13 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         this.getTheme().resolveAttribute(R.attr.selectedTextColor, typedValue, true);
         @ColorInt int color = typedValue.data;
         ExtendApplication.currentThemeColorsTextSelected = color;
+        typedValue = null;
+
+        TypedValue typedValue2 = new TypedValue();
+        this.getTheme().resolveAttribute(R.attr.UNselectedTextColor, typedValue2, true);
+        @ColorInt int color2 = typedValue2.data;
+        ExtendApplication.currentThemeColorsTextUNSelected = color2;
+        typedValue2 = null;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_level);

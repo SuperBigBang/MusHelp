@@ -25,14 +25,15 @@
         android:id="@+id/buyButton"
         android:layout_width="42dp"
         android:layout_height="42dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="?backGroundColor"
         android:contentDescription="@string/buybutton"
         android:scaleType="fitCenter"
+        android:tint="?lines_color"
+        android:tintMode="multiply"
         app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintEnd_toEndOf="parent"
-        android:tint="?lines_color"
         app:srcCompat="@drawable/baseline_shopping_cart_white_48" />
 
     <ImageButton
@@ -44,9 +45,10 @@
         android:background="?backGroundColor"
         android:contentDescription="@string/metroSoundChangeButton"
         android:scaleType="fitCenter"
+        android:tint="?lines_color"
+        android:tintMode="multiply"
         app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintStart_toEndOf="@+id/countdownChangeButton"
-        android:tint="?lines_color"
         app:srcCompat="@drawable/baseline_music_note_white1_48" />
 
     <ImageButton
@@ -59,6 +61,8 @@
         android:background="?backGroundColor"
         android:contentDescription="@string/rate_change_button"
         android:scaleType="fitCenter"
+        android:tint="?lines_color"
+        android:tintMode="multiply"
         app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintEnd_toStartOf="@+id/newItemCircleButton"
         app:layout_constraintStart_toEndOf="@+id/metroSoundChangeButton"
@@ -74,26 +78,28 @@
         android:background="?backGroundColor"
         android:contentDescription="@string/theme_change_button"
         android:scaleType="fitCenter"
+        android:tint="?lines_color"
+        android:tintMode="multiply"
         app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintEnd_toStartOf="@+id/buyButton"
         app:layout_constraintStart_toEndOf="@+id/newItemCircleButton"
-        android:tint="?lines_color"
         app:srcCompat="@drawable/baseline_change_theme_48" />
 
     <ImageButton
         android:id="@+id/newItemCircleButton"
         android:layout_width="42dp"
         android:layout_height="42dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="?backGroundColor"
         android:contentDescription="@string/newitemcirclebutton"
         android:scaleType="fitCenter"
+        android:tint="?lines_color"
+        android:tintMode="multiply"
         app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintEnd_toEndOf="@+id/buyButton"
         app:layout_constraintStart_toStartOf="@+id/countdownChangeButton"
-        android:tint="?lines_color"
         app:srcCompat="@drawable/baseline_add_circle_outline_white_48" />
 
     <ImageButton
@@ -106,9 +112,10 @@
         android:contentDescription="@string/volumex2button"
 
         android:scaleType="fitCenter"
+        android:tint="?lines_color"
+        android:tintMode="multiply"
         app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintStart_toStartOf="parent"
-        android:tint="?lines_color"
         app:srcCompat="@drawable/baseline_timer_white_48_off" />
 
     <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
@@ -117,11 +124,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:background="?backGroundColor"
         ads:adSize="SMART_BANNER"
         ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
         ads:layout_constraintBottom_toBottomOf="parent"
         ads:layout_constraintEnd_toEndOf="parent"
-        android:background="?backGroundColor"
         ads:layout_constraintStart_toStartOf="parent">
 
     </com.google.android.gms.ads.AdView>
@@ -130,9 +137,9 @@
         android:id="@+id/RecyclerSetList"
         android:layout_width="0dp"
         android:layout_height="43dp"
-        android:layout_marginEnd="4dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
         android:scrollbars="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -143,8 +150,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:theme="@style/SeekBarColor"
         android:progressDrawable="@drawable/seekbarstyle"
+        android:theme="@style/SeekBarColor"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/newItemCircleButton"
         app:layout_constraintEnd_toEndOf="parent"

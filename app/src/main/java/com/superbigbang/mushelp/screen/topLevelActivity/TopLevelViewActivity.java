@@ -97,6 +97,9 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
             case 2:
                 setTheme(R.style.Theme_2);
                 break;
+            case 3:
+                setTheme(R.style.Theme_3);
+                break;
         }
         TypedValue typedValue = new TypedValue();
         this.getTheme().resolveAttribute(R.attr.selectedTextColor, typedValue, true);
@@ -142,7 +145,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         //Clicks
         themeChangeButton.setOnClickListener(v -> {
             themeValue++;
-            if (themeValue == 3) {
+            if (themeValue == 4) {
                 themeValue = 1;
             }
             recreate();
@@ -414,6 +417,9 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
                 break;
             case 101:
                 Toast.makeText(this, getText(R.string.rate_change_feature_error), Toast.LENGTH_LONG).show();
+                break;
+            case 102:
+                Toast.makeText(this, getText(R.string.check_file_exist_error), Toast.LENGTH_LONG).show();
                 break;
         }
     }

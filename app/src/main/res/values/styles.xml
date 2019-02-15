@@ -29,7 +29,7 @@
 
         <item name="backGroundColor">@color/colorPrimaryDark</item>
         <item name="selectedTextColor">@color/colorPrimaryWhite</item>
-        <item name="UNselectedTextColor">@color/colorPrimaryWhite</item>
+        <item name="UNselectedTextColor">@color/cornerColor</item>
         <item name="OtherTextColor">@color/colorPrimaryWhite</item>
         <item name="seekBarDotColor">@color/colorPrimaryBlue</item>
         <item name="seekBarProgressColor">@color/colorPrimaryBlue</item>
@@ -38,8 +38,25 @@
         <item name="BuyOkButton">@color/BuyOkButtonDark</item>
     </style>
 
-
     <style name="Theme_2" parent="@style/AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimartWhiteDarkBlueTheme</item>
+        <item name="colorAccent">@color/colorPrimartWhiteDarkBlueTheme</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_state_darkBlue_blue</item>
+        <item name="android:alertDialogTheme">@style/Theme.AppCompat.NoActionBar</item>
+
+        <item name="backGroundColor">@color/colorPrimaryDarkBlueBackground</item>
+        <item name="selectedTextColor">@color/colorPrimartWhiteDarkBlueTheme</item>
+        <item name="UNselectedTextColor">@color/cornerColorDarkBlueTheme</item>
+        <item name="OtherTextColor">@color/colorPrimartWhiteDarkBlueTheme</item>
+        <item name="seekBarDotColor">@color/cornerColorDarkBlueTheme</item>
+        <item name="seekBarProgressColor">@color/cornerColorDarkBlueTheme</item>
+        <item name="seekBarBackgroundProgressColor">@color/colorPrimartWhiteDarkBlueTheme</item>
+        <item name="lines_color">@color/cornerColorDarkBlueTheme</item>
+        <item name="BuyOkButton">@color/BuyOkButtonDark</item>
+    </style>
+
+    <style name="Theme_3" parent="@style/AppTheme">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimaryWhite</item>
         <item name="colorAccent">@color/colorPrimary</item>

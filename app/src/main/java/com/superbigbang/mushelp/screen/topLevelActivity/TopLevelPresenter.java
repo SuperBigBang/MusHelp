@@ -12,8 +12,11 @@ import com.superbigbang.mushelp.adapter.SongsItemRvAdapter;
 import com.superbigbang.mushelp.model.SetList;
 import com.superbigbang.mushelp.model.Songs;
 
+import java.io.File;
+
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import timber.log.Timber;
 
 
 @InjectViewState
@@ -188,7 +191,7 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
                     } else {
                         //       Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Start playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
                         editsong.setPlaystarted(true);
-                        startPlaying(editsong.getMetronombpm(), false, editsong.isAudioOn() ? editsong.getAudiofile() : null, countDownIsOn);
+                        startPlaying(editsong.getMetronombpm(), false, editsong.isAudioOn() ? checkAudioFileIsExists(editsong.getAudiofile()) : null, countDownIsOn);
                     }
                 }
             } else {
@@ -198,16 +201,30 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
                     //     Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Stop playing " + firststoppedsong.getTitle() + " Start playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
                     currentSpeed = 0;
                     editsong.setPlaystarted(true);
-                    startPlaying(editsong.getMetronombpm(), true, editsong.isAudioOn() ? editsong.getAudiofile() : null, countDownIsOn);
+                    startPlaying(editsong.getMetronombpm(), true, editsong.isAudioOn() ? checkAudioFileIsExists(editsong.getAudiofile()) : null, countDownIsOn);
                 } else {
                     //    Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Start playing " + editsong.getTitle(), Toast.LENGTH_LONG).show();
                     editsong.setPlaystarted(true);
-                    startPlaying(editsong.getMetronombpm(), false, editsong.isAudioOn() ? editsong.getAudiofile() : null, countDownIsOn);
+                    startPlaying(editsong.getMetronombpm(), false, editsong.isAudioOn() ? checkAudioFileIsExists(editsong.getAudiofile()) : null, countDownIsOn);
                 }
                 isPaused = false;
             }
         }
         mSongsrealm.commitTransaction();
+    }
+
+    private String checkAudioFileIsExists(String audioFile) {
+        Timber.e("AudioFile path: %s", audioFile);
+        File fileToCheck = new File(audioFile);
+        if (fileToCheck.exists()) {
+            /** Дополнить проверку на тип файла!*/
+            fileToCheck = null;
+            return audioFile;
+        } else {
+            getViewState().showErrorMessages(102);
+            fileToCheck = null;
+            return null;
+        }
     }
 
     @Override

@@ -14,6 +14,7 @@
     <string name="theme_change_button">Theme change button</string>
     <string name="rate_change_button">Rate change button</string>
     <string name="check_permissions_failed">Необходимы разрешения на доступ к аудиофайлам</string>
+    <string name="check_file_exist_error">Аудиофайл был переименован или перемещён</string>
     <string name="rate_change_message">Скорость:\u0020</string>
     <string name="rate_change_feature_error">Изменение скорости доступно только для Android 6.0 и выше</string>
     <string name="rate_change_feature_error_off">Меняет скорость воспроизведения аудио. Длительное нажатие вернёт нормальную скорость</string>

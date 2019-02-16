@@ -44,9 +44,9 @@
         android:background="?backGroundColor"
         android:contentDescription="@string/metroSoundChangeButton"
         android:scaleType="fitCenter"
+        android:tint="?lines_color"
         app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintStart_toEndOf="@+id/countdownChangeButton"
-        android:tint="?lines_color"
         app:srcCompat="@drawable/baseline_music_note_white1_48" />
 
     <ImageButton
@@ -74,26 +74,26 @@
         android:background="?backGroundColor"
         android:contentDescription="@string/theme_change_button"
         android:scaleType="fitCenter"
+        android:tint="?lines_color"
         app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintEnd_toStartOf="@+id/buyButton"
         app:layout_constraintStart_toEndOf="@+id/newItemCircleButton"
-        android:tint="?lines_color"
         app:srcCompat="@drawable/baseline_change_theme_48" />
 
     <ImageButton
         android:id="@+id/newItemCircleButton"
         android:layout_width="42dp"
         android:layout_height="42dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="?backGroundColor"
         android:contentDescription="@string/newitemcirclebutton"
         android:scaleType="fitCenter"
+        android:tint="?lines_color"
         app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintEnd_toEndOf="@+id/buyButton"
         app:layout_constraintStart_toStartOf="@+id/countdownChangeButton"
-        android:tint="?lines_color"
         app:srcCompat="@drawable/baseline_add_circle_outline_white_48" />
 
     <ImageButton

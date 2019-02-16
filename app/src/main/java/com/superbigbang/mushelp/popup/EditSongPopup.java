@@ -377,8 +377,15 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
                         .getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).getPath())
                 .withRowLayoutView(R.layout.li_row_textview)
                 .withChosenListener((path, pathFile) -> {
-                    currentAudioFile = path;
-                    Toast.makeText(ExtendApplication.getBaseComponent().getContext(), getContext().getText(R.string.add_audio_file_ok) + pathFile.getName(), Toast.LENGTH_SHORT).show();
+                    if (path.endsWith(".aac") || path.endsWith(".m4a") || path.endsWith(".flac")
+                            || path.endsWith(".mid") || path.endsWith(".xmf") || path.endsWith(".mxmf")
+                            || path.endsWith(".mp3") || path.endsWith(".wav")
+                            || path.endsWith(".ogg")) {
+                        currentAudioFile = path;
+                        Toast.makeText(ExtendApplication.getBaseComponent().getContext(), getContext().getText(R.string.add_audio_file_ok) + pathFile.getName(), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(ExtendApplication.getBaseComponent().getContext(), getContext().getText(R.string.add_audio_file_wrong_format) + pathFile.getName(), Toast.LENGTH_SHORT).show();
+                    }
                 })
                 .build()
                 .show();

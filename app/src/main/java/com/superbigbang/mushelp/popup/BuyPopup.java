@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.superbigbang.mushelp.R;
+import com.superbigbang.mushelp.billing.BillingProvider;
 import com.superbigbang.mushelp.screen.topLevelActivity.TopLevelPresenter;
 
 import razerdp.basepopup.BasePopupWindow;
@@ -18,11 +19,13 @@ public class BuyPopup extends BasePopupWindow implements View.OnClickListener {
     private Button mCancelButton;
     private Button mBuyButton;
     private TopLevelPresenter mTopLevelPresenter;
+    private BillingProvider mBillingProvider;
 
-    public BuyPopup(Context context, TopLevelPresenter mTopLevelPresenter) {
+    public BuyPopup(Context context, TopLevelPresenter mTopLevelPresenter, BillingProvider provider) {
         super(context);
         mCancelButton = findViewById(R.id.btn_PBUY_cancel);
         mBuyButton = findViewById(R.id.btn_PBUY_Accept);
+        mBillingProvider = provider;
 
         this.mTopLevelPresenter = mTopLevelPresenter;
         setBlurBackgroundEnable(true);
@@ -84,7 +87,12 @@ public class BuyPopup extends BasePopupWindow implements View.OnClickListener {
                 dismiss();
                 break;
             case R.id.btn_PBUY_Accept:
-                Toast.makeText(getContext(), "Переход на Google Play для покупки", Toast.LENGTH_LONG).show();
+                if (mBillingProvider.isPremiumPurchased()) {
+                    Toast.makeText(getContext(), getContext().getText(R.string.already_own_premium_version), Toast.LENGTH_LONG).show();
+                } else {
+                    mBillingProvider.getBillingManager().initiatePurchaseFlow("premium",
+                            "inapp");
+                }
                 dismiss();
                 break;
             default:

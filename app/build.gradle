@@ -7,8 +7,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
 
 android {
-    compileSdkVersion versions.compileSdk
-
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.superbigbang.mushelp"
         minSdkVersion versions.minSdk
@@ -25,11 +24,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    buildToolsVersion '28.0.3'
 }
 
 dependencies {
@@ -63,4 +62,5 @@ dependencies {
     implementation 'com.google.android.gms:play-services-ads:17.1.3'
     implementation 'com.github.razerdp:BasePopup:2.0.9'
     implementation 'com.obsez.android.lib.filechooser:filechooser:1.1.14'
+    implementation 'com.android.billingclient:billing:1.2'
 }

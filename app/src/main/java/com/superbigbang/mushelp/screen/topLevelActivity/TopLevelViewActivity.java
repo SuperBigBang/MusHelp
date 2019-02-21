@@ -8,6 +8,8 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
+import android.support.annotation.UiThread;
+import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -19,14 +21,18 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
+import com.android.billingclient.api.BillingClient;
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.superbigbang.mushelp.ExtendApplication;
+import com.superbigbang.mushelp.MainViewController;
 import com.superbigbang.mushelp.R;
 import com.superbigbang.mushelp.adapter.SetListItemRvAdapter;
 import com.superbigbang.mushelp.adapter.SongsItemRvAdapter;
+import com.superbigbang.mushelp.billing.BillingManager;
+import com.superbigbang.mushelp.billing.BillingProvider;
 import com.superbigbang.mushelp.popup.BuyPopup;
 import com.superbigbang.mushelp.popup.DeleteSongPopup;
 import com.superbigbang.mushelp.popup.EditSetListPopup;
@@ -45,7 +51,7 @@ import timber.log.Timber;
 
 import static android.os.Build.VERSION.SDK_INT;
 
-public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLevelView {
+public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLevelView, BillingProvider {
 //ca-app-pub-5364969751338385~1161013636  - идентификатор приложения в AdMob
 //ca-app-pub-5364969751338385/9526465105  -  ads:adUnitId="" -LIVE (DON'T USE FOR TEST'S)
 // ca-app-pub-3940256099942544/6300978111 - ads:adUnitId="" ONLY FOR TEST/
@@ -81,9 +87,18 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     private SharedPreferences.OnSharedPreferenceChangeListener callback = (sharedPreferences, key) -> {
     };
 
+    private BillingManager mBillingManager;
+    private MainViewController mViewController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        // Start the controller and load data
+        mViewController = new MainViewController(this);
+
+        // Create and initialize BillingManager which talks to BillingLibrary
+        mBillingManager = new BillingManager(this, mViewController.getUpdateListener());
+
         //Get the theme save on sharedpreference
         themeValue = mSettings.getInt("theme", 1);
         //Theme settings
@@ -152,6 +167,36 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         });
     }
 
+    /**
+     * Remove loading spinner and refresh the UI
+     */
+    public void showRefreshedUi() {
+        //     setWaitScreen(false);
+        updateUi();
+    }
+
+    /**
+     * Update UI to reflect model
+     */
+    @UiThread
+    private void updateUi() {
+        if (isPremiumPurchased()) {
+            Toast.makeText(this, "You On full PREMIUM!", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "You On FREE demo!", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public BillingManager getBillingManager() {
+        return mBillingManager;
+    }
+
+    @Override
+    public boolean isPremiumPurchased() {
+        return mViewController.isPremiumPurchased();
+    }
+
     @Override
     public void showSongsLists(SongsItemRvAdapter songsItemRvAdapter) {
         mRecyclerSongsList.setAdapter(songsItemRvAdapter);
@@ -176,6 +221,13 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
             return true;
         });
     }
+
+    @VisibleForTesting
+    public MainViewController getViewController() {
+        return mViewController;
+    }
+
+
 
     @Override
     public void showSongEditPopup(String SongName, int position, int currentSetList, boolean audioIsOn, String audioFile, String lyrics, int tempBpm, boolean actionIsAddNewSong) {
@@ -213,6 +265,14 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     @Override
     protected void onResume() {
         super.onResume();
+        // Note: We query purchases in onResume() to handle purchases completed while the activity
+        // is inactive. For example, this can happen if the activity is destroyed during the
+        // purchase flow. This ensures that when the activity is resumed it reflects the user's
+        // current purchases.
+        if (mBillingManager != null
+                && mBillingManager.getBillingClientResponseCode() == BillingClient.BillingResponse.OK) {
+            mBillingManager.queryPurchases();
+        }
     }
 
     @Override
@@ -232,9 +292,13 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
+        Timber.d("Destroying helper.");
+        if (mBillingManager != null) {
+            mBillingManager.destroy();
+        }
         mSettings = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
         mSettings.unregisterOnSharedPreferenceChangeListener(callback);
+        super.onDestroy();
     }
 
     @Override
@@ -313,7 +377,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
 
     @Override
     public void showBuyPopup() {
-        new BuyPopup(this, mTopLevelPresenter).showPopupWindow();
+        new BuyPopup(this, mTopLevelPresenter, this).showPopupWindow();
     }
 
     private boolean checkAndRequestPermissions() {

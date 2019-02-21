@@ -66,4 +66,5 @@
     <string name="Hint10">Долгое нажатие позволяет отредактировать элемент</string>
     <string name="_170">170</string>
     <string name="_12">12</string>
+    <string name="already_own_premium_version">У вас уже полная премиум версия программы</string>
 </resources>

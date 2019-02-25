@@ -20,7 +20,7 @@ package com.superbigbang.mushelp.billing;
  */
 public final class BillingConstants {
     // SKUs for our products: the premium upgrade (non-consumable)
-    public static final String SKU_PREMIUM = "premium";
+    public static final String SKU_PREMIUM = "mus.pro";
 
     private BillingConstants() {
     }

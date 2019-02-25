@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.superbigbang.mushelp.R;
+import com.superbigbang.mushelp.billing.BillingConstants;
 import com.superbigbang.mushelp.billing.BillingProvider;
 import com.superbigbang.mushelp.screen.topLevelActivity.TopLevelPresenter;
 
@@ -90,7 +91,7 @@ public class BuyPopup extends BasePopupWindow implements View.OnClickListener {
                 if (mBillingProvider.isPremiumPurchased()) {
                     Toast.makeText(getContext(), getContext().getText(R.string.already_own_premium_version), Toast.LENGTH_LONG).show();
                 } else {
-                    mBillingProvider.getBillingManager().initiatePurchaseFlow("premium",
+                    mBillingProvider.getBillingManager().initiatePurchaseFlow(BillingConstants.SKU_PREMIUM,
                             "inapp");
                 }
                 dismiss();

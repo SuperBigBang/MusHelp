@@ -17,6 +17,7 @@
 package com.superbigbang.mushelp;
 
 import com.android.billingclient.api.Purchase;
+import com.superbigbang.mushelp.billing.BillingConstants;
 import com.superbigbang.mushelp.billing.BillingManager;
 import com.superbigbang.mushelp.screen.topLevelActivity.TopLevelViewActivity;
 
@@ -64,7 +65,7 @@ public class MainViewController {
 
             for (Purchase purchase : purchaseList) {
                 switch (purchase.getSku()) {
-                    case "premium":
+                    case BillingConstants.SKU_PREMIUM:
                         Timber.d("You are Premium! Congratulations!!!");
                         mIsPremium = true;
                         break;

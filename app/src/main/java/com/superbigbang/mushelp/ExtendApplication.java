@@ -37,7 +37,16 @@ public class ExtendApplication extends Application implements ServiceConnection 
     private static MetroComponent sMetroComponent;
     public static int currentThemeColorsTextSelected = Color.parseColor("#FFFFFFFF");
     public static int currentThemeColorsTextUNSelected = Color.parseColor("#66bfff");
+    public static int currentThemeColorsUnavailable = Color.parseColor("#4DFFFFFF");
+    private static boolean isFull;
 
+    public static boolean isIsFull() {
+        return isFull;
+    }
+
+    public static void setIsFull(boolean isFull) {
+        ExtendApplication.isFull = isFull;
+    }
 
     //==================Lyrics added for Test:
     private String Amon_Amarth_One_Against_All_lyrics = "Winter's lost its grip\n" +

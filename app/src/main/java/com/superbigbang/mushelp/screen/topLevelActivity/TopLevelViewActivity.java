@@ -128,6 +128,12 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         ExtendApplication.currentThemeColorsTextUNSelected = color2;
         typedValue2 = null;
 
+        TypedValue typedValue3 = new TypedValue();
+        this.getTheme().resolveAttribute(R.attr.UnavailableObj, typedValue3, true);
+        @ColorInt int color3 = typedValue3.data;
+        ExtendApplication.currentThemeColorsUnavailable = color2;
+        typedValue3 = null;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_level);
         ButterKnife.bind(this);
@@ -181,8 +187,10 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     @UiThread
     private void updateUi() {
         if (isPremiumPurchased()) {
+            ExtendApplication.setIsFull(true);
             Toast.makeText(this, "You On full PREMIUM!", Toast.LENGTH_LONG).show();
         } else {
+            ExtendApplication.setIsFull(false);
             Toast.makeText(this, "You On FREE demo!", Toast.LENGTH_LONG).show();
         }
     }

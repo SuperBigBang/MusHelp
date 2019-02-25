@@ -17,6 +17,7 @@
         <item name="seekBarBackgroundProgressColor">@color/colorPrimaryWhite</item>
         <item name="lines_color">@color/cornerColor</item>
         <item name="BuyOkButton">@color/BuyOkButtonDark</item>
+        <item name="UnavailableObj">@color/md_dark_disabled</item>
     </style>
 
 
@@ -103,4 +104,5 @@
     <attr name="seekBarBackgroundProgressColor" format="reference|color" />
     <attr name="lines_color" format="reference|color" />
     <attr name="BuyOkButton" format="reference|color" />
+    <attr name="UnavailableObj" format="reference|color" />
 </resources>

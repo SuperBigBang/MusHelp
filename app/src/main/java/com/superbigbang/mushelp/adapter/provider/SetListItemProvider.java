@@ -29,5 +29,9 @@ public class SetListItemProvider extends BaseItemProvider<SetList, BaseViewHolde
         } else {
             helper.setTextColor(R.id.setListName, ExtendApplication.currentThemeColorsTextUNSelected);
         }
+        if (!ExtendApplication.isIsFull() && position > 1) {
+            helper.setTextColor(R.id.setListName, ExtendApplication.currentThemeColorsTextUNSelected);
+            helper.setBackgroundRes(R.id.setListName, R.drawable.round_shape_btn_set_lists_unavailable);
+        }
     }
 }

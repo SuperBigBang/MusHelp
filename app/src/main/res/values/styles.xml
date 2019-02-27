@@ -17,7 +17,7 @@
         <item name="seekBarBackgroundProgressColor">@color/colorPrimaryWhite</item>
         <item name="lines_color">@color/cornerColor</item>
         <item name="BuyOkButton">@color/BuyOkButtonDark</item>
-        <item name="UnavailableObj">@color/md_dark_disabled</item>
+        <item name="UnavailableObj">@color/md_grey_500</item>
     </style>
 
 
@@ -37,6 +37,7 @@
         <item name="seekBarBackgroundProgressColor">@color/colorPrimaryWhite</item>
         <item name="lines_color">@color/cornerColor</item>
         <item name="BuyOkButton">@color/BuyOkButtonDark</item>
+        <item name="UnavailableObj">@color/md_grey_500</item>
     </style>
 
     <style name="Theme_2" parent="@style/AppTheme">
@@ -55,6 +56,7 @@
         <item name="seekBarBackgroundProgressColor">@color/colorPrimartWhiteDarkBlueTheme</item>
         <item name="lines_color">@color/cornerColorDarkBlueTheme</item>
         <item name="BuyOkButton">@color/BuyOkButtonDark</item>
+        <item name="UnavailableObj">@color/md_grey_500</item>
     </style>
 
     <style name="Theme_3" parent="@style/AppTheme">

@@ -131,7 +131,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         TypedValue typedValue3 = new TypedValue();
         this.getTheme().resolveAttribute(R.attr.UnavailableObj, typedValue3, true);
         @ColorInt int color3 = typedValue3.data;
-        ExtendApplication.currentThemeColorsUnavailable = color2;
+        ExtendApplication.currentThemeColorsUnavailable = color3;
         typedValue3 = null;
 
         super.onCreate(savedInstanceState);

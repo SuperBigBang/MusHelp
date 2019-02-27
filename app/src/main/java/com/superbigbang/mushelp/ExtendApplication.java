@@ -46,6 +46,7 @@ public class ExtendApplication extends Application implements ServiceConnection 
 
     public static void setIsFull(boolean isFull) {
         ExtendApplication.isFull = isFull;
+        // ExtendApplication.isFull = true; //FOR TEST
     }
 
     //==================Lyrics added for Test:

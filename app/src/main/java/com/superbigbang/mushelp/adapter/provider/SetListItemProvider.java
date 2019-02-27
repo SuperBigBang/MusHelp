@@ -24,13 +24,14 @@ public class SetListItemProvider extends BaseItemProvider<SetList, BaseViewHolde
     @Override
     public void convert(BaseViewHolder helper, SetList data, int position) {
         helper.setText(R.id.setListName, data.getName());
+        helper.setBackgroundRes(R.id.setListName, R.drawable.round_shape_btn_set_lists);
         if (data.isOpen()) {
             helper.setTextColor(R.id.setListName, ExtendApplication.currentThemeColorsTextSelected);
         } else {
             helper.setTextColor(R.id.setListName, ExtendApplication.currentThemeColorsTextUNSelected);
         }
-        if (!ExtendApplication.isIsFull() && position > 1) {
-            helper.setTextColor(R.id.setListName, ExtendApplication.currentThemeColorsTextUNSelected);
+        if (!ExtendApplication.isIsFull() && data.getPosition() > 1) {
+            helper.setTextColor(R.id.setListName, ExtendApplication.currentThemeColorsUnavailable);
             helper.setBackgroundRes(R.id.setListName, R.drawable.round_shape_btn_set_lists_unavailable);
         }
     }

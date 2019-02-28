@@ -84,8 +84,8 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     SharedPreferences mSettings;
 
     private int themeValue;
-    private SharedPreferences.OnSharedPreferenceChangeListener callback = (sharedPreferences, key) -> {
-    };
+  /*  private SharedPreferences.OnSharedPreferenceChangeListener callback = (sharedPreferences, key) -> {
+    };*/
 
     private BillingManager mBillingManager;
     private MainViewController mViewController;
@@ -161,7 +161,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         mTopLevelPresenter.sendSeekBarOperationsToService(mSeekBar);
 
 
-        mSettings.registerOnSharedPreferenceChangeListener(callback);
+        //mSettings.registerOnSharedPreferenceChangeListener(callback);
 
         //Clicks
         themeChangeButton.setOnClickListener(v -> {
@@ -188,9 +188,15 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     private void updateUi() {
         if (isPremiumPurchased()) {
             ExtendApplication.setIsFull(true);
+            SharedPreferences.Editor spe = mSettings.edit();
+            spe.putBoolean("Premium", true);
+            spe.apply();
             Toast.makeText(this, "You On full PREMIUM!", Toast.LENGTH_LONG).show();
         } else {
             ExtendApplication.setIsFull(false);
+            SharedPreferences.Editor spe = mSettings.edit();
+            spe.putBoolean("Premium", false);
+            spe.apply();
             Toast.makeText(this, "You On FREE demo!", Toast.LENGTH_LONG).show();
         }
     }
@@ -203,6 +209,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     @Override
     public boolean isPremiumPurchased() {
         return mViewController.isPremiumPurchased();
+        //  return true; //FOR TEST
     }
 
     @Override
@@ -287,7 +294,6 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     protected void onStop() {
         super.onStop();
         //Save on sharedpreference when app stop
-        mSettings = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
         SharedPreferences.Editor editor = mSettings.edit();
         editor.putInt("theme", themeValue);
         editor.apply();
@@ -304,8 +310,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         if (mBillingManager != null) {
             mBillingManager.destroy();
         }
-        mSettings = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
-        mSettings.unregisterOnSharedPreferenceChangeListener(callback);
+        //mSettings.unregisterOnSharedPreferenceChangeListener(callback);
         super.onDestroy();
     }
 

@@ -46,7 +46,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
 
     public static void setIsFull(boolean isFull) {
         ExtendApplication.isFull = isFull;
-        // ExtendApplication.isFull = true; //FOR TEST
     }
 
     //==================Lyrics added for Test:
@@ -528,6 +527,9 @@ public class ExtendApplication extends Application implements ServiceConnection 
     public void onCreate() {
         super.onCreate();
         SharedPreferences mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        if (mSettings.contains("Premium")) {
+            setIsFull(mSettings.getBoolean("Premium", false));
+        }
 
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());

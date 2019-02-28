@@ -110,7 +110,9 @@ public class EditSetListPopup extends BasePopupWindow implements View.OnClickLis
                 } else {
                     valueOfResultPositionEditText = (Integer.valueOf(resultPositionEditText)) - 1;
                     if (valueOfResultPositionEditText < 0 || valueOfResultPositionEditText >= maxPosition) {
-                        Toast.makeText(getContext(), getContext().getString(R.string.SetListPosNumError) + String.valueOf(maxPosition), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), getContext().getString(R.string.SetListPosNumError) +
+                                String.valueOf(maxPosition) +
+                                (ExtendApplication.isIsFull() ? "" : getContext().getString(R.string.SetListPosNumErrorExtend)), Toast.LENGTH_LONG).show();
                     } else {
                         if (currentPosition > valueOfResultPositionEditText) {
 //=============================================================to Bottom

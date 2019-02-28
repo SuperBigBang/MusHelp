@@ -60,6 +60,7 @@
     <string name="SongNoNameError">Введите название трэка, чтобы продолжить</string>
     <string name="SongNoMetronomError">Введите значение для метронома, чтобы продолжить</string>
     <string name="SetListPosNumError">Введите позицию от 1 до\u0020</string>
+    <string name="SetListPosNumErrorExtend">.\u0020 Больше сет-листов доступно в MusHelp Pro</string>
     <string name="SongPosNumError">Введите позицию от 1 до\u0020</string>
     <string name="SongMetronomNumError">Введите значение от 1 до 300</string>
     <string name="EmptyLyrics">Текст песни можно вставить в редакторе</string>

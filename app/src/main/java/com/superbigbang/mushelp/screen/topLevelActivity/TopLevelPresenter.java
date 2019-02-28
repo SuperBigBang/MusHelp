@@ -124,26 +124,34 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
     }
 
     void changeSetList(int position) {
-        SetList lastOpened = mSetlistsrealm.where(SetList.class).equalTo("isOpen", true).findFirst();
-        SetList openlist = mSetlistsrealm.where(SetList.class).equalTo("position", position).findFirst();
-        if (lastOpened.getId() != openlist.getId()) {
-            Songs editsong = mSongsrealm.where(Songs.class).equalTo("playstarted", true).findFirst();
-            if (editsong != null) {
-                mSongsrealm.beginTransaction();
-                editsong.setPlaystarted(false);
-                mSongsrealm.commitTransaction();
-                stopTrueOrPauseFalsePlaying(true);
+        if (ExtendApplication.isIsFull() || position < 2) {
+            SetList lastOpened = mSetlistsrealm.where(SetList.class).equalTo("isOpen", true).findFirst();
+            SetList openlist = mSetlistsrealm.where(SetList.class).equalTo("position", position).findFirst();
+            if (lastOpened.getId() != openlist.getId()) {
+                Songs editsong = mSongsrealm.where(Songs.class).equalTo("playstarted", true).findFirst();
+                if (editsong != null) {
+                    mSongsrealm.beginTransaction();
+                    editsong.setPlaystarted(false);
+                    mSongsrealm.commitTransaction();
+                    stopTrueOrPauseFalsePlaying(true);
+                }
+                mSetlistsrealm.beginTransaction();
+                lastOpened.setOpen(false);
+                openlist.setOpen(true);
+                mSetlistsrealm.commitTransaction();
+                getViewState().changeSetList(openlist.getName());
             }
-            mSetlistsrealm.beginTransaction();
-            lastOpened.setOpen(false);
-            openlist.setOpen(true);
-            mSetlistsrealm.commitTransaction();
-            getViewState().changeSetList(openlist.getName());
+        } else {
+            getViewState().showErrorMessages(103);
         }
     }
 
     void showSetListEditPopup(int position) {
-        getViewState().showSetListEditPopup(mSetlistsrealm.where(SetList.class).equalTo("position", position).findFirst().getName(), position);
+        if (ExtendApplication.isIsFull() || position < 2) {
+            getViewState().showSetListEditPopup(mSetlistsrealm.where(SetList.class).equalTo("position", position).findFirst().getName(), position);
+        } else {
+            getViewState().showErrorMessages(103);
+        }
     }
 
     void showSongEditPopup(int position, boolean actionIsAddNewSong) {

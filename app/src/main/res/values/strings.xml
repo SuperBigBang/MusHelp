@@ -15,6 +15,7 @@
     <string name="rate_change_button">Rate change button</string>
     <string name="check_permissions_failed">Необходимы разрешения на доступ к аудиофайлам</string>
     <string name="check_file_exist_error">Аудиофайл был переименован или перемещён</string>
+    <string name="need_full_version_for_setlists_error">Больше сет-листов доступно в MusHelp Pro</string>
     <string name="rate_change_message">Скорость:\u0020</string>
     <string name="rate_change_feature_error">Изменение скорости доступно только для Android 6.0 и выше</string>
     <string name="rate_change_feature_error_off">Меняет скорость воспроизведения аудио. Длительное нажатие вернёт нормальную скорость</string>
@@ -58,7 +59,7 @@
     <string name="SetListNoNameError">Введите название сет-листа, чтобы продолжить</string>
     <string name="SongNoNameError">Введите название трэка, чтобы продолжить</string>
     <string name="SongNoMetronomError">Введите значение для метронома, чтобы продолжить</string>
-    <string name="SetListPosNumError">Введите позицию от 1 до 20</string>
+    <string name="SetListPosNumError">Введите позицию от 1 до\u0020</string>
     <string name="SongPosNumError">Введите позицию от 1 до\u0020</string>
     <string name="SongMetronomNumError">Введите значение от 1 до 300</string>
     <string name="EmptyLyrics">Текст песни можно вставить в редакторе</string>

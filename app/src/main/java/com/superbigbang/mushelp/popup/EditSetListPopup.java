@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.superbigbang.mushelp.ExtendApplication;
 import com.superbigbang.mushelp.R;
 import com.superbigbang.mushelp.model.SetList;
 import com.superbigbang.mushelp.screen.topLevelActivity.TopLevelPresenter;
@@ -23,6 +24,7 @@ public class EditSetListPopup extends BasePopupWindow implements View.OnClickLis
     private EditText mEditTextPosition;
     private EditText mEditTextSetListName;
     private int currentPosition;
+    private int maxPosition;
 
     private TopLevelPresenter mTopLevelPresenter;
 
@@ -35,6 +37,7 @@ public class EditSetListPopup extends BasePopupWindow implements View.OnClickLis
         mEditTextPosition.setText(String.valueOf(position + 1));
         mEditTextSetListName.setText(SongName);
 
+        maxPosition = ExtendApplication.isIsFull() ? 20 : 2;
         currentPosition = position;
         this.mTopLevelPresenter = mTopLevelPresenter;
         setBlurBackgroundEnable(true);
@@ -106,8 +109,8 @@ public class EditSetListPopup extends BasePopupWindow implements View.OnClickLis
                     Toast.makeText(getContext(), R.string.SetListNoNameError, Toast.LENGTH_LONG).show();
                 } else {
                     valueOfResultPositionEditText = (Integer.valueOf(resultPositionEditText)) - 1;
-                    if (valueOfResultPositionEditText < 0 || valueOfResultPositionEditText >= 20) {
-                        Toast.makeText(getContext(), R.string.SetListPosNumError, Toast.LENGTH_LONG).show();
+                    if (valueOfResultPositionEditText < 0 || valueOfResultPositionEditText >= maxPosition) {
+                        Toast.makeText(getContext(), getContext().getString(R.string.SetListPosNumError) + String.valueOf(maxPosition), Toast.LENGTH_LONG).show();
                     } else {
                         if (currentPosition > valueOfResultPositionEditText) {
 //=============================================================to Bottom

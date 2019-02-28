@@ -493,6 +493,9 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
             case 102:
                 Toast.makeText(this, getText(R.string.check_file_exist_error), Toast.LENGTH_LONG).show();
                 break;
+            case 103:
+                Toast.makeText(this, getText(R.string.need_full_version_for_setlists_error), Toast.LENGTH_LONG).show();
+                break;
         }
     }
 

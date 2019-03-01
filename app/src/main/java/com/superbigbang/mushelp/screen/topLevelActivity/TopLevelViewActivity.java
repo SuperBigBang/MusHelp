@@ -90,6 +90,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     private BillingManager mBillingManager;
     private MainViewController mViewController;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
@@ -142,7 +143,6 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         mTopLevelPresenter.showAdvertistments();
 
         mTopLevelPresenter.realmsInit();
-//        mSettingsEditor = mSettings.edit();
         LinearLayoutManager managerSetList = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mRecyclerSetList.setLayoutManager(managerSetList);
         mTopLevelPresenter.showSetLists();
@@ -159,7 +159,6 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         }
 
         mTopLevelPresenter.sendSeekBarOperationsToService(mSeekBar);
-
 
         //mSettings.registerOnSharedPreferenceChangeListener(callback);
 
@@ -179,6 +178,11 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     public void showRefreshedUi() {
         //     setWaitScreen(false);
         updateUi();
+    }
+
+    void checkSongAddLimitations() {
+        // if (mRecyclerSongsList.getAdapter().getItemCount())
+        Timber.e("Items on list: %s", String.valueOf(mRecyclerSongsList.getAdapter().getItemCount()));
     }
 
     /**
@@ -235,6 +239,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
             }
             return true;
         });
+        checkSongAddLimitations();
     }
 
     @VisibleForTesting

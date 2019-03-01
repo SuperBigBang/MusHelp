@@ -536,7 +536,12 @@ public class ExtendApplication extends Application implements ServiceConnection 
         }
 
         Intent intent = new Intent(this, MetronomeService.class);
-        startService(intent);
+     /*   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            ContextCompat.startForegroundService(this,intent);
+        } else {
+            startService(intent);
+        }*/
+        MetronomeService.enqueueWork(this, intent);
         bindService(intent, this, Context.BIND_AUTO_CREATE);
 
         sBaseComponent = DaggerBaseComponent.builder()

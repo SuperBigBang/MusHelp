@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,8 +17,10 @@ import android.os.IBinder;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.JobIntentService;
 import android.support.v4.app.NotificationCompat;
 import android.view.View;
 import android.widget.SeekBar;
@@ -38,7 +39,7 @@ import io.reactivex.subjects.PublishSubject;
 import timber.log.Timber;
 
 
-public class MetronomeService extends Service {
+public class MetronomeService extends JobIntentService {
 
     public static final String ACTION_START = "ACTION_START";
     public static final String ACTION_PAUSE = "ACTION_PAUSE";
@@ -61,7 +62,7 @@ public class MetronomeService extends Service {
     private int soundId = -1;
     private boolean isPlaying;
     private Vibrator vibrator;
-
+    public static final int JOB_ID = 1;
 
     /* private boolean start;
      private long startTime1;
@@ -89,6 +90,15 @@ public class MetronomeService extends Service {
 
     private static long toInterval(int bpm) {
         return (long) 60000 / bpm;
+    }
+
+    public static void enqueueWork(Context context, Intent work) {
+        enqueueWork(context, MetronomeService.class, JOB_ID, work);
+    }
+
+    @Override
+    protected void onHandleWork(@NonNull Intent intent) {
+        // your code
     }
 
     @Override

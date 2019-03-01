@@ -34,7 +34,9 @@
             android:name=".screen.topLevelActivity.TopLevelViewActivity"
             android:theme="@style/AppTheme" />
 
-        <service android:name=".services.MetronomeService" />
+        <service
+            android:name=".services.MetronomeService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>
 
 

@@ -15,12 +15,13 @@ import com.superbigbang.mushelp.model.Songs;
 import java.io.File;
 
 import io.realm.Realm;
+import io.realm.RealmChangeListener;
 import io.realm.RealmConfiguration;
 import timber.log.Timber;
 
 
 @InjectViewState
-public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
+public class TopLevelPresenter extends MvpPresenter<TopLevelView> implements RealmChangeListener {
     public static float[] speedRates = new float[]{
             1f, 0.95f, 0.90f, 0.85f, 0.80f, 0.75f, 1.05f
     };
@@ -34,6 +35,11 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
+    }
+
+    @Override
+    public void onChange(Object o) {
+        getViewState().checkSongAddLimitations();
     }
 
     public void realmsInit() {
@@ -59,6 +65,7 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
                 forCloseLyricsEditSong.setLyricshasopen(false);
                 mSongsrealm.commitTransaction();
             }
+            mSongsrealm.addChangeListener(this);
         }
     }
 
@@ -239,7 +246,9 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> {
     public void onDestroy() {
         super.onDestroy();
         stopTrueOrPauseFalsePlaying(true);
+        mSetlistsrealm.removeAllChangeListeners();
         mSetlistsrealm.close();
+        mSongsrealm.removeAllChangeListeners();
         mSongsrealm.close();
         ExtendApplication.getMetroComponent().getMetronomeService().stopSelf();
     }

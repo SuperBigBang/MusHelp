@@ -16,6 +16,7 @@
     <string name="check_permissions_failed">Необходимы разрешения на доступ к аудиофайлам</string>
     <string name="check_file_exist_error">Аудиофайл был переименован или перемещён</string>
     <string name="need_full_version_for_setlists_error">Больше сет-листов доступно в MusHelp Pro</string>
+    <string name="need_full_version_for_addsong_error">Больше позиций для трэков доступно в MusHelp Pro</string>
     <string name="rate_change_message">Скорость:\u0020</string>
     <string name="rate_change_feature_error">Изменение скорости доступно только для Android 6.0 и выше</string>
     <string name="rate_change_feature_error_off">Меняет скорость воспроизведения аудио. Длительное нажатие вернёт нормальную скорость</string>

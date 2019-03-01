@@ -18,6 +18,8 @@ public interface TopLevelView extends MvpView {
 
     void showSongsLists(SongsItemRvAdapter songsItemRvAdapter);
 
+    void checkSongAddLimitations();
+
     void showErrorMessages(int errorID);
 
     void changeRateChangeButtonState(int state);

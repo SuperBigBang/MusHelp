@@ -20,4 +20,5 @@
     <color name="BuyOkButtonDark">#00FF7F</color>
     <color name="BuyOkButtonLight">#00FF7F</color>
     <color name="backgroundWindowColor">#808080</color>
+    <color name="activatebuttoncolor">#12FF00</color>
 </resources>

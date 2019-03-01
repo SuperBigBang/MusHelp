@@ -158,8 +158,6 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
             mTopLevelPresenter.setPermissionsToFileStorageIsGranted(true);
         }
 
-        mTopLevelPresenter.sendSeekBarOperationsToService(mSeekBar);
-
         //mSettings.registerOnSharedPreferenceChangeListener(callback);
 
         //Clicks
@@ -170,18 +168,24 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
             }
             recreate();
         });
+
+        try {
+            mTopLevelPresenter.sendSeekBarOperationsToService(mSeekBar);
+        } catch (Exception e) {
+            Timber.e("service not started (null)");
+        }
     }
 
-    /**
-     * Remove loading spinner and refresh the UI
-     */
     public void showRefreshedUi() {
-        //     setWaitScreen(false);
         updateUi();
     }
 
-    void checkSongAddLimitations() {
-        // if (mRecyclerSongsList.getAdapter().getItemCount())
+    public void checkSongAddLimitations() {
+        if (mRecyclerSongsList.getAdapter().getItemCount() >= 5 && !ExtendApplication.isIsFull()) {
+            newItemCircleButton.setColorFilter(ExtendApplication.currentThemeColorsUnavailable);
+        } else {
+            newItemCircleButton.clearColorFilter();
+        }
         Timber.e("Items on list: %s", String.valueOf(mRecyclerSongsList.getAdapter().getItemCount()));
     }
 
@@ -221,6 +225,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         mRecyclerSongsList.setAdapter(songsItemRvAdapter);
         songsItemRvAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             if (view.getId() == R.id.playPauseButton) {
+                mTopLevelPresenter.sendSeekBarOperationsToService(mSeekBar);
                 mTopLevelPresenter.playButtonIsClicked(position, false);
             } else if (view.getId() == R.id.deleteSongButton) {
                 mTopLevelPresenter.showDeletePopup(position);
@@ -232,6 +237,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         });
         songsItemRvAdapter.setOnItemChildLongClickListener((adapter, view, position) -> {
             if (view.getId() == R.id.playPauseButton) {
+                mTopLevelPresenter.sendSeekBarOperationsToService(mSeekBar);
                 mTopLevelPresenter.playButtonIsClicked(position, true);
             }
             if (view.getId() == R.id.songName) {
@@ -331,7 +337,11 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
                 mTopLevelPresenter.showBuyPopup();
                 break;
             case R.id.newItemCircleButton:
-                mTopLevelPresenter.showSongEditPopup(0, true);
+                if (mRecyclerSongsList.getAdapter().getItemCount() >= 5 && !ExtendApplication.isIsFull()) {
+                    showErrorMessages(104);
+                } else {
+                    mTopLevelPresenter.showSongEditPopup(0, true);
+                }
                 break;
             case R.id.countdownChangeButton:
                 mTopLevelPresenter.changeCountDownStateAndButton();
@@ -505,6 +515,9 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
                 break;
             case 103:
                 Toast.makeText(this, getText(R.string.need_full_version_for_setlists_error), Toast.LENGTH_LONG).show();
+                break;
+            case 104:
+                Toast.makeText(this, getText(R.string.need_full_version_for_addsong_error), Toast.LENGTH_LONG).show();
                 break;
         }
     }

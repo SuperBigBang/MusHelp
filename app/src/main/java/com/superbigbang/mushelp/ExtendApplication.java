@@ -554,7 +554,9 @@ public class ExtendApplication extends Application implements ServiceConnection 
             MyInitialDataRealmTransaction();
         }
 
-        MobileAds.initialize(this, "ca-app-pub-5364969751338385~1161013636");
+        if (!isIsFull()) {
+            MobileAds.initialize(this, "ca-app-pub-5364969751338385~1161013636");
+        }
 
         SharedPreferences.Editor editor = mSettings.edit();
         editor.putBoolean(APP_PREFERENCES_FIRST_INSTALL_FLAG, false).apply();

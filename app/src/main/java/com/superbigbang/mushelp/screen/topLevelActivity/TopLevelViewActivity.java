@@ -140,7 +140,11 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         ButterKnife.bind(this);
 
 
-        mTopLevelPresenter.showAdvertistments();
+        if (!ExtendApplication.isIsFull()) {
+            mTopLevelPresenter.showAdvertistments();
+        } else {
+            mAdView.setVisibility(View.GONE);
+        }
 
         mTopLevelPresenter.realmsInit();
         LinearLayoutManager managerSetList = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -217,7 +221,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     @Override
     public boolean isPremiumPurchased() {
         return mViewController.isPremiumPurchased();
-        //  return true; //FOR TEST
+        // return true; //FOR TEST
     }
 
     @Override

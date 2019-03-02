@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?backGroundColor">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/RecyclerSongsList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@+id/seekBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RecyclerSetList" />
+
+    <ImageButton
+        android:id="@+id/buyButton"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="?backGroundColor"
+        android:contentDescription="@string/buybutton"
+        android:scaleType="fitCenter"
+        android:tint="?lines_color"
+        android:tintMode="multiply"
+        app:layout_constraintBottom_toTopOf="@+id/adView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/baseline_shopping_cart_white_48" />
+
+    <ImageButton
+        android:id="@+id/metroSoundChangeButton"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="?backGroundColor"
+        android:contentDescription="@string/metroSoundChangeButton"
+        android:scaleType="fitCenter"
+        android:tint="?lines_color"
+        android:tintMode="multiply"
+        app:layout_constraintBottom_toTopOf="@+id/adView"
+        app:layout_constraintStart_toEndOf="@+id/countdownChangeButton"
+        app:srcCompat="@drawable/baseline_music_note_white1_48" />
+
+    <ImageButton
+        android:id="@+id/rateChangeButton"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="?backGroundColor"
+        android:contentDescription="@string/rate_change_button"
+        android:scaleType="fitCenter"
+        android:tint="?lines_color"
+        android:tintMode="multiply"
+        app:layout_constraintBottom_toTopOf="@+id/adView"
+        app:layout_constraintEnd_toStartOf="@+id/newItemCircleButton"
+        app:layout_constraintStart_toEndOf="@+id/metroSoundChangeButton"
+        app:srcCompat="@drawable/baseline_change_rate_button_48_0" />
+
+    <ImageButton
+        android:id="@+id/themeChangeButton"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="?backGroundColor"
+        android:contentDescription="@string/theme_change_button"
+        android:scaleType="fitCenter"
+        android:tint="?lines_color"
+        android:tintMode="multiply"
+        app:layout_constraintBottom_toTopOf="@+id/adView"
+        app:layout_constraintEnd_toStartOf="@+id/buyButton"
+        app:layout_constraintStart_toEndOf="@+id/newItemCircleButton"
+        app:srcCompat="@drawable/baseline_change_theme_48" />
+
+    <ImageButton
+        android:id="@+id/newItemCircleButton"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="?backGroundColor"
+        android:contentDescription="@string/newitemcirclebutton"
+        android:scaleType="fitCenter"
+        android:tint="?lines_color"
+        android:tintMode="multiply"
+        app:layout_constraintBottom_toTopOf="@+id/adView"
+        app:layout_constraintEnd_toEndOf="@+id/buyButton"
+        app:layout_constraintStart_toStartOf="@+id/countdownChangeButton"
+        app:srcCompat="@drawable/baseline_add_circle_outline_white_48" />
+
+    <ImageButton
+        android:id="@+id/countdownChangeButton"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="?backGroundColor"
+        android:contentDescription="@string/volumex2button"
+
+        android:scaleType="fitCenter"
+        android:tint="?lines_color"
+        android:tintMode="multiply"
+        app:layout_constraintBottom_toTopOf="@+id/adView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/baseline_timer_white_48_off" />
+
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="?backGroundColor"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+        ads:layout_constraintBottom_toBottomOf="parent"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintStart_toStartOf="parent">
+
+    </com.google.android.gms.ads.AdView>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/RecyclerSetList"
+        android:layout_width="0dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:progressDrawable="@drawable/seekbarstyle"
+        android:theme="@style/SeekBarColor"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/newItemCircleButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

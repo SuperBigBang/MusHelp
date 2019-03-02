@@ -32,6 +32,7 @@
             android:contentDescription="@string/newitemcirclebutton"
             android:scaleType="fitCenter"
             android:tint="?lines_color"
+            android:tintMode="multiply"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editMetronomBPM"
             app:srcCompat="@drawable/baseline_delete_sweep_white_48" />
@@ -53,6 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="21dp"
             android:fontFamily="@font/roboto_medium"
+            android:longClickable="false"
             android:text="@string/popupWEdit_text2"
             android:textColor="?lines_color"
             android:textSize="16sp"
@@ -67,7 +69,6 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
             android:ems="10"
-            android:longClickable="false"
             android:fontFamily="@font/roboto_medium"
             android:gravity="center"
             android:hint="@string/popupWEditSetListHintText1"
@@ -126,8 +127,8 @@
             android:fontFamily="@font/roboto_medium"
             android:gravity="center"
             android:hint="@string/_100"
-            android:longClickable="false"
             android:inputType="number"
+            android:longClickable="false"
             android:maxLength="3"
             android:maxLines="1"
             android:textColor="?OtherTextColor"
@@ -177,7 +178,7 @@
                 android:background="@drawable/round_shape_btn_set_lists"
                 android:text="@string/button_Cancel"
                 android:textColor="?lines_color"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/btn_e_Save2"
@@ -188,7 +189,7 @@
                 android:background="@drawable/round_shape_btn_set_lists"
                 android:text="@string/button_Save"
                 android:textColor="?lines_color"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 tools:ignore="ButtonStyle" />
         </LinearLayout>
 
@@ -208,9 +209,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
             android:checked="false"
             android:theme="@style/MySwitch"
             app:layout_constraintBottom_toBottomOf="@+id/textView4"
+            app:layout_constraintEnd_toStartOf="@+id/btn_e_clearLyricsOrClearPathToAudioFile"
             app:layout_constraintStart_toEndOf="@+id/textView4"
             app:layout_constraintTop_toTopOf="@+id/textView4" />
 
@@ -231,8 +234,9 @@
             android:id="@+id/editSongLyrics"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginEnd="9dp"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="9dp"
+            android:background="@android:color/transparent"
             android:fontFamily="@font/roboto_medium"
             android:gravity="center_horizontal"
             android:hint="@string/edit_hint_Enter_song_lyics"
@@ -241,7 +245,6 @@
             android:textColor="?OtherTextColor"
             android:textColorHint="?OtherTextColor"
             android:textSize="16sp"
-            android:background="@android:color/transparent"
             app:layout_constraintBottom_toTopOf="@+id/divider10"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

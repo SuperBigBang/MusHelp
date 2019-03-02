@@ -220,8 +220,8 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
 
     @Override
     public boolean isPremiumPurchased() {
-        return mViewController.isPremiumPurchased();
-        // return true; //FOR TEST
+        //return mViewController.isPremiumPurchased();
+        return true; //FOR TEST
     }
 
     @Override

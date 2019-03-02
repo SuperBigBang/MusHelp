@@ -56,6 +56,7 @@
             android:fontFamily="@font/roboto_medium"
             android:text="@string/popupWEdit_text2"
             android:textColor="?lines_color"
+            android:longClickable="false"
             android:textSize="16sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/editSongName"
             app:layout_constraintStart_toStartOf="@+id/textView" />
@@ -126,6 +127,7 @@
             android:fontFamily="@font/roboto_medium"
             android:gravity="center"
             android:hint="@string/_100"
+            android:longClickable="false"
             android:inputType="number"
             android:maxLength="3"
             android:maxLines="1"
@@ -140,8 +142,10 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:fontFamily="@font/roboto_medium"
             android:text="@string/text_audio_or_metronom"
+            android:textAlignment="center"
             android:textColor="?lines_color"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/btn_e_clearLyricsOrClearPathToAudioFile"
@@ -202,14 +206,12 @@
             android:id="@+id/edit_audioOrMetronom_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginStart="16dp"
             android:checked="false"
             android:theme="@style/MySwitch"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_e_clearLyricsOrClearPathToAudioFile"
+            app:layout_constraintBottom_toBottomOf="@+id/textView4"
             app:layout_constraintStart_toEndOf="@+id/textView4"
-            app:layout_constraintTop_toTopOf="@+id/btn_e_clearLyricsOrClearPathToAudioFile" />
+            app:layout_constraintTop_toTopOf="@+id/textView4" />
 
         <ImageView
             android:id="@+id/divider10"

@@ -55,6 +55,7 @@
             android:fontFamily="@font/roboto_medium"
             android:gravity="start"
             android:hint="@string/popupWEditSetListHintText1"
+            android:longClickable="false"
             android:inputType="number"
             android:maxLength="2"
             android:maxLines="1"

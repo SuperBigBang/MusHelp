@@ -28,11 +28,10 @@
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_marginEnd="16dp"
-            android:background="?backGroundColor"
+            android:background="@color/colorPrimaryDarkBlueBackground"
             android:contentDescription="@string/newitemcirclebutton"
             android:scaleType="fitCenter"
-            android:tint="?lines_color"
-            android:tintMode="multiply"
+            android:tint="@color/cornerColorDarkBlueTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editMetronomBPM"
             app:srcCompat="@drawable/baseline_delete_sweep_white_48" />
@@ -44,7 +43,7 @@
             android:layout_marginStart="40dp"
             android:fontFamily="@font/roboto_medium"
             android:text="@string/enter_track_position"
-            android:textColor="?lines_color"
+            android:textColor="@color/cornerColorDarkBlueTheme"
             android:textSize="16sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/editSongPosition"
             app:layout_constraintStart_toStartOf="parent" />
@@ -55,8 +54,7 @@
             android:layout_height="21dp"
             android:fontFamily="@font/roboto_medium"
             android:text="@string/popupWEdit_text2"
-            android:textColor="?lines_color"
-            android:longClickable="false"
+            android:textColor="@color/cornerColorDarkBlueTheme"
             android:textSize="16sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/editSongName"
             app:layout_constraintStart_toStartOf="@+id/textView" />
@@ -69,14 +67,15 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
             android:ems="10"
+            android:longClickable="false"
             android:fontFamily="@font/roboto_medium"
             android:gravity="center"
             android:hint="@string/popupWEditSetListHintText1"
             android:inputType="number"
             android:maxLength="2"
             android:maxLines="1"
-            android:textColor="?OtherTextColor"
-            android:textColorHint="?OtherTextColor"
+            android:textColor="@color/colorPrimartWhiteDarkBlueTheme"
+            android:textColorHint="@color/colorPrimartWhiteDarkBlueTheme"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -98,8 +97,8 @@
             android:maxLength="100"
             android:maxLines="1"
             android:scrollHorizontally="true"
-            android:textColor="?OtherTextColor"
-            android:textColorHint="?OtherTextColor"
+            android:textColor="@color/colorPrimartWhiteDarkBlueTheme"
+            android:textColorHint="@color/colorPrimartWhiteDarkBlueTheme"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.333"
@@ -113,7 +112,7 @@
             android:layout_height="21dp"
             android:fontFamily="@font/roboto_medium"
             android:text="@string/text_metronom"
-            android:textColor="?lines_color"
+            android:textColor="@color/cornerColorDarkBlueTheme"
             android:textSize="16sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/editMetronomBPM"
             app:layout_constraintStart_toStartOf="@+id/textView" />
@@ -131,8 +130,8 @@
             android:inputType="number"
             android:maxLength="3"
             android:maxLines="1"
-            android:textColor="?OtherTextColor"
-            android:textColorHint="?OtherTextColor"
+            android:textColor="@color/colorPrimartWhiteDarkBlueTheme"
+            android:textColorHint="@color/colorPrimartWhiteDarkBlueTheme"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/editSongName"
             app:layout_constraintTop_toBottomOf="@+id/editSongName"
@@ -146,7 +145,7 @@
             android:fontFamily="@font/roboto_medium"
             android:text="@string/text_audio_or_metronom"
             android:textAlignment="center"
-            android:textColor="?lines_color"
+            android:textColor="@color/cornerColorDarkBlueTheme"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/btn_e_clearLyricsOrClearPathToAudioFile"
             app:layout_constraintStart_toStartOf="@+id/textView"
@@ -177,7 +176,7 @@
                 android:layout_weight="0.75"
                 android:background="@drawable/round_shape_btn_set_lists"
                 android:text="@string/button_Cancel"
-                android:textColor="?lines_color"
+                android:textColor="@color/cornerColorDarkBlueTheme"
                 android:textSize="14sp" />
 
             <Button
@@ -188,7 +187,7 @@
                 android:layout_weight="0.75"
                 android:background="@drawable/round_shape_btn_set_lists"
                 android:text="@string/button_Save"
-                android:textColor="?lines_color"
+                android:textColor="@color/cornerColorDarkBlueTheme"
                 android:textSize="14sp"
                 tools:ignore="ButtonStyle" />
         </LinearLayout>
@@ -199,7 +198,7 @@
             android:layout_height="wrap_content"
             android:text="@string/bpm"
             android:textAlignment="viewStart"
-            android:textColor="?lines_color"
+            android:textColor="@color/cornerColorDarkBlueTheme"
             android:textSize="16sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/editMetronomBPM"
             app:layout_constraintStart_toEndOf="@+id/editMetronomBPM" />
@@ -226,23 +225,23 @@
             app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="?lines_color" />
+            app:srcCompat="@color/cornerColorDarkBlueTheme" />
 
         <EditText
             android:id="@+id/editSongLyrics"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="8dp"
             android:layout_marginEnd="9dp"
-            android:background="@android:color/transparent"
+            android:layout_marginStart="8dp"
             android:fontFamily="@font/roboto_medium"
             android:gravity="center_horizontal"
             android:hint="@string/edit_hint_Enter_song_lyics"
             android:inputType="textMultiLine"
             android:scrollHorizontally="false"
-            android:textColor="?OtherTextColor"
-            android:textColorHint="?OtherTextColor"
+            android:background="@android:color/transparent"
+            android:textColor="@color/colorPrimartWhiteDarkBlueTheme"
             android:textSize="16sp"
+            android:textColorHint="@color/colorPrimartWhiteDarkBlueTheme"
             app:layout_constraintBottom_toTopOf="@+id/divider10"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -261,7 +260,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_e_clearLyricsOrClearPathToAudioFile"
-            app:srcCompat="?lines_color" />
+            app:srcCompat="@color/cornerColorDarkBlueTheme" />
 
     </android.support.constraint.ConstraintLayout>
 

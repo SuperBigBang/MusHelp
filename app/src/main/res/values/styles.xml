@@ -91,7 +91,7 @@
         <!-- Неактивное состояние -->
         <item name="colorSwitchThumbNormal">@color/uncheckColor</item>
         <!-- Активное состояние -->
-        <item name="colorControlActivated">?lines_color</item>
+        <item name="colorControlActivated">@color/cornerColorDarkBlueTheme</item>
     </style>
 
     <style name="SeekBarColor" parent="Widget.AppCompat.SeekBar">

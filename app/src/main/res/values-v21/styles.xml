@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="MySwitch" parent="Theme.AppCompat.Light">
+        <item name="trackTint" tools:ignore="PrivateResource">@color/cardview_light_background
+        </item>
+        <!-- Неактивное состояние -->
+        <item name="colorSwitchThumbNormal">@color/uncheckColor</item>
+        <!-- Активное состояние -->
+        <item name="colorControlActivated">?lines_color</item>
+    </style>
+</resources>

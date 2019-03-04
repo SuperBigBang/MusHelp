@@ -10,7 +10,7 @@
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?backGroundColor"
+        android:background="@color/colorPrimaryDarkBlueBackground"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/divider1"
@@ -25,10 +25,10 @@
             android:gravity="center"
             android:maxLength="2"
             android:maxLines="1"
-            android:paddingStart="@dimen/dp_4"
             android:paddingEnd="@dimen/dp_4"
+            android:paddingStart="@dimen/dp_4"
             android:text="@string/_12"
-            android:textColor="?OtherTextColor"
+            android:textColor="@color/colorPrimartWhiteDarkBlueTheme"
             android:textSize="18sp"
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="@+id/songName"
@@ -39,13 +39,13 @@
             android:id="@+id/divider1"
             android:layout_width="1dp"
             android:layout_height="0dp"
-            android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
             android:contentDescription="@string/divider"
             app:layout_constraintBottom_toBottomOf="@+id/songName"
             app:layout_constraintStart_toEndOf="@+id/songPosition"
             app:layout_constraintTop_toTopOf="@+id/songName"
-            app:srcCompat="?lines_color" />
+            app:srcCompat="@color/cornerColorDarkBlueTheme" />
 
         <TextView
             android:id="@+id/songName"
@@ -55,9 +55,9 @@
             android:fontFamily="@font/roboto_medium"
             android:gravity="center"
             android:minHeight="36dp"
-            android:paddingStart="@dimen/dp_4"
             android:paddingEnd="@dimen/dp_4"
-            android:textColor="?OtherTextColor"
+            android:paddingStart="@dimen/dp_4"
+            android:textColor="@color/colorPrimartWhiteDarkBlueTheme"
             android:textSize="18sp"
             android:textStyle="normal"
             app:layout_constraintEnd_toStartOf="@+id/divider2"
@@ -76,7 +76,7 @@
             android:paddingStart="@dimen/dp_4"
             android:paddingEnd="@dimen/dp_4"
             android:text=""
-            android:textColor="?OtherTextColor"
+            android:textColor="@color/colorPrimartWhiteDarkBlueTheme"
             android:textSize="18sp"
             android:textStyle="normal"
             android:visibility="gone"
@@ -94,7 +94,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/songName"
             app:layout_constraintEnd_toStartOf="@+id/bpmEditMetro"
             app:layout_constraintTop_toTopOf="@+id/songName"
-            app:srcCompat="?lines_color" />
+            app:srcCompat="@color/cornerColorDarkBlueTheme" />
 
         <TextView
             android:id="@+id/bpmEditMetro"
@@ -107,7 +107,7 @@
             android:maxLength="3"
             android:maxLines="1"
             android:text="@string/_170"
-            android:textColor="?OtherTextColor"
+            android:textColor="@color/colorPrimartWhiteDarkBlueTheme"
             android:textSize="18sp"
             android:textStyle="normal"
             app:layout_constraintBottom_toTopOf="@+id/bpmText"
@@ -124,7 +124,7 @@
             android:gravity="center"
             android:maxLines="1"
             android:text="@string/bpm"
-            android:textColor="?OtherTextColor"
+            android:textColor="@color/colorPrimartWhiteDarkBlueTheme"
             android:textSize="14sp"
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="@+id/playPauseButton"
@@ -138,14 +138,13 @@
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_marginEnd="4dp"
-            android:background="?backGroundColor"
+            android:background="@color/colorPrimaryDarkBlueBackground"
             android:contentDescription="@string/playpausebutton"
             android:scaleType="fitCenter"
-            android:tint="?lines_color"
-            android:tintMode="multiply"
             app:layout_constraintBottom_toBottomOf="@+id/songName"
             app:layout_constraintEnd_toStartOf="@+id/divider4"
             app:layout_constraintTop_toTopOf="parent"
+            android:tint="@color/cornerColorDarkBlueTheme"
             app:srcCompat="@drawable/baseline_play_circle_outline_white_48" />
 
         <ImageView
@@ -158,28 +157,27 @@
             app:layout_constraintBottom_toBottomOf="@+id/songName"
             app:layout_constraintEnd_toStartOf="@+id/deleteSongButton"
             app:layout_constraintTop_toTopOf="@+id/songName"
-            app:srcCompat="?lines_color" />
+            app:srcCompat="@color/cornerColorDarkBlueTheme" />
 
         <ImageButton
             android:id="@+id/deleteSongButton"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:background="?backGroundColor"
+            android:background="@color/colorPrimaryDarkBlueBackground"
             android:contentDescription="@string/deletesongbutton"
             android:scaleType="fitCenter"
-            android:tint="?lines_color"
-            android:tintMode="multiply"
             app:layout_constraintBottom_toBottomOf="@+id/playPauseButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/playPauseButton"
             app:layout_constraintVertical_bias="0.0"
+            android:tint="@color/cornerColorDarkBlueTheme"
             app:srcCompat="@drawable/baseline_remove_white_36" />
 
         <View
             android:id="@+id/horizontalDivider"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="?lines_color"
+            android:background="@color/cornerColorDarkBlueTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -188,7 +186,7 @@
             android:id="@+id/horizontalDivider2"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="?lines_color"
+            android:background="@color/cornerColorDarkBlueTheme"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

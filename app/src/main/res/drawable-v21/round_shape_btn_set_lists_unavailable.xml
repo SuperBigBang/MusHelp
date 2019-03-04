@@ -2,11 +2,11 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
     <corners android:radius="30dp" />
-    <solid android:color="@color/colorPrimaryDarkBlueBackground" />
+    <solid android:color="?backGroundColor" />
     <size
         android:width="140dp"
         android:height="43dp" />
     <stroke
         android:width="2dp"
-        android:color="@color/cornerColorDarkBlueTheme" />
+        android:color="?UnavailableObj" />
 </shape>

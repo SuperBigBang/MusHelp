@@ -27,7 +27,7 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto_medium"
             android:text="@string/popupWEdit_set_text1"
-            android:textColor="@color/cornerColorDarkBlueTheme"
+            android:textColor="?lines_color"
             android:textSize="16sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/editSetListPosition"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +41,7 @@
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/roboto_medium"
             android:text="@string/popupWEdit_text2"
-            android:textColor="@color/cornerColorDarkBlueTheme"
+            android:textColor="?lines_color"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -62,8 +62,8 @@
             android:longClickable="false"
             android:maxLength="2"
             android:maxLines="1"
-            android:textColor="@color/colorPrimartWhiteDarkBlueTheme"
-            android:textColorHint="@color/colorPrimartWhiteDarkBlueTheme"
+            android:textColor="?OtherTextColor"
+            android:textColorHint="?OtherTextColor"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -84,8 +84,8 @@
             android:inputType="textPersonName"
             android:maxLength="20"
             android:maxLines="1"
-            android:textColor="@color/colorPrimartWhiteDarkBlueTheme"
-            android:textColorHint="@color/colorPrimartWhiteDarkBlueTheme"
+            android:textColor="?OtherTextColor"
+            android:textColorHint="?OtherTextColor"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -118,7 +118,7 @@
                 android:layout_weight="0.75"
                 android:background="@drawable/round_shape_btn_set_lists"
                 android:text="@string/button_Cancel"
-                android:textColor="@color/cornerColorDarkBlueTheme"
+                android:textColor="?lines_color"
                 android:textSize="12sp" />
 
             <Button
@@ -129,7 +129,7 @@
                 android:layout_weight="0.75"
                 android:background="@drawable/round_shape_btn_set_lists"
                 android:text="@string/button_Save"
-                android:textColor="@color/cornerColorDarkBlueTheme"
+                android:textColor="?lines_color"
                 android:textSize="12sp"
                 tools:ignore="ButtonStyle" />
         </LinearLayout>

@@ -48,9 +48,13 @@ public class MetronomeService extends JobIntentService {
     public static final String PREF_TICK = "tick";
     public static final String PREF_INTERVAL = "interval";
     public static TickData[] ticks = new TickData[]{
-            new TickData(R.string.title_beep, R.raw.beep),
-            new TickData(R.string.title_wood, R.raw.tick1),
-            new TickData(R.string.title_ding, R.raw.ding),
+            new TickData(R.string.title_beep, R.raw.a_hight),
+            new TickData(R.string.title_beep, R.raw.a_low),
+            new TickData(R.string.title_wood, R.raw.b_hight),
+            new TickData(R.string.title_wood, R.raw.b_low),
+            new TickData(R.string.title_ding, R.raw.c_hight),
+            new TickData(R.string.title_ding, R.raw.c_low),
+            new TickData(R.string.title_vibrate),
             new TickData(R.string.title_vibrate),
     };
     private final IBinder binder = new LocalBinder();
@@ -60,6 +64,8 @@ public class MetronomeService extends JobIntentService {
     private long interval;
     private SoundPool soundPool;
     private int soundId = -1;
+    private int soundIdlow = -1;
+    private int soundIdSilence;
     private boolean isPlaying;
     private Vibrator vibrator;
     public static final int JOB_ID = 1;
@@ -77,6 +83,7 @@ public class MetronomeService extends JobIntentService {
     private boolean pause;
     private float currentRate = 1f;
     private int countdownNum = 8;
+    private int beat = 1;
 
     // private SeekBar mSeekBar;
     private PublishSubject<Object> stopTrigger = PublishSubject.create();
@@ -231,11 +238,21 @@ public class MetronomeService extends JobIntentService {
             backupAudioFilePath = null;
         }
         if (audioFilePath == null) {
+            beat = 1;
             Observable.interval(interval, TimeUnit.MILLISECONDS, scheduler)
                     .takeUntil(stopTrigger)
                     .subscribe((Long value) -> {
                         if (soundId != -1) {
-                            soundPool.play(soundId, 1, 1, 1, 0, 1);
+                            if (beat == 5) {
+                                beat = 1;
+                            }
+                            if (beat == 1) {
+                                soundPool.play(soundId, 1, 1, 1, 0, 1);
+                                beat++;
+                            } else {
+                                soundPool.play(soundIdlow, 1, 1, 1, 0, 1);
+                                beat++;
+                            }
                             //      soundPool.play(soundId, 0, 0, 0, -1, 1);
                             //Timber.e("Setted interval: %s", String.valueOf(interval));
                             //  checkIntervals();
@@ -248,12 +265,22 @@ public class MetronomeService extends JobIntentService {
         } else if (!countdownIsOn) {
             prepareAndStartOrResumePlayback();
         } else {
+            beat = 1;
             Observable.interval(interval, TimeUnit.MILLISECONDS, scheduler)
                     .takeUntil(stopTrigger)
                     .subscribe((Long value) -> {
                         if (countdownNum != 0) {
                             if (soundId != -1) {
-                                soundPool.play(soundId, 1, 1, 1, 0, 1);
+                                if (beat == 5) {
+                                    beat = 1;
+                                }
+                                if (beat == 1) {
+                                    soundPool.play(soundId, 1, 1, 1, 0, 1);
+                                    beat++;
+                                } else {
+                                    soundPool.play(soundIdlow, 1, 1, 1, 0, 1);
+                                    beat++;
+                                }
                                 //      soundPool.play(soundId, 0, 0, 0, -1, 1);
                                 //Timber.e("Setted interval: %s", String.valueOf(interval));
                                 //  checkIntervals();
@@ -377,8 +404,11 @@ public class MetronomeService extends JobIntentService {
                     tick = prefs.getInt(PREF_TICK, 0);
                     if (!ticks[tick].isVibration()) {
                         soundId = ticks[tick].getSoundId(this, soundPool0);
+                        soundIdlow = ticks[tick + 1].getSoundId(this, soundPool0);
+                        soundIdSilence = ticks[0].getSoundId(this, soundPool0);
                     }
                     soundPool = soundPool0;
+                    soundPool.play(soundIdSilence, 0, 0, 1, 0, 1);
                 });
     }
 
@@ -457,11 +487,11 @@ public class MetronomeService extends JobIntentService {
     }
 
     public void changeTickSound() {
-        if (tick + 1 == ticks.length) {
+        if (tick + 2 == ticks.length) {
             tick = 0;
             setTick(tick);
         } else {
-            tick++;
+            tick = tick + 2;
             setTick(tick);
         }
     }
@@ -503,6 +533,7 @@ public class MetronomeService extends JobIntentService {
     public void setTick(int tick) {
         if (!ticks[tick].isVibration()) {
             soundId = ticks[tick].getSoundId(this, soundPool);
+            soundIdlow = ticks[tick + 1].getSoundId(this, soundPool);
          /*   if (!isPlaying){
                 soundPool.play(soundId, 1.0f, 1.0f, 1, 0, 1.0f);}*/
         } else soundId = -1;

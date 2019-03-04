@@ -3,6 +3,6 @@
     android:shape="line">
     <stroke
         android:width="0.5dp"
-        android:color="?seekBarBackgroundProgressColor" />
+        android:color="@color/md_grey_500" />
     <corners android:radius="1dp" />
 </shape>

@@ -190,7 +190,6 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         } else {
             newItemCircleButton.clearColorFilter();
         }
-        Timber.e("Items on list: %s", String.valueOf(mRecyclerSongsList.getAdapter().getItemCount()));
     }
 
     /**

@@ -10,8 +10,8 @@
         android:id="@+id/linearLayout3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:background="@drawable/round_shape_btn_set_lists"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,9 +22,9 @@
             android:id="@+id/textView8"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
             android:fontFamily="@font/roboto_medium"
             android:text="@string/buy_popup_text"
             android:textAllCaps="false"
@@ -34,14 +34,31 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/textViewRate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/buy_popup_rate_app"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/cornerColorDarkBlueTheme"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="24dp"
             android:contentDescription="@string/author_superbigbang"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView8"
+            app:layout_constraintTop_toBottomOf="@+id/textViewRate"
             app:srcCompat="@drawable/author" />
 
 
@@ -82,6 +99,82 @@
                 android:textSize="14sp"
                 tools:ignore="ButtonStyle" />
         </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/rateStar1"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="40dp"
+
+            android:background="@color/colorPrimaryDarkBlueBackground"
+            android:contentDescription="@string/volumex2button"
+            android:scaleType="fitCenter"
+            android:tint="@color/cornerColorDarkBlueTheme"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewRate"
+            app:srcCompat="@drawable/outline_star_border_white_48" />
+
+        <ImageButton
+            android:id="@+id/rateStar2"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/colorPrimaryDarkBlueBackground"
+            android:contentDescription="@string/volumex2button"
+            android:scaleType="fitCenter"
+            android:tint="@color/cornerColorDarkBlueTheme"
+            app:layout_constraintEnd_toStartOf="@+id/rateStar3"
+            app:layout_constraintStart_toEndOf="@+id/rateStar1"
+            app:layout_constraintTop_toBottomOf="@+id/textViewRate"
+            app:srcCompat="@drawable/outline_star_border_white_48" />
+
+        <ImageButton
+            android:id="@+id/rateStar3"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/colorPrimaryDarkBlueBackground"
+            android:contentDescription="@string/volumex2button"
+            android:scaleType="fitCenter"
+            android:tint="@color/cornerColorDarkBlueTheme"
+            app:layout_constraintEnd_toStartOf="@+id/rateStar4"
+            app:layout_constraintStart_toEndOf="@+id/rateStar2"
+            app:layout_constraintTop_toBottomOf="@+id/textViewRate"
+            app:srcCompat="@drawable/outline_star_border_white_48" />
+
+        <ImageButton
+            android:id="@+id/rateStar4"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/colorPrimaryDarkBlueBackground"
+            android:contentDescription="@string/volumex2button"
+            android:scaleType="fitCenter"
+            android:tint="@color/cornerColorDarkBlueTheme"
+            app:layout_constraintEnd_toStartOf="@+id/rateStar5"
+            app:layout_constraintStart_toEndOf="@+id/rateStar3"
+            app:layout_constraintTop_toBottomOf="@+id/textViewRate"
+            app:srcCompat="@drawable/outline_star_border_white_48" />
+
+        <ImageButton
+            android:id="@+id/rateStar5"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+
+            android:layout_marginEnd="40dp"
+            android:background="@color/colorPrimaryDarkBlueBackground"
+            android:contentDescription="@string/volumex2button"
+            android:scaleType="fitCenter"
+            android:tint="@color/cornerColorDarkBlueTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewRate"
+            app:srcCompat="@drawable/outline_star_border_white_48" />
 
 
     </android.support.constraint.ConstraintLayout>

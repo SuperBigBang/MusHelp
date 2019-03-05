@@ -192,6 +192,13 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         }
     }
 
+    public void setBuyButtonState() {
+        if (ExtendApplication.isIsFull()) {
+            buyButton.setImageDrawable(getResources().getDrawable(R.drawable.pro_button_48));
+        } else {
+            buyButton.setImageDrawable(getResources().getDrawable(R.drawable.baseline_shopping_cart_white_48));
+        }
+    }
     /**
      * Update UI to reflect model
      */
@@ -202,13 +209,13 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
             SharedPreferences.Editor spe = mSettings.edit();
             spe.putBoolean("Premium", true);
             spe.apply();
-            Toast.makeText(this, "You On full PREMIUM!", Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "You On full PREMIUM!", Toast.LENGTH_LONG).show();
         } else {
             ExtendApplication.setIsFull(false);
             SharedPreferences.Editor spe = mSettings.edit();
             spe.putBoolean("Premium", false);
             spe.apply();
-            Toast.makeText(this, "You On FREE demo!", Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "You On FREE demo!", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -249,6 +256,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
             return true;
         });
         checkSongAddLimitations();
+        setBuyButtonState();
     }
 
     @VisibleForTesting

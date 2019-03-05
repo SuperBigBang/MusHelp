@@ -160,7 +160,6 @@ public class BillingManager implements PurchasesUpdatedListener {
             mBillingClient.querySkuDetailsAsync(params.build(),
                     listener);
         };
-
         executeServiceRequest(queryRequest);
     }
 

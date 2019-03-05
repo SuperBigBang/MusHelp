@@ -16,6 +16,9 @@
 
 package com.superbigbang.mushelp;
 
+import android.widget.Toast;
+
+import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.Purchase;
 import com.superbigbang.mushelp.billing.BillingConstants;
 import com.superbigbang.mushelp.billing.BillingManager;
@@ -57,7 +60,6 @@ public class MainViewController {
     private class UpdateListener implements BillingManager.BillingUpdatesListener {
         @Override
         public void onBillingClientSetupFinished() {
-            //    mActivity.onBillingManagerSetupFinished();
         }
 
         @Override
@@ -68,16 +70,37 @@ public class MainViewController {
                     case BillingConstants.SKU_PREMIUM:
                         Timber.d("You are Premium! Congratulations!!!");
                         mIsPremium = true;
+                        mActivity.showRefreshedUi();
+                        break;
+                    case BillingConstants.SKU_DONATE:
+                        Timber.e("We have DONATE. Consuming it.");
+                        // We should consume the purchase and fill up the tank once it was consumed
+                        mActivity.getBillingManager().consumeAsync(purchase.getPurchaseToken());
                         break;
                 }
             }
-
-            mActivity.showRefreshedUi();
         }
 
         @Override
-        public void onConsumeFinished(String token, int result) {
+        public void onConsumeFinished(String token, @BillingClient.BillingResponse int result) {
+            Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Consumption finished. Purchase token: " + token + ", result: " + result, Toast.LENGTH_LONG).show();
+            // Note: We know this is the SKU_DONATE, because it's the only one we consume, so we don't
+            // check if token corresponding to the expected sku was consumed.
+            // If you have more than one sku, you probably need to validate that the token matches
+            // the SKU you expect.
+            // It could be done by maintaining a map (updating it every time you call consumeAsync)
+            // of all tokens into SKUs which were scheduled to be consumed and then looking through
+            // it here to check which SKU corresponds to a consumed token.
+            if (result == BillingClient.BillingResponse.OK) {
+                // Successfully consumed, so we apply the effects of the item in our
+                // game world's logic, which in our case means filling the gas tank a bit
+                Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Consumption successful. Provisioning." + result, Toast.LENGTH_LONG).show();
+            } else {
+                Timber.e("Consumption error!");
+            }
+            Timber.e("End consumption flow.");
         }
+
     }
 /*
     /**

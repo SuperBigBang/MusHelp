@@ -137,8 +137,8 @@ public class BuyPopup extends BasePopupWindow implements View.OnClickListener {
                 break;
             case R.id.btn_PBUY_Accept:
                 if (mBillingProvider.isPremiumPurchased()) {
-                    //Заменить
-                    Toast.makeText(getContext(), getContext().getText(R.string.already_own_premium_version), Toast.LENGTH_LONG).show();
+                    mBillingProvider.getBillingManager().initiatePurchaseFlow(BillingConstants.SKU_DONATE,
+                            BillingClient.SkuType.INAPP);
                 } else {
                     mBillingProvider.getBillingManager().initiatePurchaseFlow(BillingConstants.SKU_PREMIUM,
                             BillingClient.SkuType.INAPP);

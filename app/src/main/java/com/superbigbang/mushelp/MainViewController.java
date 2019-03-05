@@ -24,6 +24,9 @@ import com.superbigbang.mushelp.billing.BillingConstants;
 import com.superbigbang.mushelp.billing.BillingManager;
 import com.superbigbang.mushelp.screen.topLevelActivity.TopLevelViewActivity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 import timber.log.Timber;
@@ -64,12 +67,21 @@ public class MainViewController {
 
         @Override
         public void onPurchasesUpdated(List<Purchase> purchaseList) {
-
             for (Purchase purchase : purchaseList) {
                 switch (purchase.getSku()) {
                     case BillingConstants.SKU_PREMIUM:
                         Timber.d("You are Premium! Congratulations!!!");
-                        mIsPremium = true;
+                        Timber.e("purchase: %s", purchase.toString());
+                        try {
+                            JSONObject jsonObject = new JSONObject(purchase.getOriginalJson());
+                            if (jsonObject.optString("purchaseState").equals("1")) {
+                                mIsPremium = true;
+                            } else if (jsonObject.optString("purchaseState").equals("0")) {
+                                mIsPremium = false;
+                            } //Сконсумэблить если будет в приобретённом 1чка
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         mActivity.showRefreshedUi();
                         break;
                     case BillingConstants.SKU_DONATE:
@@ -79,6 +91,7 @@ public class MainViewController {
                         break;
                 }
             }
+            mActivity.showRefreshedUi();
         }
 
         @Override
@@ -94,10 +107,11 @@ public class MainViewController {
             if (result == BillingClient.BillingResponse.OK) {
                 // Successfully consumed, so we apply the effects of the item in our
                 // game world's logic, which in our case means filling the gas tank a bit
-                Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Consumption successful. Provisioning." + result, Toast.LENGTH_LONG).show();
+                Timber.e("Consumption successful. Provisioning.%s", result);
             } else {
                 Timber.e("Consumption error!");
             }
+            mActivity.showRefreshedUi();
             Timber.e("End consumption flow.");
         }
 

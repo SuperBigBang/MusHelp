@@ -99,7 +99,6 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
 
         // Create and initialize BillingManager which talks to BillingLibrary
         mBillingManager = new BillingManager(this, mViewController.getUpdateListener());
-
         //Get the theme save on sharedpreference
         themeValue = mSettings.getInt("theme", 1);
         //Theme settings
@@ -213,9 +212,9 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         } else {
             ExtendApplication.setIsFull(false);
             SharedPreferences.Editor spe = mSettings.edit();
+            spe.remove("Premium");
             spe.putBoolean("Premium", false);
-            spe.apply();
-            //Toast.makeText(this, "You On FREE demo!", Toast.LENGTH_LONG).show();
+            spe.apply();//Toast.makeText(this, "You On FREE demo!", Toast.LENGTH_LONG).show();
         }
     }
 

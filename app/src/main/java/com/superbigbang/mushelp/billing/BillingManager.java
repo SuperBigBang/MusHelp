@@ -254,7 +254,6 @@ public class BillingManager implements PurchasesUpdatedListener {
             @Override
             public void onBillingSetupFinished(@BillingResponse int billingResponseCode) {
                 Timber.d("Setup finished. Response code: %s", billingResponseCode);
-
                 if (billingResponseCode == BillingResponse.OK) {
                     mIsServiceConnected = true;
                     if (executeOnSuccess != null) {

@@ -24,9 +24,6 @@ import com.superbigbang.mushelp.billing.BillingConstants;
 import com.superbigbang.mushelp.billing.BillingManager;
 import com.superbigbang.mushelp.screen.topLevelActivity.TopLevelViewActivity;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.List;
 
 import timber.log.Timber;
@@ -72,16 +69,7 @@ public class MainViewController {
                     case BillingConstants.SKU_PREMIUM:
                         Timber.d("You are Premium! Congratulations!!!");
                         Timber.e("purchase: %s", purchase.toString());
-                        try {
-                            JSONObject jsonObject = new JSONObject(purchase.getOriginalJson());
-                            if (jsonObject.optString("purchaseState").equals("1")) {
-                                mIsPremium = true;
-                            } else if (jsonObject.optString("purchaseState").equals("0")) {
-                                mIsPremium = false;
-                            } //Сконсумэблить если будет в приобретённом 1чка
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        mIsPremium = true;
                         mActivity.showRefreshedUi();
                         break;
                     case BillingConstants.SKU_DONATE:
@@ -96,7 +84,8 @@ public class MainViewController {
 
         @Override
         public void onConsumeFinished(String token, @BillingClient.BillingResponse int result) {
-            Toast.makeText(ExtendApplication.getBaseComponent().getContext(), "Consumption finished. Purchase token: " + token + ", result: " + result, Toast.LENGTH_LONG).show();
+            Timber.e("Consumption finished. Purchase token: " + token + ", result: " + result);
+            Toast.makeText(ExtendApplication.getBaseComponent().getContext(), R.string.Thanks, Toast.LENGTH_SHORT).show();
             // Note: We know this is the SKU_DONATE, because it's the only one we consume, so we don't
             // check if token corresponding to the expected sku was consumed.
             // If you have more than one sku, you probably need to validate that the token matches

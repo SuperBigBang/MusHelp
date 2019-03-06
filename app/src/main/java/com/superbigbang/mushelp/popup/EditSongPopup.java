@@ -152,7 +152,7 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
                         //=============================================================Add new song
                         if (valueOfResultPositionEditText < 0 || valueOfResultPositionEditText > sizeOfcurrentSetlist) {
                             Toast.makeText(getContext(), ExtendApplication.getBaseComponent().getContext().getResources().getString(R.string.SongPosNumError) + (sizeOfcurrentSetlist + 1), Toast.LENGTH_LONG).show();
-                        } else if (valueOfResultMetronomEditText <= 0 || valueOfResultMetronomEditText > 999) {
+                        } else if (valueOfResultMetronomEditText <= 0 || valueOfResultMetronomEditText > 300) {
                             Toast.makeText(getContext(), R.string.SongMetronomNumError, Toast.LENGTH_LONG).show();
                         } else {
                             int newIdForSong = mTopLevelPresenter.mSongsrealm
@@ -345,7 +345,7 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
             currentAudioFile = null;
             Toast.makeText(getContext(), getContext().getText(R.string.delete_audio_file_path), Toast.LENGTH_LONG).show();
         }
-        return false;
+        return true; //если false то выполняется ещё и OnClick!
     }
 
     @Override

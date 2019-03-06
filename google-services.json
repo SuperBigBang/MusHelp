@@ -1,0 +1,43 @@
+{
+  "project_info": {
+    "project_number": "99976535949",
+    "firebase_url": "https://mushelp-7a901.firebaseio.com",
+    "project_id": "mushelp-7a901",
+    "storage_bucket": "mushelp-7a901.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:99976535949:android:9c6dff834a0c1039",
+        "android_client_info": {
+          "package_name": "com.superbigbang.mushelp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "99976535949-9ko0npgdjvka4epun466vp6urmcdh1g4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUe1KuGgjwsbhEzZtzdQgOi5RYEEDMAOY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      },
+      "admob_app_id": "ca-app-pub-5364969751338385~1161013636"
+    }
+  ],
+  "configuration_version": "1"
+}

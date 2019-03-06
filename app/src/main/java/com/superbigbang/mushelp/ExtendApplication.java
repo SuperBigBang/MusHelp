@@ -527,6 +527,8 @@ public class ExtendApplication extends Application implements ServiceConnection 
     public void onCreate() {
         super.onCreate();
         SharedPreferences mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        // Obtain the FirebaseAnalytics instance.
+
         if (mSettings.contains("Premium")) {
             setIsFull(mSettings.getBoolean("Premium", false));
         }

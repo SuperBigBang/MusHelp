@@ -3,8 +3,10 @@ package com.superbigbang.mushelp.screen.topLevelActivity;
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
@@ -177,6 +179,10 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         } catch (Exception e) {
             Timber.e("service not started (null)");
         }
+        // ATTENTION: This was auto-generated to handle app links.
+        Intent appLinkIntent = getIntent();
+        String appLinkAction = appLinkIntent.getAction();
+        Uri appLinkData = appLinkIntent.getData();
     }
 
     public void showRefreshedUi() {

@@ -85,7 +85,7 @@ public class MainViewController {
         @Override
         public void onConsumeFinished(String token, @BillingClient.BillingResponse int result) {
             Timber.e("Consumption finished. Purchase token: " + token + ", result: " + result);
-            Toast.makeText(ExtendApplication.getBaseComponent().getContext(), R.string.Thanks, Toast.LENGTH_SHORT).show();
+            Toast.makeText(ExtendApplication.getBaseComponent().getContext(), R.string.thankss, Toast.LENGTH_SHORT).show();
             // Note: We know this is the SKU_DONATE, because it's the only one we consume, so we don't
             // check if token corresponding to the expected sku was consumed.
             // If you have more than one sku, you probably need to validate that the token matches

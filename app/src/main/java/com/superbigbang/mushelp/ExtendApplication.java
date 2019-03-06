@@ -767,7 +767,7 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song13.setLyricshasopen(false);
         song13.setPlaystarted(false);
 
-        for (int i = 0; i < 7; i++) {
+        /*for (int i = 0; i < 7; i++) {
             int startFrom = 13;
             Songs songNew = songsrealm.createObject(Songs.class);
             songNew.setTitle(getResources().getString(R.string.EmptySongName));
@@ -779,7 +779,7 @@ public class ExtendApplication extends Application implements ServiceConnection 
             songNew.setLyrics(getResources().getString(R.string.EmptyLyrics));
             songNew.setLyricshasopen(false);
             songNew.setPlaystarted(false);
-        }
+        }*/
 //===================Other songs added for Test, on second Set List:
         Songs song1_1 = songsrealm.createObject(Songs.class);
         song1_1.setTitle("One Against All");

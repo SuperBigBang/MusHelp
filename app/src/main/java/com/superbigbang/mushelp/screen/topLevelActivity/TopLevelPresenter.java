@@ -273,6 +273,7 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> implements Rea
                     }
                     ExtendApplication.getMetroComponent().getMetronomeService().play();
                 } else {
+                    stopTrueOrPauseFalsePlaying(true);
                     ExtendApplication.getMetroComponent().getMetronomeService().setCountdownIsOn(filepath != null && countdownIsOn);
                     ExtendApplication.getMetroComponent().getMetronomeService().play();
                 }
@@ -282,6 +283,7 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> implements Rea
                 if (ExtendApplication.getMetroComponent().getMetronomeService().isPlaying()) {
                     stopTrueOrPauseFalsePlaying(true);
                 }
+                stopTrueOrPauseFalsePlaying(true);
                 ExtendApplication.getMetroComponent().getMetronomeService().setBpm(bpm);
                 ExtendApplication.getMetroComponent().getMetronomeService().setFilePathOfCurrentAudio(filepath);
                 ExtendApplication.getMetroComponent().getMetronomeService().setCountdownIsOn(filepath != null && countdownIsOn);

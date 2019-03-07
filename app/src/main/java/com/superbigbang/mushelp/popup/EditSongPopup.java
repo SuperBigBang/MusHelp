@@ -343,6 +343,7 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
     public boolean onLongClick(View v) {
         if (v.getId() == R.id.btn_e_clearLyricsOrClearPathToAudioFile) {
             currentAudioFile = null;
+            mAudioOrMetronomSwitch.setChecked(false);
             Toast.makeText(getContext(), getContext().getText(R.string.delete_audio_file_path), Toast.LENGTH_LONG).show();
         }
         return true; //если false то выполняется ещё и OnClick!

@@ -42,7 +42,7 @@ public class MainViewController {
     /**
      * Change for false/true! now is PRO
      */
-    private boolean mIsPremium = true;
+    private boolean mIsPremium;
 
     public MainViewController(TopLevelViewActivity activity) {
         mUpdateListener = new UpdateListener();

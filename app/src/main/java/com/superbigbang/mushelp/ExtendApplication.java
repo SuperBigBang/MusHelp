@@ -605,14 +605,7 @@ public class ExtendApplication extends Application implements ServiceConnection 
         setList1.setName("Hell Rain");
         setList1.setPosition(0);
         setList1.setOpen(true);
-      /*  SetList setList2 = setlistsrealm.createObject(SetList.class);
-        setList2.setId(1);
-        setList2.setName("Amon Amarth");
-        setList2.setPosition(1);
-        SetList setList3 = setlistsrealm.createObject(SetList.class);
-        setList3.setId(2);
-        setList3.setName("Arch Enemy");
-        setList3.setPosition(2);*/
+
         for (int i = 1; i < 20; i++) {
             SetList setList = setlistsrealm.createObject(SetList.class);
             setList.setId(i);
@@ -779,138 +772,7 @@ public class ExtendApplication extends Application implements ServiceConnection 
             songNew.setLyricshasopen(false);
             songNew.setPlaystarted(false);
         }*/
-//===================Other songs added for Test, on second Set List:
-   /*     Songs song1_1 = songsrealm.createObject(Songs.class);
-        song1_1.setTitle("One Against All");
-        song1_1.setSetlistid(1);
-        song1_1.setSongid(20);
-        song1_1.setPosition(0);
-        song1_1.setMetronombpm(145);
-        song1_1.setAudioOn(false);
-        song1_1.setAudiofile(Environment
-                .getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC)
-                + "/Amon Amarth/Amon Amarth - One Against All [Deathcoreanstvo] (1).mp3");
-        song1_1.setLyrics(Amon_Amarth_One_Against_All_lyrics);
-        song1_1.setLyricshasopen(false);
-        song1_1.setPlaystarted(false);
 
-        Songs song1_2 = songsrealm.createObject(Songs.class);
-        song1_2.setTitle("We shall destroy");
-        song1_2.setSetlistid(1);
-        song1_2.setSongid(21);
-        song1_2.setPosition(1);
-        song1_2.setMetronombpm(122);
-        song1_2.setAudioOn(false);
-        song1_2.setAudiofile(Environment
-                .getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC)
-                + "/Amon Amarth/Amon Amarth - We Shall Destroy (1).mp3");
-        song1_2.setLyrics(Amon_Amarth_We_Shall_Destroy_lyrics);
-        song1_2.setLyricshasopen(false);
-        song1_2.setPlaystarted(false);
-
-        Songs song1_3 = songsrealm.createObject(Songs.class);
-        song1_3.setTitle("Cry of blackbirds");
-        song1_3.setSetlistid(1);
-        song1_3.setSongid(22);
-        song1_3.setPosition(2);
-        song1_3.setMetronombpm(173);
-        song1_3.setAudioOn(false);
-        song1_3.setAudiofile(Environment
-                .getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC)
-                + "/Amon Amarth/Amon Amarth-Cry Of The Black Birds Vid.mp3");
-        song1_3.setLyrics(Amon_Amarth_Cry_of_blackbirds_lyrics);
-        song1_3.setLyricshasopen(false);
-        song1_3.setPlaystarted(false);
-
-        Songs song1_4 = songsrealm.createObject(Songs.class);
-        song1_4.setTitle("At down's First light");
-        song1_4.setSetlistid(1);
-        song1_4.setSongid(23);
-        song1_4.setPosition(3);
-        song1_4.setMetronombpm(160);
-        song1_4.setAudioOn(false);
-        song1_4.setLyrics(Amon_Amarth_At_downs_First_light_lyrics);
-        song1_4.setLyricshasopen(false);
-        song1_4.setPlaystarted(false);
-
-        Songs song1_5 = songsrealm.createObject(Songs.class);
-        song1_5.setTitle("First Kill");
-        song1_5.setSetlistid(1);
-        song1_5.setSongid(24);
-        song1_5.setPosition(4);
-        song1_5.setMetronombpm(100);
-        song1_5.setAudioOn(false);
-        song1_5.setLyrics(Amon_Amarth_First_Kill_lyrics);
-        song1_5.setLyricshasopen(false);
-        song1_5.setPlaystarted(false);
-
-//===================Other songs added for Test, on 3 Set List:
-        Songs song2_1 = songsrealm.createObject(Songs.class);
-        song2_1.setTitle("Eagles Fly's alone");
-        song2_1.setSetlistid(2);
-        song2_1.setSongid(25);
-        song2_1.setPosition(0);
-        song2_1.setMetronombpm(126);
-        song2_1.setAudioOn(false);
-        song2_1.setLyrics(Arch_Enemy_Eagles_Flys_alone);
-        song2_1.setLyricshasopen(false);
-        song2_1.setPlaystarted(false);
-
-        Songs song2_2 = songsrealm.createObject(Songs.class);
-        song2_2.setTitle("Avalanche");
-        song2_2.setSetlistid(2);
-        song2_2.setSongid(26);
-        song2_2.setPosition(1);
-        song2_2.setMetronombpm(192);
-        song2_2.setAudioOn(false);
-        song2_2.setLyrics(Arch_Enemy_Avalanche);
-        song2_2.setLyricshasopen(false);
-        song2_2.setPlaystarted(false);
-
-        Songs song2_3 = songsrealm.createObject(Songs.class);
-        song2_3.setTitle("Ravenous");
-        song2_3.setSetlistid(2);
-        song2_3.setSongid(27);
-        song2_3.setPosition(2);
-        song2_3.setMetronombpm(175);
-        song2_3.setAudioOn(false);
-        song2_3.setLyrics(Arch_Enemy_Ravenous);
-        song2_3.setLyricshasopen(false);
-        song2_3.setPlaystarted(false);
-
-        Songs song2_4 = songsrealm.createObject(Songs.class);
-        song2_4.setTitle("The world is Your's");
-        song2_4.setSetlistid(2);
-        song2_4.setSongid(28);
-        song2_4.setPosition(3);
-        song2_4.setMetronombpm(180);
-        song2_4.setAudioOn(false);
-        song2_4.setLyrics(Arch_Enemy_The_world_is_Yours);
-        song2_4.setLyricshasopen(false);
-        song2_4.setPlaystarted(false);
-
-        Songs song2_5 = songsrealm.createObject(Songs.class);
-        song2_5.setTitle("Taking back my soul");
-        song2_5.setSetlistid(2);
-        song2_5.setSongid(29);
-        song2_5.setPosition(4);
-        song2_5.setMetronombpm(140);
-        song2_5.setAudioOn(false);
-        song2_5.setLyrics(Arch_Enemy_Taking_back_my_soul);
-        song2_5.setLyricshasopen(false);
-        song2_5.setPlaystarted(false);
-
-        Songs song2_6 = songsrealm.createObject(Songs.class);
-        song2_6.setTitle("As the pages burn");
-        song2_6.setSetlistid(2);
-        song2_6.setSongid(30);
-        song2_6.setPosition(5);
-        song2_6.setMetronombpm(210);
-        song2_6.setAudioOn(false);
-        song2_6.setLyrics(Arch_Enemy_As_the_pages_burn);
-        song2_6.setLyricshasopen(false);
-        song2_6.setPlaystarted(false);
-*/
         songsrealm.commitTransaction();
         songsrealm.close();
     }

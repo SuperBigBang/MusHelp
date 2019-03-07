@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.Environment;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
@@ -606,15 +605,15 @@ public class ExtendApplication extends Application implements ServiceConnection 
         setList1.setName("Hell Rain");
         setList1.setPosition(0);
         setList1.setOpen(true);
-        SetList setList2 = setlistsrealm.createObject(SetList.class);
+      /*  SetList setList2 = setlistsrealm.createObject(SetList.class);
         setList2.setId(1);
         setList2.setName("Amon Amarth");
         setList2.setPosition(1);
         SetList setList3 = setlistsrealm.createObject(SetList.class);
         setList3.setId(2);
         setList3.setName("Arch Enemy");
-        setList3.setPosition(2);
-        for (int i = 3; i < 20; i++) {
+        setList3.setPosition(2);*/
+        for (int i = 1; i < 20; i++) {
             SetList setList = setlistsrealm.createObject(SetList.class);
             setList.setId(i);
             setList.setName(getResources().getString(R.string.SetListNameDefault) + (i + 1));
@@ -781,7 +780,7 @@ public class ExtendApplication extends Application implements ServiceConnection 
             songNew.setPlaystarted(false);
         }*/
 //===================Other songs added for Test, on second Set List:
-        Songs song1_1 = songsrealm.createObject(Songs.class);
+   /*     Songs song1_1 = songsrealm.createObject(Songs.class);
         song1_1.setTitle("One Against All");
         song1_1.setSetlistid(1);
         song1_1.setSongid(20);
@@ -911,7 +910,7 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song2_6.setLyrics(Arch_Enemy_As_the_pages_burn);
         song2_6.setLyricshasopen(false);
         song2_6.setPlaystarted(false);
-
+*/
         songsrealm.commitTransaction();
         songsrealm.close();
     }

@@ -15,31 +15,18 @@
  */
 package com.superbigbang.mushelp.billing;
 
-import com.android.billingclient.api.BillingClient;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-
 /**
  * Static fields and methods useful for billing
  */
 public final class BillingConstants {
     // SKUs for our products: the premium upgrade (non-consumable), donate consumable
     //  public static final String SKU_PREMIUM = "mus.pro";
-    public static final String SKU_PREMIUM = "mush.test.full";
+    public static final String SKU_PREMIUM = "mush.test.full2";
     public static final String SKU_DONATE = "mushelp.donate";
 
     private static final String[] IN_APP_SKUS = {SKU_DONATE, SKU_PREMIUM};
 
     private BillingConstants() {
-    }
-
-    /**
-     * Returns the list of all SKUs for the billing type specified
-     */
-    public static final ArrayList<String> getSkuList(@BillingClient.SkuType String billingType) {
-        return (billingType == BillingClient.SkuType.INAPP) ? new ArrayList<String>(Arrays.asList(IN_APP_SKUS))
-                : null;
     }
 }
 

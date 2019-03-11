@@ -155,11 +155,16 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
                         } else if (valueOfResultMetronomEditText <= 0 || valueOfResultMetronomEditText > 300) {
                             Toast.makeText(getContext(), R.string.SongMetronomNumError, Toast.LENGTH_LONG).show();
                         } else {
-                            int newIdForSong = mTopLevelPresenter.mSongsrealm
+                            int newIdForSong = (mTopLevelPresenter.mSongsrealm
                                     .where(Songs.class)
-                                    .max("songid")
-                                    .intValue()
-                                    + 1;
+                                    .max("songid")) == null ? 0 :
+                                    (mTopLevelPresenter.mSongsrealm
+                                            .where(Songs.class)
+                                            .max("songid"))
+                                            .intValue()
+                                            + 1;
+
+
                             if (valueOfResultPositionEditText + 1 > sizeOfcurrentSetlist) {
                                 //=============================================================Adding new song to the end of current Song List
                                 mTopLevelPresenter.mSongsrealm.beginTransaction();

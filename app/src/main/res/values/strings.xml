@@ -79,4 +79,12 @@
     <string name="_170">170</string>
     <string name="_12">12</string>
     <string name="already_own_premium_version">У вас уже полная премиум версия программы</string>
+    <string name="NewItemButtonBottomText">добавить</string>
+    <string name="SpeedRateButtonBottomText">скорость</string>
+    <string name="countDownButtonBottomText">отсчёт</string>
+    <string name="metroSoundButtonBottomText">звук метр.</string>
+    <string name="fontButtonBottomText">сменить фон</string>
+    <string name="fontButtonBottomText2">версия</string>
+    <string name="metroSoundButtonBottomTextSmall">звук м.</string>
+    <string name="SpeedRateButtonBottomTextSmall">скор.</string>
 </resources>

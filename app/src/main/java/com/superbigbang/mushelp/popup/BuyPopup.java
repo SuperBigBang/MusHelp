@@ -191,8 +191,20 @@ public class BuyPopup extends BasePopupWindow implements View.OnClickListener {
 
     @Override
     public void dismiss() {
-        mTopLevelPresenter.clearStateStrategyPull();
-        mTopLevelPresenter = null;
+        if (mTopLevelPresenter != null) {
+            mTopLevelPresenter.clearPopupWindowRef();
+            mTopLevelPresenter.clearStateStrategyPull();
+            mTopLevelPresenter = null;
+        }
         super.dismiss();
+    }
+
+    @Override
+    public void dismissWithOutAnimate() {
+        if (mTopLevelPresenter != null) {
+            mTopLevelPresenter.clearPopupWindowRef();
+            mTopLevelPresenter = null;
+        }
+        super.dismissWithOutAnimate();
     }
 }

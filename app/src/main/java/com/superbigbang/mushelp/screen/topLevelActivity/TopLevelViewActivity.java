@@ -49,6 +49,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
+import razerdp.basepopup.BasePopupWindow;
 import timber.log.Timber;
 
 import static android.os.Build.VERSION.SDK_INT;
@@ -83,6 +84,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     @BindView(R.id.themeChangeButton)
     ImageButton themeChangeButton;
 
+    BasePopupWindow currentOpenedPopupWindow;
     SharedPreferences mSettings;
 
     private int themeValue;
@@ -92,6 +94,9 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     private BillingManager mBillingManager;
     private MainViewController mViewController;
 
+    public void clearCurrentOpenedPopupWindow() {
+        currentOpenedPopupWindow = null;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -273,12 +278,18 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
 
     @Override
     public void showSongEditPopup(String SongName, int position, int currentSetList, boolean audioIsOn, String audioFile, String lyrics, int tempBpm, boolean actionIsAddNewSong) {
-        new EditSongPopup(this, SongName, position, currentSetList, audioIsOn, audioFile, lyrics, mTopLevelPresenter, tempBpm, actionIsAddNewSong).showPopupWindow();
+        if (currentOpenedPopupWindow == null) {
+            currentOpenedPopupWindow = new EditSongPopup(this, SongName, position, currentSetList, audioIsOn, audioFile, lyrics, mTopLevelPresenter, tempBpm, actionIsAddNewSong);
+            currentOpenedPopupWindow.showPopupWindow();
+        }
     }
 
     @Override
     public void showDeletePopup(String songname, int currentposition, int currentSetList) {
-        new DeleteSongPopup(this, songname, currentposition, currentSetList, mTopLevelPresenter).showPopupWindow();
+        if (currentOpenedPopupWindow == null) {
+            currentOpenedPopupWindow = new DeleteSongPopup(this, songname, currentposition, currentSetList, mTopLevelPresenter);
+            currentOpenedPopupWindow.showPopupWindow();
+        }
     }
 
     @Override
@@ -296,7 +307,10 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
 
     @Override
     public void showSetListEditPopup(String setListName, int position) {
-        new EditSetListPopup(this, setListName, position, mTopLevelPresenter).showPopupWindow();
+        if (currentOpenedPopupWindow == null) {
+            currentOpenedPopupWindow = new EditSetListPopup(this, setListName, position, mTopLevelPresenter);
+            currentOpenedPopupWindow.showPopupWindow();
+        }
     }
 
     @Override
@@ -337,12 +351,18 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         if (mBillingManager != null) {
             mBillingManager.destroy();
         }
+        if (currentOpenedPopupWindow != null) {
+            currentOpenedPopupWindow.dismissWithOutAnimate();
+        }
         //mSettings.unregisterOnSharedPreferenceChangeListener(callback);
         super.onDestroy();
     }
 
     @Override
     protected void onRestart() {
+        if (currentOpenedPopupWindow != null) {
+            currentOpenedPopupWindow.dismissWithOutAnimate();
+        }
         super.onRestart();
     }
 
@@ -421,7 +441,10 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
 
     @Override
     public void showBuyPopup() {
-        new BuyPopup(this, mTopLevelPresenter, this).showPopupWindow();
+        if (currentOpenedPopupWindow == null) {
+            currentOpenedPopupWindow = new BuyPopup(this, mTopLevelPresenter, this);
+            currentOpenedPopupWindow.showPopupWindow();
+        }
     }
 
     private boolean checkAndRequestPermissions() {

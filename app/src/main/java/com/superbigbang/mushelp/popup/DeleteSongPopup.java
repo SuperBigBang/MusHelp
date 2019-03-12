@@ -123,8 +123,20 @@ public class DeleteSongPopup extends BasePopupWindow implements View.OnClickList
 
     @Override
     public void dismiss() {
-        if (mTopLevelPresenter != null) mTopLevelPresenter.clearStateStrategyPull();
-        mTopLevelPresenter = null;
+        if (mTopLevelPresenter != null) {
+            mTopLevelPresenter.clearPopupWindowRef();
+            mTopLevelPresenter.clearStateStrategyPull();
+            mTopLevelPresenter = null;
+        }
         super.dismiss();
+    }
+
+    @Override
+    public void dismissWithOutAnimate() {
+        if (mTopLevelPresenter != null) {
+            mTopLevelPresenter.clearPopupWindowRef();
+            mTopLevelPresenter = null;
+        }
+        super.dismissWithOutAnimate();
     }
 }

@@ -115,6 +115,7 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> implements Rea
     }
 
     void showDeletePopup(int position) {
+        clearStateStrategyPull();
         Songs edit = mSongsrealm.where(Songs.class).equalTo("setlistid", mSetlistsrealm.where(SetList.class).equalTo("isOpen", true).findFirst().getId())
                 .findAll()
                 .where().equalTo("position", position)
@@ -123,7 +124,12 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> implements Rea
     }
 
     void showBuyPopup() {
+        clearStateStrategyPull();
         getViewState().showBuyPopup();
+    }
+
+    public void clearPopupWindowRef() {
+        getViewState().clearCurrentOpenedPopupWindow();
     }
 
     public void clearStateStrategyPull() {
@@ -154,6 +160,7 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> implements Rea
     }
 
     void showSetListEditPopup(int position) {
+        clearStateStrategyPull();
         if (ExtendApplication.isIsFull() || position < 2) {
             getViewState().showSetListEditPopup(mSetlistsrealm.where(SetList.class).equalTo("position", position).findFirst().getName(), position);
         } else {
@@ -162,6 +169,7 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> implements Rea
     }
 
     void showSongEditPopup(int position, boolean actionIsAddNewSong) {
+        clearStateStrategyPull();
         if (!actionIsAddNewSong) {
             Songs editsong = mSongsrealm.where(Songs.class).equalTo("setlistid", mSetlistsrealm.where(SetList.class).equalTo("isOpen", true).findFirst().getId())
                     .findAll()

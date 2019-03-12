@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -149,5 +150,107 @@
         app:layout_constraintBottom_toTopOf="@+id/newItemCircleButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/NewItemButtonBottomText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/NewItemButtonBottomText"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimartWhiteDarkBlueTheme"
+        android:textSize="8sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/adView"
+        app:layout_constraintEnd_toEndOf="@+id/newItemCircleButton"
+        app:layout_constraintStart_toStartOf="@+id/newItemCircleButton"
+        app:layout_constraintTop_toBottomOf="@+id/newItemCircleButton"
+        tools:ignore="SmallSp" />
+
+    <TextView
+        android:id="@+id/SpeedRateButtonBottomText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/SpeedRateButtonBottomText"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimartWhiteDarkBlueTheme"
+        android:textSize="8sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/adView"
+        app:layout_constraintEnd_toEndOf="@+id/rateChangeButton"
+        app:layout_constraintStart_toStartOf="@+id/rateChangeButton"
+        app:layout_constraintTop_toBottomOf="@+id/rateChangeButton"
+        tools:ignore="SmallSp" />
+
+    <TextView
+        android:id="@+id/countDownButtonBottomText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/countDownButtonBottomText"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimartWhiteDarkBlueTheme"
+        android:textSize="8sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/adView"
+        app:layout_constraintEnd_toEndOf="@+id/countdownChangeButton"
+        app:layout_constraintStart_toStartOf="@+id/countdownChangeButton"
+        app:layout_constraintTop_toBottomOf="@+id/countdownChangeButton"
+        tools:ignore="SmallSp" />
+
+    <TextView
+        android:id="@+id/metroSoundButtonBottomText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/metroSoundButtonBottomText"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimartWhiteDarkBlueTheme"
+        android:textSize="8sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/adView"
+        app:layout_constraintEnd_toEndOf="@+id/metroSoundChangeButton"
+        app:layout_constraintStart_toStartOf="@+id/metroSoundChangeButton"
+        app:layout_constraintTop_toBottomOf="@+id/metroSoundChangeButton"
+        tools:ignore="SmallSp" />
+
+    <TextView
+        android:id="@+id/fontButtonBottomText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/fontButtonBottomText"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimartWhiteDarkBlueTheme"
+        android:textSize="8sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/adView"
+        app:layout_constraintEnd_toEndOf="@+id/themeChangeButton"
+        app:layout_constraintStart_toStartOf="@+id/themeChangeButton"
+        app:layout_constraintTop_toBottomOf="@+id/themeChangeButton"
+        tools:ignore="SmallSp" />
+
+    <TextView
+        android:id="@+id/fontButtonBottomText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/fontButtonBottomText2"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimartWhiteDarkBlueTheme"
+        android:textSize="8sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/adView"
+        app:layout_constraintEnd_toEndOf="@+id/buyButton"
+        app:layout_constraintStart_toStartOf="@+id/buyButton"
+        app:layout_constraintTop_toBottomOf="@+id/buyButton"
+        tools:ignore="SmallSp" />
 
 </android.support.constraint.ConstraintLayout>

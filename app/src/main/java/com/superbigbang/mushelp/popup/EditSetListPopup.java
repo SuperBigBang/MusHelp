@@ -97,9 +97,11 @@ public class EditSetListPopup extends BasePopupWindow implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_e_cancel:
+                v.startAnimation(ExtendApplication.getAnimFadein());
                 dismiss();
                 break;
             case R.id.btn_e_Save:
+                v.startAnimation(ExtendApplication.getAnimFadein());
                 String resultPositionEditText = mEditTextPosition.getText().toString();
                 String resultNameEditText = mEditTextSetListName.getText().toString();
                 int valueOfResultPositionEditText;

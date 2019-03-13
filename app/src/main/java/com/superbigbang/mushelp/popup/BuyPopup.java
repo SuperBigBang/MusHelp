@@ -115,27 +115,34 @@ public class BuyPopup extends BasePopupWindow implements View.OnClickListener {
 
     //=============================================================click event
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.rateStar1:
+                view.startAnimation(ExtendApplication.getAnimFadein());
                 sendRateFeedbackPoor((getContext().getString(R.string.reply_rate1)) + 1 + (getContext().getString(R.string.reply_rate2)));
                 break;
             case R.id.rateStar2:
+                view.startAnimation(ExtendApplication.getAnimFadein());
                 sendRateFeedbackPoor((getContext().getString(R.string.reply_rate1)) + 2 + (getContext().getString(R.string.reply_rate2)));
                 break;
             case R.id.rateStar3:
+                view.startAnimation(ExtendApplication.getAnimFadein());
                 sendRateFeedbackPoor((getContext().getString(R.string.reply_rate1)) + 3 + (getContext().getString(R.string.reply_rate2)));
                 break;
             case R.id.rateStar4:
+                view.startAnimation(ExtendApplication.getAnimFadein());
                 sendRateFeedbackNice();
                 break;
             case R.id.rateStar5:
+                view.startAnimation(ExtendApplication.getAnimFadein());
                 sendRateFeedbackNice();
                 break;
             case R.id.btn_PBUY_cancel:
+                view.startAnimation(ExtendApplication.getAnimFadein());
                 dismiss();
                 break;
             case R.id.btn_PBUY_Accept:
+                view.startAnimation(ExtendApplication.getAnimFadein());
                 if (mBillingProvider.isPremiumPurchased()) {
                     mBillingProvider.getBillingManager().initiatePurchaseFlow(BillingConstants.SKU_DONATE,
                             BillingClient.SkuType.INAPP);

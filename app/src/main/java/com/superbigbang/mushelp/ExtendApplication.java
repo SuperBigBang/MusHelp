@@ -10,6 +10,8 @@ import android.graphics.Color;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.google.android.gms.ads.MobileAds;
 import com.superbigbang.mushelp.di.BaseComponent;
@@ -38,6 +40,7 @@ public class ExtendApplication extends Application implements ServiceConnection 
     public static int currentThemeColorsTextUNSelected = Color.parseColor("#66bfff");
     public static int currentThemeColorsUnavailable = Color.parseColor("#4DFFFFFF");
     private static boolean isFull;
+    private static Animation animFadein;
 
     public static boolean isIsFull() {
         return isFull;
@@ -507,6 +510,11 @@ public class ExtendApplication extends Application implements ServiceConnection 
     @VisibleForTesting
     public static void setBaseComponent(@NonNull BaseComponent baseComponent) {
         sBaseComponent = baseComponent;
+    }
+
+    public static Animation getAnimFadein() {
+        animFadein = AnimationUtils.loadAnimation(ExtendApplication.getBaseComponent().getContext(), R.anim.fade_in);
+        return animFadein;
     }
 
     public static MetroComponent getMetroComponent() {

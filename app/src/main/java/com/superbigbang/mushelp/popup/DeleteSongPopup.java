@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.superbigbang.mushelp.ExtendApplication;
 import com.superbigbang.mushelp.R;
 import com.superbigbang.mushelp.model.Songs;
 import com.superbigbang.mushelp.screen.topLevelActivity.TopLevelPresenter;
@@ -90,9 +91,11 @@ public class DeleteSongPopup extends BasePopupWindow implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_cancel:
+                v.startAnimation(ExtendApplication.getAnimFadein());
                 dismiss();
                 break;
             case R.id.btn_Compelete:
+                v.startAnimation(ExtendApplication.getAnimFadein());
                 //================================================================Delete processing:
                 RealmResults<Songs> songsNoAutoSorting2 = mTopLevelPresenter.mSongsrealm
                         .where(Songs.class)

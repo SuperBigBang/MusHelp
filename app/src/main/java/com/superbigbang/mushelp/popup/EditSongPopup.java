@@ -123,9 +123,11 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_e_cancel2:
+                v.startAnimation(ExtendApplication.getAnimFadein());
                 dismiss();
                 break;
             case R.id.btn_e_Save2:
+                v.startAnimation(ExtendApplication.getAnimFadein());
                 String resultPositionEditText = mEditTextPosition.getText().toString();
                 String resultNameEditText = mEditTextSongName.getText().toString();
                 String resultMetronomBpm = mEditTextTempMetronom.getText().toString();
@@ -337,6 +339,7 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
                 }
                 break;
             case R.id.btn_e_clearLyricsOrClearPathToAudioFile:
+                v.startAnimation(ExtendApplication.getAnimFadein());
                 mEditTextLyrics.setText("");
                 break;
             default:
@@ -347,6 +350,7 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
     @Override
     public boolean onLongClick(View v) {
         if (v.getId() == R.id.btn_e_clearLyricsOrClearPathToAudioFile) {
+            v.startAnimation(ExtendApplication.getAnimFadein());
             currentAudioFile = null;
             mAudioOrMetronomSwitch.setChecked(false);
             Toast.makeText(getContext(), getContext().getText(R.string.delete_audio_file_path), Toast.LENGTH_LONG).show();

@@ -44,7 +44,7 @@
     <string name="edit_enter_track_name"><u>Введите название трека</u></string>
     <string name="text_metronom">Метроном:</string>
     <string name="text_audio_or_metronom">Аудио\nвместо метронома</string>
-    <string name="edit_hint_Enter_song_lyics"><u>Разместите тут текст песни</u>\nРазовое нажатие на корзину удалит текст песни, а долгое удерживание на ней, удалит привязанную ссылку на аудио файл</string>
+    <string name="edit_hint_Enter_song_lyics"><u>Разместите тут текст песни (или любой символ)</u>\nРазовое нажатие на корзину удалит текст песни, а долгое удерживание на ней, удалит привязанную ссылку на аудио файл</string>
     <string name="_100"><u>100</u></string>
     <string name="Yes">Да</string>
     <string name="Countdown">Отсчёт:</string>

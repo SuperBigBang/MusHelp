@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
@@ -86,6 +85,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
 
     BasePopupWindow currentOpenedPopupWindow;
     SharedPreferences mSettings;
+
 
     private int themeValue;
   /*  private SharedPreferences.OnSharedPreferenceChangeListener callback = (sharedPreferences, key) -> {
@@ -186,8 +186,8 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         }
         // ATTENTION: This was auto-generated to handle app links.
         Intent appLinkIntent = getIntent();
-        String appLinkAction = appLinkIntent.getAction();
-        Uri appLinkData = appLinkIntent.getData();
+        //   String appLinkAction = appLinkIntent.getAction();
+        //   Uri appLinkData = appLinkIntent.getData();
     }
 
     public void showRefreshedUi() {
@@ -244,6 +244,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
     public void showSongsLists(SongsItemRvAdapter songsItemRvAdapter) {
         mRecyclerSongsList.setAdapter(songsItemRvAdapter);
         songsItemRvAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+
             if (view.getId() == R.id.playPauseButton) {
                 mTopLevelPresenter.sendSeekBarOperationsToService(mSeekBar);
                 mTopLevelPresenter.playButtonIsClicked(position, false);
@@ -253,7 +254,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
             if (view.getId() == R.id.songName || view.getId() == R.id.songLyrics) {
                 mTopLevelPresenter.changeLyricsOpenOrCloseCondition(position);
             }
-
+            view.startAnimation(ExtendApplication.getAnimFadein());
         });
         songsItemRvAdapter.setOnItemChildLongClickListener((adapter, view, position) -> {
             if (view.getId() == R.id.playPauseButton) {
@@ -263,6 +264,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
             if (view.getId() == R.id.songName) {
                 mTopLevelPresenter.showSongEditPopup(position, false);
             }
+            view.startAnimation(ExtendApplication.getAnimFadein());
             return true;
         });
         checkSongAddLimitations();
@@ -298,9 +300,11 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
 
         setListItemAdapter.setOnItemClickListener((adapter, view, position) -> {
             mTopLevelPresenter.changeSetList(position);
+            view.startAnimation(ExtendApplication.getAnimFadein());
         });
         setListItemAdapter.setOnItemLongClickListener((adapter, view, position) -> {
             mTopLevelPresenter.showSetListEditPopup(position);
+            view.startAnimation(ExtendApplication.getAnimFadein());
             return true;
         });
     }
@@ -387,13 +391,16 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
                 break;
             case R.id.rateChangeButton:
                 mTopLevelPresenter.changeRate(false);
+                break;
         }
+        view.startAnimation(ExtendApplication.getAnimFadein());
     }
 
     @OnLongClick({R.id.rateChangeButton})
     public boolean onViewLongClicked(View view) {
         switch (view.getId()) {
             case R.id.rateChangeButton:
+                view.startAnimation(ExtendApplication.getAnimFadein());
                 mTopLevelPresenter.changeRate(true);
                 break;
         }

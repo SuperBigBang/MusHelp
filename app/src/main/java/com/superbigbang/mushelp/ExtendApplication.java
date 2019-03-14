@@ -149,13 +149,13 @@ public class ExtendApplication extends Application implements ServiceConnection 
         Realm songsrealm = Realm.getInstance(songsRealmConfig);
 
         setlistsrealm.beginTransaction();
-    /*    SetList setList1 = setlistsrealm.createObject(SetList.class); // Create a new object
+        SetList setList1 = setlistsrealm.createObject(SetList.class); // Create a new object
         setList1.setId(0);
-        setList1.setName("Hell Rain");
+        setList1.setName(getResources().getString(R.string.SetListNameDefault) + 1);
         setList1.setPosition(0);
-        setList1.setOpen(true);*/
+        setList1.setOpen(true);
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 1; i < 20; i++) {
             SetList setList = setlistsrealm.createObject(SetList.class);
             setList.setId(i);
             setList.setName(getResources().getString(R.string.SetListNameDefault) + (i + 1));

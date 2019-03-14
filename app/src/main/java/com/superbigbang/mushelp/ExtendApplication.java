@@ -50,459 +50,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
         ExtendApplication.isFull = isFull;
     }
 
-    //==================Lyrics added for Test:
-    private String Amon_Amarth_One_Against_All_lyrics = "Winter's lost its grip\n" +
-            "The ocean is set free\n" +
-            "The ship glides through the broken ice\n" +
-            "Out to an open sea\n" +
-            "North winds fill the sails\n" +
-            "They fly on frothing seas\n" +
-            "As hope grows stronger in his heart\n" +
-            "It's easier to breathe\n" +
-            "Days turn into nights\n" +
-            "Nights turn into days\n" +
-            "His determination grows\n" +
-            "With every breath he takes\n" +
-            "There he stands alone, one man against all\n" +
-            "With a sword in each hand, soon he will fall\n" +
-            "There he stands alone, one man against all\n" +
-            "With a sword in each hand, heeding the call\n" +
-            "When the reach the Hanö bay\n" +
-            "There waits a ship of war\n" +
-            "Like the bear attacks its prey\n" +
-            "It comes at them with force\n" +
-            "All men to the oars\n" +
-            "Row for all your worth\n" +
-            "Most likely this will be your last day\n" +
-            "On this wretched earth\n" +
-            "The weak they try to run\n" +
-            "But he's prepared to fight\n" +
-            "One by one his friends are slain\n" +
-            "Only he remains\n" +
-            "He knows the end is near\n" +
-            "They have him in their jaws\n" +
-            "When a noble man appears\n" +
-            "He tells them, withdraw\n" +
-            "There he stands before him\n" +
-            "As the skirmish quells\n" +
-            "He offers him\n" +
-            "Join our crew or join your friends in hell\n" +
-            "There he stands alone, one man against all\n" +
-            "With a sword in each hand, and soon he will fall\n" +
-            "There he stands alone, one man against all\n" +
-            "With a sword in each hand, he's heeding the call\n" +
-            "Авторы: Ted Oscar Lundstroem / Olavi Mikkonen / Johan Soederberg / Johan Hegg\n" +
-            "Текст песни \"One Against All\", © Sony/ATV Music Publishing LLC";
-    private String Amon_Amarth_We_Shall_Destroy_lyrics = "Sword and spear\n" +
-            "Wall of shields\n" +
-            "Standing strong\n" +
-            "On this their chosen battle field\n" +
-            "Form the lines\n" +
-            "Shield by shield\n" +
-            "Side by side\n" +
-            "We're marching into destiny\n" +
-            "March as one\n" +
-            "Don't look back\n" +
-            "Oden's sons\n" +
-            "Attack!\n" +
-            "Unleash hell! Do not repent!\n" +
-            "Warfare grants us no lament\n" +
-            "Let your weapons slash and tear\n" +
-            "This is no place for fear\n" +
-            "Hold the lines! Move as one!\n" +
-            "In unity our victory's won\n" +
-            "Our shields will form a mighty wall\n" +
-            "United we shall never fall\n" +
-            "Fear will not pierce our hearts\n" +
-            "Though swords and arrows will\n" +
-            "Victory is our reward\n" +
-            "For all the blood we spill\n" +
-            "We didn't come to waste our lives\n" +
-            "Like pawns in savage game\n" +
-            "Our spirits, spears and shields are linked\n" +
-            "In a much stronger chain\n" +
-            "March as one\n" +
-            "Don't look back\n" +
-            "Oden's sons\n" +
-            "Attack!\n" +
-            "All are one\n" +
-            "And one is all\n" +
-            "Side by side\n" +
-            "The battle calls\n" +
-            "All are one\n" +
-            "And one is all\n" +
-            "Shield by shield\n" +
-            "We'll never fall\n" +
-            "All are one\n" +
-            "And one is all\n" +
-            "Side by side\n" +
-            "The battle calls\n" +
-            "All are one\n" +
-            "And one is all\n" +
-            "Shield by shield\n" +
-            "We'll never fall\n" +
-            "Unleash hell! Do not repent!\n" +
-            "Warfare grants us no lament\n" +
-            "Let your weapons slash and tear\n" +
-            "This is no place for fear\n" +
-            "Charge with force! Break their ranks!\n" +
-            "No remorse, crush their flanks!\n" +
-            "Pulverize their human wall!\n" +
-            "We shall destroy!\n" +
-            "Авторы: Ted Oscar Lundstroem / Olavi Mikkonen / Johan Soederberg / Fredrik Andersson / Johan Hegg\n" +
-            "Текст песни \"We Shall Destroy\", © Sony/ATV Music Publishing LLC";
-    private String Amon_Amarth_Cry_of_blackbirds_lyrics = "Raise your swords up high!\n" +
-            "See the black birds fly!\n" +
-            "Let them hear your rage!\n" +
-            "Show no fear!\n" +
-            "Attack!\n" +
-            "Charge your horses across the fields\n" +
-            "Together we ride into destiny\n" +
-            "Have no fear of death, when its our time\n" +
-            "Oden will bring us home, when we die!\n" +
-            "The ground trembles under us\n" +
-            "As we make our thunder charge\n" +
-            "The pounding hooves spread panic and fear into their hearts\n" +
-            "Our helmets shine in the sun as we near their wall of shields\n" +
-            "Some of them turn and run\n" +
-            "When they hear our frenzied screams!\n" +
-            "Draw your swords to strike!\n" +
-            "Hear the Black Birds cry!\n" +
-            "Let them feel your hate!\n" +
-            "Show no fear!\n" +
-            "Charge your horses across the fields\n" +
-            "Together we ride into destiny\n" +
-            "Have no fear of death, when its our time\n" +
-            "Oden will bring us home, when we die!\n" +
-            "The enemy are in disarray ride them down as they run\n" +
-            "Send them to their violent graves don't spare anyone\n" +
-            "Dead and wounded lie all around see the pain in their eyes\n" +
-            "Over the field an eerie sound, as we hear the ravens cry\n" +
-            "Авторы: Fredrick Andersson / Johan Hans Hegg / Johan Olof Soderberg / Olavi Petteri Mikkonen / Ted Lundstrom\n" +
-            "Текст песни \"Cry of the Black Birds\", © BMG Rights Management";
-    private String Amon_Amarth_At_downs_First_light_lyrics = "At dawn's first light\n" +
-            "Run for your lives\n" +
-            "Viking ships come out of the mist\n" +
-            "Ominous sight\n" +
-            "Flee or stand fast\n" +
-            "You won't last\n" +
-            "Warlords invade with axe and blade\n" +
-            "Attack at first light\n" +
-            "Unstoppable force\n" +
-            "No remorse\n" +
-            "Under attack, no turning back\n" +
-            "You cannot run\n" +
-            "Nowhere to hide\n" +
-            "No shelter inside\n" +
-            "Under attack, no turning back\n" +
-            "Slaughter's begun\n" +
-            "Nowhere to hid\n" +
-            "No shelter inside\n" +
-            "Slashing, killing\n" +
-            "Thrashing, spilling\n" +
-            "Blood for honor, death, and glory\n" +
-            "Out of the night\n" +
-            "At dawn's first light\n" +
-            "Longships arrive\n" +
-            "Run for your lives\n" +
-            "Wounds won't mend your bitter end\n" +
-            "Death to all\n" +
-            "Flee or fight\n" +
-            "No one survives\n" +
-            "Bloodshed won't stop\n" +
-            "'Til the last drop\n" +
-            "You will fall\n" +
-            "It matters not how hard you fought\n" +
-            "Under attack, no turning back\n" +
-            "You cannot run\n" +
-            "Nowhere to hide\n" +
-            "No shelter inside\n" +
-            "Under attack, no turning back\n" +
-            "Slaughter's begun\n" +
-            "Nowhere to hid\n" +
-            "No shelter inside\n" +
-            "Slashing, killing\n" +
-            "Thrashing, spilling\n" +
-            "Blood for honor, death, and glory\n" +
-            "The ships bring terror to these shores\n" +
-            "Death and all out war\n" +
-            "Their oars are cutting through the waves\n" +
-            "Like spades are digging graves\n" +
-            "At dawn's first light\n" +
-            "Run for your lives\n" +
-            "Out of the night\n" +
-            "At dawn's first light\n" +
-            "Longships arrive\n" +
-            "Run for your lives\n" +
-            "Авторы: Ted Oscar Lundstroem / Olavi Mikkonen / Johan Soederberg / Johan Hegg\n" +
-            "Текст песни \"At Dawn's First Light\", © Sony/ATV Music Publishing LLC";
-    private String Amon_Amarth_First_Kill_lyrics = "The first man I killed was the earl's right-hand man\n" +
-            "When he came to take her away\n" +
-            "I ran his own sword straight through his throat\n" +
-            "And then I stood there, watching him fall\n" +
-            "The first blood I spilled was the blood of a bard\n" +
-            "I had to wipe the smile away\n" +
-            "I was not yet a man, nor was I a boy\n" +
-            "But still, I made that bastard pay\n" +
-            "So I left him there, on the stone floor\n" +
-            "Bathing in a pool of his own blood\n" +
-            "My one and only choice was to flee this land\n" +
-            "To leave this wretched place for good\n" +
-            "I am an outcast\n" +
-            "All alone\n" +
-            "I'm a nomad without home\n" +
-            "I am an outlaw\n" +
-            "I'm disowned\n" +
-            "And I am no man's son\n" +
-            "Through the cold midwinter nights on a southbound winding path\n" +
-            "The stars and moon my only light and the earl's men closing fast\n" +
-            "I swore that I'd return that I would see him burn\n" +
-            "I will live it in my dreams the smell, the blood, his dying screams\n" +
-            "To my father I was dead, he took his hand from me\n" +
-            "He drove me away, I was shunned\n" +
-            "My one and only choice was to leave this land\n" +
-            "To become the pagan they would hunt\n" +
-            "I am an outcast\n" +
-            "All alone\n" +
-            "I'm a nomad without home\n" +
-            "I am an outlaw\n" +
-            "I'm disowned\n" +
-            "And I am no man's son\n" +
-            "I am an outcast\n" +
-            "All alone\n" +
-            "I'm a nomad without home\n" +
-            "I am an outlaw\n" +
-            "I'm disowned\n" +
-            "And I am no man's son\n" +
-            "Авторы: Ted Oscar Lundstroem / Olavi Mikkonen / Johan Soederberg / Johan Hegg\n" +
-            "Текст песни \"First Kill\", © Sony/ATV Music Publishing LLC";
-    private String Arch_Enemy_Eagles_Flys_alone = "When I was born the seed was sown\n" +
-            "I will not obey, my life is my own\n" +
-            "Battle rows, which do enslave me\n" +
-            "Exposed lies that enrage me\n" +
-            "I don't believe in heaven, I don't believe in hell\n" +
-            "Never joined the herd, could not adjust well\n" +
-            "Slave and master, it's not for me\n" +
-            "I choose my own path, set myself free\n" +
-            "I, I go my own way\n" +
-            "I swim against the stream\n" +
-            "Forever I will fight the powers that be\n" +
-            "I, I go my own way\n" +
-            "I swim against the stream\n" +
-            "Forever I will fight the pοwers that be\n" +
-            "The eagle flies alone\n" +
-            "Reject the system that dictates the norm\n" +
-            "This world is full of lies and deceit\n" +
-            "I ask my own betrayal, cut so deep\n" +
-            "Suffered defeat only to rise again\n" +
-            "I, I go my own way\n" +
-            "I swim against the stream\n" +
-            "Forever I will fight the powers that be\n" +
-            "I, I go my own way\n" +
-            "I swim against the stream\n" +
-            "Forever I will fight the powers that be\n" +
-            "The eagle flies alone\n" +
-            "Alone!\n" +
-            "I, I go my own way\n" +
-            "I swim against the stream\n" +
-            "Forever I will fight the powers that be\n" +
-            "I, I go my own way\n" +
-            "I swim against the stream\n" +
-            "Forever I will fight the powers that be\n" +
-            "The eagle flies alone\n" +
-            "Авторы: Michael Amott\n" +
-            "Текст песни \"The Eagle Flies Alone\", © Kobalt Music Publishing Ltd.";
-    private String Arch_Enemy_Avalanche = "A fistful of fear in my hands\n" +
-            "A bullet of betrayal in my brain\n" +
-            "No progress comes from pleasure\n" +
-            "We smile in ignorance and learn in pain\n" +
-            "Willful deceit was your plan\n" +
-            "Desperately avoid the blame\n" +
-            "Who will you answer to now?\n" +
-            "Sharpened your shovels\n" +
-            "Just to dig your grave\n" +
-            "Stand up because the ground is in your way\n" +
-            "I won't give you any piece\n" +
-            "Yet still you talk\n" +
-            "Try to fight but I will watch you fall\n" +
-            "Fall\n" +
-            "This is sweet revenge\n" +
-            "And karma's a bitch\n" +
-            "You glutton for punishment\n" +
-            "What did you expect?\n" +
-            "Sick, sick, sick\n" +
-            "I'm sick of being your martyr\n" +
-            "Your inglated ego is just dead weight\n" +
-            "Bask in all the eyes upon you\n" +
-            "Before you know it\n" +
-            "The'll have turned away\n" +
-            "Stand up as the whole world turns away\n" +
-            "I won't give you any peace\n" +
-            "Yet still you talk\n" +
-            "Try to fight but I will watch you fall\n" +
-            "Fall\n" +
-            "This is sweet revenge\n" +
-            "And karma's a bitch\n" +
-            "You glutton for punishment\n" +
-            "What did you expect?\n" +
-            "Wait and see\n" +
-            "Cry yourself a lonesome creek\n" +
-            "Your decaying corpse\n" +
-            "Can feed the roots\n" +
-            "Of my towering free\n" +
-            "Just wait and see\n" +
-            "You're dead to me\n" +
-            "Yet still you speak\n" +
-            "Trying to justify what you're doing to me\n" +
-            "I will watch you fall\n" +
-            "Fall\n" +
-            "This is sweet revenge\n" +
-            "And karma's a bitch\n" +
-            "You glutton for punishment\n" +
-            "What did you\n" +
-            "What did you expect?\n" +
-            "Авторы: Alissa White-Gluz / Daniel Erlandsson / Michael Amott / Nicholas Cordle\n" +
-            "Текст песни \"Avalanche\", © Kobalt Music Publishing Ltd.";
-    private String Arch_Enemy_Ravenous = "I am hunting for your soul\n" +
-            "It dwells within your heart\n" +
-            "I lacerate your pounding flesh\n" +
-            "Your spirits shall be mine\n" +
-            "So rise my spirits rise\n" +
-            "Revel in this dead man's body\n" +
-            "Grip his soul, sip the blood\n" +
-            "Life in death\n" +
-            "A holy carnage\n" +
-            "Ravenous\n" +
-            "I will be a god\n" +
-            "Carnivorous Jesus\n" +
-            "I need your flesh\n" +
-            "Ritual slaughter\n" +
-            "Fill up the chalice\n" +
-            "With the essence of your life\n" +
-            "Liquid strengths trapped in your veins\n" +
-            "I crave your blood\n" +
-            "You must die\n" +
-            "Ravenous\n" +
-            "I will be a god\n" +
-            "Carnivorous Jesus\n" +
-            "I need your flesh\n" +
-            "Ravenous\n" +
-            "I will be a god\n" +
-            "Carnivorous Jesus\n" +
-            "I need your flesh\n" +
-            "Flesh\n" +
-            "Авторы: Marc Edwin Allen / Nathan Barcalow / Derek Doherty / Alejandro Martinez Linares / Randy Strohmeyer\n" +
-            "Текст песни \"Ravenous\", © Kobalt Music Publishing Ltd., Universal Music Publishing Group";
-    private String Arch_Enemy_The_world_is_Yours = "Rise into the light and fade to the night\n" +
-            "Sick of being told how to run your life\n" +
-            "Their rules\n" +
-            "They're fools\n" +
-            "Empty words they promise so much\n" +
-            "The present status quo remains untouched\n" +
-            "If you want the world\n" +
-            "Use your mind\n" +
-            "Take control\n" +
-            "Feel the strength\n" +
-            "Rise from within\n" +
-            "If you really want it the world is yours\n" +
-            "Every empire was raised by the slain\n" +
-            "Built through the age and you can destroy it in a day\n" +
-            "Turn the page\n" +
-            "Unleash your rage\n" +
-            "Burn your golden cage and walk away\n" +
-            "On your path toward ultimate power\n" +
-            "If you want the world\n" +
-            "Use your mind\n" +
-            "Take control\n" +
-            "Feel the strength\n" +
-            "Rise from within\n" +
-            "If you really want it the world is yours\n" +
-            "Striking at the leash\n" +
-            "Foaming at the mouth\n" +
-            "No more subservience\n" +
-            "Justice will be done\n" +
-            "There was only so much\n" +
-            "You could take\n" +
-            "There was only so much\n" +
-            "You could tolerate\n" +
-            "When the bough breaks, the empire will fall\n" +
-            "If you want the world\n" +
-            "Use your mind\n" +
-            "Take control\n" +
-            "Feel the strength\n" +
-            "Rise from within\n" +
-            "If you really want it the world is yours\n" +
-            "If you want the world\n" +
-            "Use your mind\n" +
-            "Take control\n" +
-            "Feel the strength\n" +
-            "Rise from within\n" +
-            "If you really want it the world is yours\n" +
-            "Авторы: Daniel Erlandsson / Michael Amott\n" +
-            "Текст песни \"The World Is Yours\", © Kobalt Music Publishing Ltd.";
-    private String Arch_Enemy_Taking_back_my_soul = "Processed, diluted\n" +
-            "Virtually unrecognizable\n" +
-            "I was lost there, no direction\n" +
-            "A scattered void\n" +
-            "No more\n" +
-            "It's over\n" +
-            "I'm on to you\n" +
-            "Your evil game\n" +
-            "The tables have turned\n" +
-            "I am taking back my soul\n" +
-            "Tranquilized, scrutinized\n" +
-            "Hate injected mind\n" +
-            "As if internal wounds\n" +
-            "Wouldn't bleed, wouldn't hurt me\n" +
-            "I see through your lies\n" +
-            "Taking back what's mine\n" +
-            "Авторы: Angela Gossow / Christopher Amott / Daniel Erlandsson / Michael Amott\n" +
-            "Текст песни \"Taking Back My Soul\", © Kobalt Music Publishing Ltd.";
-    private String Arch_Enemy_As_the_pages_burn = "As the pages burn\n" +
-            "Secrets can't be unlearned\n" +
-            "Silence can't be unheard... Knowledge is burden\n" +
-            "Power is onus as the pages burn\n" +
-            "Rejecting cognition as the pages turn\n" +
-            "Sinking in a pool of either\n" +
-            "The past is washed clean\n" +
-            "Rip apart the world\n" +
-            "Word by word\n" +
-            "Inch by inch\n" +
-            "Sever your timeline\n" +
-            "Silence your conscience\n" +
-            "Sweet amnesia here to free you\n" +
-            "As the pages burn (burn!)\n" +
-            "All you trials solved bye fire\n" +
-            "As the pages burn\n" +
-            "As smoke fills the room soon to pass... heavy gloom\n" +
-            "The wind will whisk away the past\n" +
-            "A blank page stares at you\n" +
-            "Nothing left\n" +
-            "Where to start?\n" +
-            "A second chance carries expectation!\n" +
-            "The books you'd written no longer exist\n" +
-            "The future is in your pen\n" +
-            "Ink to paper now begin\n" +
-            "Rip apart the world\n" +
-            "Word by word\n" +
-            "Inch by inch\n" +
-            "Sever your timeline\n" +
-            "Silence your conscience!\n" +
-            "Sweet amnesia here to free you\n" +
-            "As the pages burn (burn!)\n" +
-            "All you trials solved bye fire\n" +
-            "As the pages... burn!\n" +
-            "Rewriting history\n" +
-            "Starting now!\n" +
-            "Erase the misery\n" +
-            "Let the flames eat your doubts\n" +
-            "Sweet amnesia here to free you\n" +
-            "As the pages burn (burn!)\n" +
-            "All you trials solved bye fire\n" +
-            "As the pages burn!\n" +
-            "Авторы: Alissa White-Gluz / Michael Amott\n" +
-            "Текст песни \"As the Pages Burn\", © Kobalt Music Publishing Ltd.";
-
     public static BaseComponent getBaseComponent() {
         return sBaseComponent;
     }
@@ -534,7 +81,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
     public void onCreate() {
         super.onCreate();
         SharedPreferences mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        // Obtain the FirebaseAnalytics instance.
 
         if (mSettings.contains("Premium")) {
             setIsFull(mSettings.getBoolean("Premium", false));
@@ -545,11 +91,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
         }
 
         Intent intent = new Intent(this, MetronomeService.class);
-     /*   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            ContextCompat.startForegroundService(this,intent);
-        } else {
-            startService(intent);
-        }*/
         MetronomeService.enqueueWork(this, intent);
         bindService(intent, this, Context.BIND_AUTO_CREATE);
 
@@ -608,13 +149,13 @@ public class ExtendApplication extends Application implements ServiceConnection 
         Realm songsrealm = Realm.getInstance(songsRealmConfig);
 
         setlistsrealm.beginTransaction();
-        SetList setList1 = setlistsrealm.createObject(SetList.class); // Create a new object
+    /*    SetList setList1 = setlistsrealm.createObject(SetList.class); // Create a new object
         setList1.setId(0);
         setList1.setName("Hell Rain");
         setList1.setPosition(0);
-        setList1.setOpen(true);
+        setList1.setOpen(true);*/
 
-        for (int i = 1; i < 20; i++) {
+        for (int i = 0; i < 20; i++) {
             SetList setList = setlistsrealm.createObject(SetList.class);
             setList.setId(i);
             setList.setName(getResources().getString(R.string.SetListNameDefault) + (i + 1));
@@ -624,7 +165,7 @@ public class ExtendApplication extends Application implements ServiceConnection 
         setlistsrealm.close();
 
         songsrealm.beginTransaction();
-        Songs song1 = songsrealm.createObject(Songs.class);
+     /*   Songs song1 = songsrealm.createObject(Songs.class);
         song1.setTitle("Предатель");
         song1.setSetlistid(0);
         song1.setSongid(0);
@@ -699,20 +240,20 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song7.setAudioOn(false);
         song7.setLyrics("Текст песни Молчание вечного крика");
         song7.setLyricshasopen(false);
-        song7.setPlaystarted(false);
+        song7.setPlaystarted(false);*/
 
         Songs song8 = songsrealm.createObject(Songs.class);
         song8.setTitle(getResources().getString(R.string.Hint10));
         song8.setSetlistid(0);
-        song8.setSongid(7);
-        song8.setPosition(7);
+        song8.setSongid(0);
+        song8.setPosition(0);
         song8.setMetronombpm(80);
         song8.setAudioOn(false);
         song8.setLyrics(getResources().getString(R.string.EmptyLyrics));
         song8.setLyricshasopen(false);
         song8.setPlaystarted(false);
 
-        Songs song9 = songsrealm.createObject(Songs.class);
+     /*   Songs song9 = songsrealm.createObject(Songs.class);
         song9.setTitle("Воздаяние");
         song9.setSetlistid(0);
         song9.setSongid(8);
@@ -765,7 +306,7 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song13.setAudioOn(false);
         song13.setLyrics("Текст песни Заготовка 8");
         song13.setLyricshasopen(false);
-        song13.setPlaystarted(false);
+        song13.setPlaystarted(false);*/
 
         /*for (int i = 0; i < 7; i++) {
             int startFrom = 13;
@@ -780,7 +321,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
             songNew.setLyricshasopen(false);
             songNew.setPlaystarted(false);
         }*/
-
         songsrealm.commitTransaction();
         songsrealm.close();
     }

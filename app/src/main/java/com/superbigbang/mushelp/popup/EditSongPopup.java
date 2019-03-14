@@ -145,9 +145,10 @@ public class EditSongPopup extends BasePopupWindow implements View.OnClickListen
                     Toast.makeText(getContext(), R.string.SongNoNameError, Toast.LENGTH_LONG).show();
                 } else if (resultMetronomBpm.isEmpty()) {
                     Toast.makeText(getContext(), R.string.SongNoMetronomError, Toast.LENGTH_LONG).show();
-                } else if (resultLyrics.isEmpty()) {
-                    resultLyrics = "";
                 } else {
+                    if (resultLyrics.isEmpty()) {
+                        resultLyrics = "";
+                    }
                     valueOfResultPositionEditText = (Integer.valueOf(resultPositionEditText)) - 1;
                     valueOfResultMetronomEditText = (Integer.valueOf(resultMetronomBpm));
                     if (actionIsAddNewSong) {

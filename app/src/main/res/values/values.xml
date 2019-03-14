@@ -316,23 +316,6 @@
     <dimen name="materialize_typography_subheading">16sp</dimen>
     <dimen name="materialize_typography_title">20sp</dimen>
     <dimen name="tool_bar_top_padding">0dp</dimen>
-    <item name="materialize_root" type="id" />
-    <string name="define_materialize">year;owner</string>
-    <string name="library_materialize_author">Mike Penz</string>
-    <string name="library_materialize_authorWebsite">http://mikepenz.com/</string>
-    <string name="library_materialize_isOpenSource">true</string>
-    <string name="library_materialize_libraryDescription">
-        
-        &lt;b>Materialize&lt;/b> comes with useful helper classes, the complete material color palette, and many additional utils. Use its theme as base. Let it manage your StatusBar, NavigationBar, Fullscreen behavior&amp;#8230;
-        
-    </string>
-    <string name="library_materialize_libraryName">Materialize</string>
-    <string name="library_materialize_libraryVersion">0.5.1</string>
-    <string name="library_materialize_libraryWebsite">https://github.com/mikepenz/Materialize</string>
-    <string name="library_materialize_licenseId">apache_2_0</string>
-    <string name="library_materialize_owner">Mike Penz</string>
-    <string name="library_materialize_repositoryLink">https://github.com/mikepenz/Materialize</string>
-    <string name="library_materialize_year">2015</string>
 
     <style name="Material.DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">false</item>

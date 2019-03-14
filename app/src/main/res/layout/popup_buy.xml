@@ -102,8 +102,8 @@
 
         <ImageButton
             android:id="@+id/rateStar1"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
             android:layout_marginStart="40dp"
 
             android:background="?backGroundColor"
@@ -116,8 +116,8 @@
 
         <ImageButton
             android:id="@+id/rateStar2"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
 
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
@@ -132,8 +132,8 @@
 
         <ImageButton
             android:id="@+id/rateStar3"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
 
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
@@ -148,8 +148,8 @@
 
         <ImageButton
             android:id="@+id/rateStar4"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
 
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
@@ -164,8 +164,8 @@
 
         <ImageButton
             android:id="@+id/rateStar5"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
 
             android:layout_marginEnd="40dp"
             android:background="?backGroundColor"

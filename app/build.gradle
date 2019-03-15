@@ -1,7 +1,7 @@
 def versionMajor = 0
 def versionMinor = 9
 def versionPatch = 8
-def versionBuild = 14
+def versionBuild = 17
 
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'

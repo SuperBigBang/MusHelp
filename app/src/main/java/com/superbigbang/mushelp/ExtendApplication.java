@@ -40,7 +40,6 @@ public class ExtendApplication extends Application implements ServiceConnection 
     public static int currentThemeColorsTextUNSelected = Color.parseColor("#66bfff");
     public static int currentThemeColorsUnavailable = Color.parseColor("#4DFFFFFF");
     private static boolean isFull;
-    private static Animation animFadein;
 
     public static boolean isIsFull() {
         return isFull;
@@ -60,8 +59,7 @@ public class ExtendApplication extends Application implements ServiceConnection 
     }
 
     public static Animation getAnimFadein() {
-        animFadein = AnimationUtils.loadAnimation(ExtendApplication.getBaseComponent().getContext(), R.anim.fade_in);
-        return animFadein;
+        return AnimationUtils.loadAnimation(ExtendApplication.getBaseComponent().getContext(), R.anim.fade_in);
     }
 
     public static MetroComponent getMetroComponent() {
@@ -136,6 +134,12 @@ public class ExtendApplication extends Application implements ServiceConnection 
         isBound = false;
     }
 
+    public String getStringResourceByName(String aString) {
+        String packageName = getPackageName();
+        int resId = getResources().getIdentifier(aString, "string", packageName);
+        return getString(resId);
+    }
+
     void MyInitialDataRealmTransaction() {
         RealmConfiguration setListsRealmConfig = new RealmConfiguration.Builder()
                 .name("setlistsrealm.realm")
@@ -151,14 +155,14 @@ public class ExtendApplication extends Application implements ServiceConnection 
         setlistsrealm.beginTransaction();
         SetList setList1 = setlistsrealm.createObject(SetList.class); // Create a new object
         setList1.setId(0);
-        setList1.setName(getResources().getString(R.string.SetListNameDefault) + 1);
+        setList1.setName(getStringResourceByName("SetListNameDefault") + 1);
         setList1.setPosition(0);
         setList1.setOpen(true);
 
         for (int i = 1; i < 20; i++) {
             SetList setList = setlistsrealm.createObject(SetList.class);
             setList.setId(i);
-            setList.setName(getResources().getString(R.string.SetListNameDefault) + (i + 1));
+            setList.setName(getStringResourceByName("SetListNameDefault") + (i + 1));
             setList.setPosition(i);
         }
         setlistsrealm.commitTransaction();
@@ -243,13 +247,13 @@ public class ExtendApplication extends Application implements ServiceConnection 
         song7.setPlaystarted(false);*/
 
         Songs song8 = songsrealm.createObject(Songs.class);
-        song8.setTitle(getResources().getString(R.string.Hint10));
+        song8.setTitle(getStringResourceByName("Hint10"));
         song8.setSetlistid(0);
         song8.setSongid(0);
         song8.setPosition(0);
         song8.setMetronombpm(80);
         song8.setAudioOn(false);
-        song8.setLyrics(getResources().getString(R.string.EmptyLyrics));
+        song8.setLyrics(getStringResourceByName("EmptyLyrics"));
         song8.setLyricshasopen(false);
         song8.setPlaystarted(false);
 

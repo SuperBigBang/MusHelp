@@ -87,4 +87,6 @@
     <string name="title_ding" translatable="false">Ding</string>
     <string name="theme_change_button" translatable="false">Theme change button</string>
     <string name="rate_change_button" translatable="false">Rate change button</string>
+    <string name="save_set_list_button">save set-list button</string>
+    <string name="load_set_list_button">load set-list button</string>
 </resources>

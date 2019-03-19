@@ -13,8 +13,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 import com.obsez.android.lib.filechooser.ChooserDialog;
 import com.superbigbang.mushelp.ExtendApplication;
 import com.superbigbang.mushelp.R;
@@ -42,8 +41,6 @@ public class EditSetListPopup extends BasePopupWindow implements View.OnClickLis
     private int currentPosition;
     private int maxPosition;
     private int countOfSongs;
-    private String savedjsonstring;
-    private String loadjsonstring;
     private Gson gson;
     private TopLevelPresenter mTopLevelPresenter;
 
@@ -137,8 +134,7 @@ public class EditSetListPopup extends BasePopupWindow implements View.OnClickLis
                 if (currentSetlistSongs.size() == 0) {
                     mTopLevelPresenter.getViewState().showErrorMessages(105);
                 } else {
-                    savedjsonstring = gson.toJson(currentSetlistSongs);
-                    Timber.e("Using Gson.toJson() on a raw collection: %s", savedjsonstring);
+                    List<Songs> finalCurrentSetlistSongs = currentSetlistSongs;
                     new ChooserDialog(EditSetListPopup.this.getContext())
                             .withFilter(true, false)
                             .withStartFile(Environment
@@ -150,7 +146,7 @@ public class EditSetListPopup extends BasePopupWindow implements View.OnClickLis
                                     try {
                                         String pathCreatingFile = path + "/" + (mEditTextSetListName == null ? "saved_set_list.sbb" : mEditTextSetListName.getText() + ".sbb");
                                         FileWriter file = new FileWriter(pathCreatingFile);
-                                        file.write(gson.toJson(savedjsonstring));
+                                        file.write(gson.toJson(finalCurrentSetlistSongs));
                                         file.flush();
                                         file.close();
                                         Toast.makeText(ExtendApplication.getBaseComponent().getContext(), ExtendApplication.getBaseComponent().getContext().getString(R.string.saving_tracks_was_successful_in) + pathCreatingFile, Toast.LENGTH_SHORT).show();
@@ -177,7 +173,6 @@ public class EditSetListPopup extends BasePopupWindow implements View.OnClickLis
                             .withChosenListener((path, pathFile) -> {
                                 if (path.endsWith(".sbb")) {
                                     gson = new Gson();
-                                    JsonParser parser = new JsonParser();
                                     try {
                                         File f = new File(path);
                                         FileInputStream is = new FileInputStream(f);
@@ -186,35 +181,48 @@ public class EditSetListPopup extends BasePopupWindow implements View.OnClickLis
                                         is.read(buffer);
                                         is.close();
                                         String mResponse = new String(buffer);
-
-                                        //Продолжить делать тут
-                                        JsonArray array = null;
-                                        int newIdForSong = (mTopLevelPresenter.mSongsrealm
-                                                .where(Songs.class)
-                                                .max("songid")) == null ? 0 :
-                                                (mTopLevelPresenter.mSongsrealm
-                                                        .where(Songs.class)
-                                                        .max("songid"))
-                                                        .intValue()
-                                                        + 1;
-                                        mTopLevelPresenter.mSongsrealm.beginTransaction();
-                                        for (int i = 0; i < array.size(); i++) {
-                                            Songs songfromJson = gson.fromJson(array.get(i), Songs.class);
-                                            Songs newsong = mTopLevelPresenter.mSongsrealm.createObject(Songs.class);
-                                            newsong.setSongid(newIdForSong + i);
-                                            newsong.setSetlistid(currentPosition);
-                                            newsong.setAudioOn(false);
-                                            newsong.setAudiofile(null);
-                                            newsong.setCountdownOn(false);
-                                            newsong.setLyricshasopen(false);
-                                            newsong.setPlaystarted(false);
-                                            newsong.setLyrics(songfromJson.getLyrics());
-                                            newsong.setMetronombpm(songfromJson.getMetronombpm());
-                                            newsong.setPosition(songfromJson.getPosition());
-                                            newsong.setTitle(songfromJson.getTitle());
+                                        List<Songs> loadsongs= null;
+                                        try {
+                                            loadsongs= gson.fromJson(mResponse, new TypeToken<List<Songs>>(){}.getType());
+                                            int newIdForSong = (mTopLevelPresenter.mSongsrealm
+                                                    .where(Songs.class)
+                                                    .max("songid")) == null ? 0 :
+                                                    (mTopLevelPresenter.mSongsrealm
+                                                            .where(Songs.class)
+                                                            .max("songid"))
+                                                            .intValue()
+                                                            + 1;
+                                            mTopLevelPresenter.mSongsrealm.beginTransaction();
+                                            for (int i = 0; i < loadsongs.size(); i++) {
+                                                Timber.e(loadsongs.get(i).getTitle());
+                                                Songs songfromJson = loadsongs.get(i);
+                                                Songs newsong = mTopLevelPresenter.mSongsrealm.createObject(Songs.class);
+                                                newsong.setSongid(newIdForSong + i);
+                                                newsong.setSetlistid(currentPosition);
+                                                newsong.setAudioOn(false);
+                                                newsong.setAudiofile(null);
+                                                newsong.setCountdownOn(false);
+                                                newsong.setLyricshasopen(false);
+                                                newsong.setPlaystarted(false);
+                                                newsong.setLyrics(songfromJson.getLyrics());
+                                                newsong.setMetronombpm(songfromJson.getMetronombpm());
+                                                newsong.setPosition(songfromJson.getPosition());
+                                                newsong.setTitle(songfromJson.getTitle());
+                                            }
+                                            mTopLevelPresenter.mSongsrealm.commitTransaction();
+                                            countOfSongs = (int) mTopLevelPresenter
+                                                    .mSongsrealm.where(Songs.class)
+                                                    .equalTo("setlistid", currentPosition)
+                                                    .count();
+                                            if (countOfSongs > 0) {
+                                                mLoadSongsButton.setColorFilter(ExtendApplication.currentThemeColorsUnavailable);
+                                            }
+                                            Toast.makeText(ExtendApplication.getBaseComponent().getContext(), getContext().getText(R.string.add_audio_file_ok) + pathFile.getName(), Toast.LENGTH_SHORT).show();
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                            Toast.makeText(ExtendApplication.getBaseComponent().getContext(), getContext().getText(R.string.loading_filed), Toast.LENGTH_SHORT).show();
                                         }
-                                        mTopLevelPresenter.mSongsrealm.commitTransaction();
-                                        Toast.makeText(ExtendApplication.getBaseComponent().getContext(), getContext().getText(R.string.add_audio_file_ok) + pathFile.getName(), Toast.LENGTH_SHORT).show();
+
                                     } catch (IOException e) {
                                         e.printStackTrace();
                                         Toast.makeText(ExtendApplication.getBaseComponent().getContext(), getContext().getText(R.string.loading_filed), Toast.LENGTH_SHORT).show();

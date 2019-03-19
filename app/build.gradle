@@ -36,11 +36,9 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation deps.support.appCompat
     implementation deps.support.constraintLayout
-    implementation deps.support.design
     implementation deps.support.cardview
     implementation deps.support.recyclerView
     implementation deps.timber
-    implementation deps.eventbus
     implementation deps.baseRecyclerViewAdapterHelper
     implementation deps.dialogplus
     implementation deps.rx.core
@@ -52,12 +50,6 @@ dependencies {
         implementation deps.moxy.core
     implementation deps.moxy.compat
     annotationProcessor deps.moxy.compiler
-    testImplementation deps.junit
-    androidTestImplementation deps.testRunner
-    androidTestImplementation deps.testRules
-    androidTestImplementation(deps.espresso.core) {
-        exclude group: 'com.google.code.findbugs'
-    }
     implementation 'com.google.android.gms:play-services-ads:17.2.0'
     implementation 'com.github.razerdp:BasePopup:2.0.9'
     implementation 'com.obsez.android.lib.filechooser:filechooser:1.1.14'

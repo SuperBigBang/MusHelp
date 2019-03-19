@@ -110,7 +110,8 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> implements Rea
     void showSongsLists() {
         SongsItemRvAdapter songsItemRvAdapter = new SongsItemRvAdapter(mSongsrealm.where(Songs.class)
                 .equalTo("setlistid", mSetlistsrealm.where(SetList.class).equalTo("isOpen", true)
-                        .findFirst().getId()).findAll());
+                        .findFirst().getId())
+                .findAll());
         getViewState().showSongsLists(songsItemRvAdapter);
     }
 

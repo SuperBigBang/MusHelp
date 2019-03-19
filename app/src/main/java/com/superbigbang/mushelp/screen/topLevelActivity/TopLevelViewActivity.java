@@ -458,6 +458,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         if (SDK_INT >= Build.VERSION_CODES.M) {
             //   int permissionReadPhoneState = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
             int permissionStorage = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+            int permissionStorage2 = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
             List<String> listPermissionsNeeded = new ArrayList<>();
 
         /*    if (permissionReadPhoneState != PackageManager.PERMISSION_GRANTED) {
@@ -466,6 +467,9 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
 
             if (permissionStorage != PackageManager.PERMISSION_GRANTED) {
                 listPermissionsNeeded.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+            }
+            if (permissionStorage2 != PackageManager.PERMISSION_GRANTED) {
+                listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
             }
 
             if (!listPermissionsNeeded.isEmpty()) {
@@ -490,6 +494,7 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
                 // Initialize the map with both permissions
                 /*    perms.put(Manifest.permission.READ_PHONE_STATE, PackageManager.PERMISSION_GRANTED);*/
                 perms.put(Manifest.permission.READ_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
+                perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
                 // Fill with actual results from user
                 if (grantResults.length > 0) {
                     for (int i = 0; i < permissions.length; i++)
@@ -499,7 +504,8 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
                   /*  if (perms.get(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED
                             && perms.get(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
                     )*/
-                    if (perms.get(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                    if (perms.get(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
+                            perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                         /*     Timber.d("Phone state and storage permissions granted");*/
                         Timber.d("Storage permissions granted");
                         // process the normal flow
@@ -514,6 +520,19 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
                                 ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_PHONE_STATE))
                         */
                         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                            showDialogOK(
+                                    (dialog, which) -> {
+                                        switch (which) {
+                                            case DialogInterface.BUTTON_POSITIVE:
+                                                checkAndRequestPermissions();
+                                                break;
+                                            case DialogInterface.BUTTON_NEGATIVE:
+                                                // proceed with logic by disabling the related features or quit the app.
+                                                break;
+                                        }
+                                    });
+                        }
+                        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                             showDialogOK(
                                     (dialog, which) -> {
                                         switch (which) {
@@ -564,6 +583,8 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
                 break;
             case 104:
                 Toast.makeText(this, getText(R.string.need_full_version_for_addsong_error), Toast.LENGTH_LONG).show();
+            case 105:
+                Toast.makeText(this, getText(R.string.nothing_to_save_error), Toast.LENGTH_LONG).show();
                 break;
         }
     }

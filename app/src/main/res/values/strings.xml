@@ -89,4 +89,9 @@
     <string name="rate_change_button" translatable="false">Rate change button</string>
     <string name="save_set_list_button">save set-list button</string>
     <string name="load_set_list_button">load set-list button</string>
+    <string name="nothing_to_save_error">Nothing to save</string>
+    <string name="saving_tracks_was_successful_in">Saving tracks was successful in:</string>
+    <string name="saving_failed">Saving failed</string>
+    <string name="loading_filed">Loading filed</string>
+    <string name="set_list_must_be_empty">Set list must be empty</string>
 </resources>

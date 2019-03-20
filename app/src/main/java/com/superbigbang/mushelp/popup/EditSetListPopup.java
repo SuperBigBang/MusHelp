@@ -26,6 +26,7 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 import io.realm.RealmResults;
@@ -140,6 +141,7 @@ public class EditSetListPopup extends BasePopupWindow implements View.OnClickLis
                             .withFilter(true, false)
                             .withStartFile(Environment
                                     .getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).getPath())
+                            .withRowLayoutView(R.layout.li_row_textview)
                             // to handle the result(s)
                             .withChosenListener(new ChooserDialog.Result() {
                                 @Override
@@ -167,7 +169,7 @@ public class EditSetListPopup extends BasePopupWindow implements View.OnClickLis
                 if (countOfSongs > 0) {
                     Toast.makeText(ExtendApplication.getBaseComponent().getContext(), getContext().getText(R.string.set_list_must_be_empty), Toast.LENGTH_SHORT).show();
                 } else {
-                    new ChooserDialog().with(EditSetListPopup.this.getContext())
+                    new ChooserDialog(EditSetListPopup.this.getContext())
                             .withStartFile(Environment
                                     .getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).getPath())
                             .withRowLayoutView(R.layout.li_row_textview)
@@ -185,6 +187,15 @@ public class EditSetListPopup extends BasePopupWindow implements View.OnClickLis
                                         List<Songs> loadsongs= null;
                                         try {
                                             loadsongs= gson.fromJson(mResponse, new TypeToken<List<Songs>>(){}.getType());
+                                            Collections.sort(loadsongs, (obj1, obj2) -> {
+                                                // ## Ascending order
+                                                // return obj1.firstName.compareToIgnoreCase(obj2.firstName); // To compare string values
+                                                return Integer.valueOf(obj1.getPosition()).compareTo(obj2.getPosition()); // To compare integer values
+
+                                                // ## Descending order
+                                                // return obj2.firstName.compareToIgnoreCase(obj1.firstName); // To compare string values
+                                                // return Integer.valueOf(obj2.empId).compareTo(obj1.empId); // To compare integer values
+                                            });
                                             int newIdForSong = (mTopLevelPresenter.mSongsrealm
                                                     .where(Songs.class)
                                                     .max("songid")) == null ? 0 :
@@ -193,8 +204,9 @@ public class EditSetListPopup extends BasePopupWindow implements View.OnClickLis
                                                             .max("songid"))
                                                             .intValue()
                                                             + 1;
+                                            int howManyTracksToAdd = loadsongs.size() > 5 ? (ExtendApplication.isIsFull() ? loadsongs.size() : (loadsongs.get(0).getTitle().contains("Предатель") ? loadsongs.size() : 5)) : loadsongs.size();
                                             mTopLevelPresenter.mSongsrealm.beginTransaction();
-                                            for (int i = 0; i < loadsongs.size(); i++) {
+                                            for (int i = 0; i < howManyTracksToAdd; i++) {
                                                 Timber.e(loadsongs.get(i).getTitle());
                                                 Songs songfromJson = loadsongs.get(i);
                                                 Songs newsong = mTopLevelPresenter.mSongsrealm.createObject(Songs.class);
@@ -218,7 +230,7 @@ public class EditSetListPopup extends BasePopupWindow implements View.OnClickLis
                                             if (countOfSongs > 0) {
                                                 mLoadSongsButton.setColorFilter(ExtendApplication.currentThemeColorsUnavailable);
                                             }
-                                            Toast.makeText(ExtendApplication.getBaseComponent().getContext(), getContext().getText(R.string.add_audio_file_ok) + pathFile.getName(), Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(ExtendApplication.getBaseComponent().getContext(), getContext().getText(R.string.loading_tracks_was_successful) + pathFile.getName(), Toast.LENGTH_SHORT).show();
                                         } catch (Exception e) {
                                             e.printStackTrace();
                                             Toast.makeText(ExtendApplication.getBaseComponent().getContext(), getContext().getText(R.string.loading_filed), Toast.LENGTH_SHORT).show();

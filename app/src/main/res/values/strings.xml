@@ -94,4 +94,5 @@
     <string name="saving_failed">Saving failed</string>
     <string name="loading_filed">Loading failed</string>
     <string name="set_list_must_be_empty">Set list must be empty</string>
+    <string name="loading_tracks_was_successful">loading tracks was successful</string>
 </resources>

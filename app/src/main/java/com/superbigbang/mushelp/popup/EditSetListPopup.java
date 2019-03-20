@@ -212,8 +212,8 @@ public class EditSetListPopup extends BasePopupWindow implements View.OnClickLis
                                                 Songs newsong = mTopLevelPresenter.mSongsrealm.createObject(Songs.class);
                                                 newsong.setSongid(newIdForSong + i);
                                                 newsong.setSetlistid(currentPosition);
-                                                newsong.setAudioOn(false);
-                                                newsong.setAudiofile(null);
+                                                newsong.setAudioOn(songfromJson.isAudioOn());
+                                                newsong.setAudiofile(songfromJson.getAudiofile());
                                                 newsong.setCountdownOn(false);
                                                 newsong.setLyricshasopen(false);
                                                 newsong.setPlaystarted(false);

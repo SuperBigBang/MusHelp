@@ -65,4 +65,12 @@
     <string name="metroSoundButtonBottomTextSmall">suono m.</string>
     <string name="SpeedRateButtonBottomTextSmall">velocità</string>
     <string name="reply_rate2">\nE anche la mia recensione:\n</string>
+    <string name="save_set_list_button">salva set-list</string>
+    <string name="load_set_list_button">carica set-list</string>
+    <string name="nothing_to_save_error">Niente da salvare</string>
+    <string name="saving_tracks_was_successful_in">Salvare le tracce ha avuto successo in:</string>
+    <string name="saving_failed">Salvataggio fallito</string>
+    <string name="loading_filed">Caricamento fallito</string>
+    <string name="set_list_must_be_empty">La lista dei set deve essere vuota</string>
+    <string name="loading_tracks_was_successful">il caricamento delle tracce ha avuto successo</string>
 </resources>

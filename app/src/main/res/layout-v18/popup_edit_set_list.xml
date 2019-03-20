@@ -147,6 +147,36 @@
             app:layout_constraintTop_toBottomOf="@+id/editSetListName"
             app:srcCompat="@drawable/baseline_save_white_48" />
 
+        <TextView
+            android:id="@+id/setListSaveButtonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/save_set_list_button"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimartWhiteDarkBlueTheme"
+            android:textSize="8sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/setListSaveButton"
+            app:layout_constraintStart_toStartOf="@+id/setListSaveButton"
+            app:layout_constraintTop_toBottomOf="@+id/setListSaveButton"
+            tools:ignore="SmallSp" />
+
+        <TextView
+            android:id="@+id/setListLoadButtonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/load_set_list_button"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimartWhiteDarkBlueTheme"
+            android:textSize="8sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/setListLoadButton"
+            app:layout_constraintStart_toStartOf="@+id/setListLoadButton"
+            app:layout_constraintTop_toBottomOf="@+id/setListLoadButton"
+            tools:ignore="SmallSp" />
         <ImageButton
             android:id="@+id/setListLoadButton"
             android:layout_width="42dp"

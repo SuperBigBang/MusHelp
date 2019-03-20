@@ -65,4 +65,12 @@
     <string name="metroSoundButtonBottomTextSmall">звук м.</string>
     <string name="SpeedRateButtonBottomTextSmall">скор.</string>
     <string name="reply_rate2">\nА также мой обзор:\n</string>
+    <string name="save_set_list_button">сохранить сет-лист</string>
+    <string name="load_set_list_button">загрузить сет-лист</string>
+    <string name="nothing_to_save_error">выбранный сет-лист пуст</string>
+    <string name="saving_tracks_was_successful_in">Сохранение треков прошло успешно в:</string>
+    <string name="saving_failed">Сохранение не удалось</string>
+    <string name="loading_filed">Загрузка не удалась</string>
+    <string name="set_list_must_be_empty">Сет-лист должен быть пустым</string>
+    <string name="loading_tracks_was_successful">загрузка треков прошла успешно</string>
 </resources>

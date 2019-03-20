@@ -65,4 +65,12 @@
     <string name="metroSoundButtonBottomTextSmall">シグナル</string>
     <string name="SpeedRateButtonBottomTextSmall">速度</string>
     <string name="reply_rate2">\nまた私のレビュー：\n</string>
+    <string name="loading_tracks_was_successful">トラックの読み込みに成功しました</string>
+    <string name="set_list_must_be_empty">セットリストは空でなければなりません</string>
+    <string name="loading_filed">読み込みに失敗しました</string>
+    <string name="saving_failed">保存できませんでした</string>
+    <string name="saving_tracks_was_successful_in">トラックの保存は成功しました。</string>
+    <string name="nothing_to_save_error">保存するものがありません</string>
+    <string name="load_set_list_button">セットリストを読み込む</string>
+    <string name="save_set_list_button">セットリストを保存</string>
 </resources>

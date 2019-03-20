@@ -65,4 +65,12 @@
     <string name="metroSoundButtonBottomTextSmall">Ton m.</string>
     <string name="SpeedRateButtonBottomTextSmall">Geschwindigkeit</string>
     <string name="reply_rate2">\nUnd auch meine Bewertung:\n</string>
+    <string name="loading_tracks_was_successful">Das Laden von Tracks war erfolgreich</string>
+    <string name="set_list_must_be_empty">Setliste muss leer sein</string>
+    <string name="loading_filed">Laden fehlgeschlagen</string>
+    <string name="saving_failed">Speichern fehlgeschlagen</string>
+    <string name="saving_tracks_was_successful_in">Das Speichern von Tracks war erfolgreich in:</string>
+    <string name="nothing_to_save_error">Nichts zu retten</string>
+    <string name="load_set_list_button">Setliste laden</string>
+    <string name="save_set_list_button">Setliste speichern</string>
 </resources>

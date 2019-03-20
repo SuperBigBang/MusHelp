@@ -65,4 +65,12 @@
     <string name="metroSoundButtonBottomTextSmall">sonido m.</string>
     <string name="SpeedRateButtonBottomTextSmall">velocidad</string>
     <string name="reply_rate2">\ny también mi opinión:\n</string>
+    <string name="loading_tracks_was_successful">cargando pistas fue exitosa</string>
+    <string name="set_list_must_be_empty">La lista de ajustes debe estar vacía</string>
+    <string name="loading_filed">Carga fallida</string>
+    <string name="saving_failed">Ahorro fallido</string>
+    <string name="saving_tracks_was_successful_in">Guardando tracks fue exitoso en:</string>
+    <string name="nothing_to_save_error">Nada que salvar</string>
+    <string name="load_set_list_button">cargar lista de configuración</string>
+    <string name="save_set_list_button">guardar set-list</string>
 </resources>

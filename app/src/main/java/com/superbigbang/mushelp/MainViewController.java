@@ -38,10 +38,6 @@ public class MainViewController {
     private final UpdateListener mUpdateListener;
     private TopLevelViewActivity mActivity;
 
-    // Tracks if we currently own a premium
-    /**
-     * Change for false/true! now is PRO
-     */
     private boolean mIsPremium;
 
     public MainViewController(TopLevelViewActivity activity) {

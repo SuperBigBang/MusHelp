@@ -23,12 +23,12 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto_medium"
             android:text="@string/popupWEdit_set_text1"
             android:textColor="?lines_color"
-            android:textSize="16sp"
+            android:textSize="14sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/editSetListPosition"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -53,7 +53,7 @@
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginEnd="8dp"
             android:ems="10"
             android:fontFamily="@font/roboto_medium"
             android:gravity="start"
@@ -62,18 +62,18 @@
             android:longClickable="false"
             android:maxLength="2"
             android:maxLines="1"
+            android:textAlignment="center"
             android:textColor="?OtherTextColor"
             android:textColorHint="?UnavailableObj"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/textView"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="Autofill" />
 
         <EditText
             android:id="@+id/editSetListName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
@@ -84,6 +84,7 @@
             android:inputType="textPersonName"
             android:maxLength="20"
             android:maxLines="1"
+            android:textAlignment="center"
             android:textColor="?OtherTextColor"
             android:textColorHint="?UnavailableObj"
             android:textSize="16sp"
@@ -98,6 +99,7 @@
             android:layout_height="38dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
             android:gravity="center"
             android:orientation="horizontal"
             android:weightSum="2"
@@ -130,8 +132,8 @@
                 android:background="@drawable/round_shape_btn_set_lists"
                 android:text="@string/button_Save"
                 android:textColor="?lines_color"
-                android:textSize="12sp"
-                tools:ignore="ButtonStyle" />
+                android:textSize="10sp"
+                tools:ignore="ButtonStyle,SmallSp" />
         </LinearLayout>
 
         <ImageButton

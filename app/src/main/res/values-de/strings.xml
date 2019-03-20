@@ -63,7 +63,7 @@
     <string name="fontButtonBottomText">Hintergrund ändern</string>
     <string name="fontButtonBottomText2">Ausführung</string>
     <string name="metroSoundButtonBottomTextSmall">Ton m.</string>
-    <string name="SpeedRateButtonBottomTextSmall">Geschwindigkeit</string>
+    <string name="SpeedRateButtonBottomTextSmall">Speed</string>
     <string name="reply_rate2">\nUnd auch meine Bewertung:\n</string>
     <string name="loading_tracks_was_successful">Das Laden von Tracks war erfolgreich</string>
     <string name="set_list_must_be_empty">Setliste muss leer sein</string>

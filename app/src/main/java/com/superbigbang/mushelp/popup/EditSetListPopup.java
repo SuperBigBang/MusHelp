@@ -25,6 +25,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 
 import io.realm.RealmResults;
@@ -144,7 +145,7 @@ public class EditSetListPopup extends BasePopupWindow implements View.OnClickLis
                                 @Override
                                 public void onChoosePath(String path, File pathFile) {
                                     try {
-                                        String pathCreatingFile = path + "/" + (mEditTextSetListName == null ? "saved_set_list.sbb" : mEditTextSetListName.getText() + ".sbb");
+                                        String pathCreatingFile = path + "/" + ("saved_set_list_" + String.valueOf(Calendar.getInstance().getTimeInMillis()) + ".sbb");
                                         FileWriter file = new FileWriter(pathCreatingFile);
                                         file.write(gson.toJson(finalCurrentSetlistSongs));
                                         file.flush();

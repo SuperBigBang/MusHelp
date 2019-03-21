@@ -152,7 +152,7 @@ public class EditSetListPopup extends BasePopupWindow implements View.OnClickLis
                                         file.write(gson.toJson(finalCurrentSetlistSongs));
                                         file.flush();
                                         file.close();
-                                        Toast.makeText(ExtendApplication.getBaseComponent().getContext(), ExtendApplication.getBaseComponent().getContext().getString(R.string.saving_tracks_was_successful_in) + pathCreatingFile, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(ExtendApplication.getBaseComponent().getContext(), ExtendApplication.getBaseComponent().getContext().getString(R.string.saving_tracks_was_successful_in) +" "+ pathCreatingFile, Toast.LENGTH_SHORT).show();
                                     } catch (IOException e) {
                                         Timber.e(e);
                                         e.printStackTrace();
@@ -230,7 +230,7 @@ public class EditSetListPopup extends BasePopupWindow implements View.OnClickLis
                                             if (countOfSongs > 0) {
                                                 mLoadSongsButton.setColorFilter(ExtendApplication.currentThemeColorsUnavailable);
                                             }
-                                            Toast.makeText(ExtendApplication.getBaseComponent().getContext(), getContext().getText(R.string.loading_tracks_was_successful) + pathFile.getName(), Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(ExtendApplication.getBaseComponent().getContext(), getContext().getText(R.string.loading_tracks_was_successful) +" "+ pathFile.getName(), Toast.LENGTH_SHORT).show();
                                         } catch (Exception e) {
                                             e.printStackTrace();
                                             Toast.makeText(ExtendApplication.getBaseComponent().getContext(), getContext().getText(R.string.loading_filed), Toast.LENGTH_SHORT).show();

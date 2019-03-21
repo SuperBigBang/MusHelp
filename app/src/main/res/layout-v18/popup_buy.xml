@@ -84,7 +84,7 @@
                 android:background="@drawable/round_shape_btn_set_lists"
                 android:text="@string/button_Cancel"
                 android:textColor="@color/cornerColorDarkBlueTheme"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 tools:ignore="ButtonStyle" />
 
             <Button
@@ -96,7 +96,7 @@
                 android:background="@drawable/round_shape_btn_set_lists"
                 android:text="@string/Buy"
                 android:textColor="@color/BuyOkButtonDark"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 tools:ignore="ButtonStyle" />
         </LinearLayout>
 

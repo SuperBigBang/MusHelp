@@ -177,7 +177,7 @@
                 android:background="@drawable/round_shape_btn_set_lists"
                 android:text="@string/button_Cancel"
                 android:textColor="@color/cornerColorDarkBlueTheme"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/btn_e_Save2"
@@ -188,7 +188,7 @@
                 android:background="@drawable/round_shape_btn_set_lists"
                 android:text="@string/button_Save"
                 android:textColor="@color/cornerColorDarkBlueTheme"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 tools:ignore="ButtonStyle" />
         </LinearLayout>
 

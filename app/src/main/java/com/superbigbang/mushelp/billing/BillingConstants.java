@@ -21,7 +21,7 @@ package com.superbigbang.mushelp.billing;
 public final class BillingConstants {
     // SKUs for our products: the premium upgrade (non-consumable), donate consumable
     //  public static final String SKU_PREMIUM = "mus.pro";
-    public static final String SKU_PREMIUM = "mush.test.full2";
+    public static final String SKU_PREMIUM = "mus.pro";
     public static final String SKU_DONATE = "mushelp.donate";
 
     private static final String[] IN_APP_SKUS = {SKU_DONATE, SKU_PREMIUM};

@@ -98,6 +98,11 @@ public class TopLevelPresenter extends MvpPresenter<TopLevelView> implements Rea
         mSongsrealm.commitTransaction();
     }
 
+    public void scrollToLastOpenedSetList() {
+        SetList lastOpened = mSetlistsrealm.where(SetList.class).equalTo("isOpen", true).findFirst();
+        getViewState().scrollToLastOpenedSetList(lastOpened.getPosition());
+    }
+
     void showAdvertistments() {
         getViewState().showAdvertistments(new AdRequest.Builder().build());
     }

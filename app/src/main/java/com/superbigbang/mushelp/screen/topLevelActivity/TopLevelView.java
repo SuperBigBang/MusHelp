@@ -28,6 +28,8 @@ public interface TopLevelView extends MvpView {
 
     void setCountDownButtonState(boolean state);
 
+    void scrollToLastOpenedSetList(int position);
+
     void showMessage(int messageId, String additionalText);
 
     @StateStrategyType(SingleStateStrategy.class)

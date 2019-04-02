@@ -188,6 +188,11 @@ public class TopLevelViewActivity extends MvpAppCompatActivity implements TopLev
         Intent appLinkIntent = getIntent();
         //   String appLinkAction = appLinkIntent.getAction();
         //   Uri appLinkData = appLinkIntent.getData();
+        mTopLevelPresenter.scrollToLastOpenedSetList();
+    }
+
+    public void scrollToLastOpenedSetList(int position) {
+        mRecyclerSetList.smoothScrollToPosition(position);
     }
 
     public void showRefreshedUi() {

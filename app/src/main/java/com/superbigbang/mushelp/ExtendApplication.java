@@ -13,6 +13,7 @@ import android.support.annotation.VisibleForTesting;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import com.google.android.gms.ads.MobileAds;
 import com.superbigbang.mushelp.di.BaseComponent;
 import com.superbigbang.mushelp.di.DaggerBaseComponent;
 import com.superbigbang.mushelp.di.DaggerMetroComponent;
@@ -101,9 +102,9 @@ public class ExtendApplication extends Application implements ServiceConnection 
             MyInitialDataRealmTransaction();
         }
 
-  /*      if (!isIsFull()) {
+        if (!isIsFull()) {
             MobileAds.initialize(this, "ca-app-pub-5364969751338385~1161013636");
-        }*/
+        }
 
         SharedPreferences.Editor editor = mSettings.edit();
         editor.putBoolean(APP_PREFERENCES_FIRST_INSTALL_FLAG, false).apply();

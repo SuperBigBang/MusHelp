@@ -48,7 +48,7 @@ public class MetronomeService extends JobIntentService {
 
     public static final String PREF_TICK = "tick";
     public static final String PREF_INTERVAL = "interval";
-    public static TickData[] ticks = new TickData[]{
+    public static final TickData[] ticks = new TickData[]{
             new TickData(R.string.title_beep, R.raw.a_hight),
             new TickData(R.string.title_beep, R.raw.a_low),
             new TickData(R.string.title_wood, R.raw.b_hight),

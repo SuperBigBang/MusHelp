@@ -31,9 +31,10 @@ import com.superbigbang.mushelp.model.TickData;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
-import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
 import timber.log.Timber;
@@ -295,9 +296,17 @@ public class MetronomeService extends JobIntentService {
                             stopTrigger.onNext(false);
                             stopSeekBarTrigger.onNext(false);
                             isPlaying = false;
-                            Observable.just(1)
+                           /* Observable.just(1)
                                     .observeOn(AndroidSchedulers.mainThread())
-                                    .subscribe((Integer values) -> prepareAndStartOrResumePlayback());
+                                    .subscribe((Integer values) -> prepareAndStartOrResumePlayback());*/
+                            Completable.fromAction(new Action() {
+                                @Override
+                                public void run() {
+                                    prepareAndStartOrResumePlayback();
+                                }
+                            }).subscribeOn(scheduler)
+                                    .observeOn(scheduler)
+                                    .subscribe();
                         }
                     });
         }
@@ -389,7 +398,7 @@ public class MetronomeService extends JobIntentService {
 
     @SuppressLint("CheckResult")
     void loadSoundPoolOnNewThreadRX() {
-        Observable.just(0)
+       /* Observable.just(0)
                 .observeOn(scheduler)
                 .subscribe((Integer value) -> {
                     SoundPool soundPool0;
@@ -409,7 +418,31 @@ public class MetronomeService extends JobIntentService {
                     }
                     soundPool = soundPool0;
                     soundPool.play(soundIdSilence, 0, 0, 1, 0, 1);
-                });
+                });*/
+        Completable.fromAction(new Action() {
+            @Override
+            public void run() {
+                SoundPool soundPool0;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    soundPool0 = new SoundPool.Builder()
+                            .setMaxStreams(4)
+                            .setAudioAttributes(new AudioAttributes.Builder()
+                                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                                    .build())
+                            .build();
+                } else soundPool0 = new SoundPool(4, AudioManager.STREAM_MUSIC, 0);
+                tick = prefs.getInt(PREF_TICK, 0);
+                if (!ticks[tick].isVibration()) {
+                    soundId = ticks[tick].getSoundId(MetronomeService.this, soundPool0);
+                    soundIdlow = ticks[tick + 1].getSoundId(MetronomeService.this, soundPool0);
+                    soundIdSilence = ticks[0].getSoundId(MetronomeService.this, soundPool0);
+                }
+                soundPool = soundPool0;
+                soundPool.play(soundIdSilence, 0, 0, 1, 0, 1);
+            }
+        }).subscribeOn(scheduler)
+                .observeOn(scheduler)
+                .subscribe();
     }
 
     private void releaseMP() {

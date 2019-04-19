@@ -3,3 +3,5 @@ Please email superbigbang@yandex.ru if you would like permission to do something
 
 SuperBigBang (Виталий Викторович К.), все права защищены
 Пожалуйста, напишите на superbigbang@yandex.ru если вам нужно разрешение на то, чтобы что-то сделать с содержимым этого репозитория
+
+https://play.google.com/store/apps/details?id=com.superbigbang.mushelp
